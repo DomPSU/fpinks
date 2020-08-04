@@ -1,0 +1,98 @@
+{
+  "name": "fpinks",
+  "version": "1.0.0",
+  "description": "A webiste for browsing, uploading and viewing fountain pen inks.",
+  "scripts": {
+    "start": "node scripts/server.js",
+    "build": "react-scripts build",
+    "dev-fe": "NODE_ENV=development,EXTEND_ESLINT=true react-scripts start",
+    "dev-be": "NODE_ENV=development,EXTEND_ESLINT=true nodemon scripts/server.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "npm run build",
+    "lint": "eslint --ext .js,.jsx .",
+    "lint-fix": "eslint --ext .js,.jsx --fix ."
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.13.1",
+    "react-loading": "^2.0.3",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-toastify": "^6.0.8",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.29.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/react": "^16.9.43",
+    "@types/react-bootstrap": "^1.0.1",
+    "acorn": "^7.3.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DomPSU/fpinks_v2.git"
+  },
+  "author": "Dominic Lupo",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/DomPSU/fpinks_v2/issues"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3001",
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  }
+}
