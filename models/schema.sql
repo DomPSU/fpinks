@@ -6,7 +6,7 @@ Create TABLE Users(
   user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
--- TODO admin, regular or make a separate table??
+  level VARCHAR(10) NOT NULL,
   createdAt DATETIME NOT NULL,
   updatedAt DATETIME NOT NULL
 );
@@ -16,28 +16,24 @@ DROP TABLE IF EXISTS Inks;
 Create TABLE Inks(
   ink_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   brand VARCHAR(100) NOT NULL,
-  name VARCHAR(255) NOT NULL,
+  model VARCHAR(100) NOT NULL,
+  color VARCHAR(100) NOT NULL,
   createdAt DATETIME NOT NULL,
   updatedAt DATETIME NOT NULL
 );
 
 -- Papers
--- TODO create table
-
--- WritingSamples
-DROP TABLE IF EXISTS WritingSamples;
-Create TABLE WritingSamples(
-  writing_sample_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
--- TODO add PenNibs reference
-  ink_id INT NOT NULL,
-  url VARCHAR(2083) NOT NULL,
-  valid_extra_review TINYINT NOT NULL,
+DROP TABLE IF EXISTS Papers;
+Create TABLE Papers(
+  paper_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  brand VARCHAR(100) NOT NULL,
+  name VARCHAR(100),
+  style VARCHAR(10) NOT NULL,
+  lbs VARCHAR(10), -- TODO make NOT NULL and fix seeds
+  grams  VARCHAR(10), -- TODO make NOT NULL and fix seeds
   createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
--- TODO add PenNibs FK referernce
-  FOREIGN KEY (ink_id) REFERENCES Inks (ink_id)
+  updatedAt DATETIME NOT NULL
 );
-
 
 -- Pens
 DROP TABLE IF EXISTS Pens;
@@ -76,27 +72,32 @@ Create TABLE PenNibs(
   updatedAt DATETIME NOT NULL
 );
 
+-- WritingSamples
+DROP TABLE IF EXISTS WritingSamples;
+Create TABLE WritingSamples(
+  writing_sample_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  pen_id INT NOT NULL,
+  nib_id INT NOT NULL,
+  ink_id INT NOT NULL,
+  paper_id INT NOT NULL,
+  url VARCHAR(2083) NOT NULL,
+-- TODO valid_waterproofness_review TINYINT NOT NULL 
+-- TODO vaid_transparency_review TINYINT NOT NULL 
+-- TODO split transparency_review into showthrough and bleedthrough ??
+-- TODO vaid drying_time TINYINT NOT NULL 
+  createdAt DATETIME NOT NULL,
+  updatedAt DATETIME NOT NULL,
+  FOREIGN KEY (ink_id) REFERENCES Inks (ink_id),
+  FOREIGN KEY (paper_id) REFERENCES Papers (paper_id),
+  FOREIGN KEY (pen_id, nib_id) REFERENCES PenNibs (pen_id, nib_id)
+);
+
 -- Reviews
 DROP TABLE IF EXISTS Reviews;
 Create TABLE Reviews(
   review_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
-  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
-  FOREIGN KEY (user_id) REFERENCES Users (user_id)
-);
-
--- ExtraReviews
-DROP TABLE IF EXISTS ExtraReviews;
-Create TABLE ExtraReviews(
-  extra_review_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  writing_sample_id INT NOT NULL,
-  user_id INT NOT NULL,
--- TOOD waterproofness
--- TODO drying time
--- TODO transparency
   createdAt DATETIME NOT NULL,
   updatedAt DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
