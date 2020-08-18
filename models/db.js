@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const util = require('util');
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -6,6 +7,8 @@ const pool = mysql.createPool({
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
 });
+
+pool.asyncQuery = util.promisify(pool.query);
 
 module.exports = {
   mysql,
