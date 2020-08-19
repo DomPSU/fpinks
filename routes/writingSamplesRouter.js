@@ -1,8 +1,13 @@
 const express = require('express');
 const writingSamplesService = require('../services/writingSamplesService');
 
-const userRouter = express.Router();
+const writingSamplesRouter = express.Router();
 
-userRouter.get('/', writingSamplesService.getAll);
+// GET
+writingSamplesRouter.get('/', writingSamplesService.index);
+writingSamplesRouter.get('/unapproved', writingSamplesService.unapprovedIndex);
 
-module.exports = userRouter;
+// POST
+writingSamplesRouter.post('/', writingSamplesService.insert);
+
+module.exports = writingSamplesRouter;

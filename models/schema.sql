@@ -7,8 +7,9 @@ Create TABLE Users(
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   level VARCHAR(10) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- Inks
@@ -17,9 +18,10 @@ Create TABLE Inks(
   ink_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   brand VARCHAR(100) NOT NULL,
   model VARCHAR(100) NOT NULL,
-  color VARCHAR(100) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  name VARCHAR(100) NOT NULL,
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- Papers
@@ -31,8 +33,9 @@ Create TABLE Papers(
   style VARCHAR(10) NOT NULL,
   lbs VARCHAR(10), -- TODO make NOT NULL and fix seeds
   grams  VARCHAR(10), -- TODO make NOT NULL and fix seeds
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- Pens
@@ -41,8 +44,9 @@ Create TABLE Pens(
   pen_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   brand VARCHAR(100) NOT NULL,
   model VARCHAR(255) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- Nibs
@@ -52,8 +56,9 @@ Create TABLE Nibs(
   size VARCHAR(10) NOT NULL,
   grind VARCHAR(100) NOT NULL,
   tune VARCHAR(10) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- PenNibs
@@ -61,15 +66,16 @@ DROP TABLE IF EXISTS PenNibs;
 Create TABLE PenNibs(
   pen_id INT NOT NULL,
   nib_id INT NOT NULL,
-  CONSTRAINT PK_PenNibs PRIMARY KEY
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+    CONSTRAINT PK_PenNibs PRIMARY KEY
   (
     pen_id,
     nib_id
   ),
   FOREIGN KEY (pen_id) REFERENCES Pens (pen_id),
-  FOREIGN KEY (nib_id) REFERENCES Nibs (nib_id),
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  FOREIGN KEY (nib_id) REFERENCES Nibs (nib_id)
 );
 
 -- WritingSamples
@@ -85,8 +91,9 @@ Create TABLE WritingSamples(
 -- TODO vaid_transparency_review TINYINT NOT NULL 
 -- TODO split transparency_review into showthrough and bleedthrough ??
 -- TODO vaid drying_time TINYINT NOT NULL 
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
   FOREIGN KEY (ink_id) REFERENCES Inks (ink_id),
   FOREIGN KEY (paper_id) REFERENCES Papers (paper_id),
   FOREIGN KEY (pen_id, nib_id) REFERENCES PenNibs (pen_id, nib_id)
@@ -98,8 +105,8 @@ Create TABLE Reviews(
   review_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
   FOREIGN KEY (user_id) REFERENCES Users (user_id)
 );
@@ -109,8 +116,8 @@ DROP TABLE IF EXISTS Colors;
 Create TABLE Colors(
   color_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   name VARCHAR(10) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- ColorReviews
@@ -125,8 +132,8 @@ Create TABLE ColorReviews(
   color_id INT NOT NULL,
   FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
   FOREIGN KEY (color_id) REFERENCES Colors (color_id),
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
 );
 
 -- ShadingReviews 
@@ -140,8 +147,8 @@ Create TABLE ShadingReviews(
   review_id INT NOT NULL,
   color_id INT NOT NULL,
   amount VARCHAR(10) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
   FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
   FOREIGN KEY (color_id) REFERENCES Colors (color_id)
 );
@@ -157,8 +164,8 @@ Create TABLE SheenReviews(
   review_id INT NOT NULL,
   color_id INT NOT NULL,
   amount varchar(10) NOT NULL,
-  createdAt DATETIME NOT NULL,
-  updatedAt DATETIME NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
   FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
   FOREIGN KEY (color_id) REFERENCES Colors (color_id)
 );

@@ -1,9 +1,9 @@
 const usersModel = require('../models/usersModel');
 
-const getAll = async (req, res, next) => {
+const index = async (req, res, next) => {
   let data;
   try {
-    data = await usersModel.getAll();
+    data = await usersModel.index();
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -11,5 +11,5 @@ const getAll = async (req, res, next) => {
 };
 
 module.exports = {
-  getAll,
+  index,
 };

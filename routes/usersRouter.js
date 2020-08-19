@@ -3,6 +3,8 @@ const usersService = require('../services/usersService');
 
 const usersRouter = express.Router();
 
-usersRouter.get('/', usersService.getAll);
+// GET
+usersRouter.get('/', usersService.index);
+usersRouter.get('/unapproved', usersService.unapprovedIndex);
 
 module.exports = usersRouter;

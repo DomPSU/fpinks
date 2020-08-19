@@ -1,7 +1,19 @@
 const db = require('./db');
 
-const getAll = async () => {
-  const data = await db.pool.asyncQuery('SELECT * FROM Users');
+const index = async () => {
+  const data = await db.pool.asyncQuery(
+    'SELECT * FROM Users WHERE approved <> 0',
+  );
+  data.forEach((user) => {
+    delete user.password;
+  });
+  return data;
+};
+
+const unapprovedIndex = async () => {
+  const data = await db.pool.asyncQuery(
+    'SELECT * FROM Users WHERE approved = 0',
+  );
   data.forEach((user) => {
     delete user.password;
   });
@@ -9,5 +21,6 @@ const getAll = async () => {
 };
 
 module.exports = {
-  getAll,
+  index,
+  unapprovedIndex,
 };

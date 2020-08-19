@@ -10,8 +10,6 @@ export default function Table(props) {
   // these props may be passed from any parent component e.g. UserIndex.js
   const { headers, rows, select, selected, handleSelect } = props;
 
-  const selectSpace = select ? <th /> : null;
-
   return (
     <div className="row justify-content-center">
       <div className="col-auto">

@@ -6,6 +6,9 @@ import Contribute from './contribute/Contribute';
 import About from './about/About';
 import UsersIndex from './users/UsersIndex';
 import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
+import Admin from './admin/Admin';
+import InksIndex from './inks/InksIndex';
+import InksInsert from './inks/InksInsert';
 
 export default function App() {
   return (
@@ -13,11 +16,20 @@ export default function App() {
       <div>
         <Header />
         <Switch>
+          <Route path="/inks/new">
+            <InksInsert />
+          </Route>
+          <Route path="/inks">
+            <InksIndex />
+          </Route>
           <Route path="/writing-samples">
             <WritingSamplesIndex />
           </Route>
           <Route path="/users">
             <UsersIndex />
+          </Route>
+          <Route path="/admin">
+            <Admin />
           </Route>
           <Route path="/about">
             <About />
@@ -33,3 +45,6 @@ export default function App() {
     </Router>
   );
 }
+
+// TODO make users admin only
+// TODO make writing-samples available to index
