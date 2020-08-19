@@ -26,6 +26,11 @@ export default function Header() {
               Users
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/writing-samples">
+              Writing Samples
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

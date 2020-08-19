@@ -1,8 +1,10 @@
 const express = require('express');
-const userRouter = require('./userRouter');
+const usersRouter = require('./usersRouter');
+const writingSamplesRouter = require('./writingSamplesRouter');
 
 const router = express.Router();
 
-router.use('/user', userRouter);
+router.use('/users', usersRouter);
+router.use('/writing-samples', writingSamplesRouter);
 
 module.exports = router;
