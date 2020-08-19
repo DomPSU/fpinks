@@ -20,7 +20,21 @@ const unapprovedIndex = async (req, res, next) => {
   }
 };
 
+const insert = async (req, res, next) => {
+  const nib = {
+    ...req.body,
+  };
+
+  try {
+    const data = await nibsModel.insert(nib);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   unapprovedIndex,
+  insert,
 };

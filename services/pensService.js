@@ -20,7 +20,21 @@ const unapprovedIndex = async (req, res, next) => {
   }
 };
 
+const insert = async (req, res, next) => {
+  const pen = {
+    ...req.body,
+  };
+
+  try {
+    const data = await pensModel.insert(pen);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   unapprovedIndex,
+  insert,
 };

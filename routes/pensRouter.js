@@ -7,4 +7,7 @@ const pensRouter = express.Router();
 pensRouter.get('/', pensService.index);
 pensRouter.get('/unapproved', pensService.unapprovedIndex);
 
+// POST
+pensRouter.post('/', pensService.insert);
+
 module.exports = pensRouter;

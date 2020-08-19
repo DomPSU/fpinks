@@ -15,7 +15,7 @@ const unapprovedIndex = async () => {
 const insert = async (data) => {
   // TODO validate all needed keys
 
-  // TODO validate all values not blank unless they can be, set up JSON
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
 
   // search database for ink
   const selectRes = await db.pool.asyncQuery(
@@ -36,11 +36,13 @@ const insert = async (data) => {
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       ],
     );
+    console.log(insertRes);
     return insertRes;
   }
 
   // return ink if it already exists
   if (selectRes.legnth === 1) {
+    console.log(selectRes);
     return selectRes;
   }
 

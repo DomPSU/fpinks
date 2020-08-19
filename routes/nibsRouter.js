@@ -7,4 +7,7 @@ const nibsRouter = express.Router();
 nibsRouter.get('/', nibsService.index);
 nibsRouter.get('/unapproved', nibsService.unapprovedIndex);
 
+// POST
+nibsRouter.post('/', nibsService.insert);
+
 module.exports = nibsRouter;

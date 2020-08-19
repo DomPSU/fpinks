@@ -11,9 +11,11 @@ import UsersIndex from './users/UsersIndex';
 
 // pens
 import PensIndex from './pens/PensIndex';
+import PensInsert from './pens/PensInsert';
 
 // nibs
 import NibsIndex from './nibs/NibsIndex';
+import NibsInsert from './nibs/NibsInsert';
 
 // penNibs
 // TODO fix eslint issue below, no clue why it is happening
@@ -44,12 +46,18 @@ export default function App() {
           <Route path="/pens/unapproved">
             <PensIndex link="/pens/unapproved" />
           </Route>
+          <Route path="/pens/new">
+            <PensInsert />
+          </Route>
           <Route path="/pens">
             <PensIndex link="/pens" />
           </Route>
           {/* nibs */}
           <Route path="/nibs/unapproved">
             <NibsIndex link="/nibs/unapproved" />
+          </Route>
+          <Route path="/nibs/new">
+            <NibsInsert />
           </Route>
           <Route path="/nibs">
             <NibsIndex link="/nibs" />

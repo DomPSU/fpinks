@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Admin() {
   return (
     <div className="container">
+      {/* users */}
       <div className="row">
         <h1 className="mt-5">Users</h1>
       </div>
@@ -15,6 +16,7 @@ export default function Admin() {
           Unapproved Users
         </Link>
       </div>
+      {/* pens */}
       <div className="row">
         <h1 className="mt-5">Pens</h1>
       </div>
@@ -25,7 +27,11 @@ export default function Admin() {
         <Link className="p-3" to="/pens/unapproved">
           Unapproved Pens
         </Link>
+        <Link className="p-3" to="/pens/new">
+          Pens Insert
+        </Link>
       </div>
+      {/* nibs */}
       <div className="row">
         <h1 className="mt-5">Nibs</h1>
       </div>
@@ -36,7 +42,11 @@ export default function Admin() {
         <Link className="p-3" to="/nibs/unapproved">
           Unapproved Nibs
         </Link>
+        <Link className="p-3" to="/nibs/new">
+          Nibs Insert
+        </Link>
       </div>
+      {/* penNibs */}
       <div className="row">
         <h1 className="mt-5">PenNibs</h1>
       </div>
@@ -48,6 +58,7 @@ export default function Admin() {
           Unapproved PenNibs
         </Link>
       </div>
+      {/* inks */}
       <div className="row">
         <h1 className="mt-5">Inks</h1>
       </div>
@@ -62,6 +73,7 @@ export default function Admin() {
           Inks Insert
         </Link>
       </div>
+      {/* writingSamples */}
       <div className="row">
         <h1 className="mt-5">Writing Samples</h1>
       </div>
