@@ -23,29 +23,12 @@ const getWritingSamples = async () => {
   });
 };
 
-function encode(data) {
-  const buf = Buffer.from(data);
-  const base64 = buf.toString('base64');
-  return base64;
-}
-
-async function getImage(key) {
-  const data = s3
-    .getObject({
-      Bucket: 'fpinks.com',
-      Key: key,
-    })
-    .promise()
-    .then((img) => {
-      return encode(img.Body);
-    })
-    .catch((e) => {
-      return e;
-    });
-  return data;
+async function getURL(key) {
+  const url = s3.getSignedUrl('getObject', { Bucket: 'fpinks.com', Key: key });
+  return url; // TODO add error handling for bad key
 }
 
 module.exports = {
   getWritingSamples,
-  getImage,
+  getURL,
 };

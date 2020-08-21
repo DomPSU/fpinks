@@ -19,10 +19,8 @@ const insert = async (data) => {
   // console.log('AWS WRITING SAMPLES');
   // AWS.getWritingSamples();
 
-  console.log('getImage');
-  AWS.getImage('013a33f57h1f4c32iinnkkhc6qd3').then((meow) =>
-    console.log(meow),
-  );
+  console.log('getURL');
+  AWS.getURL('013a33f57h1f4c32iinnkkhc6qd3').then((meow) => console.log(meow));
 
   // TODO validate all needed keys
 
