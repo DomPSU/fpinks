@@ -15,6 +15,9 @@ const unapprovedIndex = async () => {
 };
 
 const insert = async (writingSample) => {
+  console.log('writing sample'); // TODO
+  console.log(writingSample); // TODO
+
   // check if Ink Model already exists, insert if it doesnt, get id if it does
 
   // check if pen Model already exists, insert if it doesnt, get id if it does

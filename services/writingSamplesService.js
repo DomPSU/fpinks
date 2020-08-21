@@ -21,6 +21,9 @@ const unapprovedIndex = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
+  console.log('request fiel');
+  console.log(req.file);
+
   const writingSample = {
     ...req.body,
   };

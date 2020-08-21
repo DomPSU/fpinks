@@ -6,6 +6,7 @@ class Contribute extends Component {
     super(props);
 
     this.state = {
+      writingSampleImage: '',
       inkBrand: '',
       inkName: '',
       penBrand: '',
@@ -19,6 +20,7 @@ class Contribute extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -31,8 +33,15 @@ class Contribute extends Component {
     });
   }
 
+  handleFile(e) {
+    this.setState({
+      writingSampleImage: e.target.files[0],
+    });
+  }
+
   handleSubmit(e) {
     const {
+      writingSampleImage,
       inkBrand,
       inkName,
       penBrand,
@@ -47,19 +56,22 @@ class Contribute extends Component {
 
     // TODO add frontend validation
 
+    // HACK
+    const formData = new FormData();
+    formData.append('writingSampleImage', writingSampleImage);
+    formData.append('inkBrand', inkBrand);
+    formData.append('inkName', inkName);
+    formData.append('penBrand', penBrand);
+    formData.append('penModel', penModel);
+    formData.append('nibSize', nibSize);
+    formData.append('nibGrind', nibGrind);
+    formData.append('nibTune', nibTune);
+    formData.append('paperBrand', paperBrand);
+    formData.append('paperName', paperName);
+    formData.append('paperWeight', paperWeight);
+
     API.instance
-      .post('/writing-samples', {
-        inkBrand,
-        inkName,
-        penBrand,
-        penModel,
-        nibSize,
-        nibGrind,
-        nibTune,
-        paperBrand,
-        paperName,
-        paperWeight,
-      })
+      .post('/writing-samples', formData)
       .then((res) => {
         console.log(res);
       })
@@ -84,6 +96,7 @@ class Contribute extends Component {
                   type="file"
                   id="writingSampleImage"
                   className="form-control"
+                  onChange={this.handleFile}
                 />
               </label>
             </div>
