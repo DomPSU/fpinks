@@ -45,8 +45,6 @@ const insert = async (req, res, next) => {
 
     // get inkID from insert or query
     inkID = data.insertId || data[0].ink_id;
-
-    res.status(200).send(data);
   } catch (e) {
     next(e);
   }
@@ -65,8 +63,6 @@ const insert = async (req, res, next) => {
 
     // get paperID from insert or query
     paperID = data.insertId || data[0].paper_id;
-
-    res.status(200).send(data);
   } catch (e) {
     next(e);
   }
@@ -84,8 +80,6 @@ const insert = async (req, res, next) => {
 
     // get penID from insert or query
     penID = data.insertId || data[0].pen_id;
-
-    res.status(200).send(data);
   } catch (e) {
     next(e);
   }
@@ -104,8 +98,6 @@ const insert = async (req, res, next) => {
 
     // get nibID from insert or query
     nibID = data.insertId || data[0].nib_id;
-
-    res.status(200).send(data);
   } catch (e) {
     next(e);
   }
@@ -117,20 +109,19 @@ const insert = async (req, res, next) => {
   };
 
   try {
-    const data = await penNibsModel.insert(penNibs);
-    res.status(200).send(data);
+    await penNibsModel.insert(penNibs);
   } catch (e) {
     next(e);
   }
 
-  // GET URL
+  // GET URL from AWS
 
   // process writingSample insert
   const writingSample = {
     penID,
     nibID,
     inkID,
-    paperID, // TODO add url
+    paperID, // TODO add url, user
   };
 
   try {

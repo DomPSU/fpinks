@@ -16,9 +16,8 @@ import PensInsert from './pens/PensInsert';
 import NibsInsert from './nibs/NibsInsert';
 
 // penNibs
-// TODO fix eslint issue below, no clue why it is happening
-// eslint-disable-next-line import/extensions
-import PenNibsIndex from './penNibs/PenNibsIndex.jsx';
+import PenNibsIndex from './penNibs/PenNibsIndex';
+import PenNibsInsert from './penNibs/PenNibsInsert';
 
 // inks
 import InksInsert from './inks/InksInsert';
@@ -65,6 +64,9 @@ export default function App() {
           {/* penNibs */}
           <Route path="/pen-nibs/unapproved">
             <PenNibsIndex link="/pen-nibs/unapproved" />
+          </Route>
+          <Route path="/pen-nibs/new">
+            <PenNibsInsert />
           </Route>
           <Route path="/pen-nibs">
             <PenNibsIndex link="/pen-nibs/" />

@@ -57,6 +57,9 @@ export default function Admin() {
         <Link className="p-3" to="/pen-nibs/unapproved">
           Unapproved PenNibs
         </Link>
+        <Link className="p-3" to="/pen-nibs/new">
+          PenNibs Insert
+        </Link>
       </div>
       {/* inks */}
       <div className="row">

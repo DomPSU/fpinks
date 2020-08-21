@@ -90,6 +90,7 @@ Create TABLE WritingSamples(
 -- TODO vaid_transparency_review TINYINT NOT NULL 
 -- TODO split transparency_review into showthrough and bleedthrough ??
 -- TODO vaid drying_time TINYINT NOT NULL 
+-- TODO add user_id NOT NULL
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,

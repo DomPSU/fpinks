@@ -7,4 +7,7 @@ const penNibsRouter = express.Router();
 penNibsRouter.get('/', penNibsService.index);
 penNibsRouter.get('/unapproved', penNibsService.unapprovedIndex);
 
+// POST
+penNibsRouter.post('/', penNibsService.insert);
+
 module.exports = penNibsRouter;

@@ -21,9 +21,12 @@ const unapprovedIndex = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  let data;
+  const penNib = {
+    ...req.body,
+  };
+
   try {
-    data = await penNibsModel.insert();
+    const data = await penNibsModel.insert(penNib);
     res.status(200).send(data);
   } catch (e) {
     next(e);
