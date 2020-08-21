@@ -73,6 +73,21 @@ export default function Admin() {
           Inks Insert
         </Link>
       </div>
+      {/* papers */}
+      <div className="row">
+        <h1 className="mt-5">Papers</h1>
+      </div>
+      <div className="row">
+        <Link className="p-3" to="/papers">
+          Approved Papers
+        </Link>
+        <Link className="p-3" to="/papers/unapproved">
+          Unapproved Papers
+        </Link>
+        <Link className="p-3" to="/papers/new">
+          Papers Insert
+        </Link>
+      </div>
       {/* writingSamples */}
       <div className="row">
         <h1 className="mt-5">Writing Samples</h1>

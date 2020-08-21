@@ -5,16 +5,14 @@ import Gallery from './gallery/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
 import Admin from './admin/Admin';
+import Index from './shared/Index';
 
 // users
-import UsersIndex from './users/UsersIndex';
 
 // pens
-import PensIndex from './pens/PensIndex';
 import PensInsert from './pens/PensInsert';
 
 // nibs
-import NibsIndex from './nibs/NibsIndex';
 import NibsInsert from './nibs/NibsInsert';
 
 // penNibs
@@ -23,8 +21,10 @@ import NibsInsert from './nibs/NibsInsert';
 import PenNibsIndex from './penNibs/PenNibsIndex.jsx';
 
 // inks
-import InksIndex from './inks/InksIndex';
 import InksInsert from './inks/InksInsert';
+
+// papers
+import PapersInsert from './papers/PapersInsert';
 
 // writingSamples
 import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
@@ -37,30 +37,30 @@ export default function App() {
         <Switch>
           {/* users */}
           <Route path="/users/unapproved">
-            <UsersIndex link="/users/unapproved" />
+            <Index link="/users/unapproved" />
           </Route>
           <Route path="/users">
-            <UsersIndex link="/users" />
+            <Index link="/users" />
           </Route>
           {/* pens */}
           <Route path="/pens/unapproved">
-            <PensIndex link="/pens/unapproved" />
+            <Index link="/pens/unapproved" />
           </Route>
           <Route path="/pens/new">
             <PensInsert />
           </Route>
           <Route path="/pens">
-            <PensIndex link="/pens" />
+            <Index link="/pens" />
           </Route>
           {/* nibs */}
           <Route path="/nibs/unapproved">
-            <NibsIndex link="/nibs/unapproved" />
+            <Index link="/nibs/unapproved" />
           </Route>
           <Route path="/nibs/new">
             <NibsInsert />
           </Route>
           <Route path="/nibs">
-            <NibsIndex link="/nibs" />
+            <Index link="/nibs" />
           </Route>
           {/* penNibs */}
           <Route path="/pen-nibs/unapproved">
@@ -74,10 +74,20 @@ export default function App() {
             <InksInsert />
           </Route>
           <Route path="/inks/unapproved">
-            <InksIndex link="/inks/unapproved" />
+            <Index link="/inks/unapproved" />
           </Route>
           <Route path="/inks">
-            <InksIndex link="/inks" />
+            <Index link="/inks" />
+          </Route>
+          {/* papers */}
+          <Route path="/papers/new">
+            <PapersInsert />
+          </Route>
+          <Route path="/papers/unapproved">
+            <Index link="/papers/unapproved" />
+          </Route>
+          <Route path="/papers">
+            <Index link="/papers" />
           </Route>
           {/* writingSamples */}
           <Route path="/writing-samples/unapproved">
