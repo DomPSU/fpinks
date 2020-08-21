@@ -45,7 +45,7 @@ const insert = async (data) => {
   }
 
   // return paper if it already exists
-  if (selectRes.legnth === 1) {
+  if (selectRes.length === 1) {
     console.log(selectRes);
     return selectRes;
   }

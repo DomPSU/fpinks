@@ -39,8 +39,8 @@ const insert = async (data) => {
     return insertRes;
   }
 
-  // return ink if it already exists
-  if (selectRes.legnth === 1) {
+  // return pen if it already exists
+  if (selectRes.length === 1) {
     console.log(selectRes);
     return selectRes;
   }

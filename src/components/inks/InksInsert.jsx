@@ -7,7 +7,6 @@ class InksInsert extends Component {
 
     this.state = {
       inkBrand: '',
-      inkModel: '',
       inkName: '',
     };
 
@@ -25,14 +24,13 @@ class InksInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { inkBrand, inkModel, inkName } = this.state;
+    const { inkBrand, inkName } = this.state;
 
     // TODO add frontend validation
 
     API.instance
       .post('/inks', {
         inkBrand,
-        inkModel,
         inkName,
       })
       .then((res) => {
@@ -58,15 +56,6 @@ class InksInsert extends Component {
                 <input
                   type="text"
                   id="inkBrand"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="inkModel">
-                Ink Model
-                <input
-                  type="text"
-                  id="inkModel"
                   className="form-control"
                   onChange={this.handleChange}
                 />

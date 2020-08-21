@@ -19,17 +19,16 @@ const insert = async (data) => {
 
   // search database for ink
   const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM Inks WHERE brand = ? AND model = ? AND name = ?',
-    [data.inkBrand, data.inkModel, data.inkName],
+    'SELECT * FROM Inks WHERE brand = ? AND name = ?',
+    [data.inkBrand, data.inkName],
   );
 
   // insert ink if it doesnt exist
   if (selectRes.length === 0) {
     const insertRes = await db.pool.asyncQuery(
-      'INSERT INTO Inks (brand, model, name, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO Inks (brand, name, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
       [
         data.inkBrand.toLowerCase(),
-        data.inkModel.toLowerCase(),
         data.inkName.toLowerCase(),
         0,
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
@@ -41,7 +40,7 @@ const insert = async (data) => {
   }
 
   // return ink if it already exists
-  if (selectRes.legnth === 1) {
+  if (selectRes.length === 1) {
     console.log(selectRes);
     return selectRes;
   }

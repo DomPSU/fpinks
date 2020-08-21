@@ -16,7 +16,7 @@ class Contribute extends Component {
       nibTune: '',
       paperBrand: '',
       paperName: '',
-      paperWeight: '',
+      paperStyle: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,7 +51,7 @@ class Contribute extends Component {
       nibTune,
       paperBrand,
       paperName,
-      paperWeight,
+      paperStyle,
     } = this.state;
 
     // TODO add frontend validation
@@ -68,7 +68,7 @@ class Contribute extends Component {
     formData.append('nibTune', nibTune);
     formData.append('paperBrand', paperBrand);
     formData.append('paperName', paperName);
-    formData.append('paperWeight', paperWeight);
+    formData.append('paperStyle', paperStyle);
 
     API.instance
       .post('/writing-samples', formData)
@@ -225,7 +225,7 @@ class Contribute extends Component {
                 />
               </label>
               <label htmlFor="paperName">
-                Paper Name
+                Paper name
                 <input
                   type="text"
                   id="paperName"
@@ -233,14 +233,19 @@ class Contribute extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <label htmlFor="paperWeight">
-                Paper weight
-                <input
-                  type="text"
-                  id="paperWeight"
+              <label htmlFor="paperStyle">
+                Paper style
+                <select
                   className="form-control"
-                  onChange={this.handleChange}
-                />
+                  id="paperStyle"
+                  onBlur={this.handleChange}
+                >
+                  <option> </option>
+                  <option>plain</option>
+                  <option>lined</option>
+                  <option>grid</option>
+                  <option>dot</option>
+                </select>
               </label>
             </div>
           </div>

@@ -14,24 +14,8 @@ const unapprovedIndex = async () => {
   return res;
 };
 
-const insert = async (writingSample) => {
-  console.log('writing sample'); // TODO
-  console.log(writingSample); // TODO
-
-  // check if Ink Model already exists, insert if it doesnt, get id if it does
-
-  // check if pen Model already exists, insert if it doesnt, get id if it does
-
-  // chec kif nib Model already exists, insert if it doesnt, get id if it does
-
-  // check if pen nib relation exists, insert if it doesnt, get id if it does
-
-  // chgeck if paper felation exists, insert if it doesnt, get id if it does
-
-  // insert writing sample model
-
-  console.log(writingSample);
-  const res = await db.pool.asyncQuery();
+const insert = async (data) => {
+  const res = await db.pool.asyncQuery(data);
   return res;
 };
 

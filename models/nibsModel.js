@@ -41,11 +41,12 @@ const insert = async (data) => {
   }
 
   // return ink if it already exists
-  if (selectRes.legnth === 1) {
-    console.log(selectRes);
+  if (selectRes.length === 1) {
     return selectRes;
   }
 
+  // TODO this should probably still insert, I could maybe use approved numbers
+  // for status codes but then I would have to put approved = 1 instead of approved <>0
   if (selectRes.length >= 2) {
     throw Object.assign(new Error('duplicate nib in database'), { code: 500 });
   }

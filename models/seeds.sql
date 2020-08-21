@@ -7,10 +7,10 @@ INSERT INTO Users (email, password, level, approved, created_at, updated_at)
 VALUES ('fake2@gmail.com', 'password2', 'user', 0, NOW(), NOW());
 
 -- Inks
-INSERT INTO Inks (brand, model, name, approved, created_at, updated_at)
-VALUES ('parker', 'quink', 'blue', 1, NOW(), NOW());
-INSERT INTO Inks (brand, model, name, approved, created_at, updated_at)
-VALUES ('pilot', 'iroshizuku', 'momiji', 1, NOW(), NOW());
+INSERT INTO Inks (brand, name, approved, created_at, updated_at)
+VALUES ('parker quink', 'blue', 1, NOW(), NOW());
+INSERT INTO Inks (brand, name, approved, created_at, updated_at)
+VALUES ('pilot iroshizuku', 'momiji', 1, NOW(), NOW());
 
 -- Papers
 INSERT INTO Papers (brand, name, style, lbs, grams, approved, created_at, updated_at) 
@@ -44,7 +44,7 @@ VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m4
 INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, url, approved, created_at, updated_at)
 VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
        (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'parker' AND model = 'quink' AND name = 'blue'),
+       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
        (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'printer' AND style = 'plain' AND 
        lbs = '20'), 'fpinks.com', 1, NOW(), NOW());
 

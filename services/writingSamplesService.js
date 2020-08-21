@@ -2,6 +2,8 @@ const writingSamplesModel = require('../models/writingSamplesModel');
 const pensModel = require('../models/pensModel');
 const nibsModel = require('../models/nibsModel');
 const penNibsModel = require('../models/penNibsModel');
+const inksModel = require('../models/inksModel');
+const papersModel = require('../models/papersModel');
 
 const index = async (req, res, next) => {
   let data;
@@ -30,20 +32,105 @@ const insert = async (req, res, next) => {
   console.log('request body'); // TODO remove
   console.log(req.body); // TODO remove
 
-  // check if Ink Model already exists, insert if it doesnt, get id if it does
+  // process ink insert
+  const ink = {
+    inkBrand: req.body.inkBrand,
+    inkName: req.body.inkName,
+  };
 
-  // check if pen Model already exists, insert if it doesnt, get id if it does
+  let inkID;
 
-  // chec kif nib Model already exists, insert if it doesnt, get id if it does
+  try {
+    const data = await inksModel.insert(ink);
 
-  // check if pen nib relation exists, insert if it doesnt, get id if it does
+    // get inkID from insert or query
+    inkID = data.insertId || data[0].ink_id;
 
-  // chgeck if paper felation exists, insert if it doesnt, get id if it does
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
 
-  // insert writing sample model
+  // process paper insert
+  const paper = {
+    paperBrand: req.body.paperBrand,
+    paperName: req.body.paperName,
+    paperStyle: req.body.paperStyle,
+  };
 
+  let paperID;
+
+  try {
+    const data = await papersModel.insert(paper);
+
+    // get paperID from insert or query
+    paperID = data.insertId || data[0].paper_id;
+
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+
+  // process pen insert
+  const pen = {
+    penBrand: req.body.penBrand,
+    penModel: req.body.penModel,
+  };
+
+  let penID;
+
+  try {
+    const data = await pensModel.insert(pen);
+
+    // get penID from insert or query
+    penID = data.insertId || data[0].pen_id;
+
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+
+  // process nib insert
+  const nib = {
+    nibSize: req.body.nibSize,
+    nibGrind: req.body.nibGrind,
+    nibTune: req.body.nibTune,
+  };
+
+  let nibID;
+
+  try {
+    const data = await nibsModel.insert(nib);
+
+    // get nibID from insert or query
+    nibID = data.insertId || data[0].nib_id;
+
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+
+  // process penNib insert
+  const penNibs = {
+    penID,
+    nibID,
+  };
+
+  try {
+    const data = await penNibsModel.insert(penNibs);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+
+  // GET URL
+
+  // process writingSample insert
   const writingSample = {
-    ...req.body,
+    penID,
+    nibID,
+    inkID,
+    paperID, // TODO add url
   };
 
   try {
