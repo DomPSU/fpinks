@@ -7,6 +7,13 @@ const index = async () => {
   return res;
 };
 
+const show = async (id) => {
+  const res = await db.pool.asyncQuery('SELECT * FROM Inks WHERE ink_id = ? ', [
+    id,
+  ]);
+  return res;
+};
+
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery('SELECT * FROM Inks WHERE approved = 0');
   return res;
@@ -54,6 +61,7 @@ module.exports = {
   index,
   unapprovedIndex,
   insert,
+  show,
 };
 
 // TODO move parts of validation to controller (services)

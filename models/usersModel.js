@@ -10,6 +10,18 @@ const index = async () => {
   return res;
 };
 
+const show = async (id) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT * FROM Users WHERE user_id = ? ',
+    [id],
+  );
+
+  res.forEach((user) => {
+    delete user.password;
+  });
+  return res;
+};
+
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT * FROM Users WHERE approved = 0',
@@ -23,4 +35,5 @@ const unapprovedIndex = async () => {
 module.exports = {
   index,
   unapprovedIndex,
+  show,
 };

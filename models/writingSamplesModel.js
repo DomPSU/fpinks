@@ -8,6 +8,14 @@ const index = async () => {
   return res;
 };
 
+const show = async (id) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT * FROM WritingSamples WHERE writing_sample_id = ? ',
+    [id],
+  );
+  return res;
+};
+
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT * FROM WritingSamples WHERE approved = 0',
@@ -67,4 +75,5 @@ module.exports = {
   index,
   unapprovedIndex,
   insert,
+  show,
 };

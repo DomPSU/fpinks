@@ -15,6 +15,18 @@ const index = async (req, res, next) => {
   }
 };
 
+const show = async (req, res, next) => {
+  let data;
+  const { id } = req.params;
+
+  try {
+    data = await writingSamplesModel.show(id);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
+
 const unapprovedIndex = async (req, res, next) => {
   let data;
   try {
@@ -136,4 +148,5 @@ module.exports = {
   index,
   unapprovedIndex,
   insert,
+  show,
 };
