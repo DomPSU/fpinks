@@ -1,8 +1,11 @@
 const express = require('express');
 const multer = require('multer');
 const writingSamplesService = require('../services/writingSamplesService');
+const AWS = require('../config/aws'); // TODO env based
 
-const upload = multer({ dest: 'uploads/' });
+const { upload } = AWS; // TODO env based
+
+// const upload = multer({ dest: 'uploads/' }); // TODO env based
 
 const writingSamplesRouter = express.Router();
 

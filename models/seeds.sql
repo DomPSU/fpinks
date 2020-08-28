@@ -41,20 +41,20 @@ VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m4
        1, NOW(), NOW());
 
 -- Writing Samples
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, url, approved, created_at, updated_at)
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, aws_key, approved, created_at, updated_at)
 VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
        (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
        (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
        (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'printer' AND style = 'plain' AND 
-       lbs = '20'), 'fpinks.com', 1, NOW(), NOW());
+       lbs = '20'), 'ruby_wallpaper.jpg', 1, NOW(), NOW());
 
 -- Reviews
 INSERT INTO Reviews (writing_sample_id, user_id, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE url = 'fpinks.com'), 
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE aws_key = 'ruby_wallpaper.jpg'), 
         (SELECT user_id FROM Users WHERE email = 'dominiclupo5318@gmail.com'),
         NOW(), NOW());
 INSERT INTO Reviews (writing_sample_id, user_id, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE url = 'fpinks.com'), 
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE aws_key = 'ruby_wallpaper.jpg'), 
         (SELECT user_id FROM Users WHERE email = 'fake1@gmail.com'),
         NOW(), NOW());
 
@@ -85,7 +85,7 @@ VALUES ('white', NOW(), NOW());
 -- ColorReviews
 INSERT INTO ColorReviews (review_id, color_id, created_at, updated_at)
 VALUES ((SELECT review_id FROM Reviews WHERE writing_sample_id = 
-        (SELECT writing_sample_id FROM WritingSamples WHERE url = 'fpinks.com') AND user_id = 
+        (SELECT writing_sample_id FROM WritingSamples WHERE aws_key = 'ruby_wallpaper.jpg') AND user_id = 
         (SELECT user_id FROM Users WHERE email = 'dominiclupo5318@gmail.com')), 
         (SELECT color_id FROM Colors where name = 'blue'),
         NOW(), NOW());
@@ -93,7 +93,7 @@ VALUES ((SELECT review_id FROM Reviews WHERE writing_sample_id =
 -- ShadingReviews
 INSERT INTO ShadingReviews (review_id, color_id, amount, created_at, updated_at)
 VALUES ((SELECT review_id FROM Reviews WHERE writing_sample_id = 
-        (SELECT writing_sample_id FROM WritingSamples WHERE url = 'fpinks.com') AND user_id = 
+        (SELECT writing_sample_id FROM WritingSamples WHERE aws_key = 'ruby_wallpaper.jpg') AND user_id = 
         (SELECT user_id FROM Users WHERE email = 'dominiclupo5318@gmail.com')), 
         (SELECT color_id FROM Colors where name = 'blue'),
         'full', NOW(), NOW());
@@ -102,7 +102,7 @@ VALUES ((SELECT review_id FROM Reviews WHERE writing_sample_id =
 -- SheenReviews
 INSERT INTO SheenReviews (review_id, color_id, amount, created_at, updated_at)
 VALUES ((SELECT review_id FROM Reviews WHERE writing_sample_id = 
-        (SELECT writing_sample_id FROM WritingSamples WHERE url = 'fpinks.com') AND user_id = 
+        (SELECT writing_sample_id FROM WritingSamples WHERE aws_key = 'ruby_wallpaper.jpg') AND user_id = 
         (SELECT user_id FROM Users WHERE email = 'dominiclupo5318@gmail.com')), 
         (SELECT color_id FROM Colors where name = 'blue'),
         'none', NOW(), NOW());

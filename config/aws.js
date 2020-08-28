@@ -1,6 +1,8 @@
 const AWS = require('aws-sdk');
-const writingSampleModel = require('../models/writingSamplesModel'); // TODO
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 
+const bucketName = 'fpinks.com-dev'; // TODO env var
 AWS.config.update({ region: 'us-east-2' });
 
 // Create S3 service object
@@ -8,7 +10,7 @@ const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 // Create the parameters for calling listObjects
 const bucketParams = {
-  Bucket: 'fpinks.com',
+  Bucket: bucketName,
 };
 
 const getWritingSamples = async () => {
@@ -24,11 +26,50 @@ const getWritingSamples = async () => {
 };
 
 async function getURL(key) {
-  const url = s3.getSignedUrl('getObject', { Bucket: 'fpinks.com', Key: key });
+  const url = s3.getSignedUrl('getObject', { Bucket: bucketName, Key: key });
   return url; // TODO add error handling for bad key
 }
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+// test locally if multer is working fine, need to upload directory in root
+// also need to reseed db after because writing sample url wont work
+const storage = multer.diskStorage({
+  destination: (req, res, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${new Date().toISOString()}-${file.originalname}`);
+  },
+});
+
+const multerS3Config = multerS3({
+  s3,
+  bucket: bucketName,
+  metadata(req, file, cb) {
+    cb(null, { fieldName: file.fieldname });
+  },
+  key(req, file, cb) {
+    cb(null, `${new Date().toISOString()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({
+  storage: multerS3Config, // change storage type
+  fileFilter,
+  limits: {
+    fileSize: 1024 * 1024 * 5, // we are allowing only 5 MB files
+  },
+});
 
 module.exports = {
   getWritingSamples,
   getURL,
+  upload,
 };

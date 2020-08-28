@@ -85,7 +85,7 @@ Create TABLE WritingSamples(
   nib_id INT NOT NULL,
   ink_id INT NOT NULL,
   paper_id INT NOT NULL,
-  url VARCHAR(2083) NOT NULL,
+  aws_key VARCHAR(1024) NOT NULL,
 -- TODO valid_waterproofness_review TINYINT NOT NULL 
 -- TODO vaid_transparency_review TINYINT NOT NULL 
 -- TODO split transparency_review into showthrough and bleedthrough ??

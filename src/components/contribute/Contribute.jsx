@@ -83,7 +83,7 @@ class Contribute extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state); // TODO
     return (
       <div className="container text-center">
         <h1 className="mt-5">Add a Writing Sample</h1>

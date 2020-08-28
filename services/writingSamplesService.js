@@ -38,11 +38,7 @@ const unapprovedIndex = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  console.log('request file'); // TODO remove
-  console.log(req.file); // TODO remove
-
-  console.log('request body'); // TODO remove
-  console.log(req.body); // TODO remove
+  const awsKey = req.file.key || req.file.filename; // aws or local storage
 
   // process ink insert
   const ink = {
@@ -126,14 +122,13 @@ const insert = async (req, res, next) => {
     next(e);
   }
 
-  // GET URL from AWS
-
   // process writingSample insert
   const writingSample = {
     penID,
     nibID,
     inkID,
-    paperID, // TODO add url, user
+    paperID,
+    awsKey,
   };
 
   try {
