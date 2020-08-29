@@ -146,7 +146,7 @@ Create TABLE ShadingReviews(
   ),
   review_id INT NOT NULL,
   color_id INT NOT NULL,
-  amount VARCHAR(10) NOT NULL,
+  amount VARCHAR(10) NOT NULL, -- TODO if shading amount is none then color should be none
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
@@ -162,8 +162,8 @@ Create TABLE SheenReviews(
     color_id 
   ),
   review_id INT NOT NULL,
-  color_id INT NOT NULL,
-  amount varchar(10) NOT NULL,
+  color_id INT NOT NULL,  
+  amount varchar(10) NOT NULL, -- TODO if sheen amount if none then color should be none
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (review_id) REFERENCES Reviews (review_id),

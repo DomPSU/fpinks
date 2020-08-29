@@ -1,0 +1,26 @@
+@media (min-width: 0px) {
+  .gallery-feed-list {
+    height: 40vmax;
+    width: 40vmax;
+    padding: 0.5vmax;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery-feed-list {
+    height: 28vmax;
+    width: 28vmax;
+    padding: 0.5vmin;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 992px) {
+  .gallery-feed-list {
+    height: 15vmax;
+    width: 15vmax;
+    padding: 0.5vmin;
+    overflow: hidden;
+  }
+}

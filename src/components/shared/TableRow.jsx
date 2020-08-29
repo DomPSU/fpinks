@@ -5,10 +5,9 @@ class TableRow extends Component {
     const { row } = this.props;
     const rowClasses = 'border border-dark p-1 align-middle';
 
-    // format row values
     const formattedRows = Object.entries(row).map(([key, value]) => {
-      if (key === 'createdAt' || key === 'updatedAt') {
-        return value.slice(0, 10);
+      if (key === 'url') {
+        return <a href={value}>writing sample</a>;
       }
       return value;
     });

@@ -1,10 +1,22 @@
 const db = require('./db');
 const AWS = require('../config/aws');
 
+const addUrlToRes = async (res) => {
+  res.forEach(
+    // TODO fix es lint error and use await instead of then?
+    (writingSample) =>
+      AWS.getURL(writingSample.aws_key).then(
+        // eslint-disable-next-line no-return-assign
+        (url) => (writingSample.url = url),
+      ),
+  );
+};
+
 const index = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT * FROM WritingSamples WHERE approved <> 0',
   );
+  await addUrlToRes(res);
   return res;
 };
 
@@ -20,6 +32,7 @@ const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT * FROM WritingSamples WHERE approved = 0',
   );
+  await addUrlToRes(res);
   return res;
 };
 
@@ -50,7 +63,3 @@ module.exports = {
   insert,
   show,
 };
-
-// console.log('getURL');
-// AWS.getURL('ruby_wallpaper.jpg').then((meow) => console.log(meow));
-// TODO
