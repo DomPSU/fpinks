@@ -5,6 +5,8 @@ import Gallery from './gallery/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
 import Admin from './admin/Admin';
+
+// shared
 import Index from './shared/Index';
 
 // users
@@ -27,6 +29,7 @@ import PapersInsert from './papers/PapersInsert';
 
 // writingSamples
 import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
+import WritingSample from './writingSamples/WritingSample';
 
 export default function App() {
   return (
@@ -94,6 +97,9 @@ export default function App() {
           {/* writingSamples */}
           <Route path="/writing-samples/unapproved">
             <WritingSamplesIndex link="/writing-samples/unapproved" />
+          </Route>
+          <Route path="/writing-samples/:id">
+            <WritingSample />
           </Route>
           <Route path="/writing-samples">
             <WritingSamplesIndex link="/writing-samples" />

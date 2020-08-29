@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import API from '../../apis/API';
 import './gallery.css';
 
@@ -31,17 +32,22 @@ class Gallery extends Component {
 
     const list = index.map((writingSample) => (
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-center">
-        <img
-          src={writingSample.url}
-          alt="writing sample"
-          className="gallery-feed-list"
-        />
+        <Link to={`/writing-samples/${writingSample.writing_sample_id}`}>
+          <img
+            src={writingSample.url}
+            alt="writing sample"
+            className="writing-sample"
+          />
+        </Link>
       </div>
     ));
 
     return (
       <div className="container-fluid">
-        <div className="row"> {list}</div>
+        <div id="search-bar-div" className="fixed-top row">
+          <input id="search-bar" />
+        </div>
+        <div className="row d-flex flex-wrap align-items-center"> {list}</div>
       </div>
     );
   }

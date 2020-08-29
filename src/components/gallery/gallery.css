@@ -1,26 +1,24 @@
-@media (min-width: 0px) {
-  .gallery-feed-list {
-    height: 40vmax;
-    width: 40vmax;
-    padding: 0.5vmax;
-    overflow: hidden;
-  }
+.writing-sample {
+  height: auto;
+  max-width: 100%;
+  margin: 0.25vmax;
+  overflow: hidden;
+  border: solid transparent;
 }
 
-@media (min-width: 768px) {
-  .gallery-feed-list {
-    height: 28vmax;
-    width: 28vmax;
-    padding: 0.5vmin;
-    overflow: hidden;
-  }
+.writing-sample:hover {
+  border: solid dodgerblue;
 }
 
-@media (min-width: 992px) {
-  .gallery-feed-list {
-    height: 15vmax;
-    width: 15vmax;
-    padding: 0.5vmin;
-    overflow: hidden;
-  }
+#search-bar-div {
+  margin-top: 56px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: lightgray;
+}
+
+#search-bar {
+  width: 100%;
 }

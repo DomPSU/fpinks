@@ -25,6 +25,7 @@ const show = async (id) => {
     'SELECT * FROM WritingSamples WHERE writing_sample_id = ? ',
     [id],
   );
+  await addUrlToRes(res);
   return res;
 };
 
