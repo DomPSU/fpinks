@@ -86,16 +86,24 @@ class Contribute extends Component {
     console.log(this.state); // TODO
     return (
       <div className="container text-center">
-        <h1 className="mt-5">Add a Writing Sample</h1>
-        <form className="bg-secondary">
+        <div className="row">
+          <div className="col-lg-4" />
+          <div className="col-lg-4 pb-3 border-bottom border-dark m-1">
+            A writing sample may simply be written words. You may also add any
+            of the following: waterproofness, drying time,
+            bleed-through/ghosting.
+          </div>
+          <div className="col-lg-4" />
+        </div>
+        <form>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="writingSampleImage">
+              <label htmlFor="writingSampleImage" className="p-3 m-0">
                 Image
                 <input
                   type="file"
                   id="writingSampleImage"
-                  className="form-control"
+                  className="form-control p-1"
                   onChange={this.handleFile}
                 />
               </label>
@@ -103,51 +111,7 @@ class Contribute extends Component {
           </div>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="inkBrand">
-                Ink Brand
-                <input
-                  type="text"
-                  id="inkBrand"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="inkName">
-                Ink Name
-                <input
-                  type="text"
-                  id="inkName"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="penBrand">
-                Pen Brand
-                <input
-                  type="text"
-                  id="penBrand"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="penModel">
-                Pen Model
-                <input
-                  type="text"
-                  id="penModel"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="nibSize">
+              <label htmlFor="nibSize" className="p-3 m-0">
                 Nib Size
                 <select
                   className="form-control"
@@ -180,7 +144,7 @@ class Contribute extends Component {
                   <option>&gt; 1.5 mm</option>
                 </select>
               </label>
-              <label htmlFor="nibGrind">
+              <label htmlFor="nibGrind" className="p-3 m-0">
                 Nib Grind
                 <select
                   className="form-control"
@@ -198,7 +162,7 @@ class Contribute extends Component {
                   <option>Calligraphy</option>
                 </select>
               </label>
-              <label htmlFor="nibTune">
+              <label htmlFor="nibTune" className="p-3 m-0">
                 Nib Tune
                 <select
                   className="form-control"
@@ -215,25 +179,69 @@ class Contribute extends Component {
           </div>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="paperBrand">
+              <label htmlFor="inkBrand" className="p-3 m-0">
+                Ink Brand
+                <input
+                  type="text"
+                  id="inkBrand"
+                  className="form-control text-center"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor="inkName" className="p-3 m-0">
+                Ink Name
+                <input
+                  type="text"
+                  id="inkName"
+                  className="form-control text-center"
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12 col-lg-offset-12">
+              <label htmlFor="penBrand" className="p-3 m-0">
+                Pen Brand
+                <input
+                  type="text"
+                  id="penBrand"
+                  className="form-control text-center"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label htmlFor="penModel" className="p-3 m-0">
+                Pen Model
+                <input
+                  type="text"
+                  id="penModel"
+                  className="form-control text-center"
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12 col-lg-offset-12">
+              <label htmlFor="paperBrand" className="p-3 m-0">
                 Paper Brand
                 <input
                   type="text"
                   id="paperBrand"
-                  className="form-control"
+                  className="form-control text-center"
                   onChange={this.handleChange}
                 />
               </label>
-              <label htmlFor="paperName">
+              <label htmlFor="paperName" className="p-3 m-0">
                 Paper name
                 <input
                   type="text"
                   id="paperName"
-                  className="form-control"
+                  className="form-control text-center"
                   onChange={this.handleChange}
                 />
               </label>
-              <label htmlFor="paperStyle">
+              <label htmlFor="paperStyle" className="p-3 m-0">
                 Paper style
                 <select
                   className="form-control"
@@ -248,6 +256,21 @@ class Contribute extends Component {
                 </select>
               </label>
             </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-1" />
+            <div className="col-lg-10 col-lg-offset-12">
+              <label htmlFor="comment" className="p-3 m-0 w-100">
+                Comment
+                <textarea
+                  id="comment"
+                  className="form-control text-center"
+                  onChange={this.handleChange}
+                  placeholder="If a dropdown above does not offer a proper choice for this writing sample, please let us know."
+                />
+              </label>
+            </div>
+            <div className="col-lg-1" />
           </div>
           <button
             type="submit"

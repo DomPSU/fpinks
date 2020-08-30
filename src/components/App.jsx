@@ -34,7 +34,7 @@ import WritingSample from './writingSamples/WritingSample';
 export default function App() {
   return (
     <Router>
-      <div className="bg-color">
+      <div>
         <Header />
         <Switch>
           {/* users */}

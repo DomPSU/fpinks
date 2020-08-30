@@ -14,7 +14,7 @@ const addUrlToRes = async (res) => {
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM WritingSamples WHERE approved <> 0',
+    'SELECT WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id WHERE WritingSamples.approved <> 0',
   );
   await addUrlToRes(res);
   return res;
@@ -22,7 +22,7 @@ const index = async () => {
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM WritingSamples WHERE writing_sample_id = ? ',
+    'SELECT WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id WHERE WritingSamples.writing_sample_id = ? ',
     [id],
   );
   await addUrlToRes(res);
@@ -31,7 +31,7 @@ const show = async (id) => {
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM WritingSamples WHERE approved = 0',
+    'SELECT WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id WHERE WritingSamples.approved = 0',
   );
   await addUrlToRes(res);
   return res;
