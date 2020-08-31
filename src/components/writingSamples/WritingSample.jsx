@@ -58,7 +58,7 @@ class WritingSample extends Component {
               data-parent="#accordionExample"
             >
               <img
-                src={writingSample.url}
+                src={writingSample.high_res_url}
                 alt="writing sample"
                 className="w-100"
               />
@@ -97,13 +97,14 @@ class WritingSample extends Component {
                       {capitalize(writingSample.pen_model)}
                     </div>
                     <div className="col-12 col-sm-6 col-lg-3 text-center p-1">
-                      Nib: {capitalize(writingSample.nib_tune)}{' '}
+                      Nib: {capitalize(writingSample.nib_grind)}{' '}
                       {capitalize(writingSample.nib_size)}{' '}
-                      {capitalize(writingSample.nib_grind)}
+                      {capitalize(writingSample.nib_tune)}
                     </div>
                     <div className="col-12 col-sm-6 col-lg-3 text-center p-1">
-                      Paper: {capitalize(writingSample.pen_brand)}{' '}
-                      {capitalize(writingSample.pen_model)}
+                      Paper: {capitalize(writingSample.paper_brand)}{' '}
+                      {capitalize(writingSample.paper_name)}{' '}
+                      {capitalize(writingSample.paper_style)}
                     </div>
                   </div>
                 </div>

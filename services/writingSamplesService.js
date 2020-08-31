@@ -37,6 +37,19 @@ const unapprovedIndex = async (req, res, next) => {
   }
 };
 
+const search = async (req, res, next) => {
+  const { query } = req.params;
+  console.log('QUERY');
+  console.log(query);
+  let data;
+  try {
+    data = await writingSamplesModel.search();
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
+
 const insert = async (req, res, next) => {
   const awsKey = req.file.key || req.file.filename; // aws or local storage
 
@@ -144,4 +157,5 @@ module.exports = {
   unapprovedIndex,
   insert,
   show,
+  search,
 };

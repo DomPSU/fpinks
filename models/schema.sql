@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Users;
 Create TABLE Users(
   user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   email VARCHAR(255) NOT NULL,
+  username VARCHAR(20) NOT NULL,
   password VARCHAR(255) NOT NULL,
   level VARCHAR(10) NOT NULL,
   approved TINYINT NOT NULL,
@@ -85,29 +86,18 @@ Create TABLE WritingSamples(
   nib_id INT NOT NULL,
   ink_id INT NOT NULL,
   paper_id INT NOT NULL,
-  aws_key VARCHAR(1024) NOT NULL,
--- TODO valid_waterproofness_review TINYINT NOT NULL 
--- TODO vaid_transparency_review TINYINT NOT NULL 
--- TODO split transparency_review into showthrough and bleedthrough ??
--- TODO vaid drying_time TINYINT NOT NULL 
--- TODO add user_id NOT NULL
+  user_id INT NOT NULL,  -- TODO seeds
+  low_res_aws_key VARCHAR(1024) NOT NULL, -- TODO seeds aws_key -> low_res_aws_key
+  high_res_aws_key VARCHAR(1024) NOT NULL, -- TODO seeds
+  valid_waterproofness TINYINT NOT NULL, -- TODO seeds
+  valid_transparency TINYINT NOT NULL, -- TODO seeds
+  valid_drying_time TINYINT NOT NULL, -- TODO seeds
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (ink_id) REFERENCES Inks (ink_id),
   FOREIGN KEY (paper_id) REFERENCES Papers (paper_id),
-  FOREIGN KEY (pen_id, nib_id) REFERENCES PenNibs (pen_id, nib_id)
-);
-
--- Reviews
-DROP TABLE IF EXISTS Reviews;
-Create TABLE Reviews(
-  review_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  writing_sample_id INT NOT NULL,
-  user_id INT NOT NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NOT NULL,
-  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (pen_id, nib_id) REFERENCES PenNibs (pen_id, nib_id),
   FOREIGN KEY (user_id) REFERENCES Users (user_id)
 );
 
@@ -125,15 +115,18 @@ DROP TABLE IF EXISTS ColorReviews;
 Create TABLE ColorReviews(
   Constraint PK_ColorReviews PRIMARY KEY
   (
-    review_id,
+    writing_sample_id,
+    user_id,
     color_id
   ), 
-  review_id INT NOT NULL,
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
   color_id INT NOT NULL,
-  FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
-  FOREIGN KEY (color_id) REFERENCES Colors (color_id),
   created_at DATETIME NOT NULL,
-  updated_at DATETIME NOT NULL
+  updated_at DATETIME NOT NULL,
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id),
+  FOREIGN KEY (color_id) REFERENCES Colors (color_id)
 );
 
 -- ShadingReviews 
@@ -141,15 +134,18 @@ DROP TABLE IF EXISTS ShadingReviews;
 Create TABLE ShadingReviews(
   Constraint PK_ShadingReviews PRIMARY KEY
   (
-    review_id,
+    writing_sample_id,
+    user_id,
     color_id
   ),
-  review_id INT NOT NULL,
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
   color_id INT NOT NULL,
-  amount VARCHAR(10) NOT NULL, -- TODO if shading amount is none then color should be none
+  amount varchar(10) NOT NULL, -- TODO if shading amount is none then color should be none
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
-  FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id),
   FOREIGN KEY (color_id) REFERENCES Colors (color_id)
 );
 
@@ -158,16 +154,70 @@ DROP TABLE IF EXISTS SheenReviews;
 Create TABLE SheenReviews(
   CONSTRAINT PK_SheenReviews PRIMARY KEY
   (
-    review_id,
-    color_id 
+    writing_sample_id,
+    user_id,
+    color_id
   ),
-  review_id INT NOT NULL,
-  color_id INT NOT NULL,  
-  amount varchar(10) NOT NULL, -- TODO if sheen amount if none then color should be none
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
+  color_id INT NOT NULL,
+  amount varchar(10) NOT NULL, -- TODO if sheen amount is none then color should be none
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
-  FOREIGN KEY (review_id) REFERENCES Reviews (review_id),
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id),
   FOREIGN KEY (color_id) REFERENCES Colors (color_id)
+);
+
+-- WaterReviews
+DROP TABLE IF EXISTS WaterReviews;
+Create TABLE WaterReviews(
+  CONSTRAINT PK_WaterReviews PRIMARY KEY
+  (
+    writing_sample_id,
+    user_id
+  ),
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
+  waterproofness VARCHAR(20) NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+-- DryingReviews
+DROP TABLE IF EXISTS DryingReviews;
+Create TABLE DryingReviews(
+  CONSTRAINT PK_DryingReviews PRIMARY KEY
+  (
+    writing_sample_id,
+    user_id
+  ),
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
+  drying_time VARCHAR(10) NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+-- TransparencyReviews
+DROP TABLE IF EXISTS TransparencyReviews;
+Create TABLE TransparencyReviews(
+  CONSTRAINT PK_TransparencyReviews PRIMARY KEY
+  (
+    writing_sample_id,
+    user_id
+  ),
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
+  transparency VARCHAR(25) NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id)
 );
 
 SET FOREIGN_KEY_CHECKS=1;
