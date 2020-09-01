@@ -4,28 +4,28 @@ const AWS = require('../config/aws');
 const addUrlsToRes = async (res) => {
   res.forEach(
     // TODO fix es lint error and use await instead of then?
-    (colorReviews) =>
-      AWS.getURL(colorReviews.high_res_aws_key).then(
+    (shadingReviews) =>
+      AWS.getURL(shadingReviews.high_res_aws_key).then(
         // eslint-disable-next-line no-return-assign
-        (highResUrl) => (colorReviews.high_res_url = highResUrl),
+        (highResUrl) => (shadingReviews.high_res_url = highResUrl),
       ),
   );
 };
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT ColorReviews.writing_sample_id, WritingSamples.high_res_aws_key, ColorReviews.user_id, Users.username, ColorReviews.color_id, Colors.name, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ColorReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.approved <> 0',
+    'SELECT ShadingReviews.writing_sample_id, WritingSamples.high_res_aws_key, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.approved, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ShadingReviews.writing_sample_id WHERE ShadingReviews.approved <> 0',
   );
   await addUrlsToRes(res);
-  res.forEach((colorReview) => {
-    delete colorReview.high_res_aws_key;
+  res.forEach((shadingReview) => {
+    delete shadingReview.high_res_aws_key;
   });
   return res;
 };
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM ColorReviews WHERE approved = 0',
+    'SELECT * FROM ShadingReviews WHERE approved = 0',
   );
   await addUrlsToRes(res);
   return res;
@@ -33,7 +33,7 @@ const unapprovedIndex = async () => {
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT ColorReviews.writing_sample_id, WritingSamples.high_res_aws_key, ColorReviews.user_id, Users.username, ColorReviews.color_id, Colors.name, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ColorReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.writing_sample_id=? AND ColorReviews.approved <> 0',
+    'SELECT ShadingReviews.writing_sample_id, WritingSamples.high_res_aws_key, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.approved, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ShadingReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND ShadingReviews.approved <> 0',
     [writingSampleID],
   );
   return res;

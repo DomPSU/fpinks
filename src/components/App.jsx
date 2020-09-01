@@ -117,9 +117,7 @@ export default function App() {
             <WritingSamplesIndex link="/writing-samples" />
           </Route>
           {/* colorReviews */}
-          <Route path="/color-reviews/new">
-            <PapersInsert />
-          </Route>
+          {/* insert */}
           <Route path="/color-reviews/unapproved">
             <Index link="/color-reviews/unapproved" />
           </Route>
@@ -127,6 +125,13 @@ export default function App() {
             <Index link="/color-reviews" />
           </Route>
           {/* shadingReviews */}
+          {/* insert */}
+          <Route path="/shading-reviews/unapproved">
+            <Index link="/shading-reviews/unapproved" />
+          </Route>
+          <Route path="/shading-reviews">
+            <Index link="/shading-reviews" />
+          </Route>
           {/* sheenReviews */}
           {/* waterReviews */}
           {/* dryingReviews */}

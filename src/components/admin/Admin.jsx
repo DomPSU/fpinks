@@ -115,6 +115,18 @@ export default function Admin() {
           Unapproved Color Reviews
         </Link>
       </div>
+      {/* shadingReviews */}
+      <div className="row">
+        <h1 className="mt-5">Shading Reviews</h1>
+      </div>
+      <div className="row border-bottom border-dark">
+        <Link className="p-3" to="/shading-reviews">
+          Approved Shading Reviews
+        </Link>
+        <Link className="p-3" to="/shading-reviews/unapproved">
+          Unapproved Shading Reviews
+        </Link>
+      </div>
     </div>
   );
 }

@@ -10,15 +10,18 @@ class WritingSample extends Component {
     this.state = {
       writingSample: {},
       colorReviews: [],
+      shadingReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
     this.getColorReviews = this.getColorReviews.bind(this);
+    this.getShadingReviews = this.getShadingReviews.bind(this);
   }
 
   componentDidMount() {
     this.getWritingSample();
     this.getColorReviews();
+    this.getShadingReviews();
   }
 
   getWritingSample() {
@@ -45,8 +48,20 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getShadingReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `shading-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ shadingReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
-    const { writingSample, colorReviews } = this.state;
+    const { writingSample, colorReviews, shadingReviews } = this.state;
 
     // process colorReviews
     const colorCounts = [];
@@ -63,6 +78,23 @@ class WritingSample extends Component {
     for (const [key, value] of Object.entries(colorCounts)) {
       colorData.push([key, value]);
       colorChartColors.push(key);
+    }
+
+    // process shadingReviews
+    const shadingCounts = [];
+    shadingReviews.forEach((shadingReview) => {
+      const { amount } = shadingReview;
+      shadingCounts[amount] = shadingCounts[amount]
+        ? shadingCounts[amount] + 1
+        : 1;
+    });
+
+    const shadingData = [['Shading', 'Amount']];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(shadingCounts)) {
+      shadingData.push([key, value]);
     }
 
     console.log(this.state);
@@ -194,7 +226,7 @@ class WritingSample extends Component {
             </div>
           </div>
         </div>
-        <div className="card-body">
+        <div>
           <Chart
             width="500px"
             height="300px"
@@ -204,6 +236,20 @@ class WritingSample extends Component {
             options={{
               title: 'Color Reviews',
               colors: colorChartColors,
+              pieSliceBorderColor: 'black',
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+        <div>
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={shadingData}
+            options={{
+              title: 'Shading Reviews',
               pieSliceBorderColor: 'black',
             }}
             rootProps={{ 'data-testid': '1' }}

@@ -1,9 +1,9 @@
-const colorReviewsModel = require('../models/colorReviewsModel');
+const shadingReviewsModel = require('../models/shadingReviewsModel');
 
 const index = async (req, res, next) => {
   let data;
   try {
-    data = await colorReviewsModel.index();
+    data = await shadingReviewsModel.index();
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -15,7 +15,7 @@ const show = async (req, res, next) => {
   const { writingSampleID } = req.params;
 
   try {
-    data = await colorReviewsModel.show(writingSampleID);
+    data = await shadingReviewsModel.show(writingSampleID);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -25,7 +25,7 @@ const show = async (req, res, next) => {
 const unapprovedIndex = async (req, res, next) => {
   let data;
   try {
-    data = await colorReviewsModel.unapprovedIndex();
+    data = await shadingReviewsModel.unapprovedIndex();
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -33,12 +33,12 @@ const unapprovedIndex = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  const colorReview = {
+  const shadingReview = {
     ...req.body,
   };
 
   try {
-    const data = await colorReviewsModel.insert(colorReview);
+    const data = await shadingReviewsModel.insert(shadingReview);
     res.status(200).send(data);
   } catch (e) {
     next(e);
