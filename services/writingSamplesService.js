@@ -41,12 +41,50 @@ const search = async (req, res, next) => {
   const { query } = req.params;
   console.log('QUERY');
   console.log(query);
+
   let data;
-  try {
-    data = await writingSamplesModel.search();
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+
+  // blank query
+  if (query === undefined) {
+    try {
+      data = await writingSamplesModel.index();
+      res.status(200).send(data);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  // whitespace query
+  if (query.trim === '') {
+    try {
+      data = await writingSamplesModel.index();
+      res.status(200).send(data);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  // process query
+
+  // TODO
+  // validate number of '=' is the same or one greater than number of ','
+
+  // no equals
+  if (query.search('=') < 0) {
+    try {
+      data = await writingSamplesModel.basicSearch(query);
+      res.status(200).send(data);
+    } catch (e) {
+      next(e);
+    }
+
+    // one equals, no commas
+  } else if (query.search(',') < 0) {
+    console.log('equal and no commas');
+
+    // general case
+  } else {
+    console.log('equal and commas');
   }
 };
 

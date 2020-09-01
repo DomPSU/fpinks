@@ -11,6 +11,7 @@ const writingSamplesRouter = express.Router();
 // GET
 writingSamplesRouter.get('/unapproved', writingSamplesService.unapprovedIndex);
 writingSamplesRouter.get('/search/:query', writingSamplesService.search);
+writingSamplesRouter.get('/search/', writingSamplesService.search);
 writingSamplesRouter.get('/:id', writingSamplesService.show);
 writingSamplesRouter.get('/', writingSamplesService.index);
 

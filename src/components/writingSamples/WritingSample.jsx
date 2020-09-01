@@ -46,7 +46,7 @@ class WritingSample extends Component {
                   aria-expanded="true"
                   aria-controls="collapseOne"
                 >
-                  Show High Resolution Image
+                  High Resolution Image
                 </button>
               </h2>
             </div>
@@ -75,7 +75,7 @@ class WritingSample extends Component {
                   aria-expanded="false"
                   aria-controls="collapseTwo"
                 >
-                  Show Details
+                  Details
                 </button>
               </h2>
             </div>
@@ -122,7 +122,7 @@ class WritingSample extends Component {
                   aria-expanded="false"
                   aria-controls="collapseThree"
                 >
-                  Show Reviews
+                  Reviews
                 </button>
               </h2>
             </div>
