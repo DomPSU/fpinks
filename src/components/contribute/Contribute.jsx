@@ -89,9 +89,9 @@ class Contribute extends Component {
         <div className="row">
           <div className="col-lg-4" />
           <div className="col-lg-4 pb-3 border-bottom border-dark m-1">
-            A writing sample may simply be written words. You may also add any
-            of the following: waterproofness, drying time,
-            bleed-through/ghosting.
+            A writing sample may simply be written words. Feel free to add
+            anything else but we suggest the following: waterproofness, drying
+            time, bleed-through/ghosting.
           </div>
           <div className="col-lg-4" />
         </div>

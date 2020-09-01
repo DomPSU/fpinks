@@ -6,9 +6,18 @@ class TableRow extends Component {
     const rowClasses = 'border border-dark p-1 align-middle';
 
     const formattedRows = Object.entries(row).map(([key, value]) => {
-      if (key === 'url') {
-        return <a href={value}>writing sample</a>;
+      if (key === 'low_res_url') {
+        return <a href={value}>low res writing sample</a>;
       }
+
+      if (key === 'high_res_url') {
+        return <a href={value}>high res writing sample</a>;
+      }
+
+      if (key === 'original_url') {
+        return <a href={value}>original writing sample</a>;
+      }
+
       return value;
     });
 

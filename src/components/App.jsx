@@ -31,6 +31,18 @@ import PapersInsert from './papers/PapersInsert';
 import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
 import WritingSample from './writingSamples/WritingSample';
 
+// colorReviews
+
+// shadingReviews
+
+// sheenReviews
+
+// WaterReviews
+
+// DryingReviews
+
+// TransparencyReviews
+
 export default function App() {
   return (
     <Router>
@@ -104,6 +116,21 @@ export default function App() {
           <Route path="/writing-samples">
             <WritingSamplesIndex link="/writing-samples" />
           </Route>
+          {/* colorReviews */}
+          <Route path="/color-reviews/new">
+            <PapersInsert />
+          </Route>
+          <Route path="/color-reviews/unapproved">
+            <Index link="/color-reviews/unapproved" />
+          </Route>
+          <Route path="/color-reviews">
+            <Index link="/color-reviews" />
+          </Route>
+          {/* shadingReviews */}
+          {/* sheenReviews */}
+          {/* waterReviews */}
+          {/* dryingReviews */}
+          {/* transparencyReviews */}
           {/* other */}
           <Route path="/admin">
             <Admin />

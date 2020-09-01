@@ -8,7 +8,7 @@ export default function Admin() {
       <div className="row">
         <h1 className="mt-5">Users</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/users">
           Approved Users
         </Link>
@@ -20,7 +20,7 @@ export default function Admin() {
       <div className="row">
         <h1 className="mt-5">Pens</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/pens">
           Approved Pens
         </Link>
@@ -35,7 +35,7 @@ export default function Admin() {
       <div className="row">
         <h1 className="mt-5">Nibs</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/nibs">
           Approved Nibs
         </Link>
@@ -50,7 +50,7 @@ export default function Admin() {
       <div className="row">
         <h1 className="mt-5">PenNibs</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/pen-nibs">
           Approved PenNibs
         </Link>
@@ -62,10 +62,10 @@ export default function Admin() {
         </Link>
       </div>
       {/* inks */}
-      <div className="row">
+      <div className="row ">
         <h1 className="mt-5">Inks</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/inks">
           Approved Inks
         </Link>
@@ -80,7 +80,7 @@ export default function Admin() {
       <div className="row">
         <h1 className="mt-5">Papers</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/papers">
           Approved Papers
         </Link>
@@ -95,12 +95,24 @@ export default function Admin() {
       <div className="row">
         <h1 className="mt-5">Writing Samples</h1>
       </div>
-      <div className="row">
+      <div className="row border-bottom border-dark">
         <Link className="p-3" to="/writing-samples">
           Approved Writing Samples
         </Link>
         <Link className="p-3" to="/writing-samples/unapproved">
           Unapproved Writing Samples
+        </Link>
+      </div>
+      {/* colorReviews */}
+      <div className="row">
+        <h1 className="mt-5">Color Reviews</h1>
+      </div>
+      <div className="row border-bottom border-dark">
+        <Link className="p-3" to="/color-reviews">
+          Approved Color Reviews
+        </Link>
+        <Link className="p-3" to="/color-reviews/unapproved">
+          Unapproved Color Reviews
         </Link>
       </div>
     </div>

@@ -87,8 +87,9 @@ Create TABLE WritingSamples(
   ink_id INT NOT NULL,
   paper_id INT NOT NULL,
   user_id INT NOT NULL,  -- TODO seeds
-  low_res_aws_key VARCHAR(1024) NOT NULL, -- TODO seeds aws_key -> low_res_aws_key
-  high_res_aws_key VARCHAR(1024) NOT NULL, -- TODO seeds
+  low_res_aws_key VARCHAR(1024), -- TODO seeds aws_key -> low_res_aws_key
+  high_res_aws_key VARCHAR(1024), -- TODO seeds
+  original_aws_key VARCHAR(2014) NOT NULL, -- TODO seeds
   valid_waterproofness TINYINT NOT NULL, -- TODO seeds
   valid_transparency TINYINT NOT NULL, -- TODO seeds
   valid_drying_time TINYINT NOT NULL, -- TODO seeds
@@ -122,6 +123,7 @@ Create TABLE ColorReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   color_id INT NOT NULL,
+  approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
@@ -142,6 +144,7 @@ Create TABLE ShadingReviews(
   user_id INT NOT NULL,
   color_id INT NOT NULL,
   amount varchar(10) NOT NULL, -- TODO if shading amount is none then color should be none
+  approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
@@ -162,6 +165,7 @@ Create TABLE SheenReviews(
   user_id INT NOT NULL,
   color_id INT NOT NULL,
   amount varchar(10) NOT NULL, -- TODO if sheen amount is none then color should be none
+  approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
@@ -180,6 +184,7 @@ Create TABLE WaterReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   waterproofness VARCHAR(20) NOT NULL,
+  approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
@@ -197,6 +202,7 @@ Create TABLE DryingReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   drying_time VARCHAR(10) NOT NULL,
+  approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
@@ -214,6 +220,7 @@ Create TABLE TransparencyReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   transparency VARCHAR(25) NOT NULL,
+  approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),

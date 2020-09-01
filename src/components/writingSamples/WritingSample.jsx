@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Chart } from 'react-google-charts';
 import API from '../../apis/API';
 import { capitalize } from '../../util/util';
 
@@ -8,13 +9,16 @@ class WritingSample extends Component {
 
     this.state = {
       writingSample: {},
+      colorReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
+    this.getColorReviews = this.getColorReviews.bind(this);
   }
 
   componentDidMount() {
     this.getWritingSample();
+    this.getColorReviews();
   }
 
   getWritingSample() {
@@ -29,8 +33,38 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getColorReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `color-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ colorReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
-    const { writingSample } = this.state;
+    const { writingSample, colorReviews } = this.state;
+
+    // process colorReviews
+    const colorCounts = [];
+    colorReviews.forEach((colorReview) => {
+      const color = colorReview.name;
+      colorCounts[color] = colorCounts[color] ? colorCounts[color] + 1 : 1;
+    });
+
+    const colorData = [['Color', 'Number of reviews']];
+    const colorChartColors = [];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(colorCounts)) {
+      colorData.push([key, value]);
+      colorChartColors.push(key);
+    }
+
     console.log(this.state);
     return (
       <div className="container-fluid text-center">
@@ -39,11 +73,11 @@ class WritingSample extends Component {
             <div className="card-header" id="headingOne">
               <h2 className="mb-0">
                 <button
-                  className="btn btn-link btn-block text-left text-center"
+                  className="btn btn-link btn-block text-left collpased text-center"
                   type="button"
                   data-toggle="collapse"
                   data-target="#collapseOne"
-                  aria-expanded="true"
+                  aria-expanded="false"
                   aria-controls="collapseOne"
                 >
                   High Resolution Image
@@ -53,7 +87,7 @@ class WritingSample extends Component {
 
             <div
               id="collapseOne"
-              className="collapse show"
+              className="collapse"
               aria-labelledby="headingOne"
               data-parent="#accordionExample"
             >
@@ -122,7 +156,7 @@ class WritingSample extends Component {
                   aria-expanded="false"
                   aria-controls="collapseThree"
                 >
-                  Reviews
+                  Review
                 </button>
               </h2>
             </div>
@@ -132,7 +166,7 @@ class WritingSample extends Component {
               aria-labelledby="headingThree"
               data-parent="#accordionExample"
             >
-              <div className="card-body">Coming Soon</div>
+              coming soon
             </div>
           </div>
           <div className="card">
@@ -159,6 +193,21 @@ class WritingSample extends Component {
               <div className="card-body">Coming Soon</div>
             </div>
           </div>
+        </div>
+        <div className="card-body">
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={colorData}
+            options={{
+              title: 'Color Reviews',
+              colors: colorChartColors,
+              pieSliceBorderColor: 'black',
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
         </div>
       </div>
     );
