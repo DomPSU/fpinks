@@ -87,7 +87,10 @@ class Gallery extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div className="row d-flex flex-wrap align-items-center"> {list}</div>
+        <div id="list" className="row d-flex flex-wrap align-items-center">
+          {' '}
+          {list}
+        </div>
       </div>
     );
   }

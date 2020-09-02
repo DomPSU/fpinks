@@ -88,7 +88,7 @@ class Contribute extends Component {
       <div className="container text-center">
         <div className="row">
           <div className="col-lg-4" />
-          <div className="col-lg-4 pb-3 border-bottom border-dark m-1">
+          <div className="col-lg-4 pb-3 pt-3 border-bottom border-dark m-1">
             A writing sample may simply be written words. Feel free to add
             anything else but we suggest the following: waterproofness, drying
             time, bleed-through/ghosting.

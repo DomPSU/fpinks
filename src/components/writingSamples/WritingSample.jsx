@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
 import API from '../../apis/API';
 import { capitalize } from '../../util/util';
+import './writingSample.css';
 
 class WritingSample extends Component {
   constructor(props) {
@@ -160,7 +161,7 @@ class WritingSample extends Component {
     // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(colorCounts)) {
-      colorData.push([key, value]);
+      colorData.push([capitalize(key), value]);
       colorChartColors.push(key); // TODO conditional when color is none
     }
 
@@ -178,7 +179,7 @@ class WritingSample extends Component {
     // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(shadingCounts)) {
-      shadingData.push([key, value]);
+      shadingData.push([capitalize(key), value]);
     }
 
     // TODO sheenChartColors for 'partial color' and 'full color'.
@@ -198,9 +199,9 @@ class WritingSample extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(sheenCounts)) {
       if (key !== 'none none') {
-        sheenData.push([key, value]);
+        sheenData.push([capitalize(key), value]);
       } else {
-        sheenData.push(['none', value]);
+        sheenData.push(['None', value]);
       }
     }
 
@@ -219,7 +220,7 @@ class WritingSample extends Component {
     // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(waterCounts)) {
-      waterData.push([key, value]);
+      waterData.push([capitalize(key), value]);
     }
 
     // process dryingReviews
@@ -255,7 +256,7 @@ class WritingSample extends Component {
     // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(transparencyCounts)) {
-      transparencyData.push([key, value]);
+      transparencyData.push([capitalize(key), value]);
     }
 
     // process featheringReviews
@@ -273,12 +274,40 @@ class WritingSample extends Component {
     // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(featheringCounts)) {
-      featheringData.push([key, value]);
+      featheringData.push([capitalize(key), value]);
     }
 
     console.log(this.state);
     return (
-      <div className="container-fluid text-center">
+      <div className="container-fluid text-center topmargin">
+        <div className="row ml-1 mb-3 mr-1 rounded bg-light ">
+          <div className="col-12 col-sm-6 col-lg-3 text-center pt-1 pb-1">
+            <h4>
+              Ink: {capitalize(writingSample.ink_brand)}{' '}
+              {capitalize(writingSample.ink_name)}
+            </h4>
+          </div>
+          <div className="col-12 col-sm-6 col-lg-3 text-center pt-1 pb-1">
+            <h4>
+              Pen: {capitalize(writingSample.pen_brand)}{' '}
+              {capitalize(writingSample.pen_model)}
+            </h4>
+          </div>
+          <div className="col-12 col-sm-6 col-lg-3 text-center pt-1 pb-1">
+            <h4>
+              Nib: {capitalize(writingSample.nib_grind)}{' '}
+              {capitalize(writingSample.nib_size)}{' '}
+              {capitalize(writingSample.nib_tune)}
+            </h4>
+          </div>
+          <div className="col-12 col-sm-6 col-lg-3 text-center pt-1 pb-1">
+            <h4>
+              Paper: {capitalize(writingSample.paper_brand)}{' '}
+              {capitalize(writingSample.paper_name)}{' '}
+              {capitalize(writingSample.paper_style)}
+            </h4>
+          </div>
+        </div>
         <div className="accordion" id="accordionExample">
           <div className="card">
             <div className="card-header" id="headingOne">
@@ -320,7 +349,7 @@ class WritingSample extends Component {
                   aria-expanded="false"
                   aria-controls="collapseTwo"
                 >
-                  Details
+                  Downloads
                 </button>
               </h2>
             </div>
@@ -330,30 +359,7 @@ class WritingSample extends Component {
               aria-labelledby="headingTwo"
               data-parent="#accordionExample"
             >
-              <div className="card-body">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12 col-sm-6 col-lg-3 text-center p-1">
-                      Ink: {capitalize(writingSample.ink_brand)}{' '}
-                      {capitalize(writingSample.ink_name)}
-                    </div>
-                    <div className="col-12 col-sm-6 col-lg-3 text-center p-1">
-                      Pen: {capitalize(writingSample.pen_brand)}{' '}
-                      {capitalize(writingSample.pen_model)}
-                    </div>
-                    <div className="col-12 col-sm-6 col-lg-3 text-center p-1">
-                      Nib: {capitalize(writingSample.nib_grind)}{' '}
-                      {capitalize(writingSample.nib_size)}{' '}
-                      {capitalize(writingSample.nib_tune)}
-                    </div>
-                    <div className="col-12 col-sm-6 col-lg-3 text-center p-1">
-                      Paper: {capitalize(writingSample.paper_brand)}{' '}
-                      {capitalize(writingSample.paper_name)}{' '}
-                      {capitalize(writingSample.paper_style)}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              coming soon
             </div>
           </div>
           <div className="card">
@@ -380,129 +386,100 @@ class WritingSample extends Component {
               coming soon
             </div>
           </div>
-          <div className="card">
-            <div className="card-header" id="headingFour">
-              <h2 className="mb-0">
-                <button
-                  className="btn btn-link btn-block text-left collapsed text-center"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapseFour"
-                  aria-expanded="false"
-                  aria-controls="collapseFour"
-                >
-                  Downloads
-                </button>
-              </h2>
-            </div>
-            <div
-              id="collapseFour"
-              className="collapse"
-              aria-labelledby="headingFour"
-              data-parent="#accordionExample"
-            >
-              <div className="card-body">Coming Soon</div>
-            </div>
+        </div>
+        <div className="row pt-3">
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={colorData}
+              options={{
+                title: 'Color Reviews',
+                colors: colorChartColors,
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
           </div>
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={colorData}
-            options={{
-              title: 'Color Reviews',
-              colors: colorChartColors,
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={shadingData}
-            options={{
-              title: 'Shading Reviews',
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={sheenData}
-            options={{
-              title: 'Sheen Reviews',
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={waterData}
-            options={{
-              title: 'Waterproofness Reviews',
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={dryingData}
-            options={{
-              title: 'Drying Time Reviews',
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={transparencyData}
-            options={{
-              title: 'Transparency Reviews',
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </div>
-        <div>
-          <Chart
-            width="500px"
-            height="300px"
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={featheringData}
-            options={{
-              title: 'Feathering Reviews',
-              pieSliceBorderColor: 'black',
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={shadingData}
+              options={{
+                title: 'Shading Reviews',
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={sheenData}
+              options={{
+                title: 'Sheen Reviews',
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={waterData}
+              options={{
+                title: 'Waterproofness Reviews',
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={dryingData}
+              options={{
+                title: 'Drying Time Reviews',
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={transparencyData}
+              options={{
+                title: 'Transparency Reviews',
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={featheringData}
+              options={{
+                title: 'Feathering Reviews',
+                pieSliceBorderColor: 'black',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
         </div>
       </div>
     );
