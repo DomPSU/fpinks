@@ -4,39 +4,39 @@ const AWS = require('../config/aws');
 const addUrlsToRes = async (res) => {
   res.forEach(
     // TODO fix es lint error and use await instead of then?
-    (dryingReviews) =>
-      AWS.getURL(dryingReviews.high_res_aws_key).then(
+    (transparencyReviews) =>
+      AWS.getURL(transparencyReviews.high_res_aws_key).then(
         // eslint-disable-next-line no-return-assign
-        (highResUrl) => (dryingReviews.high_res_url = highResUrl),
+        (highResUrl) => (transparencyReviews.high_res_url = highResUrl),
       ),
   );
 };
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT DryingReviews.writing_sample_id, WritingSamples.high_res_aws_key, DryingReviews.user_id, Users.username, DryingReviews.drying_time, DryingReviews.approved, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=DryingReviews.writing_sample_id WHERE DryingReviews.approved <> 0',
+    'SELECT TransparencyReviews.writing_sample_id, WritingSamples.high_res_aws_key, TransparencyReviews.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.approved, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=TransparencyReviews.writing_sample_id WHERE TransparencyReviews.approved <> 0',
   );
   await addUrlsToRes(res);
-  res.forEach((dryingReview) => {
-    delete dryingReview.high_res_aws_key;
+  res.forEach((transparencyReview) => {
+    delete transparencyReview.high_res_aws_key;
   });
   return res;
 };
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT DryingReviews.writing_sample_id, WritingSamples.high_res_aws_key, DryingReviews.user_id, Users.username, DryingReviews.drying_time, DryingReviews.approved, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=DryingReviews.writing_sample_id WHERE DryingReviews.approved = 0',
+    'SELECT TransparencyReviews.writing_sample_id, WritingSamples.high_res_aws_key, TransparencyReviews.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.approved, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=TransparencyReviews.writing_sample_id WHERE TransparencyReviews.approved = 0',
   );
   await addUrlsToRes(res);
-  res.forEach((dryingReview) => {
-    delete dryingReview.high_res_aws_key;
+  res.forEach((transparencyReview) => {
+    delete transparencyReview.high_res_aws_key;
   });
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT DryingReviews.writing_sample_id, WritingSamples.high_res_aws_key, DryingReviews.user_id, Users.username, DryingReviews.drying_time, DryingReviews.approved, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=DryingReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND DryingReviews.approved <> 0',
+    'SELECT TransparencyReviews.writing_sample_id, WritingSamples.high_res_aws_key, TransparencyReviews.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.approved, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=TransparencyReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND TransparencyReviews.approved <> 0',
     [writingSampleID],
   );
   return res;

@@ -14,6 +14,7 @@ class WritingSample extends Component {
       sheenReviews: [],
       waterReviews: [],
       dryingReviews: [],
+      transparencyReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
@@ -22,6 +23,7 @@ class WritingSample extends Component {
     this.getSheenReviews = this.getSheenReviews.bind(this);
     this.getWaterReviews = this.getWaterReviews.bind(this);
     this.getDryingReviews = this.getDryingReviews.bind(this);
+    this.getTransparencyReviews = this.getTransparencyReviews.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,7 @@ class WritingSample extends Component {
     this.getSheenReviews();
     this.getWaterReviews();
     this.getDryingReviews();
+    this.getTransparencyReviews();
   }
 
   getWritingSample() {
@@ -105,6 +108,18 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getTransparencyReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `transparency-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ transparencyReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
     const {
       writingSample,
@@ -113,6 +128,7 @@ class WritingSample extends Component {
       sheenReviews,
       waterReviews,
       dryingReviews,
+      transparencyReviews,
     } = this.state;
 
     // process colorReviews
@@ -129,7 +145,7 @@ class WritingSample extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(colorCounts)) {
       colorData.push([key, value]);
-      colorChartColors.push(key);
+      colorChartColors.push(key); // TODO conditional when color is none
     }
 
     // process shadingReviews
@@ -209,6 +225,22 @@ class WritingSample extends Component {
     }
 
     // process transparencyReviews
+    const transparencyCounts = [];
+    transparencyReviews.forEach((transparencyReview) => {
+      const { transparency } = transparencyReview;
+
+      transparencyCounts[transparency] = transparencyCounts[transparency]
+        ? transparencyCounts[transparency] + 1
+        : 1;
+    });
+
+    const transparencyData = [['Transparency', 'Number of reviews']];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(transparencyCounts)) {
+      transparencyData.push([key, value]);
+    }
 
     // process featheringReviews
 
@@ -366,7 +398,6 @@ class WritingSample extends Component {
             options={{
               title: 'Shading Reviews',
               pieSliceBorderColor: 'black',
-              colors: ['slategrey', 'dimgrey', 'darkgrey'],
             }}
             rootProps={{ 'data-testid': '1' }}
           />
@@ -381,7 +412,6 @@ class WritingSample extends Component {
             options={{
               title: 'Sheen Reviews',
               pieSliceBorderColor: 'black',
-              colors: ['slategrey', 'dimgrey', 'darkgrey'],
             }}
             rootProps={{ 'data-testid': '1' }}
           />
@@ -396,7 +426,6 @@ class WritingSample extends Component {
             options={{
               title: 'Waterproofness Reviews',
               pieSliceBorderColor: 'black',
-              colors: ['slategrey', 'dimgrey', 'darkgrey'],
             }}
             rootProps={{ 'data-testid': '1' }}
           />
@@ -411,7 +440,20 @@ class WritingSample extends Component {
             options={{
               title: 'Drying Time Reviews',
               pieSliceBorderColor: 'black',
-              colors: ['slategrey', 'dimgrey', 'darkgrey'],
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+        <div>
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={transparencyData}
+            options={{
+              title: 'Transparency Reviews',
+              pieSliceBorderColor: 'black',
             }}
             rootProps={{ 'data-testid': '1' }}
           />

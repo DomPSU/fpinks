@@ -13,6 +13,7 @@ const shadingReviewsRouter = require('./shadingReviewsRouter');
 const sheenReviewsRouter = require('./sheenReviewsRouter');
 const waterReviewsRouter = require('./waterReviewsRouter');
 const dryingReviewsRouter = require('./dryingReviewsRouter');
+const transparencyReviewsRouter = require('./transparencyReviewsRouter');
 
 router.use('/users', usersRouter);
 router.use('/pens', pensRouter);
@@ -26,5 +27,6 @@ router.use('/shading-reviews', shadingReviewsRouter);
 router.use('/sheen-reviews', sheenReviewsRouter);
 router.use('/water-reviews', waterReviewsRouter);
 router.use('/drying-reviews', dryingReviewsRouter);
+router.use('/transparency-reviews', transparencyReviewsRouter);
 
 module.exports = router;
