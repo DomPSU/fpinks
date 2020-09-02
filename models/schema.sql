@@ -161,7 +161,7 @@ Create TABLE SheenReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   color_id INT NOT NULL,
-  amount varchar(10) NOT NULL, -- TODO if sheen amount is none then color should be none
+  amount varchar(10) NOT NULL,
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
@@ -217,6 +217,24 @@ Create TABLE TransparencyReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   transparency VARCHAR(25) NOT NULL,
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+-- TransparencyReviews
+DROP TABLE IF EXISTS FeatheringReviews;
+Create TABLE FeatheringReviews(
+  CONSTRAINT PK_FeatheringReviews PRIMARY KEY
+  (
+    writing_sample_id,
+    user_id
+  ),
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
+  feathering VARCHAR(10) NOT NULL,
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,

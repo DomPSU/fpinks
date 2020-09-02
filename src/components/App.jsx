@@ -167,6 +167,13 @@ export default function App() {
             <Index link="/transparency-reviews" />
           </Route>
           {/* featheringReviews */}
+          {/* TODO insert */}
+          <Route path="/feathering-reviews/unapproved">
+            <Index link="/feathering-reviews/unapproved" />
+          </Route>
+          <Route path="/feathering-reviews">
+            <Index link="/feathering-reviews" />
+          </Route>
           {/* other */}
           <Route path="/admin">
             <Admin />

@@ -15,6 +15,7 @@ class WritingSample extends Component {
       waterReviews: [],
       dryingReviews: [],
       transparencyReviews: [],
+      featheringReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
@@ -24,6 +25,7 @@ class WritingSample extends Component {
     this.getWaterReviews = this.getWaterReviews.bind(this);
     this.getDryingReviews = this.getDryingReviews.bind(this);
     this.getTransparencyReviews = this.getTransparencyReviews.bind(this);
+    this.getFeatheringReviews = this.getFeatheringReviews.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +36,7 @@ class WritingSample extends Component {
     this.getWaterReviews();
     this.getDryingReviews();
     this.getTransparencyReviews();
+    this.getFeatheringReviews();
   }
 
   getWritingSample() {
@@ -120,6 +123,18 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getFeatheringReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `feathering-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ featheringReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
     const {
       writingSample,
@@ -129,6 +144,7 @@ class WritingSample extends Component {
       waterReviews,
       dryingReviews,
       transparencyReviews,
+      featheringReviews,
     } = this.state;
 
     // process colorReviews
@@ -243,6 +259,22 @@ class WritingSample extends Component {
     }
 
     // process featheringReviews
+    const featheringCounts = [];
+    featheringReviews.forEach((featheringReview) => {
+      const { feathering } = featheringReview;
+
+      featheringCounts[feathering] = featheringCounts[feathering]
+        ? featheringCounts[feathering] + 1
+        : 1;
+    });
+
+    const featheringData = [['Feathering', 'Number of reviews']];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(featheringCounts)) {
+      featheringData.push([key, value]);
+    }
 
     console.log(this.state);
     return (
@@ -453,6 +485,20 @@ class WritingSample extends Component {
             data={transparencyData}
             options={{
               title: 'Transparency Reviews',
+              pieSliceBorderColor: 'black',
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+        <div>
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={featheringData}
+            options={{
+              title: 'Feathering Reviews',
               pieSliceBorderColor: 'black',
             }}
             rootProps={{ 'data-testid': '1' }}
