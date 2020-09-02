@@ -11,17 +11,20 @@ class WritingSample extends Component {
       writingSample: {},
       colorReviews: [],
       shadingReviews: [],
+      sheenReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
+    this.getSheenReviews = this.getSheenReviews.bind(this);
   }
 
   componentDidMount() {
     this.getWritingSample();
     this.getColorReviews();
     this.getShadingReviews();
+    this.getSheenReviews();
   }
 
   getWritingSample() {
@@ -60,8 +63,25 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getSheenReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `sheen-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ sheenReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
-    const { writingSample, colorReviews, shadingReviews } = this.state;
+    const {
+      writingSample,
+      colorReviews,
+      shadingReviews,
+      sheenReviews,
+    } = this.state;
 
     // process colorReviews
     const colorCounts = [];
@@ -96,6 +116,36 @@ class WritingSample extends Component {
     for (const [key, value] of Object.entries(shadingCounts)) {
       shadingData.push([key, value]);
     }
+
+    // process sheenReviews
+    const sheenCounts = [];
+    sheenReviews.forEach((sheenReview) => {
+      const { amount, name } = sheenReview;
+
+      sheenCounts[`${amount} ${name}`] = sheenCounts[`${amount} ${name}`]
+        ? sheenCounts[`${amount} ${name}`] + 1
+        : 1;
+    });
+
+    const sheenData = [['Sheen', 'Color Amount']];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(sheenCounts)) {
+      if (key !== 'none none') {
+        sheenData.push([key, value]);
+      } else {
+        sheenData.push(['none', value]);
+      }
+    }
+
+    // TODO sheenChartColors for 'partial color' and 'full color'.
+
+    // process waterReviews
+
+    // process dryingReviews
+
+    // process transparencyReviews
 
     console.log(this.state);
     return (
@@ -251,6 +301,22 @@ class WritingSample extends Component {
             options={{
               title: 'Shading Reviews',
               pieSliceBorderColor: 'black',
+              colors: ['slategrey', 'dimgrey', 'darkgrey'],
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+        <div>
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={sheenData}
+            options={{
+              title: 'Sheen Reviews',
+              pieSliceBorderColor: 'black',
+              colors: ['slategrey', 'dimgrey', 'darkgrey'],
             }}
             rootProps={{ 'data-testid': '1' }}
           />

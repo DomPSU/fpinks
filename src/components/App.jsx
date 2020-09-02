@@ -117,7 +117,7 @@ export default function App() {
             <WritingSamplesIndex link="/writing-samples" />
           </Route>
           {/* colorReviews */}
-          {/* insert */}
+          {/* TODO insert */}
           <Route path="/color-reviews/unapproved">
             <Index link="/color-reviews/unapproved" />
           </Route>
@@ -125,7 +125,7 @@ export default function App() {
             <Index link="/color-reviews" />
           </Route>
           {/* shadingReviews */}
-          {/* insert */}
+          {/* TODO insert */}
           <Route path="/shading-reviews/unapproved">
             <Index link="/shading-reviews/unapproved" />
           </Route>
@@ -133,6 +133,13 @@ export default function App() {
             <Index link="/shading-reviews" />
           </Route>
           {/* sheenReviews */}
+          {/* TODO insert */}
+          <Route path="/sheen-reviews/unapproved">
+            <Index link="/sheen-reviews/unapproved" />
+          </Route>
+          <Route path="/sheen-reviews">
+            <Index link="/sheen-reviews" />
+          </Route>
           {/* waterReviews */}
           {/* dryingReviews */}
           {/* transparencyReviews */}

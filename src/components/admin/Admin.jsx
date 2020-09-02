@@ -127,6 +127,18 @@ export default function Admin() {
           Unapproved Shading Reviews
         </Link>
       </div>
+      {/* sheenReviews */}
+      <div className="row">
+        <h1 className="mt-5">Sheen Reviews</h1>
+      </div>
+      <div className="row border-bottom border-dark">
+        <Link className="p-3" to="/sheen-reviews">
+          Approved Sheen Reviews
+        </Link>
+        <Link className="p-3" to="/sheen-reviews/unapproved">
+          Unapproved Sheen Reviews
+        </Link>
+      </div>
     </div>
   );
 }

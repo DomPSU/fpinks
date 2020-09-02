@@ -25,9 +25,12 @@ const index = async () => {
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM ColorReviews WHERE approved = 0',
+    'SELECT ColorReviews.writing_sample_id, WritingSamples.high_res_aws_key, ColorReviews.user_id, Users.username, ColorReviews.color_id, Colors.name, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ColorReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.approved = 0',
   );
   await addUrlsToRes(res);
+  res.forEach((colorReview) => {
+    delete colorReview.high_res_aws_key;
+  });
   return res;
 };
 
