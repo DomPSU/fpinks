@@ -12,12 +12,14 @@ class WritingSample extends Component {
       colorReviews: [],
       shadingReviews: [],
       sheenReviews: [],
+      waterReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
     this.getSheenReviews = this.getSheenReviews.bind(this);
+    this.getWaterReviews = this.getWaterReviews.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +27,7 @@ class WritingSample extends Component {
     this.getColorReviews();
     this.getShadingReviews();
     this.getSheenReviews();
+    this.getWaterReviews();
   }
 
   getWritingSample() {
@@ -75,12 +78,25 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getWaterReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `water-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ waterReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
     const {
       writingSample,
       colorReviews,
       shadingReviews,
       sheenReviews,
+      waterReviews,
     } = this.state;
 
     // process colorReviews
@@ -109,7 +125,7 @@ class WritingSample extends Component {
         : 1;
     });
 
-    const shadingData = [['Shading', 'Amount']];
+    const shadingData = [['Shading', 'Number of reviews']];
 
     // TODO
     // eslint-disable-next-line no-restricted-syntax
@@ -117,6 +133,7 @@ class WritingSample extends Component {
       shadingData.push([key, value]);
     }
 
+    // TODO sheenChartColors for 'partial color' and 'full color'.
     // process sheenReviews
     const sheenCounts = [];
     sheenReviews.forEach((sheenReview) => {
@@ -127,7 +144,7 @@ class WritingSample extends Component {
         : 1;
     });
 
-    const sheenData = [['Sheen', 'Color Amount']];
+    const sheenData = [['Sheen', 'Number of reviews']];
 
     // TODO
     // eslint-disable-next-line no-restricted-syntax
@@ -139,13 +156,29 @@ class WritingSample extends Component {
       }
     }
 
-    // TODO sheenChartColors for 'partial color' and 'full color'.
-
     // process waterReviews
+    const waterCounts = [];
+    waterReviews.forEach((waterReview) => {
+      const { waterproofness } = waterReview;
+
+      waterCounts[waterproofness] = waterCounts[waterproofness]
+        ? waterCounts[waterproofness] + 1
+        : 1;
+    });
+
+    const waterData = [['Waterproofness', 'Number of reviews']];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(waterCounts)) {
+      waterData.push([key, value]);
+    }
 
     // process dryingReviews
 
     // process transparencyReviews
+
+    // process featheringReviews
 
     console.log(this.state);
     return (
@@ -315,6 +348,21 @@ class WritingSample extends Component {
             data={sheenData}
             options={{
               title: 'Sheen Reviews',
+              pieSliceBorderColor: 'black',
+              colors: ['slategrey', 'dimgrey', 'darkgrey'],
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+        <div>
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={waterData}
+            options={{
+              title: 'Waterproofness Reviews',
               pieSliceBorderColor: 'black',
               colors: ['slategrey', 'dimgrey', 'darkgrey'],
             }}

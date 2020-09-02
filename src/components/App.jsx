@@ -37,11 +37,13 @@ import WritingSample from './writingSamples/WritingSample';
 
 // sheenReviews
 
-// WaterReviews
+// waterReviews
 
-// DryingReviews
+// dryingReviews
 
-// TransparencyReviews
+// transparencyReviews
+
+// featheringReviews
 
 export default function App() {
   return (
@@ -141,8 +143,16 @@ export default function App() {
             <Index link="/sheen-reviews" />
           </Route>
           {/* waterReviews */}
+          {/* TODO insert */}
+          <Route path="/water-reviews/unapproved">
+            <Index link="/water-reviews/unapproved" />
+          </Route>
+          <Route path="/water-reviews">
+            <Index link="/water-reviews" />
+          </Route>
           {/* dryingReviews */}
           {/* transparencyReviews */}
+          {/* featheringReviews */}
           {/* other */}
           <Route path="/admin">
             <Admin />

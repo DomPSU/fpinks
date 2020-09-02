@@ -139,6 +139,18 @@ export default function Admin() {
           Unapproved Sheen Reviews
         </Link>
       </div>
+      {/* waterReviews */}
+      <div className="row">
+        <h1 className="mt-5">Water Reviews</h1>
+      </div>
+      <div className="row border-bottom border-dark">
+        <Link className="p-3" to="/water-reviews">
+          Approved Water Reviews
+        </Link>
+        <Link className="p-3" to="/water-reviews/unapproved">
+          Unapproved Water Reviews
+        </Link>
+      </div>
     </div>
   );
 }
