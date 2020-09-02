@@ -151,6 +151,13 @@ export default function App() {
             <Index link="/water-reviews" />
           </Route>
           {/* dryingReviews */}
+          {/* TODO insert */}
+          <Route path="/drying-reviews/unapproved">
+            <Index link="/drying-reviews/unapproved" />
+          </Route>
+          <Route path="/drying-reviews">
+            <Index link="/drying-reviews" />
+          </Route>
           {/* transparencyReviews */}
           {/* featheringReviews */}
           {/* other */}

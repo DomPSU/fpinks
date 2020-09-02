@@ -13,6 +13,7 @@ class WritingSample extends Component {
       shadingReviews: [],
       sheenReviews: [],
       waterReviews: [],
+      dryingReviews: [],
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
@@ -20,6 +21,7 @@ class WritingSample extends Component {
     this.getShadingReviews = this.getShadingReviews.bind(this);
     this.getSheenReviews = this.getSheenReviews.bind(this);
     this.getWaterReviews = this.getWaterReviews.bind(this);
+    this.getDryingReviews = this.getDryingReviews.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +30,7 @@ class WritingSample extends Component {
     this.getShadingReviews();
     this.getSheenReviews();
     this.getWaterReviews();
+    this.getDryingReviews();
   }
 
   getWritingSample() {
@@ -90,6 +93,18 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getDryingReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `drying-reviews/${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ dryingReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   render() {
     const {
       writingSample,
@@ -97,6 +112,7 @@ class WritingSample extends Component {
       shadingReviews,
       sheenReviews,
       waterReviews,
+      dryingReviews,
     } = this.state;
 
     // process colorReviews
@@ -175,6 +191,22 @@ class WritingSample extends Component {
     }
 
     // process dryingReviews
+    const dryingCounts = [];
+    dryingReviews.forEach((dryingReview) => {
+      const dryingTime = dryingReview.drying_time;
+
+      dryingCounts[dryingTime] = dryingCounts[dryingTime]
+        ? dryingCounts[dryingTime] + 1
+        : 1;
+    });
+
+    const dryingData = [['Drying Time', 'Number of reviews']];
+
+    // TODO
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(dryingCounts)) {
+      dryingData.push([key, value]);
+    }
 
     // process transparencyReviews
 
@@ -363,6 +395,21 @@ class WritingSample extends Component {
             data={waterData}
             options={{
               title: 'Waterproofness Reviews',
+              pieSliceBorderColor: 'black',
+              colors: ['slategrey', 'dimgrey', 'darkgrey'],
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+        <div>
+          <Chart
+            width="500px"
+            height="300px"
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={dryingData}
+            options={{
+              title: 'Drying Time Reviews',
               pieSliceBorderColor: 'black',
               colors: ['slategrey', 'dimgrey', 'darkgrey'],
             }}

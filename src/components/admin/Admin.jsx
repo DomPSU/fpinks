@@ -151,6 +151,18 @@ export default function Admin() {
           Unapproved Water Reviews
         </Link>
       </div>
+      {/* dryingReviews */}
+      <div className="row">
+        <h1 className="mt-5">Drying Reviews</h1>
+      </div>
+      <div className="row border-bottom border-dark">
+        <Link className="p-3" to="/drying-reviews">
+          Approved Drying Reviews
+        </Link>
+        <Link className="p-3" to="/drying-reviews/unapproved">
+          Unapproved Drying Reviews
+        </Link>
+      </div>
     </div>
   );
 }
