@@ -2,8 +2,8 @@ const AWS = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 
-const bucketName = 'fpinks.com-dev'; // TODO env var
-AWS.config.update({ region: 'us-east-2' });
+const bucketName = process.env.AWS_BUCKET;
+AWS.config.update({ region: process.env.AWS_REGION });
 
 // Create S3 service object
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
