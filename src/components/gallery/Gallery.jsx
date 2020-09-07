@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../apis/API';
+import Pagination from '../shared/Pagination';
 import './gallery.css';
 
 class Gallery extends Component {
@@ -10,33 +11,81 @@ class Gallery extends Component {
     this.state = {
       results: [],
       query: '',
+      currentPage: '',
     };
 
-    this.getIndex = this.getIndex.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.query = this.debounce(this.query, 1000); // TODO set debounce
+    this.getQuery = this.getQuery.bind(this);
+    this.getCurrentPage = this.getCurrentPage.bind(this);
+    this.handleQueryChange = this.handleQueryChange.bind(this);
+    this.handleIncrementClick = this.handleIncrementClick.bind(this);
+    this.handleDecrementClick = this.handleDecrementClick.bind(this);
+    this.query = this.debounce(this.query, 300);
   }
 
   componentDidMount() {
-    this.getIndex();
-  }
-
-  getIndex() {
-    API.instance
-      .get('writing-samples')
-      .then((res) => {
-        this.setState({ results: res.data });
-      })
-      .catch((error) => console.log(error.response));
-  }
-
-  async handleChange(event) {
-    await this.setState({ query: event.target.value });
+    this.getQuery();
+    this.getCurrentPage();
     this.query();
   }
 
+  getQuery() {
+    const savedQuery = sessionStorage.getItem('query');
+
+    if (savedQuery !== null) {
+      this.setState({ query: savedQuery });
+    }
+  }
+
+  getCurrentPage() {
+    const savedCurrentPage = sessionStorage.getItem('gallery page');
+
+    if (savedCurrentPage !== null) {
+      this.setState({ currentPage: savedCurrentPage });
+    } else {
+      this.setState({ currentPage: '1' });
+    }
+
+    console.log(this.state);
+  }
+
+  async handleQueryChange(event) {
+    const query = event.target.value;
+
+    this.setState({ query, currentPage: '1' });
+
+    sessionStorage.setItem('query', query);
+    sessionStorage.setItem('gallery page', '1');
+    this.query();
+  }
+
+  async handleIncrementClick() {
+    const { currentPage, results } = this.state;
+
+    const maxPage = String(Math.floor(results.length / 12) + 1);
+
+    if (currentPage === maxPage) {
+      return;
+    }
+
+    await this.setState((state) => ({
+      currentPage: String(parseInt(state.currentPage, 10) + 1),
+    }));
+    window.scrollTo(0, 0);
+  }
+
+  async handleDecrementClick() {
+    const { currentPage } = this.state;
+
+    if (currentPage === '1') {
+      return;
+    }
+
+    await this.setState((state) => ({
+      currentPage: String(parseInt(state.currentPage, 10) - 1),
+    }));
+  }
+
   query() {
-    console.log('query');
     const { query } = this.state;
     API.instance
       .get(`writing-samples/search/${query}`)
@@ -62,9 +111,17 @@ class Gallery extends Component {
   }
 
   render() {
-    const { results, query } = this.state;
+    const { results, query, currentPage } = this.state;
 
-    const list = results.map((writingSample) => (
+    if (currentPage !== '') {
+      sessionStorage.setItem('gallery page', currentPage);
+    }
+
+    const firstIndex = (parseInt(currentPage, 10) - 1) * 12;
+    const lastIndex = parseInt(currentPage, 10) * 12;
+
+    // TODO
+    const list = results.slice(firstIndex, lastIndex).map((writingSample) => (
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-center">
         <Link to={`/writing-samples/${writingSample.writing_sample_id}`}>
           <img
@@ -76,21 +133,31 @@ class Gallery extends Component {
       </div>
     ));
 
+    console.log('STATE');
     console.log(this.state); // TODO remove
+    console.log('LIST');
+    console.log(list[0]);
     return (
       <div className="container-fluid">
         <div id="search-bar-div" className="fixed-top row">
           <input
+            className="form-control"
             id="search-bar"
             type="text"
             value={query}
-            onChange={this.handleChange}
+            onChange={this.handleQueryChange}
+            placeholder="Type 'help' for search instructions."
           />
         </div>
         <div id="list" className="row d-flex flex-wrap align-items-center">
           {' '}
           {list}
         </div>
+        <Pagination
+          currentPage={currentPage}
+          handleIncrementClick={this.handleIncrementClick}
+          handleDecrementClick={this.handleDecrementClick}
+        />
       </div>
     );
   }

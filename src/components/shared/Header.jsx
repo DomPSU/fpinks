@@ -26,6 +26,11 @@ export default function Header() {
               Admin
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/login">
+              Login
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

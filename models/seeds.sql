@@ -90,196 +90,6 @@ VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
 
 -- All Writing Samples
 
--- Writing Samples Momiji Pilot Metropolitan M
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'pilot iroshizuku' AND name = 'momiji'),
-       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL),
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg',
-       'high_res/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg',
-       'original/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'pilot iroshizuku' AND name = 'momiji'),
-       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg', 
-       'high_res/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg', 
-       'original/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg', 
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'pilot iroshizuku' AND name = 'momiji'),
-       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg', 
-       'high_res/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg',
-       'original/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg', 
-       1, 1, 1 ,1 , NOW(), NOW());
-
--- Writing Samples Noodler's Ink Apache Sunset Pilot Metropolitan B
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'italic' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'apache sunset'),
-       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg',
-       'high_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg',
-       'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg', 
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'italic' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'apache sunset'),
-       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg',
-       'high_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg',
-       'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'italic' AND tune = 'factory'), 
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'apache sunset'),
-       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg',
-       'high_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg',
-       'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-
--- Writing Samples Noodler's Ink Bernanke Blue Pilot Metropolitan F
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'f' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'bernanke blue'),
-       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg',
-       'high_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg',
-       'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'f' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'bernanke blue'),
-       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg',
-       'high_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg',
-       'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
-       (SELECT nib_id FROM Nibs WHERE size = 'f' AND grind = 'standard' AND tune = 'factory'), 
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'bernanke blue'),
-       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg',
-       'high_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg',
-       'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-
--- Writing Samples Parker Quink Blue Aurora Ipsilon M
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
-       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
-       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg',
-       'high_res/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg',
-       'original/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
-       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
-       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg',
-       'high_res/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg',
-       'original/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
-       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'), 
-       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
-       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg',
-       'high_res/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg',
-       'original/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-
--- Writing Samples Diamine Ancient Copper Pelikan Souveran M400 B
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
-       (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'printer' AND style = 'plain' AND lbs = '20' AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg',
-       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg',
-       'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
-       (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'notebook' AND style = 'lined' AND lbs IS NULL AND grams = '56'), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg',
-       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg',
-       'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
-       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg',
-       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg',
-       'original/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
-       (SELECT paper_id FROM Papers WHERE brand = 'mead' AND name = 'notebook' AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg',
-       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg',
-       'original/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
-       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg',
-       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg',
-       'original/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
-VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
-       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
-       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
-       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
-       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg',
-       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg',
-       'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg',
-       1, 1, 1, 1, NOW(), NOW());
-
 -- Writing Samples Noodler's Ink Air-Corp Blue-Black Noodler's Ink Konrad Flex
 INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
 VALUES((SELECT pen_id FROM Pens WHERE brand = 'noodler''s ink' AND model = 'konrad'),
@@ -888,6 +698,196 @@ VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'
        'low_res/parker_quink_blue_pilot_metropolitan_m_rhodia.jpg',
        'high_res/parker_quink_blue_pilot_metropolitan_m_rhodia.jpg',
        'original/parker_quink_blue_pilot_metropolitan_m_rhodia.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+
+-- Writing Samples Parker Quink Blue Aurora Ipsilon M
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
+       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
+       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg',
+       'high_res/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg',
+       'original/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
+       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
+       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg',
+       'high_res/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg',
+       'original/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'aurora' AND model = 'ipsilon'),
+       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'), 
+       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
+       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg',
+       'high_res/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg',
+       'original/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+
+-- Writing Samples Diamine Ancient Copper Pelikan Souveran M400 B
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
+       (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'printer' AND style = 'plain' AND lbs = '20' AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg',
+       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg',
+       'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
+       (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'notebook' AND style = 'lined' AND lbs IS NULL AND grams = '56'), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg',
+       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg',
+       'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
+       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg',
+       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg',
+       'original/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
+       (SELECT paper_id FROM Papers WHERE brand = 'mead' AND name = 'notebook' AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg',
+       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg',
+       'original/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
+       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg',
+       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg',
+       'original/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pelikan' AND model = 'souveran m400'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'diamine' AND name = 'ancient copper'),
+       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg',
+       'high_res/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg',
+       'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+
+-- Writing Samples Momiji Pilot Metropolitan M
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'pilot iroshizuku' AND name = 'momiji'),
+       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL),
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg',
+       'high_res/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg',
+       'original/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'pilot iroshizuku' AND name = 'momiji'),
+       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg', 
+       'high_res/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg', 
+       'original/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg', 
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'm' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'pilot iroshizuku' AND name = 'momiji'),
+       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg', 
+       'high_res/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg',
+       'original/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg', 
+       1, 1, 1 ,1 , NOW(), NOW());
+
+-- Writing Samples Noodler's Ink Apache Sunset Pilot Metropolitan B
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'italic' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'apache sunset'),
+       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg',
+       'high_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg',
+       'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg', 
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'italic' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'apache sunset'),
+       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg',
+       'high_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg',
+       'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'b' AND grind = 'italic' AND tune = 'factory'), 
+       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'apache sunset'),
+       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg',
+       'high_res/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg',
+       'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+
+-- Writing Samples Noodler's Ink Bernanke Blue Pilot Metropolitan F
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'f' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'bernanke blue'),
+       (SELECT paper_id FROM Papers WHERE brand = 'clairefontaine' AND name IS NULL AND style = 'grid' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg',
+       'high_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg',
+       'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'f' AND grind = 'standard' AND tune = 'factory'),
+       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'bernanke blue'),
+       (SELECT paper_id FROM Papers WHERE brand = 'mnemosyne' AND name IS NULL AND style = 'lined' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg',
+       'high_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg',
+       'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg',
+       1, 1, 1, 1, NOW(), NOW());
+INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
+VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'),
+       (SELECT nib_id FROM Nibs WHERE size = 'f' AND grind = 'standard' AND tune = 'factory'), 
+       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'bernanke blue'),
+       (SELECT paper_id FROM Papers WHERE brand = 'rhodia' AND name IS NULL AND style = 'dot' AND lbs IS NULL AND grams IS NULL), 
+       (SELECT user_id FROM Users WHERE email = 'domfpinks@gmail.com'),
+       'low_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg',
+       'high_res/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg',
+       'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg',
        1, 1, 1, 1, NOW(), NOW());
 
 -- Colors

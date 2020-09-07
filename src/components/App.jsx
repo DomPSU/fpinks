@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Header from './general/Header';
+import Header from './shared/Header';
 import Gallery from './gallery/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
+import Login from './login/Login';
 import Admin from './admin/Admin';
 
 // shared
@@ -183,6 +184,9 @@ export default function App() {
           </Route>
           <Route path="/contribute">
             <Contribute />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/">
             <Gallery />
