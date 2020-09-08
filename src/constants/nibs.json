@@ -1,0 +1,38 @@
+{
+  "sizes": [
+    "Unmarked",
+    "< EF",
+    "EF",
+    "F",
+    "M",
+    "B",
+    "BB",
+    "3B",
+    "> 3B",
+    "Flex",
+    "< 0.5mm",
+    "0.5mm",
+    "0.6mm",
+    "0.7mm",
+    "0.8mm",
+    "0.9mm",
+    "1.0mm",
+    "1.1mm",
+    "1.2mm",
+    "1.3mm",
+    "1.4mm",
+    "1.5mm",
+    "> 1.5mm"
+  ],
+  "grinds": [
+    "Unknown",
+    "Regular",
+    "Stub",
+    "Italic",
+    "Calligraphy",
+    "Architect",
+    "Left Oblique",
+    "Right Oblique"
+  ],
+  "tunes": ["Factory", "Custom", "Unknown"]
+}

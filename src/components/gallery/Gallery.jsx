@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../apis/API';
 import Pagination from '../shared/Pagination';
+import Help from './Help';
 import './gallery.css';
 
 class Gallery extends Component {
@@ -133,10 +134,6 @@ class Gallery extends Component {
       </div>
     ));
 
-    console.log('STATE');
-    console.log(this.state); // TODO remove
-    console.log('LIST');
-    console.log(list[0]);
     return (
       <div className="container-fluid">
         <div id="search-bar-div" className="fixed-top row">
@@ -149,15 +146,20 @@ class Gallery extends Component {
             placeholder="Type 'help' for search instructions."
           />
         </div>
-        <div id="list" className="row d-flex flex-wrap align-items-center">
-          {' '}
-          {list}
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          handleIncrementClick={this.handleIncrementClick}
-          handleDecrementClick={this.handleDecrementClick}
-        />
+        {query !== 'help' && query !== "'help'" && (
+          <div id="list" className="row d-flex flex-wrap align-items-center">
+            {' '}
+            {list}
+          </div>
+        )}
+        {query !== 'help' && query !== "'help'" && (
+          <Pagination
+            currentPage={currentPage}
+            handleIncrementClick={this.handleIncrementClick}
+            handleDecrementClick={this.handleDecrementClick}
+          />
+        )}
+        {(query === 'help' || query === "'help'") && <Help />}
       </div>
     );
   }

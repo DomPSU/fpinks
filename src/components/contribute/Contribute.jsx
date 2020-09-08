@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
+import nibsJSON from '../../constants/nibs.json';
+import papersJSON from '../../constants/papers.json';
 
 class Contribute extends Component {
   constructor(props) {
@@ -87,13 +89,13 @@ class Contribute extends Component {
     return (
       <div className="container text-center">
         <div className="row">
-          <div className="col-lg-4" />
-          <div className="col-lg-4 pb-3 pt-3 border-bottom border-dark m-1">
-            A writing sample may simply be written words. Feel free to add
+          <div className="col-lg-2" />
+          <h3 className="col-lg-8 pb-3 pt-3 border-bottom border-dark m-1">
+            A contribution may simply be written words. Feel free to add
             anything else but we suggest the following: waterproofness, drying
             time, bleed-through/ghosting.
-          </div>
-          <div className="col-lg-4" />
+          </h3>
+          <div className="col-lg-2" />
         </div>
         <form>
           <div className="row">
@@ -119,29 +121,9 @@ class Contribute extends Component {
                   onBlur={this.handleChange}
                 >
                   <option> </option>
-                  <option>Unmarked</option>
-                  <option>&lt; EF</option>
-                  <option>EF</option>
-                  <option>F</option>
-                  <option>M</option>
-                  <option>B</option>
-                  <option>BB</option>
-                  <option>3B</option>
-                  <option>&gt; 3B</option>
-                  <option>Flex</option>
-                  <option>&lt; 0.5 mm</option>
-                  <option>0.5 mm</option>
-                  <option>0.6 mm</option>
-                  <option>0.7 mm</option>
-                  <option>0.8 mm</option>
-                  <option>0.9 mm</option>
-                  <option>1.0 mm</option>
-                  <option>1.1 mm</option>
-                  <option>1.2 mm</option>
-                  <option>1.3 mm</option>
-                  <option>1.4 mm</option>
-                  <option>1.5 mm</option>
-                  <option>&gt; 1.5 mm</option>
+                  {nibsJSON.sizes.map((size) => {
+                    return <option>{size}</option>;
+                  })}
                 </select>
               </label>
               <label htmlFor="nibGrind" className="p-3 m-0">
@@ -152,14 +134,9 @@ class Contribute extends Component {
                   onBlur={this.handleChange}
                 >
                   <option> </option>
-                  <option>Unknown</option>
-                  <option>Regular</option>
-                  <option>Stub</option>
-                  <option>Italic</option>
-                  <option>Left Oblique</option>
-                  <option>Right Oblique</option>
-                  <option>Architect</option>
-                  <option>Calligraphy</option>
+                  {nibsJSON.grinds.map((grind) => {
+                    return <option>{grind}</option>;
+                  })}
                 </select>
               </label>
               <label htmlFor="nibTune" className="p-3 m-0">
@@ -170,9 +147,9 @@ class Contribute extends Component {
                   onBlur={this.handleChange}
                 >
                   <option> </option>
-                  <option>factory</option>
-                  <option>custom</option>
-                  <option>unknown</option>
+                  {nibsJSON.tunes.map((tune) => {
+                    return <option>{tune}</option>;
+                  })}
                 </select>
               </label>
             </div>
@@ -238,6 +215,7 @@ class Contribute extends Component {
                   type="text"
                   id="paperName"
                   className="form-control text-center"
+                  placeholder="May be blank."
                   onChange={this.handleChange}
                 />
               </label>
@@ -249,10 +227,9 @@ class Contribute extends Component {
                   onBlur={this.handleChange}
                 >
                   <option> </option>
-                  <option>plain</option>
-                  <option>lined</option>
-                  <option>grid</option>
-                  <option>dot</option>
+                  {papersJSON.styles.map((style) => {
+                    return <option>{style}</option>;
+                  })}
                 </select>
               </label>
             </div>
@@ -266,7 +243,7 @@ class Contribute extends Component {
                   id="comment"
                   className="form-control text-center"
                   onChange={this.handleChange}
-                  placeholder="If a dropdown above does not offer a proper choice for this writing sample, please let us know."
+                  placeholder="If a dropdown above does not offer a proper choice for this writing sample, please let us know which dropdown can be improved."
                 />
               </label>
             </div>
