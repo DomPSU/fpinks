@@ -45,8 +45,6 @@ class Gallery extends Component {
     } else {
       this.setState({ currentPage: '1' });
     }
-
-    console.log(this.state);
   }
 
   async handleQueryChange(event) {
@@ -96,7 +94,6 @@ class Gallery extends Component {
       .catch((error) => console.log(error.response));
   }
 
-  // TODO REFACTOR
   // eslint-disable-next-line class-methods-use-this
   debounce(fn, delay) {
     let timer = null;
@@ -121,7 +118,6 @@ class Gallery extends Component {
     const firstIndex = (parseInt(currentPage, 10) - 1) * 12;
     const lastIndex = parseInt(currentPage, 10) * 12;
 
-    // TODO
     const list = results.slice(firstIndex, lastIndex).map((writingSample) => (
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-center">
         <Link to={`/writing-samples/${writingSample.writing_sample_id}`}>

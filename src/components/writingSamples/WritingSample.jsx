@@ -158,7 +158,6 @@ class WritingSample extends Component {
     const colorData = [['Color', 'Number of reviews']];
     const colorChartColors = [];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(colorCounts)) {
       colorData.push([capitalize(key), value]);
@@ -176,7 +175,6 @@ class WritingSample extends Component {
 
     const shadingData = [['Shading', 'Number of reviews']];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(shadingCounts)) {
       shadingData.push([capitalize(key), value]);
@@ -195,7 +193,6 @@ class WritingSample extends Component {
 
     const sheenData = [['Sheen', 'Number of reviews']];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(sheenCounts)) {
       if (key !== 'none none') {
@@ -217,7 +214,6 @@ class WritingSample extends Component {
 
     const waterData = [['Waterproofness', 'Number of reviews']];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(waterCounts)) {
       waterData.push([capitalize(key), value]);
@@ -235,7 +231,6 @@ class WritingSample extends Component {
 
     const dryingData = [['Drying Time', 'Number of reviews']];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(dryingCounts)) {
       dryingData.push([key, value]);
@@ -253,7 +248,6 @@ class WritingSample extends Component {
 
     const transparencyData = [['Transparency', 'Number of reviews']];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(transparencyCounts)) {
       transparencyData.push([capitalize(key), value]);
@@ -271,13 +265,11 @@ class WritingSample extends Component {
 
     const featheringData = [['Feathering', 'Number of reviews']];
 
-    // TODO
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(featheringCounts)) {
       featheringData.push([capitalize(key), value]);
     }
 
-    console.log(this.state);
     return (
       <div className="container-fluid text-center topmargin">
         <div className="row ml-1 mb-3 mr-1 rounded bg-light ">
@@ -398,6 +390,7 @@ class WritingSample extends Component {
                 title: 'Color Reviews',
                 colors: colorChartColors,
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />
@@ -411,6 +404,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Shading Reviews',
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />
@@ -424,6 +418,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Sheen Reviews',
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />
@@ -437,6 +432,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Waterproofness Reviews',
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />
@@ -450,6 +446,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Drying Time Reviews',
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />
@@ -463,6 +460,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Transparency Reviews',
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />
@@ -476,6 +474,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Feathering Reviews',
                 pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
               }}
               rootProps={{ 'data-testid': '1' }}
             />

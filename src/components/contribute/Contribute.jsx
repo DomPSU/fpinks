@@ -97,7 +97,7 @@ class Contribute extends Component {
           </h3>
           <div className="col-lg-2" />
         </div>
-        <form>
+        <form className="m-1">
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
               <label htmlFor="writingSampleImage" className="p-3 m-0">
@@ -243,7 +243,7 @@ class Contribute extends Component {
                   id="comment"
                   className="form-control text-center"
                   onChange={this.handleChange}
-                  placeholder="If a dropdown above does not offer a proper choice for this writing sample, please let us know which dropdown can be improved."
+                  placeholder="If a dropdown above does not offer a proper choice for this writing sample, please let us know which choice is needed for which dropdown."
                 />
               </label>
             </div>

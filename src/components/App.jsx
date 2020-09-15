@@ -5,6 +5,8 @@ import Gallery from './gallery/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
 import Login from './login/Login';
+import PrivacyPolicy from './login/PrivacyPolicy';
+import TermsOfService from './login/TermsOfService';
 import Admin from './admin/Admin';
 
 // shared
@@ -187,6 +189,12 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/privacy-policy">
+            <PrivacyPolicy />
+          </Route>
+          <Route path="/terms-of-service">
+            <TermsOfService />
           </Route>
           <Route path="/">
             <Gallery />
