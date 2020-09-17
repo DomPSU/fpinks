@@ -170,6 +170,24 @@ Create TABLE SheenReviews(
   FOREIGN KEY (color_id) REFERENCES Colors (color_id)
 );
 
+-- FeatheringReviews
+DROP TABLE IF EXISTS FeatheringReviews;
+Create TABLE FeatheringReviews(
+  CONSTRAINT PK_FeatheringReviews PRIMARY KEY
+  (
+    writing_sample_id,
+    user_id
+  ),
+  writing_sample_id INT NOT NULL,
+  user_id INT NOT NULL,
+  feathering VARCHAR(10) NOT NULL,
+  approved TINYINT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
+  FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
 -- WaterReviews
 DROP TABLE IF EXISTS WaterReviews;
 Create TABLE WaterReviews(
@@ -217,24 +235,6 @@ Create TABLE TransparencyReviews(
   writing_sample_id INT NOT NULL,
   user_id INT NOT NULL,
   transparency VARCHAR(25) NOT NULL,
-  approved TINYINT NOT NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NOT NULL,
-  FOREIGN KEY (writing_sample_id) REFERENCES WritingSamples (writing_sample_id),
-  FOREIGN KEY (user_id) REFERENCES Users (user_id)
-);
-
--- TransparencyReviews
-DROP TABLE IF EXISTS FeatheringReviews;
-Create TABLE FeatheringReviews(
-  CONSTRAINT PK_FeatheringReviews PRIMARY KEY
-  (
-    writing_sample_id,
-    user_id
-  ),
-  writing_sample_id INT NOT NULL,
-  user_id INT NOT NULL,
-  feathering VARCHAR(10) NOT NULL,
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,

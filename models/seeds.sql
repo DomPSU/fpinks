@@ -1057,83 +1057,83 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 
 -- ShadingReviews Noodler's Ink Apache Sunset Pilot Metropolitan B
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 
 -- ShadingReviews Noodler's Ink Bernanke Blue Pilot Metropolitan F
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 
 -- ShadingReviews Parker Quink Blue Aurora Ipsilon M
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 
 -- ShadingReviews Diamine Ancient Copper Pelikan Souveran M400 B
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
+        'light', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'full', 1, NOW(), NOW());
+        'heavy', 1, NOW(), NOW());
 
 -- SheenReviews
 -- SheenReviews Momiji Pilot Metropolitan M
@@ -1234,6 +1234,89 @@ INSERT INTO SheenReviews (writing_sample_id, user_id, color_id, amount, approved
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
         (SELECT color_id FROM Colors WHERE name='none'),
+        'none', 1, NOW(), NOW());
+
+-- FeatheringReviews
+-- FeatheringReviews Momiji Pilot Metropolitan M
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+
+-- FeatheringReviews Noodler's Ink Apache Sunset Pilot Metropolitan B
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+
+-- FeatheringReviews Noodler's Ink Bernanke Blue Pilot Metropolitan F
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+
+-- FeatheringReviews Parker Quink Blue Aurora Ipsilon M
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+
+-- FeatheringReviews Diamine Ancient Copper Pelikan Souveran M400 B
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'light', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
+        'none', 1, NOW(), NOW());
+INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
         'none', 1, NOW(), NOW());
 
 -- WaterReviews
@@ -1436,7 +1519,7 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'some ghosting', 1, NOW(), NOW());
+        'light ghosting', 1, NOW(), NOW());
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
@@ -1464,11 +1547,11 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'some bleed-through', 1, NOW(), NOW());
+        'light bleed-through', 1, NOW(), NOW());
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'some bleed-through', 1, NOW(), NOW());
+        'light bleed-through', 1, NOW(), NOW());
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
@@ -1476,95 +1559,12 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'some bleed-through', 1, NOW(), NOW());
+        'light bleed-through', 1, NOW(), NOW());
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
         'none', 1, NOW(), NOW());
 INSERT INTO TransparencyReviews (writing_sample_id, user_id, transparency, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-
--- FeatheringReviews
--- FeatheringReviews Momiji Pilot Metropolitan M
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_mnemosyne.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_rhodia.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-
--- FeatheringReviews Noodler's Ink Apache Sunset Pilot Metropolitan B
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_clairefontaine.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_mnemosyne.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_apache_sunset_pilot_metropolitan_b_rhodia.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-
--- FeatheringReviews Noodler's Ink Bernanke Blue Pilot Metropolitan F
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_clairefontaine.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_mnemosyne.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_bernanke_blue_pilot_metropolitan_f_rhodia.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-
--- FeatheringReviews Parker Quink Blue Aurora Ipsilon M
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_clairefontaine.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_mnemosyne.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_aurora_ipsilon_italia_150_m_rhodia.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-
--- FeatheringReviews Diamine Ancient Copper Pelikan Souveran M400 B
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_56_gsm.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_clairefontaine.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mead_spiral_notebook.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'partial', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
-VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_mnemosyne.jpg'),
-        (SELECT user_id From Users WHERE email='dom@fpinks.com'),
-        'none', 1, NOW(), NOW());
-INSERT INTO FeatheringReviews (writing_sample_id, user_id, feathering, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dom@fpinks.com'),
         'none', 1, NOW(), NOW());
