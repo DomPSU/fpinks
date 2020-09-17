@@ -93,7 +93,7 @@ class Contribute extends Component {
           <h3 className="col-lg-8 pb-3 pt-3 border-bottom border-dark m-1">
             A contribution may simply be written words. Feel free to add
             anything else but we suggest the following: waterproofness, drying
-            time, bleed-through/ghosting.
+            time, ghosting/bleed-through.
           </h3>
           <div className="col-lg-2" />
         </div>

@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
 import API from '../../apis/API';
 import { capitalize } from '../../util/util';
+import colorsJSON from '../../constants/colors.json';
+import shadingsJSON from '../../constants/shadings.json';
+import sheensJSON from '../../constants/sheens.json';
+import featheringsJSON from '../../constants/featherings.json';
+import watersJSON from '../../constants/waters.json';
+import dryingTimesJSON from '../../constants/dryingTimes.json';
+import transparenciesJSON from '../../constants/transparencies.json';
 import './writingSample.css';
 
 class WritingSample extends Component {
@@ -341,41 +348,151 @@ class WritingSample extends Component {
                   aria-expanded="false"
                   aria-controls="collapseTwo"
                 >
-                  Downloads
+                  Review
                 </button>
               </h2>
             </div>
             <div
               id="collapseTwo"
               className="collapse"
-              aria-labelledby="headingTwo"
-              data-parent="#accordionExample"
-            >
-              coming soon
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-header" id="headingThree">
-              <h2 className="mb-0">
-                <button
-                  className="btn btn-link btn-block text-left collapsed text-center"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Review
-                </button>
-              </h2>
-            </div>
-            <div
-              id="collapseThree"
-              className="collapse"
               aria-labelledby="headingThree"
               data-parent="#accordionExample"
             >
-              coming soon
+              <h3 className="p-5">
+                Feel free to leave any review category blank.
+              </h3>
+              <form className="m-1">
+                <div className="row">
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="colorReview" className="p-3 m-0">
+                      Color Review
+                      <select
+                        className="form-control m-1"
+                        id="colorReview"
+                        onBlur={this.handleChange}
+                      >
+                        <option> </option>
+                        {colorsJSON.names.map((color) => {
+                          return <option>{color}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="shadingReview" className="p-3 m-0">
+                      Shading Review
+                      <select
+                        className="form-control m-1"
+                        id="shadingReview"
+                        onBlur={this.handleChange}
+                      >
+                        <option> </option>
+                        {shadingsJSON.names.map((amount) => {
+                          return <option>{amount}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="sheenReview" className="p-3 m-0">
+                      Sheen Review
+                      <div className="row">
+                        <div className="col-6">
+                          <select
+                            className="form-control m-1"
+                            id="sheenAmountReview"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {sheensJSON.names.map((amount) => {
+                              return <option>{amount}</option>;
+                            })}
+                          </select>
+                        </div>
+                        <div className="col-6">
+                          <select
+                            className="form-control m-1"
+                            id="sheenColorReview"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {colorsJSON.names.map((color) => {
+                              return <option>{color}</option>;
+                            })}
+                          </select>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="featheringReview" className="p-3 m-0">
+                      Feathering Review
+                      <select
+                        className="form-control m-1"
+                        id="featheringReview"
+                        onBlur={this.handleChange}
+                      >
+                        <option> </option>
+                        {featheringsJSON.names.map((amount) => {
+                          return <option>{amount}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="waterproofnessReview" className="p-3 m-0">
+                      Waterproofness Review
+                      <select
+                        className="form-control m-1"
+                        id="waterproofnessReview"
+                        onBlur={this.handleChange}
+                      >
+                        <option> </option>
+                        {watersJSON.names.map((amount) => {
+                          return <option>{amount}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="dryingTimeReview" className="p-3 m-0">
+                      Drying Time Review
+                      <select
+                        className="form-control m-1"
+                        id="dryingTimeReview"
+                        onBlur={this.handleChange}
+                      >
+                        <option> </option>
+                        {dryingTimesJSON.names.map((time) => {
+                          return <option>{time}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <label htmlFor="transparencyReview" className="p-3 m-0">
+                      Transparency Review
+                      <select
+                        className="form-control m-1"
+                        id="transparencyReview"
+                        onBlur={this.handleChange}
+                      >
+                        <option> </option>
+                        {transparenciesJSON.names.map((amount) => {
+                          return <option>{amount}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={this.handleSubmit}
+                >
+                  Submit Reviews
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -428,6 +545,20 @@ class WritingSample extends Component {
               className="chart"
               chartType="PieChart"
               loader={<div>Loading Chart</div>}
+              data={featheringData}
+              options={{
+                title: 'Feathering Reviews',
+                pieSliceBorderColor: 'black',
+                pieSliceText: 'none',
+              }}
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+            <Chart
+              className="chart"
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
               data={waterData}
               options={{
                 title: 'Waterproofness Reviews',
@@ -459,20 +590,6 @@ class WritingSample extends Component {
               data={transparencyData}
               options={{
                 title: 'Transparency Reviews',
-                pieSliceBorderColor: 'black',
-                pieSliceText: 'none',
-              }}
-              rootProps={{ 'data-testid': '1' }}
-            />
-          </div>
-          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
-            <Chart
-              className="chart"
-              chartType="PieChart"
-              loader={<div>Loading Chart</div>}
-              data={featheringData}
-              options={{
-                title: 'Feathering Reviews',
                 pieSliceBorderColor: 'black',
                 pieSliceText: 'none',
               }}
