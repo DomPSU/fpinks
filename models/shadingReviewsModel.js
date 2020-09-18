@@ -39,7 +39,7 @@ const insert = async (data) => {
     [
       data.writingSampleID,
       data.userID,
-      data.shading.toLowerCase(),
+      data.amount.toLowerCase(),
       0,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),

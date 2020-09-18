@@ -8,7 +8,7 @@ class SheenReviewsInsert extends Component {
     super(props);
 
     this.state = {
-      sheen: '',
+      amount: '',
       color: '',
       writingSampleID: '',
       userID: '',
@@ -28,7 +28,7 @@ class SheenReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { sheen, color, writingSampleID, userID } = this.state;
+    const { color, amount, writingSampleID, userID } = this.state;
 
     // TODO add frontend validation
 
@@ -37,8 +37,8 @@ class SheenReviewsInsert extends Component {
 
     API.instance
       .post('/sheen-reviews', {
-        sheen,
         color,
+        amount,
         writingSampleID,
         userID,
       })
@@ -66,7 +66,7 @@ class SheenReviewsInsert extends Component {
                   <div className="col-12">
                     <select
                       className="form-control m-1"
-                      id="sheen"
+                      id="amount"
                       onBlur={this.handleChange}
                     >
                       <option> </option>

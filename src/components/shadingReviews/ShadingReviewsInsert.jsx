@@ -7,7 +7,7 @@ class ShadingReviewsInsert extends Component {
     super(props);
 
     this.state = {
-      shading: '',
+      amount: '',
       writingSampleID: '',
       userID: '',
     };
@@ -26,7 +26,7 @@ class ShadingReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { shading, writingSampleID, userID } = this.state;
+    const { amount, writingSampleID, userID } = this.state;
 
     // TODO add frontend validation
 
@@ -35,7 +35,7 @@ class ShadingReviewsInsert extends Component {
 
     API.instance
       .post('/shading-reviews', {
-        shading,
+        amount,
         writingSampleID,
         userID,
       })
@@ -63,7 +63,7 @@ class ShadingReviewsInsert extends Component {
                   <div className="col-12">
                     <select
                       className="form-control m-1"
-                      id="shading"
+                      id="amount"
                       onBlur={this.handleChange}
                     >
                       <option> </option>
