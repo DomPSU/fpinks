@@ -9,6 +9,6 @@ colorReviewsRouter.get('/:writingSampleID', colorReviewsService.show);
 colorReviewsRouter.get('/', colorReviewsService.index);
 
 // POST
-colorReviewsRouter.post(colorReviewsService.insert);
+colorReviewsRouter.post('/', colorReviewsService.insert);
 
 module.exports = colorReviewsRouter;

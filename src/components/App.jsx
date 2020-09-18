@@ -35,6 +35,7 @@ import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
 import WritingSample from './writingSamples/WritingSample';
 
 // colorReviews
+import ColorReviewsInsert from './colorReviews/colorReviewsInsert';
 
 // shadingReviews
 
@@ -122,7 +123,9 @@ export default function App() {
             <WritingSamplesIndex link="/writing-samples" />
           </Route>
           {/* colorReviews */}
-          {/* TODO insert */}
+          <Route path="/color-reviews/new">
+            <ColorReviewsInsert />
+          </Route>
           <Route path="/color-reviews/unapproved">
             <Index link="/color-reviews/unapproved" />
           </Route>

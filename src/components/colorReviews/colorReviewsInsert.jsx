@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
+import colorsJSON from '../../constants/colors.json';
 
-class PensInsert extends Component {
+class ColorReviewsInsert extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      penBrand: '',
-      penModel: '',
+      colorOne: '',
+      colorTwo: '',
+      writingSampleID: '',
+      userID: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,14 +27,19 @@ class PensInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { penBrand, penModel } = this.state;
+    const { colorOne, colorTwo, writingSampleID, userID } = this.state;
 
     // TODO add frontend validation
 
+    // TODO get user ID from login instead of html input
+    // Also delete html view for user id input
+
     API.instance
-      .post('/pens', {
-        penBrand,
-        penModel,
+      .post('/color-reviews', {
+        colorOne,
+        colorTwo,
+        writingSampleID,
+        userID,
       })
       .then((res) => {
         console.log(res);
@@ -47,33 +55,70 @@ class PensInsert extends Component {
     console.log(this.state);
     return (
       <div className="container text-center">
-        <h1 className="mt-5">Add a Pen</h1>
-        <form className="bg-secondary">
+        <h1 className="pt-5">Add a Color Review</h1>
+        <form>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="penBrand">
-                Pen Brand
-                <input
-                  type="text"
-                  id="penBrand"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
+              <label htmlFor="colorReview" className="p-3 m-0">
+                Color Review
+                <div className="row">
+                  <div className="col-12">
+                    <select
+                      className="form-control m-1"
+                      id="colorOne"
+                      onBlur={this.handleChange}
+                    >
+                      <option> </option>
+                      {colorsJSON.names.map((color) => {
+                        return <option>{color}</option>;
+                      })}
+                    </select>
+                  </div>
+                  <div className="col-12">
+                    <select
+                      className="form-control m-1"
+                      id="colorTwo"
+                      onBlur={this.handleChange}
+                    >
+                      <option> </option>
+                      {colorsJSON.names.map((color) => {
+                        return <option>{color}</option>;
+                      })}
+                    </select>
+                  </div>
+                </div>
               </label>
-              <label htmlFor="penModel">
-                Pen Model
-                <input
-                  type="text"
-                  id="penModel"
-                  className="form-control"
-                  onChange={this.handleChange}
-                />
+              <label htmlFor="writingSampleID" className="p-3 m-0">
+                Writing Sample ID
+                <div className="row">
+                  <div className="col-12">
+                    <input
+                      type="text"
+                      id="writingSampleID"
+                      className="form-control m-1 text-center"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+              </label>
+              <label htmlFor="userID" className="p-3 m-0">
+                User ID
+                <div className="row">
+                  <div className="col-12">
+                    <input
+                      type="text"
+                      id="userID"
+                      className="form-control m-1 text-center"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
               </label>
             </div>
           </div>
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary m-1"
             onClick={this.handleSubmit}
           >
             Submit
@@ -84,4 +129,4 @@ class PensInsert extends Component {
   }
 }
 
-export default PensInsert;
+export default ColorReviewsInsert;

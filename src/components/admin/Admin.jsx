@@ -114,6 +114,9 @@ export default function Admin() {
         <Link className="p-3" to="/color-reviews/unapproved">
           Unapproved Color Reviews
         </Link>
+        <Link className="p-3" to="/color-reviews/new">
+          Color Reviews Insert
+        </Link>
       </div>
       {/* shadingReviews */}
       <div className="row">

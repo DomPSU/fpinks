@@ -37,8 +37,52 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
+  // delete all existing color reviews
   try {
-    const data = await colorReviewsModel.insert(colorReview);
+    const data = await colorReviewsModel.remove(colorReview);
+  } catch (e) {
+    next(e);
+  }
+
+  // insert second color review if needed
+  if (colorReview.colorTwo !== '' && colorReview.colorTwo !== null) {
+    // set up second color review
+    const colorReviewTwo = {
+      writingSampleID: colorReview.writingSampleID,
+      userID: colorReview.userID,
+      colorName: colorReview.colorTwo,
+    };
+
+    try {
+      const data = await colorReviewsModel.insert(colorReviewTwo);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  // setup needed first color review
+  const colorReviewOne = {
+    writingSampleID: colorReview.writingSampleID,
+    userID: colorReview.userID,
+    colorName: colorReview.colorOne,
+  };
+
+  // insert first  color review
+  try {
+    const data = await colorReviewsModel.insert(colorReviewOne);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
+
+const remove = async (req, res, next) => {
+  const colorReview = {
+    ...req.body,
+  };
+
+  try {
+    const data = await colorReviewsModel.remove(colorReview);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -50,4 +94,5 @@ module.exports = {
   unapprovedIndex,
   insert,
   show,
+  remove,
 };

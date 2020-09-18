@@ -215,7 +215,7 @@ class Contribute extends Component {
                   type="text"
                   id="paperName"
                   className="form-control text-center"
-                  placeholder="May be blank."
+                  placeholder="May be blank"
                   onChange={this.handleChange}
                 />
               </label>

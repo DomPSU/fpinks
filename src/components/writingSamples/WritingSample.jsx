@@ -366,16 +366,32 @@ class WritingSample extends Component {
                   <div className="col-12 col-sm-6 col-md-6 col-lg-4">
                     <label htmlFor="colorReview" className="p-3 m-0">
                       Color Review
-                      <select
-                        className="form-control m-1"
-                        id="colorReview"
-                        onBlur={this.handleChange}
-                      >
-                        <option> </option>
-                        {colorsJSON.names.map((color) => {
-                          return <option>{color}</option>;
-                        })}
-                      </select>
+                      <div className="row">
+                        <div className="col-6">
+                          <select
+                            className="form-control m-1"
+                            id="colorReviewOne"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {colorsJSON.names.map((color) => {
+                              return <option>{color}</option>;
+                            })}
+                          </select>
+                        </div>
+                        <div className="col-6">
+                          <select
+                            className="form-control m-1"
+                            id="colorReviewTwo"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {colorsJSON.names.map((color) => {
+                              return <option>{color}</option>;
+                            })}
+                          </select>
+                        </div>
+                      </div>
                     </label>
                   </div>
                   <div className="col-12 col-sm-6 col-md-6 col-lg-4">

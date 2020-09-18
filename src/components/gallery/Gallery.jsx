@@ -119,7 +119,7 @@ class Gallery extends Component {
     const lastIndex = parseInt(currentPage, 10) * 12;
 
     const list = results.slice(firstIndex, lastIndex).map((writingSample) => (
-      <div className="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-center">
+      <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
         <Link to={`/writing-samples/${writingSample.writing_sample_id}`}>
           <img
             src={writingSample.low_res_url}
@@ -144,7 +144,6 @@ class Gallery extends Component {
         </div>
         {query !== 'help' && query !== "'help'" && (
           <div id="list" className="row d-flex flex-wrap align-items-center">
-            {' '}
             {list}
           </div>
         )}
