@@ -9,6 +9,6 @@ shadingReviewsRouter.get('/:writingSampleID', shadingReviewsService.show);
 shadingReviewsRouter.get('/', shadingReviewsService.index);
 
 // POST
-shadingReviewsRouter.post(shadingReviewsService.insert);
+shadingReviewsRouter.post('/', shadingReviewsService.insert);
 
 module.exports = shadingReviewsRouter;

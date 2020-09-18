@@ -43,7 +43,6 @@ const insert = async (data) => {
 
   const colorID = colorNameQuery[0].color_id;
 
-  // insert first color review
   const insertRes = await db.pool.asyncQuery(
     'INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
     [

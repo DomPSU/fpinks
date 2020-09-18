@@ -49,6 +49,7 @@ const search = async (req, res, next) => {
     try {
       data = await writingSamplesModel.index();
       res.status(200).send(data);
+      return;
     } catch (e) {
       next(e);
     }
@@ -59,6 +60,7 @@ const search = async (req, res, next) => {
     try {
       data = await writingSamplesModel.index();
       res.status(200).send(data);
+      return;
     } catch (e) {
       next(e);
     }
@@ -74,6 +76,7 @@ const search = async (req, res, next) => {
     try {
       data = await writingSamplesModel.basicSearch(query);
       res.status(200).send(data);
+      return;
     } catch (e) {
       next(e);
     }

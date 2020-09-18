@@ -37,7 +37,7 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
-  // delete all existing color reviews
+  // delete all existing color reviews for user and writing sample
   try {
     const data = await colorReviewsModel.remove(colorReview);
   } catch (e) {
@@ -54,7 +54,7 @@ const insert = async (req, res, next) => {
     };
 
     try {
-      const data = await colorReviewsModel.insert(colorReviewTwo);
+      await colorReviewsModel.insert(colorReviewTwo);
     } catch (e) {
       next(e);
     }

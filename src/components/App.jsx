@@ -35,9 +35,10 @@ import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
 import WritingSample from './writingSamples/WritingSample';
 
 // colorReviews
-import ColorReviewsInsert from './colorReviews/colorReviewsInsert';
+import ColorReviewsInsert from './colorReviews/ColorReviewsInsert';
 
 // shadingReviews
+import ShadingReviewsInsert from './shadingReviews/ShadingReviewsInsert';
 
 // sheenReviews
 
@@ -133,7 +134,9 @@ export default function App() {
             <Index link="/color-reviews" />
           </Route>
           {/* shadingReviews */}
-          {/* TODO insert */}
+          <Route path="/shading-reviews/new">
+            <ShadingReviewsInsert />
+          </Route>
           <Route path="/shading-reviews/unapproved">
             <Index link="/shading-reviews/unapproved" />
           </Route>

@@ -129,6 +129,9 @@ export default function Admin() {
         <Link className="p-3" to="/shading-reviews/unapproved">
           Unapproved Shading Reviews
         </Link>
+        <Link className="p-3" to="/shading-reviews/new">
+          Shading Reviews Insert
+        </Link>
       </div>
       {/* sheenReviews */}
       <div className="row">
