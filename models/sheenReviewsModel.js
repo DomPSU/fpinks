@@ -1,25 +1,13 @@
 const db = require('./db');
-const AWS = require('../config/aws');
-
-const addUrlsToRes = async (res) => {
-  res.forEach(
-    // TODO fix es lint error and use await instead of then?
-    (sheenReviews) =>
-      AWS.getURL(sheenReviews.high_res_aws_key).then(
-        // eslint-disable-next-line no-return-assign
-        (highResUrl) => (sheenReviews.high_res_url = highResUrl),
-      ),
-  );
-};
+const awsUrls = require('../utils/awsUrls');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT SheenReviews.writing_sample_id, WritingSamples.high_res_aws_key, SheenReviews.user_id, Users.username, SheenReviews.color_id, Colors.name, SheenReviews.amount, SheenReviews.approved, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=SheenReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE SheenReviews.approved <> 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((sheenReview) => {
-    delete sheenReview.high_res_aws_key;
-  });
+
+  await awsUrls.addHighResUrls(res);
+
   return res;
 };
 
@@ -27,10 +15,9 @@ const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT SheenReviews.writing_sample_id, WritingSamples.high_res_aws_key, SheenReviews.user_id, Users.username, SheenReviews.color_id, Colors.name, SheenReviews.amount, SheenReviews.approved, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=SheenReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE SheenReviews.approved = 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((sheenReview) => {
-    delete sheenReview.high_res_aws_key;
-  });
+
+  await awsUrls.addHighResUrls(res);
+
   return res;
 };
 
@@ -39,46 +26,46 @@ const show = async (writingSampleID) => {
     'SELECT SheenReviews.writing_sample_id, WritingSamples.high_res_aws_key, SheenReviews.user_id, Users.username, SheenReviews.color_id, Colors.name, SheenReviews.amount, SheenReviews.approved, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=SheenReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE SheenReviews.writing_sample_id=? AND SheenReviews.approved <> 0',
     [writingSampleID],
   );
+
   return res;
 };
 const insert = async (data) => {
   // TODO validate all needed keys
+
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-  // search database for color review
-  /*
-  const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM ColorReview WHERE user_id = ? AND writing_sample_id = ? AND color_id = ?',
-    [data.userID, data.writingSampleID, data.colorID],
+
+  // get colorID from color name
+  const colorNameQuery = await db.pool.asyncQuery(
+    'SELECT color_id FROM Colors WHERE name=?',
+    [data.color],
   );
 
-  // insert color review if it doesnt exist
-  if (selectRes.length === 0) {
-    const insertRes = await db.pool.asyncQuery(
-      'INSERT INTO ColorReviews (user_id, writing_sample_id, color_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
-      [
-        data.userID,
-        data.writingSampleID,
-        data.colorID,
-        new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-        new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-      ],
-    );
-    console.log(insertRes);
-    return insertRes;
-  }
+  const colorID = colorNameQuery[0].color_id;
 
-  // return color review if it already exists
-  if (selectRes.length === 1) {
-    console.log(selectRes);
-    return selectRes;
-  }
+  const insertRes = await db.pool.asyncQuery(
+    'INSERT INTO SheenReviews (writing_sample_id, user_id, color_id, amount, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [
+      data.writingSampleID,
+      data.userID,
+      colorID,
+      data.sheen.toLowerCase(),
+      0,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+    ],
+  );
 
-  if (selectRes.length >= 2) {
-    throw Object.assign(new Error('duplicate color review in database'), {
-      code: 500,
-    });
-  }
-  */
+  return insertRes;
+};
+
+const remove = async (data) => {
+  // remove existing sheen reviews if they exist
+  const deleteRes = await db.pool.asyncQuery(
+    'DELETE FROM SheenReviews WHERE writing_sample_id = ? AND user_id = ?',
+    [data.writingSampleID, data.userID],
+  );
+
+  return deleteRes;
 };
 
 module.exports = {
@@ -86,4 +73,5 @@ module.exports = {
   unapprovedIndex,
   insert,
   show,
+  remove,
 };

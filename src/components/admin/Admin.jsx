@@ -144,6 +144,9 @@ export default function Admin() {
         <Link className="p-3" to="/sheen-reviews/unapproved">
           Unapproved Sheen Reviews
         </Link>
+        <Link className="p-3" to="/sheen-reviews/new">
+          Sheen Reviews Insert
+        </Link>
       </div>
       {/* waterReviews */}
       <div className="row">

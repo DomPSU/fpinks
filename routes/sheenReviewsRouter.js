@@ -9,6 +9,6 @@ sheenReviewsRouter.get('/:writingSampleID', sheenReviewsService.show);
 sheenReviewsRouter.get('/', sheenReviewsService.index);
 
 // POST
-sheenReviewsRouter.post(sheenReviewsService.insert);
+sheenReviewsRouter.post('/', sheenReviewsService.insert);
 
 module.exports = sheenReviewsRouter;

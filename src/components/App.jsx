@@ -41,14 +41,15 @@ import ColorReviewsInsert from './colorReviews/ColorReviewsInsert';
 import ShadingReviewsInsert from './shadingReviews/ShadingReviewsInsert';
 
 // sheenReviews
+import SheenReviewsInsert from './sheenReviews/SheenReviewsInsert';
+
+// featheringReviews
 
 // waterReviews
 
 // dryingReviews
 
 // transparencyReviews
-
-// featheringReviews
 
 export default function App() {
   return (
@@ -144,12 +145,22 @@ export default function App() {
             <Index link="/shading-reviews" />
           </Route>
           {/* sheenReviews */}
-          {/* TODO insert */}
+          <Route path="/sheen-reviews/new">
+            <SheenReviewsInsert />
+          </Route>
           <Route path="/sheen-reviews/unapproved">
             <Index link="/sheen-reviews/unapproved" />
           </Route>
           <Route path="/sheen-reviews">
             <Index link="/sheen-reviews" />
+          </Route>
+          {/* featheringReviews */}
+          {/* TODO insert */}
+          <Route path="/feathering-reviews/unapproved">
+            <Index link="/feathering-reviews/unapproved" />
+          </Route>
+          <Route path="/feathering-reviews">
+            <Index link="/feathering-reviews" />
           </Route>
           {/* waterReviews */}
           {/* TODO insert */}
@@ -174,14 +185,6 @@ export default function App() {
           </Route>
           <Route path="/transparency-reviews">
             <Index link="/transparency-reviews" />
-          </Route>
-          {/* featheringReviews */}
-          {/* TODO insert */}
-          <Route path="/feathering-reviews/unapproved">
-            <Index link="/feathering-reviews/unapproved" />
-          </Route>
-          <Route path="/feathering-reviews">
-            <Index link="/feathering-reviews" />
           </Route>
           {/* other */}
           <Route path="/admin">

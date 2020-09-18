@@ -97,7 +97,7 @@ export default function Help() {
           </tr>
           <tr>
             <td>Paper Name</td>
-            <td>printer, notebook, etc</td>
+            <td>Printer, Notebook, etc</td>
           </tr>
           <tr>
             <td>Paper Style</td>

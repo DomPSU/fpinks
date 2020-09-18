@@ -67,7 +67,7 @@ const insert = async (req, res, next) => {
     colorName: colorReview.colorOne,
   };
 
-  // insert first  color review
+  // insert first color review
   try {
     const data = await colorReviewsModel.insert(colorReviewOne);
     res.status(200).send(data);
