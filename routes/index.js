@@ -11,10 +11,10 @@ const writingSamplesRouter = require('./writingSamplesRouter');
 const colorReviewsRouter = require('./colorReviewsRouter');
 const shadingReviewsRouter = require('./shadingReviewsRouter');
 const sheenReviewsRouter = require('./sheenReviewsRouter');
+const featheringReviewsRouter = require('./featheringReviewsRouter');
 const waterReviewsRouter = require('./waterReviewsRouter');
 const dryingReviewsRouter = require('./dryingReviewsRouter');
 const transparencyReviewsRouter = require('./transparencyReviewsRouter');
-const featheringReviewsRouter = require('./featheringReviewsRouter');
 
 router.use('/users', usersRouter);
 router.use('/pens', pensRouter);
@@ -26,9 +26,9 @@ router.use('/writing-samples', writingSamplesRouter);
 router.use('/color-reviews', colorReviewsRouter);
 router.use('/shading-reviews', shadingReviewsRouter);
 router.use('/sheen-reviews', sheenReviewsRouter);
+router.use('/feathering-reviews', featheringReviewsRouter);
 router.use('/water-reviews', waterReviewsRouter);
 router.use('/drying-reviews', dryingReviewsRouter);
 router.use('/transparency-reviews', transparencyReviewsRouter);
-router.use('/feathering-reviews', featheringReviewsRouter);
 
 module.exports = router;

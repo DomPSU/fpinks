@@ -12,6 +12,6 @@ featheringReviewsRouter.get('/:writingSampleID', featheringReviewsService.show);
 featheringReviewsRouter.get('/', featheringReviewsService.index);
 
 // POST
-featheringReviewsRouter.post(featheringReviewsService.insert);
+featheringReviewsRouter.post('/', featheringReviewsService.insert);
 
 module.exports = featheringReviewsRouter;

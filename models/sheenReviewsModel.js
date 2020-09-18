@@ -59,7 +59,7 @@ const insert = async (data) => {
 };
 
 const remove = async (data) => {
-  // remove existing sheen reviews if they exist
+  // remove existing sheen review if it exists
   const deleteRes = await db.pool.asyncQuery(
     'DELETE FROM SheenReviews WHERE writing_sample_id = ? AND user_id = ?',
     [data.writingSampleID, data.userID],

@@ -50,7 +50,7 @@ const insert = async (data) => {
 };
 
 const remove = async (data) => {
-  // remove existing shading review if they exist
+  // remove existing shading review if it exists
   const deleteRes = await db.pool.asyncQuery(
     'DELETE FROM ShadingReviews WHERE writing_sample_id = ? AND user_id = ?',
     [data.writingSampleID, data.userID],

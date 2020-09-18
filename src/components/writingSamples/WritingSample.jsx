@@ -209,6 +209,23 @@ class WritingSample extends Component {
       }
     }
 
+    // process featheringReviews
+    const featheringCounts = [];
+    featheringReviews.forEach((featheringReview) => {
+      const { amount } = featheringReview;
+
+      featheringCounts[amount] = featheringCounts[amount]
+        ? featheringCounts[amount] + 1
+        : 1;
+    });
+
+    const featheringData = [['Feathering', 'Number of reviews']];
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(featheringCounts)) {
+      featheringData.push([capitalize(key), value]);
+    }
+
     // process waterReviews
     const waterCounts = [];
     waterReviews.forEach((waterReview) => {
@@ -258,23 +275,6 @@ class WritingSample extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(transparencyCounts)) {
       transparencyData.push([capitalize(key), value]);
-    }
-
-    // process featheringReviews
-    const featheringCounts = [];
-    featheringReviews.forEach((featheringReview) => {
-      const { feathering } = featheringReview;
-
-      featheringCounts[feathering] = featheringCounts[feathering]
-        ? featheringCounts[feathering] + 1
-        : 1;
-    });
-
-    const featheringData = [['Feathering', 'Number of reviews']];
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(featheringCounts)) {
-      featheringData.push([capitalize(key), value]);
     }
 
     return (

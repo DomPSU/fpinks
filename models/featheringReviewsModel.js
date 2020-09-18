@@ -1,42 +1,28 @@
 const db = require('./db');
-const AWS = require('../config/aws');
-
-const addUrlsToRes = async (res) => {
-  res.forEach(
-    // TODO fix es lint error and use await instead of then?
-    (featheringReviews) =>
-      AWS.getURL(featheringReviews.high_res_aws_key).then(
-        // eslint-disable-next-line no-return-assign
-        (highResUrl) => (featheringReviews.high_res_url = highResUrl),
-      ),
-  );
-};
+const awsUrls = require('../utils/awsUrls');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.feathering, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE FeatheringReviews.approved <> 0',
+    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE FeatheringReviews.approved <> 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((featheringReview) => {
-    delete featheringReview.high_res_aws_key;
-  });
+
+  await awsUrls.addHighResUrls(res);
+
   return res;
 };
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.feathering, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE FeatheringReviews.approved = 0',
+    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE FeatheringReviews.approved = 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((featheringReview) => {
-    delete featheringReview.high_res_aws_key;
-  });
+  await awsUrls.addHighResUrls(res);
+
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.feathering, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND FeatheringReviews.approved <> 0',
+    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND FeatheringReviews.approved <> 0',
     [writingSampleID],
   );
   return res;
@@ -44,42 +30,32 @@ const show = async (writingSampleID) => {
 
 const insert = async (data) => {
   // TODO validate all needed keys
+
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-  // search database for color review
-  /*
-  const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM ColorReview WHERE user_id = ? AND writing_sample_id = ? AND color_id = ?',
-    [data.userID, data.writingSampleID, data.colorID],
+
+  const insertRes = await db.pool.asyncQuery(
+    'INSERT INTO FeatheringReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
+    [
+      data.writingSampleID,
+      data.userID,
+      data.amount.toLowerCase(),
+      0,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+    ],
   );
 
-  // insert color review if it doesnt exist
-  if (selectRes.length === 0) {
-    const insertRes = await db.pool.asyncQuery(
-      'INSERT INTO ColorReviews (user_id, writing_sample_id, color_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
-      [
-        data.userID,
-        data.writingSampleID,
-        data.colorID,
-        new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-        new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-      ],
-    );
-    console.log(insertRes);
-    return insertRes;
-  }
+  return insertRes;
+};
 
-  // return color review if it already exists
-  if (selectRes.length === 1) {
-    console.log(selectRes);
-    return selectRes;
-  }
+const remove = async (data) => {
+  // remove existing feathering review if it exists
+  const deleteRes = await db.pool.asyncQuery(
+    'DELETE FROM FeatheringReviews WHERE writing_sample_id = ? AND user_id = ?',
+    [data.writingSampleID, data.userID],
+  );
 
-  if (selectRes.length >= 2) {
-    throw Object.assign(new Error('duplicate color review in database'), {
-      code: 500,
-    });
-  }
-  */
+  return deleteRes;
 };
 
 module.exports = {
@@ -87,4 +63,5 @@ module.exports = {
   unapprovedIndex,
   insert,
   show,
+  remove,
 };

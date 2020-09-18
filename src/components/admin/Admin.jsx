@@ -148,6 +148,21 @@ export default function Admin() {
           Sheen Reviews Insert
         </Link>
       </div>
+      {/* featheringReviews */}
+      <div className="row">
+        <h1 className="mt-5">Feathering Reviews</h1>
+      </div>
+      <div className="row border-bottom border-dark">
+        <Link className="p-3" to="/feathering-reviews">
+          Approved Feathering Reviews
+        </Link>
+        <Link className="p-3" to="/feathering-reviews/unapproved">
+          Unapproved Feathering Reviews
+        </Link>
+        <Link className="p-3" to="/feathering-reviews/new">
+          Feathering Reviews Insert
+        </Link>
+      </div>
       {/* waterReviews */}
       <div className="row">
         <h1 className="mt-5">Water Reviews</h1>
@@ -182,18 +197,6 @@ export default function Admin() {
         </Link>
         <Link className="p-3" to="/transparency-reviews/unapproved">
           Unapproved Transparency Reviews
-        </Link>
-      </div>
-      {/* featheringReviews */}
-      <div className="row">
-        <h1 className="mt-5">Feathering Reviews</h1>
-      </div>
-      <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/feathering-reviews">
-          Approved Feathering Reviews
-        </Link>
-        <Link className="p-3" to="/feathering-reviews/unapproved">
-          Unapproved Feathering Reviews
         </Link>
       </div>
     </div>
