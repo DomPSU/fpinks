@@ -204,6 +204,9 @@ export default function Admin() {
         <Link className="p-3" to="/transparency-reviews/unapproved">
           Unapproved Transparency Reviews
         </Link>
+        <Link className="p-3" to="/transparency-reviews/new">
+          Transparency Reviews Insert
+        </Link>
       </div>
     </div>
   );

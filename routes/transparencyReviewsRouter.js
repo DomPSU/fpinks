@@ -15,6 +15,6 @@ transparencyReviewsRouter.get(
 transparencyReviewsRouter.get('/', transparencyReviewsService.index);
 
 // POST
-transparencyReviewsRouter.post(transparencyReviewsService.insert);
+transparencyReviewsRouter.post('/', transparencyReviewsService.insert);
 
 module.exports = transparencyReviewsRouter;

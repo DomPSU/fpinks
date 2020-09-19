@@ -37,6 +37,14 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
+  // delete existing transparency review for user and writing sample
+  try {
+    await transparencyReviewsModel.remove(transparencyReview);
+  } catch (e) {
+    next(e);
+  }
+
+  // insert new transparency review
   try {
     const data = await transparencyReviewsModel.insert(transparencyReview);
     res.status(200).send(data);
@@ -45,9 +53,22 @@ const insert = async (req, res, next) => {
   }
 };
 
+const remove = async (req, res, next) => {
+  const transparencyReview = {
+    ...req.body,
+  };
+
+  try {
+    const data = await transparencyReviewsModel.remove(transparencyReview);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
 module.exports = {
   index,
   unapprovedIndex,
   insert,
   show,
+  remove,
 };
