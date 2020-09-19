@@ -9,6 +9,6 @@ dryingReviewsRouter.get('/:writingSampleID', dryingReviewsService.show);
 dryingReviewsRouter.get('/', dryingReviewsService.index);
 
 // POST
-dryingReviewsRouter.post(dryingReviewsService.insert);
+dryingReviewsRouter.post('/', dryingReviewsService.insert);
 
 module.exports = dryingReviewsRouter;

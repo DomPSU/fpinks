@@ -184,10 +184,13 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/drying-reviews">
-          Approved Drying Reviews
+          Approved Drying Time Reviews
         </Link>
         <Link className="p-3" to="/drying-reviews/unapproved">
-          Unapproved Drying Reviews
+          Unapproved Drying TimeReviews
+        </Link>
+        <Link className="p-3" to="/drying-reviews/new">
+          Drying Time Reviews Insert
         </Link>
       </div>
       {/* transparencyReviews */}

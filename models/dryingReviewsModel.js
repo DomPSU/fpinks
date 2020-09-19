@@ -44,42 +44,32 @@ const show = async (writingSampleID) => {
 
 const insert = async (data) => {
   // TODO validate all needed keys
+
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-  // search database for color review
-  /*
-  const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM ColorReview WHERE user_id = ? AND writing_sample_id = ? AND color_id = ?',
-    [data.userID, data.writingSampleID, data.colorID],
+
+  const insertRes = await db.pool.asyncQuery(
+    'INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
+    [
+      data.writingSampleID,
+      data.userID,
+      data.dryingTime.toLowerCase(),
+      0,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+    ],
   );
 
-  // insert color review if it doesnt exist
-  if (selectRes.length === 0) {
-    const insertRes = await db.pool.asyncQuery(
-      'INSERT INTO ColorReviews (user_id, writing_sample_id, color_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
-      [
-        data.userID,
-        data.writingSampleID,
-        data.colorID,
-        new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-        new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-      ],
-    );
-    console.log(insertRes);
-    return insertRes;
-  }
+  return insertRes;
+};
 
-  // return color review if it already exists
-  if (selectRes.length === 1) {
-    console.log(selectRes);
-    return selectRes;
-  }
+const remove = async (data) => {
+  // remove existing waterproofness review if it exists
+  const deleteRes = await db.pool.asyncQuery(
+    'DELETE FROM DryingReviews WHERE writing_sample_id = ? AND user_id = ?',
+    [data.writingSampleID, data.userID],
+  );
 
-  if (selectRes.length >= 2) {
-    throw Object.assign(new Error('duplicate color review in database'), {
-      code: 500,
-    });
-  }
-  */
+  return deleteRes;
 };
 
 module.exports = {
@@ -87,4 +77,5 @@ module.exports = {
   unapprovedIndex,
   insert,
   show,
+  remove,
 };

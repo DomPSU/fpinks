@@ -37,6 +37,14 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
+  // delete existing waterproofness review for user and writing sample
+  try {
+    await dryingReviewsModel.remove(dryingReview);
+  } catch (e) {
+    next(e);
+  }
+
+  // insert new waterproofness review
   try {
     const data = await dryingReviewsModel.insert(dryingReview);
     res.status(200).send(data);
@@ -45,9 +53,22 @@ const insert = async (req, res, next) => {
   }
 };
 
+const remove = async (req, res, next) => {
+  const dryingReview = {
+    ...req.body,
+  };
+
+  try {
+    const data = await dryingReviewsModel.remove(dryingReview);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
 module.exports = {
   index,
   unapprovedIndex,
   insert,
   show,
+  remove,
 };
