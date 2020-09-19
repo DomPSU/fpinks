@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
-import featheringsJSON from '../../constants/shadings.json';
+import watersJSON from '../../constants/waters.json';
 
-class FeatheringReviewsInsert extends Component {
+class WaterReviewsInsert extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      amount: '',
+      waterproofness: '',
       writingSampleID: '',
       userID: '',
     };
@@ -26,7 +26,7 @@ class FeatheringReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { amount, writingSampleID, userID } = this.state;
+    const { waterproofness, writingSampleID, userID } = this.state;
 
     // TODO add frontend validation
 
@@ -34,8 +34,8 @@ class FeatheringReviewsInsert extends Component {
     // Also delete html view for user id input
 
     API.instance
-      .post('/feathering-reviews', {
-        amount,
+      .post('/water-reviews', {
+        waterproofness,
         writingSampleID,
         userID,
       })
@@ -53,22 +53,22 @@ class FeatheringReviewsInsert extends Component {
     console.log(this.state);
     return (
       <div className="container text-center">
-        <h1 className="pt-5">Add a Feathering Review</h1>
+        <h1 className="pt-5">Add a Waterproofness Review</h1>
         <form>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="shadingReview" className="p-3 m-0">
-                Feathering Review
+              <label htmlFor="waterReview" className="p-3 m-0">
+                Waterproofness Review
                 <div className="row">
                   <div className="col-12">
                     <select
                       className="form-control m-1"
-                      id="amount"
+                      id="waterproofness"
                       onBlur={this.handleChange}
                     >
                       <option> </option>
-                      {featheringsJSON.names.map((amount) => {
-                        return <option>{amount}</option>;
+                      {watersJSON.names.map((waterproofness) => {
+                        return <option>{waterproofness}</option>;
                       })}
                     </select>
                   </div>
@@ -115,4 +115,4 @@ class FeatheringReviewsInsert extends Component {
   }
 }
 
-export default FeatheringReviewsInsert;
+export default WaterReviewsInsert;

@@ -44,9 +44,10 @@ import ShadingReviewsInsert from './shadingReviews/ShadingReviewsInsert';
 import SheenReviewsInsert from './sheenReviews/SheenReviewsInsert';
 
 // featheringReviews
-import FeatheringReviewsInsert from './featherings/FeatheringReviewsInsert';
+import FeatheringReviewsInsert from './featheringReviews/FeatheringReviewsInsert';
 
 // waterReviews
+import WaterReviewsInsert from './waterReviews/WaterReviewsInsert';
 
 // dryingReviews
 
@@ -166,7 +167,9 @@ export default function App() {
             <Index link="/feathering-reviews" />
           </Route>
           {/* waterReviews */}
-          {/* TODO insert */}
+          <Route path="/water-reviews/new">
+            <WaterReviewsInsert />
+          </Route>
           <Route path="/water-reviews/unapproved">
             <Index link="/water-reviews/unapproved" />
           </Route>

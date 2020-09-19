@@ -37,6 +37,14 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
+  // delete existing waterproofness review for user and writing sample
+  try {
+    await waterReviewsModel.remove(waterReview);
+  } catch (e) {
+    next(e);
+  }
+
+  // insert new waterproofness review
   try {
     const data = await waterReviewsModel.insert(waterReview);
     res.status(200).send(data);
@@ -45,9 +53,22 @@ const insert = async (req, res, next) => {
   }
 };
 
+const remove = async (req, res, next) => {
+  const waterReview = {
+    ...req.body,
+  };
+
+  try {
+    const data = await waterReviewsModel.remove(waterReview);
+    res.status(200).send(data);
+  } catch (e) {
+    next(e);
+  }
+};
 module.exports = {
   index,
   unapprovedIndex,
   insert,
   show,
+  remove,
 };

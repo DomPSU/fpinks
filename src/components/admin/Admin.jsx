@@ -169,10 +169,13 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/water-reviews">
-          Approved Water Reviews
+          Approved Waterproofness Reviews
         </Link>
         <Link className="p-3" to="/water-reviews/unapproved">
-          Unapproved Water Reviews
+          Unapproved Waterproofness Reviews
+        </Link>
+        <Link className="p-3" to="/water-reviews/new">
+          Waterproofness Reviews Insert
         </Link>
       </div>
       {/* dryingReviews */}

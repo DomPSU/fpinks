@@ -9,6 +9,6 @@ waterReviewsRouter.get('/:writingSampleID', waterReviewsService.show);
 waterReviewsRouter.get('/', waterReviewsService.index);
 
 // POST
-waterReviewsRouter.post(waterReviewsService.insert);
+waterReviewsRouter.post('/', waterReviewsService.insert);
 
 module.exports = waterReviewsRouter;
