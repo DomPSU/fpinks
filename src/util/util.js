@@ -20,4 +20,14 @@ export const capitalize = (string) => {
   return splitStr.join(' ');
 };
 
-export default { isDevelopment, capitalize };
+// TODO send http cookie to backend
+export const isLoggedIn = () => {
+  return null;
+};
+
+// TODO send http cookie to backend
+export const isAdmin = () => {
+  return null;
+};
+
+export default { isDevelopment, capitalize, isLoggedIn };

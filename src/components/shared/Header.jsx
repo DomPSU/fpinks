@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Header() {
   return (
     <nav className="navbar navbar-expand navbar-light bg-primary fixed-top">
-      <div className="collapse navbar-collapse" id="navbarNav">
+      <div className="collapse navbar-collapse">
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link className="nav-link text-white" to="/">
@@ -26,6 +26,10 @@ export default function Header() {
               Admin
             </Link>
           </li>
+        </ul>
+      </div>
+      <div className="collapse navbar-collapse">
+        <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link text-white" to="/login">
               Login
