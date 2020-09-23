@@ -6,7 +6,8 @@ Create TABLE Users(
   user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   email VARCHAR(255) NOT NULL,
   username VARCHAR(20) NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  sub VARCHAR(255) NOT NULL,
+  iss VARCHAR(255) NOT NULL,
   level VARCHAR(10) NOT NULL,
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
@@ -69,7 +70,7 @@ Create TABLE PenNibs(
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
-    CONSTRAINT PK_PenNibs PRIMARY KEY
+    CONSTRAINT PK_PenNib PRIMARY KEY
   (
     pen_id,
     nib_id
@@ -86,7 +87,7 @@ Create TABLE WritingSamples(
   nib_id INT NOT NULL,
   ink_id INT NOT NULL,
   paper_id INT NOT NULL,
-  user_id INT NOT NULL,  -- TODO seeds
+  user_id INT NOT NULL,
   low_res_aws_key VARCHAR(1024), -- TODO seeds aws_key -> low_res_aws_key
   high_res_aws_key VARCHAR(1024), -- TODO seeds
   original_aws_key VARCHAR(2014) NOT NULL, -- TODO seeds
@@ -114,7 +115,7 @@ Create TABLE Colors(
 -- ColorReviews
 DROP TABLE IF EXISTS ColorReviews;
 Create TABLE ColorReviews(
-  Constraint PK_ColorReviews PRIMARY KEY
+  Constraint PK_ColorReview PRIMARY KEY
   (
     writing_sample_id,
     user_id,
@@ -134,7 +135,7 @@ Create TABLE ColorReviews(
 -- ShadingReviews 
 DROP TABLE IF EXISTS ShadingReviews;
 Create TABLE ShadingReviews(
-  Constraint PK_ShadingReviews PRIMARY KEY
+  Constraint PK_ShadingReview PRIMARY KEY
   (
     writing_sample_id,
     user_id
@@ -152,7 +153,7 @@ Create TABLE ShadingReviews(
 -- SheenReviews 
 DROP TABLE IF EXISTS SheenReviews;
 Create TABLE SheenReviews(
-  CONSTRAINT PK_SheenReviews PRIMARY KEY
+  CONSTRAINT PK_SheenReview PRIMARY KEY
   (
     writing_sample_id,
     user_id,
@@ -173,7 +174,7 @@ Create TABLE SheenReviews(
 -- FeatheringReviews
 DROP TABLE IF EXISTS FeatheringReviews;
 Create TABLE FeatheringReviews(
-  CONSTRAINT PK_FeatheringReviews PRIMARY KEY
+  CONSTRAINT PK_FeatheringReview PRIMARY KEY
   (
     writing_sample_id,
     user_id
@@ -191,7 +192,7 @@ Create TABLE FeatheringReviews(
 -- WaterReviews
 DROP TABLE IF EXISTS WaterReviews;
 Create TABLE WaterReviews(
-  CONSTRAINT PK_WaterReviews PRIMARY KEY
+  CONSTRAINT PK_WaterReview PRIMARY KEY
   (
     writing_sample_id,
     user_id
@@ -209,7 +210,7 @@ Create TABLE WaterReviews(
 -- DryingReviews
 DROP TABLE IF EXISTS DryingReviews;
 Create TABLE DryingReviews(
-  CONSTRAINT PK_DryingReviews PRIMARY KEY
+  CONSTRAINT PK_DryingReview PRIMARY KEY
   (
     writing_sample_id,
     user_id
@@ -227,7 +228,7 @@ Create TABLE DryingReviews(
 -- TransparencyReviews
 DROP TABLE IF EXISTS TransparencyReviews;
 Create TABLE TransparencyReviews(
-  CONSTRAINT PK_TransparencyReviews PRIMARY KEY
+  CONSTRAINT PK_TransparencyReview PRIMARY KEY
   (
     writing_sample_id,
     user_id

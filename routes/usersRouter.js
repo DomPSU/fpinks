@@ -8,4 +8,7 @@ usersRouter.get('/unapproved', usersService.unapprovedIndex);
 usersRouter.get('/:id', usersService.show);
 usersRouter.get('/', usersService.index);
 
+// POST
+usersRouter.post('/', usersService.insert);
+
 module.exports = usersRouter;
