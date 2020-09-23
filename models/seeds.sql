@@ -1,7 +1,7 @@
 -- Users
--- TODO replace sub and iss with actual sub in environment variable
+-- replace User.sub with actual User.sub when seeding
 INSERT INTO Users (email, username, sub, iss, level, approved, created_at, updated_at)
-VALUES ('dom@fpinks.com', 'Dom', '1', 'google', 'admin', 1, NOW(), NOW());
+VALUES ('dom@fpinks.com', 'Dom', 'fake-sub-to-replace', 'accounts.google.com', 'admin', 1, NOW(), NOW());
 
 -- Inks
 INSERT INTO Inks (brand, name, approved, created_at, updated_at)

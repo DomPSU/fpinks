@@ -40,25 +40,32 @@ const insert = async (req, res, next) => {
 
   // validate google id token
   const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  const validatedUser = {};
+
   async function verify() {
     const ticket = await client.verifyIdToken({
       idToken: user.idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
+
     const payload = ticket.getPayload();
-    const userid = payload.sub;
-    const email = payload[''];
-    // If request specified a G Suite domain:
-    // const domain = payload['hd'];
+    validatedUser.sub = payload.sub;
+    validatedUser.iss = payload.iss;
+    validatedUser.email = payload.email;
   }
   verify().catch(console.error);
 
+  // TODO check if invalid user gets to this code
+
+  // insert new user
   try {
     const data = await usersModel.insert(user);
     res.status(200).send(data);
   } catch (e) {
     next(e);
   }
+
+  // send http only cookie to front end
 };
 
 module.exports = {

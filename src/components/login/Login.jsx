@@ -31,12 +31,8 @@ class Login extends Component {
             console.log('User has finished signing in!');
 
             const idToken = googleUser.getAuthResponse().id_token;
-            const email = googleUser.getBasicProfile().getEmail();
 
-            console.log(googleUser);
-            console.log(idToken);
-
-            this.sendCredentials(idToken, email);
+            this.sendIDToken(idToken);
           },
         };
         window.gapi.signin2.render('loginButton', params);
@@ -45,11 +41,10 @@ class Login extends Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  sendCredentials(token, email) {
+  sendIDToken(token) {
     API.instance
       .post('/users', {
         token,
-        email,
       })
       .then((res) => {
         console.log(res);
