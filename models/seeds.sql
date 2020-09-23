@@ -1,10 +1,7 @@
 -- Users
-INSERT INTO Users (email, username, password, level, approved, created_at, updated_at)
-VALUES ('dom@fpinks.com', 'Dom', 'password0', 'admin', 1, NOW(), NOW());
-INSERT INTO Users (email, username, password, level, approved, created_at, updated_at)
-VALUES ('fake1@gmail.com', 'fakeUserName1', 'password1', 'user', 1, NOW(), NOW());
-INSERT INTO Users (email, username, password, level, approved, created_at, updated_at)
-VALUES ('fake2@gmail.com', 'fakeUsername2', 'password2', 'user', 0, NOW(), NOW());
+-- TODO replace sub and iss with actual sub in environment variable
+INSERT INTO Users (email, username, sub, iss, level, approved, created_at, updated_at)
+VALUES ('dom@fpinks.com', 'Dom', '1', 'google', 'admin', 1, NOW(), NOW());
 
 -- Inks
 INSERT INTO Inks (brand, name, approved, created_at, updated_at)
