@@ -33,6 +33,9 @@ class Login extends Component {
             const idToken = googleUser.getAuthResponse().id_token;
             const email = googleUser.getBasicProfile().getEmail();
 
+            console.log(googleUser);
+            console.log(idToken);
+
             this.sendCredentials(idToken, email);
           },
         };
@@ -44,7 +47,7 @@ class Login extends Component {
   // eslint-disable-next-line class-methods-use-this
   sendCredentials(token, email) {
     API.instance
-      .post('/auth', {
+      .post('/users', {
         token,
         email,
       })
