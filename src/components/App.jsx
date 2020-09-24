@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './shared/Header';
+import Footer from './shared/Footer';
 import Gallery from './gallery/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
@@ -221,6 +222,7 @@ export default function App() {
             <Gallery />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

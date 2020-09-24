@@ -59,7 +59,7 @@ export default function Help() {
         searches like &quot;Iroshizuku&quot; for better results. Capitalization
         does not matter. A more robust search will be provided in the future.
       </h3>
-      <table className="table table-primary">
+      <table className="table table-primary mb-5">
         <thead>
           <tr>
             <th scope="col">Search Criteria</th>

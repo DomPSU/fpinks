@@ -34,9 +34,14 @@ export default function PrivacyPolicy() {
         </h3>
         <h5 className="p-1">
           For a better experience while using our service, we may require you to
-          provide us with certain personally identifable information, including
-          but not limited to your email address. The information that we collect
-          will be used to contact or identify you.
+          provide us with certain personally identifiable information. This
+          personally identifiable information may come from a linked account
+          e.g. Google, Facebook, etc. This personally identifiable information
+          may include but is not limited to your email address, full name,
+          linked account picture and linked account id number. The only
+          information we store within our database is your email address and
+          linked account id number which will be used to contact and identify
+          you.
         </h5>
         <h3 className="text-center font-weight-bold p-1">Log data</h3>
         <h5 className="p-1">

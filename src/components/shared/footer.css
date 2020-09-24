@@ -1,0 +1,7 @@
+.navbar-nav-overwrite > li > a {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+.navbar-overwrite {
+  max-height: 24px !important;
+}

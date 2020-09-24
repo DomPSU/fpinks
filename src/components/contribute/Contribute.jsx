@@ -251,7 +251,7 @@ class Contribute extends Component {
           </div>
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary m-1"
             onClick={this.handleSubmit}
           >
             Submit

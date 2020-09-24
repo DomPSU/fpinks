@@ -17,11 +17,6 @@ export default function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/about">
-              About
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link className="nav-link text-white" to="/admin">
               Admin
             </Link>
