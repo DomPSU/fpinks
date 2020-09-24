@@ -142,19 +142,20 @@ class Gallery extends Component {
             placeholder="Type 'help' for search instructions."
           />
         </div>
-        {query !== 'help' && query !== "'help'" && (
+        {query.toLowerCase() !== 'help' && query.toLowerCase() !== "'help'" && (
           <div id="list" className="row d-flex flex-wrap align-items-center">
             {list}
           </div>
         )}
-        {query !== 'help' && query !== "'help'" && (
+        {query.toLowerCase() !== 'help' && query.toLowerCase() !== "'help'" && (
           <Pagination
             currentPage={currentPage}
             handleIncrementClick={this.handleIncrementClick}
             handleDecrementClick={this.handleDecrementClick}
           />
         )}
-        {(query === 'help' || query === "'help'") && <Help />}
+        {(query.toLowerCase() === 'help' ||
+          query.toLowerCase() === "'help'") && <Help />}
       </div>
     );
   }
