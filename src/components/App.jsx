@@ -6,6 +6,7 @@ import Gallery from './gallery/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
 import Login from './login/Login';
+import Profile from './login/Profile';
 import PrivacyPolicy from './login/PrivacyPolicy';
 import TermsOfService from './login/TermsOfService';
 import Admin from './admin/Admin';
@@ -211,6 +212,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/privacy-policy">
             <PrivacyPolicy />

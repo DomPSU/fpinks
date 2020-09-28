@@ -56,13 +56,11 @@ const insert = async (req, res, next) => {
 
     // insert new validated user
     try {
-      const data = await usersModel.insert(validatedUser);
-      res.status(200).send(data);
+      await usersModel.insert(validatedUser);
+      res.status(200).end();
     } catch (e) {
       next(e);
     }
-
-    // send http only cookie to front end
   }
   verify().catch(console.error);
 };

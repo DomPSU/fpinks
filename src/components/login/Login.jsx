@@ -1,43 +1,20 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
+import { signOut } from '../../util/util';
 
 class Login extends Component {
   componentDidMount() {
-    console.log('Mounted');
-    this.insertGapiScript();
-  }
+    this.renderSignIn = this.renderSignIn.bind(this);
 
-  insertGapiScript() {
-    const script = document.createElement('script');
-    script.src = 'https://apis.google.com/js/api.js';
-    script.onload = () => {
-      this.initializeGoogleSignIn();
-    };
-    document.body.appendChild(script);
-  }
+    // call renderSignIn right after gapi is loaded
+    document
+      .getElementById('gapiScript')
+      .addEventListener('load', this.renderSignIn);
 
-  // TODO
-  // eslint-disable-next-line class-methods-use-this
-  initializeGoogleSignIn() {
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2.init({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      });
-      console.log('API INITIATED');
-
-      window.gapi.load('signin2', () => {
-        const params = {
-          onsuccess: (googleUser) => {
-            console.log('User has finished signing in!');
-
-            const idToken = googleUser.getAuthResponse().id_token;
-
-            this.sendIDToken(idToken);
-          },
-        };
-        window.gapi.signin2.render('loginButton', params);
-      });
-    });
+    // call renderSignIn if gapi is already loaded to avoid race condition
+    if (window.gapiLoaded === true) {
+      this.renderSignIn();
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -54,17 +31,18 @@ class Login extends Component {
       });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  signOut() {
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2.init({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      });
+  renderSignIn() {
+    window.gapi.load('signin2', () => {
+      const params = {
+        onsuccess: (googleUser) => {
+          console.log('User has finished signing in!');
 
-      const auth2 = window.gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-        console.log('User signed out.');
-      });
+          const idToken = googleUser.getAuthResponse().id_token;
+
+          this.sendIDToken(idToken);
+        },
+      };
+      window.gapi.signin2.render('loginButton', params);
     });
   }
 
@@ -88,9 +66,9 @@ class Login extends Component {
           </a>
         </div>
         <div className="d-flex justify-content-center">
-          <a href="/login" onClick={this.signOut}>
+          <button type="button" onClick={signOut}>
             Sign out
-          </a>
+          </button>
         </div>
       </div>
     );
