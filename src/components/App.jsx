@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './shared/Header';
 import Footer from './shared/Footer';
-import Gallery from './gallery/Gallery';
+import Gallery from './shared/Gallery';
 import Contribute from './contribute/Contribute';
 import About from './about/About';
 import Login from './login/Login';
 import ProfileReviews from './login/Reviews';
-import ProfileWritingSamples from './login/WritingSamples';
 import PrivacyPolicy from './login/PrivacyPolicy';
 import TermsOfService from './login/TermsOfService';
 import Admin from './admin/Admin';
@@ -262,8 +261,16 @@ class App extends Component {
             <Route path="/profile-reviews">
               <ProfileReviews />
             </Route>
-            <Route path="/profile-writing-samples">
-              <ProfileWritingSamples />
+            <Route
+              path="/profile-writing-samples"
+              key="profile-writing-samples"
+            >
+              <Gallery
+                queryStorage="profile writing samples query"
+                pageStorage="profile writing samples page"
+                path="writing-samples/search/"
+                noResultsMessage="Query matches none of your writing samples."
+              />
             </Route>
             <Route path="/privacy-policy">
               <PrivacyPolicy />
@@ -271,8 +278,13 @@ class App extends Component {
             <Route path="/terms-of-service">
               <TermsOfService />
             </Route>
-            <Route path="/">
-              <Gallery />
+            <Route path="/" key="galley">
+              <Gallery
+                queryStorage="gallery query"
+                pageStorage="gallery page"
+                path="writing-samples/search/"
+                noResultsMessage="Query has no matches."
+              />
             </Route>
           </Switch>
           <Footer />

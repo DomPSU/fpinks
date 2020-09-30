@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import API from '../../apis/API';
-import Pagination from '../shared/Pagination';
+import Pagination from './Pagination';
 import Help from './Help';
 import './gallery.css';
 
@@ -13,6 +15,7 @@ class Gallery extends Component {
       results: [],
       query: '',
       currentPage: '',
+      loading: true,
     };
 
     this.getQuery = this.getQuery.bind(this);
@@ -30,7 +33,9 @@ class Gallery extends Component {
   }
 
   getQuery() {
-    const savedQuery = sessionStorage.getItem('query');
+    const { queryStorage } = this.props;
+
+    const savedQuery = sessionStorage.getItem(queryStorage);
 
     if (savedQuery !== null) {
       this.setState({ query: savedQuery });
@@ -38,7 +43,9 @@ class Gallery extends Component {
   }
 
   getCurrentPage() {
-    const savedCurrentPage = sessionStorage.getItem('gallery page');
+    const { pageStorage } = this.props;
+
+    const savedCurrentPage = sessionStorage.getItem(pageStorage);
 
     if (savedCurrentPage !== null) {
       this.setState({ currentPage: savedCurrentPage });
@@ -52,8 +59,10 @@ class Gallery extends Component {
 
     this.setState({ query, currentPage: '1' });
 
-    sessionStorage.setItem('query', query);
-    sessionStorage.setItem('gallery page', '1');
+    const { queryStorage, pageStorage } = this.props;
+
+    sessionStorage.setItem(queryStorage, query);
+    sessionStorage.setItem(pageStorage, '1');
     this.query();
   }
 
@@ -86,10 +95,12 @@ class Gallery extends Component {
 
   query() {
     const { query } = this.state;
+    const { path } = this.props;
+
     API.instance
-      .get(`writing-samples/search/${query}`)
+      .get(path + query)
       .then((res) => {
-        this.setState({ results: res.data });
+        this.setState({ results: res.data, loading: false });
       })
       .catch((error) => console.log(error.response));
   }
@@ -109,10 +120,11 @@ class Gallery extends Component {
   }
 
   render() {
-    const { results, query, currentPage } = this.state;
+    const { results, query, currentPage, loading } = this.state;
+    const { pageStorage, noResultsMessage } = this.props;
 
     if (currentPage !== '') {
-      sessionStorage.setItem('gallery page', currentPage);
+      sessionStorage.setItem(pageStorage, currentPage);
     }
 
     const firstIndex = (parseInt(currentPage, 10) - 1) * 12;
@@ -131,7 +143,7 @@ class Gallery extends Component {
     ));
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid h-100">
         <div id="search-bar-div" className="fixed-top row">
           <input
             className="form-control"
@@ -142,23 +154,63 @@ class Gallery extends Component {
             placeholder="Type 'help' for search instructions."
           />
         </div>
-        {query.toLowerCase() !== 'help' && query.toLowerCase() !== "'help'" && (
-          <div id="list" className="row d-flex flex-wrap align-items-center">
-            {list}
+
+        {loading && (
+          <div className="row justify-content-center margin-top">
+            <ReactLoading
+              className="pt-5"
+              type="bars"
+              color="#0a58ca"
+              height={100}
+              width={100}
+            />
           </div>
         )}
-        {query.toLowerCase() !== 'help' && query.toLowerCase() !== "'help'" && (
-          <Pagination
-            currentPage={currentPage}
-            handleIncrementClick={this.handleIncrementClick}
-            handleDecrementClick={this.handleDecrementClick}
-          />
-        )}
-        {(query.toLowerCase() === 'help' ||
+
+        {!loading &&
+          list.length === 0 &&
+          query.toLowerCase() !== 'help' &&
+          query.toLowerCase() !== "'help'" && (
+            <div className="row margin-top">
+              <h3 className="col text-center mt-5 pt-5">{noResultsMessage}</h3>
+            </div>
+          )}
+
+        {!loading &&
+          list.length !== 0 &&
+          query.toLowerCase() !== 'help' &&
+          query.toLowerCase() !== "'help'" && (
+            <div
+              id="list"
+              className="row d-flex flex-wrap align-items-center margin-top"
+            >
+              {list}
+            </div>
+          )}
+
+        {!loading &&
+          list.length !== 0 &&
+          query.toLowerCase() !== 'help' &&
+          query.toLowerCase() !== "'help'" && (
+            <Pagination
+              currentPage={currentPage}
+              handleIncrementClick={this.handleIncrementClick}
+              handleDecrementClick={this.handleDecrementClick}
+            />
+          )}
+
+        {((!loading && query.toLowerCase() === 'help') ||
           query.toLowerCase() === "'help'") && <Help />}
       </div>
     );
   }
 }
+
+Gallery.propTypes = {
+  queryStorage: PropTypes.string,
+  pageStorage: PropTypes.string,
+  path: PropTypes.string,
+  noResultsMessage: PropTypes.string,
+};
 
 export default Gallery;
