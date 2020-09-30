@@ -1,0 +1,16 @@
+.navbar-nav-overwrite > li > a {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+.navbar-overwrite {
+  max-height: 24px !important;
+}
+.dropdown-item-overwrite:hover,
+.dropdown-item-overwrite:focus {
+  text-decoration: underline !important;
+  background-color: #0078fa !important;
+}
+
+.nav-link:hover {
+  text-decoration: underline !important;
+}

@@ -1,0 +1,8 @@
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #0a58ca !important;
+}
+
+.nav-link:hover {
+  color: black !important;
+}

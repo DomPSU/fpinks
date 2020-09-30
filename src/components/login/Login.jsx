@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import API from '../../apis/API';
-import { signOut } from '../../util/util';
 
 class Login extends Component {
-  componentDidMount() {
-    this.renderSignIn = this.renderSignIn.bind(this);
+  constructor(props) {
+    super(props);
 
+    this.state = { redirect: false };
+
+    this.renderSignIn = this.renderSignIn.bind(this);
+  }
+
+  componentDidMount() {
     // call renderSignIn right after gapi is loaded
     document
       .getElementById('gapiScript')
@@ -17,6 +23,7 @@ class Login extends Component {
     }
   }
 
+  // TODO
   // eslint-disable-next-line class-methods-use-this
   sendIDToken(idToken) {
     API.instance
@@ -40,6 +47,7 @@ class Login extends Component {
           const idToken = googleUser.getAuthResponse().id_token;
 
           this.sendIDToken(idToken);
+          this.setState({ redirect: true });
         },
       };
       window.gapi.signin2.render('loginButton', params);
@@ -47,6 +55,11 @@ class Login extends Component {
   }
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect push to="/" />;
+    }
+
     return (
       <div>
         <div className="container">
@@ -64,11 +77,6 @@ class Login extends Component {
           <a href="/login" id="loginButton">
             Sign in with Google
           </a>
-        </div>
-        <div className="d-flex justify-content-center">
-          <button type="button" onClick={signOut}>
-            Sign out
-          </button>
         </div>
       </div>
     );

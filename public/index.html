@@ -43,12 +43,6 @@
     ></script>
     <script>
       function init() {
-        gapi.load('auth2', () => {
-          gapi.auth2.init({
-            client_id: '%REACT_APP_GOOGLE_CLIENT_ID%',
-          });
-        });
-
         window.gapiLoaded=true;
       }
     </script>

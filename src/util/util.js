@@ -1,3 +1,11 @@
+export const developmentSignIn = () => {
+  return true; // toggle true/false for development
+};
+
+export const developmentAdmin = () => {
+  return false; // toggle true/false for development
+};
+
 export const isDevelopment = () => {
   return process.env.NODE_ENV === 'development';
 };
@@ -20,49 +28,30 @@ export const capitalize = (string) => {
   return splitStr.join(' ');
 };
 
-export const execAfterGapiLoaded = (func) => {
-  // call renderSignIn right after gapi is loaded
-  document.getElementById('gapiScript').addEventListener('load', func);
-
-  // call renderSignIn if gapi is already loaded to avoid race condition
-  if (window.gapiLoaded === true) {
-    func();
-  }
-};
-
 export const signOut = () => {
-  window.gapi.load('auth2', () => {
-    window.gapi.auth2
-      .init({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      })
-      .then(() => {
-        const auth2 = window.gapi.auth2.getAuthInstance();
-        auth2.signOut().then(() => {
-          console.log('User signed out.');
-        });
-      });
-  });
-};
+  if (isDevelopment()) {
+    console.log('Signed out in development');
+    return;
+  }
 
-// TODO
-export const isLoggedIn = () => {
-  window.gapi.load('auth2', () => {
-    window.gapi.auth2
-      .init({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      })
-      .then(() => {
-        const isSignedIn = window.gapi.auth2.getAuthInstance().isSignedIn.get();
-        console.log(isSignedIn);
-        return isSignedIn;
-      });
-  });
+  if (window.gapiLoaded === true) {
+    const auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.signOut().then(() => {
+      console.log('User signed out.');
+    });
+  } else {
+    console.log('Sign out error due to gapi not loaded');
+  }
 };
 
 // TODO
 export const isAdmin = () => {
-  return null;
+  if (isDevelopment()) {
+    return developmentSignIn();
+  }
+
+  // TODO
+  return true;
 };
 
-export default { isDevelopment, capitalize, execAfterGapiLoaded, isLoggedIn };
+export default { isDevelopment, developmentSignIn, capitalize };
