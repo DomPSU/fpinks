@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Header from './shared/Header';
 import Footer from './shared/Footer';
 import Gallery from './shared/Gallery';
@@ -10,6 +15,7 @@ import ProfileReviews from './login/Reviews';
 import PrivacyPolicy from './login/PrivacyPolicy';
 import TermsOfService from './login/TermsOfService';
 import Admin from './admin/Admin';
+import GenericMessage from './shared/genericMessage';
 import {
   developmentSignIn,
   developmentAdmin,
@@ -133,187 +139,625 @@ class App extends Component {
           />
           <Switch>
             {/* users */}
-            <Route path="/users/unapproved">
-              <Index link="/users/unapproved" />
-            </Route>
-            <Route path="/users">
-              <Index link="/users" />
-            </Route>
-            {/* pens */}
-            <Route path="/pens/unapproved">
-              <Index link="/pens/unapproved" />
-            </Route>
-            <Route path="/pens/new">
-              <PensInsert />
-            </Route>
-            <Route path="/pens">
-              <Index link="/pens" />
-            </Route>
-            {/* nibs */}
-            <Route path="/nibs/unapproved">
-              <Index link="/nibs/unapproved" />
-            </Route>
-            <Route path="/nibs/new">
-              <NibsInsert />
-            </Route>
-            <Route path="/nibs">
-              <Index link="/nibs" />
-            </Route>
-            {/* penNibs */}
-            <Route path="/pen-nibs/unapproved">
-              <PenNibsIndex link="/pen-nibs/unapproved" />
-            </Route>
-            <Route path="/pen-nibs/new">
-              <PenNibsInsert />
-            </Route>
-            <Route path="/pen-nibs">
-              <PenNibsIndex link="/pen-nibs/" />
-            </Route>
-            {/* inks */}
-            <Route path="/inks/new">
-              <InksInsert />
-            </Route>
-            <Route path="/inks/unapproved">
-              <Index link="/inks/unapproved" />
-            </Route>
-            <Route path="/inks">
-              <Index link="/inks" />
-            </Route>
-            {/* papers */}
-            <Route path="/papers/new">
-              <PapersInsert />
-            </Route>
-            <Route path="/papers/unapproved">
-              <Index link="/papers/unapproved" />
-            </Route>
-            <Route path="/papers">
-              <Index link="/papers" />
-            </Route>
-            {/* writingSamples */}
-            <Route path="/writing-samples/unapproved">
-              <WritingSamplesIndex link="/writing-samples/unapproved" />
-            </Route>
-            <Route path="/writing-samples/:id">
-              <WritingSample />
-            </Route>
-            <Route path="/writing-samples">
-              <WritingSamplesIndex link="/writing-samples" />
-            </Route>
-            {/* colorReviews */}
-            <Route path="/color-reviews/new">
-              <ColorReviewsInsert />
-            </Route>
-            <Route path="/color-reviews/unapproved">
-              <Index link="/color-reviews/unapproved" />
-            </Route>
-            <Route path="/color-reviews">
-              <Index link="/color-reviews" />
-            </Route>
-            {/* shadingReviews */}
-            <Route path="/shading-reviews/new">
-              <ShadingReviewsInsert />
-            </Route>
-            <Route path="/shading-reviews/unapproved">
-              <Index link="/shading-reviews/unapproved" />
-            </Route>
-            <Route path="/shading-reviews">
-              <Index link="/shading-reviews" />
-            </Route>
-            {/* sheenReviews */}
-            <Route path="/sheen-reviews/new">
-              <SheenReviewsInsert />
-            </Route>
-            <Route path="/sheen-reviews/unapproved">
-              <Index link="/sheen-reviews/unapproved" />
-            </Route>
-            <Route path="/sheen-reviews">
-              <Index link="/sheen-reviews" />
-            </Route>
-            {/* featheringReviews */}
-            <Route path="/feathering-reviews/new">
-              <FeatheringReviewsInsert />
-            </Route>
-            <Route path="/feathering-reviews/unapproved">
-              <Index link="/feathering-reviews/unapproved" />
-            </Route>
-            <Route path="/feathering-reviews">
-              <Index link="/feathering-reviews" />
-            </Route>
-            {/* waterReviews */}
-            <Route path="/water-reviews/new">
-              <WaterReviewsInsert />
-            </Route>
-            <Route path="/water-reviews/unapproved">
-              <Index link="/water-reviews/unapproved" />
-            </Route>
-            <Route path="/water-reviews">
-              <Index link="/water-reviews" />
-            </Route>
-            {/* dryingReviews */}
-            <Route path="/drying-reviews/new">
-              <DryingReviewsInsert />
-            </Route>
-            <Route path="/drying-reviews/unapproved">
-              <Index link="/drying-reviews/unapproved" />
-            </Route>
-            <Route path="/drying-reviews">
-              <Index link="/drying-reviews" />
-            </Route>
-            {/* transparencyReviews */}
-            <Route path="/transparency-reviews/new">
-              <TransparencyReviewsInsert />
-            </Route>
-            <Route path="/transparency-reviews/unapproved">
-              <Index link="/transparency-reviews/unapproved" />
-            </Route>
-            <Route path="/transparency-reviews">
-              <Index link="/transparency-reviews" />
-            </Route>
-            {/* other */}
             <Route
-              path="/admin"
-              render={() => (isAdmin ? <Admin /> : <div>Unauthorized</div>)}
+              exact
+              path="/users/unapproved"
+              key="/users/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/users/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
             />
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/contribute">
-              <Contribute />
-            </Route>
-            <Route path="/login">
-              <Login
-                handleSignIn={this.handleSignIn}
-                handleAdminSignIn={this.handleAdminSignIn}
-              />
-            </Route>
-            <Route path="/profile-reviews">
-              <ProfileReviews />
-            </Route>
+
             <Route
+              exact
+              path="/users"
+              key="/users"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/users" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* pens */}
+            <Route
+              exact
+              path="/pens/new"
+              key="/pens/new"
+              render={() =>
+                isAdmin ? <PensInsert /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            <Route
+              exact
+              path="/pens/unapproved"
+              key="/pens/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/pens/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/pens"
+              key="/pens"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/pens" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* nibs */}
+            <Route
+              exact
+              path="/nibs/new"
+              key="/nibs/new"
+              render={() =>
+                isAdmin ? <NibsInsert /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            <Route
+              exact
+              path="/nibs/unapproved"
+              key="/nibs/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/nibs/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/nibs"
+              key="/nibs"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/nibs" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* penNibs */}
+            <Route
+              exact
+              path="/pen-nibs/new"
+              key="/pen-nibs/new"
+              render={() =>
+                isAdmin ? <PenNibsInsert /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            <Route
+              exact
+              path="/pen-nibs/unapproved"
+              key="/pen-nibs/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <PenNibsIndex link="/pen-nibs/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/pen-nibs"
+              key="/pen-nibs"
+              render={() =>
+                isAdmin ? (
+                  <PenNibsIndex link="/pen-nibs/" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* inks */}
+            <Route
+              exact
+              path="/inks/new"
+              key="/inks/new"
+              render={() =>
+                isAdmin ? <InksInsert /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            <Route
+              exact
+              path="/inks/unapproved"
+              key="/inks/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/inks/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/inks"
+              key="/inks"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/inks" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* papers */}
+            <Route
+              exact
+              path="/papers/new"
+              key="/papers/new"
+              render={() =>
+                isAdmin ? <PapersInsert /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            <Route
+              exact
+              path="/papers/unapproved"
+              key="/papers/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/papers/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/papers"
+              key="/papers"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/papers" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* writingSamples */}
+            <Route
+              exact
+              path="/writing-samples/unapproved"
+              key="/writing-samples/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <WritingSamplesIndex link="/writing-samples/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/writing-samples/:id"
+              key="/writing-samples/:id"
+              render={() => <WritingSample />}
+            />
+
+            <Route
+              exact
+              path="/writing-samples"
+              key="/writing-samples"
+              render={() =>
+                isAdmin ? (
+                  <WritingSamplesIndex link="/writing-samples" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* colorReviews */}
+            <Route
+              exact
+              path="/color-reviews/new"
+              key="/color-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <ColorReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/color-reviews/unapproved"
+              key="/color-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/color-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/color-reviews"
+              key="/color-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/color-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* shadingReviews */}
+            <Route
+              exact
+              path="/shading-reviews/new"
+              key="/shading-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <ShadingReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/shading-reviews/unapproved"
+              key="/shading-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/shading-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/shading-reviews"
+              key="/shading-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/shading-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* sheenReviews */}
+            <Route
+              exact
+              path="/sheen-reviews/new"
+              key="/sheen-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <SheenReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/sheen-reviews/unapproved"
+              key="/sheen-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/sheen-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/sheen-reviews"
+              key="/sheen-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/sheen-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* featheringReviews */}
+            <Route
+              exact
+              path="/feathering-reviews/new"
+              key="/feathering-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <FeatheringReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/feathering-reviews/unapproved"
+              key="/feathering-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/feathering-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/feathering-reviews"
+              key="/feathering-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/feathering-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* waterReviews */}
+            <Route
+              exact
+              path="/water-reviews/new"
+              key="/water-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <WaterReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/water-reviews/unapproved"
+              key="/water-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/water-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/water-reviews"
+              key="/water-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/water-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* dryingReviews */}
+            <Route
+              exact
+              path="/drying-reviews/new"
+              key="/drying-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <DryingReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/drying-reviews/unapproved"
+              key="/drying-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/drying-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/drying-reviews"
+              key="/drying-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/drying-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* transparencyReviews */}
+            <Route
+              exact
+              path="/transparency-reviews/new"
+              key="/transparency-reviews/new"
+              render={() =>
+                isAdmin ? (
+                  <TransparencyReviewsInsert />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/transparency-reviews/unapproved"
+              key="/transparency-reviews/unapproved"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/transparency-reviews/unapproved" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/transparency-reviews"
+              key="/transparency-reviews"
+              render={() =>
+                isAdmin ? (
+                  <Index link="/transparency-reviews" />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
+            {/* other */}
+            {/* Admin */}
+            <Route
+              exact
+              path="/admin"
+              key="/admin"
+              render={() =>
+                isAdmin ? <Admin /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            {/* Login */}
+            {/* TODO Maybe add a redirect here to make google login quicker? Although redirect might never render button. */}
+            <Route
+              exact
+              path="/login"
+              key="/login"
+              render={() => (
+                <Login
+                  handleSignIn={this.handleSignIn}
+                  handleAdminSignIn={this.handleAdminSignIn}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path="/profile-reviews"
+              key="/profile-reviews"
+              render={() =>
+                isSignedIn ? <ProfileReviews /> : <Redirect to="/login" />
+              }
+            />
+
+            {/* Profile Writing Samples */}
+            <Route
+              exact
               path="/profile-writing-samples"
-              key="profile-writing-samples"
-            >
-              <Gallery
-                queryStorage="profile writing samples query"
-                pageStorage="profile writing samples page"
-                path="writing-samples/search/"
-                noResultsMessage="Query matches none of your writing samples."
-              />
-            </Route>
-            <Route path="/privacy-policy">
-              <PrivacyPolicy />
-            </Route>
-            <Route path="/terms-of-service">
-              <TermsOfService />
-            </Route>
-            <Route path="/" key="galley">
-              <Gallery
-                queryStorage="gallery query"
-                pageStorage="gallery page"
-                path="writing-samples/search/"
-                noResultsMessage="Query has no matches."
-              />
-            </Route>
+              key="/profile-writing-samples"
+              render={() =>
+                isSignedIn ? (
+                  <Gallery
+                    queryStorage="profile writing samples query"
+                    pageStorage="profile writing samples page"
+                    path="writing-samples/search/"
+                    noResultsMessage="Query matches none of your writing samples."
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/unauthorized"
+              key="/unauthorized"
+              render={() => <GenericMessage message="Unauthorized" />}
+            />
+
+            <Route
+              exact
+              path="/privacy-policy"
+              key="/privacy-policy"
+              render={() => <PrivacyPolicy />}
+            />
+
+            <Route
+              exact
+              path="/terms-of-service"
+              key="/terms-of-service"
+              render={() => <TermsOfService />}
+            />
+
+            <Route exact path="/about" render={() => <About />} />
+
+            <Route
+              exact
+              path="/contribute"
+              key="/contribute"
+              render={() => <Contribute />}
+            />
+
+            {/* Gallery */}
+            <Route
+              exact
+              path="/"
+              key="/"
+              render={() => (
+                <Gallery
+                  queryStorage="gallery query"
+                  pageStorage="gallery page"
+                  path="writing-samples/search/"
+                  noResultsMessage="Query has no matches."
+                />
+              )}
+            />
+
+            <Route path="*" render={() => <GenericMessage message="404" />} />
           </Switch>
           <Footer />
         </div>
@@ -323,6 +767,3 @@ class App extends Component {
 }
 
 export default App;
-
-// TODO make users admin only
-// TODO make writing-samples available to index

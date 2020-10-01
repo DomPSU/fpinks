@@ -53,5 +53,3 @@ export const isAdmin = () => {
   // TODO
   return true;
 };
-
-export default { isDevelopment, developmentSignIn, capitalize };
