@@ -6,9 +6,9 @@ import { isAdmin, signOut } from '../../util/util';
 export default function Header(props) {
   const history = useHistory();
   // TODO fix by redirecting to login on signOut
-  const handleSignOut = useCallback(() => history.push('/'), [history]);
+  const redirect = useCallback(() => history.push('/'), [history]);
 
-  const { isSignedIn } = props;
+  const { isSignedIn, handleSignOut } = props;
   return (
     <nav className="navbar navbar-expand navbar-light bg-primary fixed-top">
       <div className="collapse navbar-collapse">
@@ -77,6 +77,7 @@ export default function Header(props) {
                   onClick={() => {
                     signOut();
                     handleSignOut();
+                    redirect();
                   }}
                 >
                   Sign Out

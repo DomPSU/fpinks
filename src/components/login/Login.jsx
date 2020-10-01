@@ -39,6 +39,8 @@ class Login extends Component {
   }
 
   renderSignIn() {
+    const { handleSignIn } = this.props;
+
     window.gapi.load('signin2', () => {
       const params = {
         onsuccess: (googleUser) => {
@@ -47,6 +49,8 @@ class Login extends Component {
           const idToken = googleUser.getAuthResponse().id_token;
 
           this.sendIDToken(idToken);
+
+          handleSignIn();
           this.setState({ redirect: true });
         },
       };

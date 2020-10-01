@@ -67,6 +67,8 @@ class App extends Component {
     if (isDevelopment()) {
       this.state.isSignedIn = developmentSignIn();
     } else {
+      this.handleSignIn = this.handleSignIn.bind(this);
+      this.handleSignOut = this.handleSignOut.bind(this);
       this.initializeGoogleSignIn = this.initializeGoogleSignIn.bind(this);
 
       // call initializeGoogleSignIn right after gapi is loaded
@@ -80,6 +82,14 @@ class App extends Component {
       }
     }
   }
+
+  handleSignIn = () => {
+    this.setState({ isSignedIn: true });
+  };
+
+  handleSignOut = () => {
+    this.setState({ isSignedIn: false });
+  };
 
   initializeGoogleSignIn = () => {
     window.gapi.load('auth2', () => {
@@ -256,7 +266,7 @@ class App extends Component {
               <Contribute />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login handleSignIn={this.handleSignIn} />
             </Route>
             <Route path="/profile-reviews">
               <ProfileReviews />
