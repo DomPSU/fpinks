@@ -3,7 +3,7 @@ export const developmentSignIn = () => {
 };
 
 export const developmentAdmin = () => {
-  return false; // toggle true/false for development
+  return true; // toggle true/false for development
 };
 
 export const isDevelopment = () => {

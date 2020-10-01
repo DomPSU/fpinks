@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './navigation.css';
-import { isAdmin, signOut } from '../../util/util';
+import { signOut } from '../../util/util';
 
 export default function Header(props) {
   const history = useHistory();
   // TODO fix by redirecting to login on signOut
   const redirect = useCallback(() => history.push('/'), [history]);
 
-  const { isSignedIn, handleSignOut } = props;
+  const { isSignedIn, isAdmin, handleSignOut } = props;
   return (
     <nav className="navbar navbar-expand navbar-light bg-primary fixed-top">
       <div className="collapse navbar-collapse">
@@ -23,7 +23,7 @@ export default function Header(props) {
               Contribute
             </Link>
           </li>
-          {isAdmin() && (
+          {isAdmin && (
             <li className="nav-item">
               <Link className="nav-link text-white" to="/admin">
                 Admin

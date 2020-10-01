@@ -10,5 +10,6 @@ usersRouter.get('/', usersService.index);
 
 // POST
 usersRouter.post('/', usersService.insert);
+usersRouter.post('/admin?', usersService.isAdmin);
 
 module.exports = usersRouter;

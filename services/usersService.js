@@ -65,9 +65,41 @@ const insert = async (req, res, next) => {
   verify().catch(console.error);
 };
 
+const isAdmin = async (req, res, next) => {
+  const user = {
+    ...req.body,
+  };
+
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  const validatedUser = {};
+
+  // get validated user from idToken
+  async function verify() {
+    const ticket = await client.verifyIdToken({
+      idToken: user.idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    validatedUser.sub = payload.sub;
+    validatedUser.iss = payload.iss;
+
+    // check if admin
+    try {
+      const isAdminRes = await usersModel.isAdmin(validatedUser);
+      res.status(200).send({ isAdmin: isAdminRes });
+    } catch (e) {
+      next(e);
+    }
+  }
+  verify().catch(console.error);
+};
+
 module.exports = {
   index,
   unapprovedIndex,
   show,
   insert,
+  isAdmin,
 };

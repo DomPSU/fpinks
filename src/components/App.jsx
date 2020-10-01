@@ -10,7 +10,11 @@ import ProfileReviews from './login/Reviews';
 import PrivacyPolicy from './login/PrivacyPolicy';
 import TermsOfService from './login/TermsOfService';
 import Admin from './admin/Admin';
-import { developmentSignIn, isDevelopment } from '../util/util';
+import {
+  developmentSignIn,
+  developmentAdmin,
+  isDevelopment,
+} from '../util/util';
 
 // shared
 import Index from './shared/Index';
@@ -62,12 +66,14 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isSignedIn: null };
+    this.state = { isSignedIn: false, isAdmin: false };
 
     if (isDevelopment()) {
       this.state.isSignedIn = developmentSignIn();
+      this.state.isAdmin = developmentAdmin();
     } else {
       this.handleSignIn = this.handleSignIn.bind(this);
+      this.handleAdminSignIn = this.handleAdminSignIn.bind(this);
       this.handleSignOut = this.handleSignOut.bind(this);
       this.initializeGoogleSignIn = this.initializeGoogleSignIn.bind(this);
 
@@ -87,8 +93,12 @@ class App extends Component {
     this.setState({ isSignedIn: true });
   };
 
+  handleAdminSignIn = (isAdminRes) => {
+    this.setState({ isAdmin: isAdminRes });
+  };
+
   handleSignOut = () => {
-    this.setState({ isSignedIn: false });
+    this.setState({ isSignedIn: false, isAdmin: false });
   };
 
   initializeGoogleSignIn = () => {
@@ -111,12 +121,16 @@ class App extends Component {
   };
 
   render = () => {
-    const { isSignedIn } = this.state;
+    const { isSignedIn, isAdmin } = this.state;
 
     return (
       <Router>
         <div>
-          <Header isSignedIn={isSignedIn} handleSignOut={this.handleSignOut} />
+          <Header
+            isSignedIn={isSignedIn}
+            isAdmin={isAdmin}
+            handleSignOut={this.handleSignOut}
+          />
           <Switch>
             {/* users */}
             <Route path="/users/unapproved">
@@ -256,9 +270,10 @@ class App extends Component {
               <Index link="/transparency-reviews" />
             </Route>
             {/* other */}
-            <Route path="/admin">
-              <Admin />
-            </Route>
+            <Route
+              path="/admin"
+              render={() => (isAdmin ? <Admin /> : <div>Unauthorized</div>)}
+            />
             <Route path="/about">
               <About />
             </Route>
@@ -266,7 +281,10 @@ class App extends Component {
               <Contribute />
             </Route>
             <Route path="/login">
-              <Login handleSignIn={this.handleSignIn} />
+              <Login
+                handleSignIn={this.handleSignIn}
+                handleAdminSignIn={this.handleAdminSignIn}
+              />
             </Route>
             <Route path="/profile-reviews">
               <ProfileReviews />

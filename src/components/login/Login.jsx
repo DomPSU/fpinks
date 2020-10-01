@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import API from '../../apis/API';
 
@@ -38,6 +39,25 @@ class Login extends Component {
       });
   }
 
+  // TODO
+  // eslint-disable-next-line class-methods-use-this
+  isAdmin(idToken) {
+    API.instance
+      .post('/users/admin?', {
+        idToken,
+      })
+      .then((res) => {
+        const { handleAdminSignIn } = this.props;
+
+        handleAdminSignIn(res.data.isAdmin);
+
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   renderSignIn() {
     const { handleSignIn } = this.props;
 
@@ -49,6 +69,7 @@ class Login extends Component {
           const idToken = googleUser.getAuthResponse().id_token;
 
           this.sendIDToken(idToken);
+          this.isAdmin(idToken);
 
           handleSignIn();
           this.setState({ redirect: true });
@@ -86,5 +107,10 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  handleSignIn: PropTypes.func.isRequired,
+  handleAdminSignIn: PropTypes.func.isRequired,
+};
 
 export default Login;

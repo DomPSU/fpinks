@@ -207,10 +207,10 @@ class Gallery extends Component {
 }
 
 Gallery.propTypes = {
-  queryStorage: PropTypes.string,
-  pageStorage: PropTypes.string,
-  path: PropTypes.string,
-  noResultsMessage: PropTypes.string,
+  queryStorage: PropTypes.string.isRequired,
+  pageStorage: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  noResultsMessage: PropTypes.string.isRequired,
 };
 
 export default Gallery;
