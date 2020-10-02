@@ -3,11 +3,8 @@ const awsUrls = require('../utils/awsUrls');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE FeatheringReviews.approved <> 0',
+    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE FeatheringReviews.approved <> 0',
   );
-
-  await awsUrls.addHighResUrls(res);
-
   return res;
 };
 
@@ -16,13 +13,12 @@ const unapprovedIndex = async () => {
     'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE FeatheringReviews.approved = 0',
   );
   await awsUrls.addHighResUrls(res);
-
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND FeatheringReviews.approved <> 0',
+    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE FeatheringReviews.writing_sample_id=? AND FeatheringReviews.approved <> 0',
     [writingSampleID],
   );
   return res;

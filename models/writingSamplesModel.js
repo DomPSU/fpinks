@@ -1,26 +1,37 @@
 const db = require('./db');
 const awsUrls = require('../utils/awsUrls');
 
+const deleteAPIAWSkeys = (res) => {
+  res.forEach((writingSample) => {
+    // eslint-disable-next-line no-param-reassign
+    delete writingSample.high_res_aws_key;
+    // eslint-disable-next-line no-param-reassign
+    delete writingSample.low_res_aws_key;
+  });
+};
+
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT Users.username, WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.approved <> 0 ORDER BY WritingSamples.writing_sample_id DESC',
+    'SELECT Users.username, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.approved <> 0 ORDER BY WritingSamples.writing_sample_id DESC',
   );
-  await awsUrls.addUrlsToRes(res);
+  await awsUrls.addAPIUrlsToRes(res);
+  deleteAPIAWSkeys(res);
   return res;
 };
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT Users.username, WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.writing_sample_id = ? ',
+    'SELECT Users.username, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.writing_sample_id = ? ',
     [id],
   );
-  await awsUrls.addUrlsToRes(res);
+  await awsUrls.addAPIUrlsToRes(res);
+  deleteAPIAWSkeys(res);
   return res;
 };
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT Users.username, WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_idLEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.approved = 0 ORDER BY WritingSamples.writing_sample_id ASC',
+    'SELECT Users.username, WritingSamples.writing_sample_id, WritingSamples.pen_id, Pens.brand AS pen_brand, Pens.model AS pen_model, WritingSamples.nib_id, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, WritingSamples.ink_id, Inks.brand AS ink_brand, Inks.name AS ink_name, WritingSamples.paper_id, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_idLEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.approved = 0 ORDER BY WritingSamples.writing_sample_id ASC',
   );
   await awsUrls.addUrlsToRes(res);
   return res;

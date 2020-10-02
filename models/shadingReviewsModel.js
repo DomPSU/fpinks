@@ -3,11 +3,8 @@ const awsUrls = require('../utils/awsUrls');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT ShadingReviews.writing_sample_id, WritingSamples.high_res_aws_key, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.approved, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ShadingReviews.writing_sample_id WHERE ShadingReviews.approved <> 0',
+    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE ShadingReviews.approved <> 0',
   );
-
-  await awsUrls.addHighResUrls(res);
-
   return res;
 };
 
@@ -15,15 +12,13 @@ const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT ShadingReviews.writing_sample_id, WritingSamples.high_res_aws_key, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.approved, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ShadingReviews.writing_sample_id WHERE ShadingReviews.approved = 0',
   );
-
   await awsUrls.addHighResUrls(res);
-
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT ShadingReviews.writing_sample_id, WritingSamples.high_res_aws_key, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.approved, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ShadingReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND ShadingReviews.approved <> 0',
+    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE ShadingReviews.writing_sample_id=? AND ShadingReviews.approved <> 0',
     [writingSampleID],
   );
   return res;

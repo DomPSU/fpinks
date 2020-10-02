@@ -2,14 +2,14 @@ const db = require('./db');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Papers WHERE approved <> 0',
+    'SELECT brand, name, style, lbs, grams, created_at, updated_at FROM Papers WHERE approved <> 0',
   );
   return res;
 };
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Papers WHERE paper_id = ? ',
+    'SELECT brand, name, style, lbs, grams, created_at, updated_at FROM Papers WHERE paper_id = ? ',
     [id],
   );
   return res;

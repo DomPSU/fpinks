@@ -1,25 +1,10 @@
 const db = require('./db');
-const AWS = require('../config/aws');
-
-const addUrlsToRes = async (res) => {
-  res.forEach(
-    // TODO fix es lint error and use await instead of then?
-    (dryingReviews) =>
-      AWS.getURL(dryingReviews.high_res_aws_key).then(
-        // eslint-disable-next-line no-return-assign
-        (highResUrl) => (dryingReviews.high_res_url = highResUrl),
-      ),
-  );
-};
+const awsUrls = require('../utils/awsUrls');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT DryingReviews.writing_sample_id, WritingSamples.high_res_aws_key, DryingReviews.user_id, Users.username, DryingReviews.drying_time, DryingReviews.approved, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=DryingReviews.writing_sample_id WHERE DryingReviews.approved <> 0',
+    'SELECT DryingReviews.writing_sample_id, Users.username, DryingReviews.drying_time, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id WHERE DryingReviews.approved <> 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((dryingReview) => {
-    delete dryingReview.high_res_aws_key;
-  });
   return res;
 };
 
@@ -27,16 +12,13 @@ const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT DryingReviews.writing_sample_id, WritingSamples.high_res_aws_key, DryingReviews.user_id, Users.username, DryingReviews.drying_time, DryingReviews.approved, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=DryingReviews.writing_sample_id WHERE DryingReviews.approved = 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((dryingReview) => {
-    delete dryingReview.high_res_aws_key;
-  });
+  await awsUrls.addHighResUrls(res);
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT DryingReviews.writing_sample_id, WritingSamples.high_res_aws_key, DryingReviews.user_id, Users.username, DryingReviews.drying_time, DryingReviews.approved, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=DryingReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND DryingReviews.approved <> 0',
+    'SELECT DryingReviews.writing_sample_id, Users.username, DryingReviews.drying_time, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id WHERE DryingReviews.writing_sample_id=? AND DryingReviews.approved <> 0',
     [writingSampleID],
   );
   return res;

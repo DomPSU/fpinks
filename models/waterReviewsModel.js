@@ -1,25 +1,10 @@
 const db = require('./db');
-const AWS = require('../config/aws');
-
-const addUrlsToRes = async (res) => {
-  res.forEach(
-    // TODO fix es lint error and use await instead of then?
-    (waterReviews) =>
-      AWS.getURL(waterReviews.high_res_aws_key).then(
-        // eslint-disable-next-line no-return-assign
-        (highResUrl) => (waterReviews.high_res_url = highResUrl),
-      ),
-  );
-};
+const awsUrls = require('../utils/awsUrls');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT WaterReviews.writing_sample_id, WritingSamples.high_res_aws_key, WaterReviews.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.approved, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=WaterReviews.writing_sample_id WHERE WaterReviews.approved <> 0',
+    'SELECT WaterReviews.writing_sample_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE WaterReviews.approved <> 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((waterReview) => {
-    delete waterReview.high_res_aws_key;
-  });
   return res;
 };
 
@@ -27,16 +12,13 @@ const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
     'SELECT WaterReviews.writing_sample_id, WritingSamples.high_res_aws_key, WaterReviews.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.approved, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=WaterReviews.writing_sample_id WHERE WaterReviews.approved = 0',
   );
-  await addUrlsToRes(res);
-  res.forEach((waterReview) => {
-    delete waterReview.high_res_aws_key;
-  });
+  await awsUrls.addHighResUrls(res);
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT WaterReviews.writing_sample_id, WritingSamples.high_res_aws_key, WaterReviews.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.approved, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=WaterReviews.writing_sample_id WHERE WritingSamples.writing_sample_id=? AND WaterReviews.approved <> 0',
+    'SELECT WaterReviews.writing_sample_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE WaterReviews.writing_sample_id=? AND WaterReviews.approved <> 0',
     [writingSampleID],
   );
   return res;

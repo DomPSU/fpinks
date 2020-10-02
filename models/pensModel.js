@@ -2,15 +2,16 @@ const db = require('./db');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Pens WHERE approved <> 0',
+    'SELECT brand, model, created_at, updated_at FROM Pens WHERE approved <> 0',
   );
   return res;
 };
 
 const show = async (id) => {
-  const res = await db.pool.asyncQuery('SELECT * FROM Pens WHERE pen_id = ? ', [
-    id,
-  ]);
+  const res = await db.pool.asyncQuery(
+    'SELECT brand, model, created_at, updated_at FROM Pens WHERE pen_id = ? ',
+    [id],
+  );
   return res;
 };
 

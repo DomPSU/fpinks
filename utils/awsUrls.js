@@ -1,8 +1,5 @@
 const AWS = require('../config/aws');
 
-// TODO optimize adding urls for admins so less AWS charge???
-// ctrl all files that import awsUrls andd see where urls are not needed
-
 const addHighResUrls = async (res) => {
   res.forEach(
     // TODO fix es lint error and use await instead of then?
@@ -36,6 +33,13 @@ const addOriginalUrls = async (res) => {
   );
 };
 
+// TODO optimize? but would lead to possibly more bugs.
+const addAPIUrlsToRes = async (res) => {
+  addHighResUrls(res);
+  addLowResUrls(res);
+};
+
+// TODO optimize? but would lead to possibly more bugs.
 const addUrlsToRes = async (res) => {
   addHighResUrls(res);
   addLowResUrls(res);
@@ -46,5 +50,6 @@ module.exports = {
   addHighResUrls,
   addLowResUrls,
   addOriginalUrls,
+  addAPIUrlsToRes,
   addUrlsToRes,
 };

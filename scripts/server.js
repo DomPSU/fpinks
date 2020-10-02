@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-
 const http = require('http');
 const app = require('../app');
 
@@ -23,9 +19,7 @@ function normalizePort(val) {
   return false;
 }
 
-/**
- * Event listener for HTTP server.js "error" event.
- */
+// Event listener for HTTP server.js "error" event.
 
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -49,37 +43,28 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server.js "listening" event.
- */
+// Event listener for HTTP server.js "listening" event.
 
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   console.log(`Listening on ${bind}`);
+  console.log(`Environment is ${process.env.NODE_ENV}`);
 }
 
-/**
- * Get port from environment and store in Express.
- */
+// Get port from environment and store in Express.
 
 const port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
-/**
- * Create HTTP server.js.
- */
+// Create HTTP server.js.
 
 const server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+// Listen on provided port, on all network interfaces.
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Normalize a port into a number, string, or false.
- */
+// Normalize a port into a number, string, or false.

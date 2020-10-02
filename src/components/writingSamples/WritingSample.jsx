@@ -158,7 +158,7 @@ class WritingSample extends Component {
     // process colorReviews
     const colorCounts = [];
     colorReviews.forEach((colorReview) => {
-      const color = colorReview.name;
+      const { color } = colorReview;
       colorCounts[color] = colorCounts[color] ? colorCounts[color] + 1 : 1;
     });
 
@@ -191,10 +191,10 @@ class WritingSample extends Component {
     // process sheenReviews
     const sheenCounts = [];
     sheenReviews.forEach((sheenReview) => {
-      const { amount, name } = sheenReview;
+      const { amount, color } = sheenReview;
 
-      sheenCounts[`${amount} ${name}`] = sheenCounts[`${amount} ${name}`]
-        ? sheenCounts[`${amount} ${name}`] + 1
+      sheenCounts[`${amount} ${color}`] = sheenCounts[`${amount} ${color}`]
+        ? sheenCounts[`${amount} ${color}`] + 1
         : 1;
     });
 

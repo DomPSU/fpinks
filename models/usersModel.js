@@ -2,33 +2,23 @@ const db = require('./db');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Users WHERE approved <> 0',
+    'SELECT username, created_at, updated_at FROM Users WHERE approved <> 0',
   );
-  res.forEach((user) => {
-    delete user.password;
-  });
   return res;
 };
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Users WHERE user_id = ? ',
+    'SELECT username, created_at, updated_at FROM Users WHERE user_id = ? ',
     [id],
   );
-
-  res.forEach((user) => {
-    delete user.password;
-  });
   return res;
 };
 
 const unapprovedIndex = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Users WHERE approved = 0',
+    'SELECT username, created_at, updated_at FROM Users WHERE approved = 0',
   );
-  res.forEach((user) => {
-    delete user.password;
-  });
   return res;
 };
 
