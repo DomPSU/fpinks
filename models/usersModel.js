@@ -68,18 +68,26 @@ const isAdmin = async (data) => {
 
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
 
+  // TODO REMOVE
+  console.log('DATA IN USERS MODEL');
+  console.log(data);
+
   // search database for admin
   const selectRes = await db.pool.asyncQuery(
     'SELECT * FROM Users WHERE sub = ? AND iss = ? AND level = ?',
     [data.sub, data.iss, 'admin'],
   );
 
+  // TODO REMOVE
+  console.log('SELECT LENGTH');
+  console.log(selectRes.length);
+
   // insert user if he or she doesnt exist
   if (selectRes.length === 0) {
     return false;
   }
 
-  // return user if it already exists
+  // return user if he already exists
   if (selectRes.length === 1) {
     return true;
   }

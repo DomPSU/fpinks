@@ -1,5 +1,5 @@
-const { OAuth2Client } = require('google-auth-library');
 const usersModel = require('../models/usersModel');
+const google = require('../config/google');
 
 const index = async (req, res, next) => {
   let data;
@@ -38,25 +38,14 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
-  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-  const validatedUser = {};
-
   // get validated user from idToken
   async function verify() {
-    const ticket = await client.verifyIdToken({
-      idToken: user.idToken,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
-
-    const payload = ticket.getPayload();
-
-    validatedUser.sub = payload.sub;
-    validatedUser.iss = payload.iss;
-    validatedUser.email = payload.email;
+    const ticket = await google.verify(user.idToken);
+    const insertCredentials = await google.getInsertCredentials(ticket);
 
     // insert new validated user
     try {
-      await usersModel.insert(validatedUser);
+      await usersModel.insert(insertCredentials);
       res.status(200).end();
     } catch (e) {
       next(e);
@@ -66,34 +55,21 @@ const insert = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
-  const user = {
-    ...req.body,
-  };
-
-  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-  const validatedUser = {};
-
-  // get validated user from idToken
-  async function verify() {
-    const ticket = await client.verifyIdToken({
-      idToken: user.idToken,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
-
-    const payload = ticket.getPayload();
-
-    validatedUser.sub = payload.sub;
-    validatedUser.iss = payload.iss;
-
-    // check if admin
-    try {
-      const isAdminRes = await usersModel.isAdmin(validatedUser);
-      res.status(200).send({ isAdmin: isAdminRes });
-    } catch (e) {
-      next(e);
-    }
+  // check if admin was verified
+  if (typeof res.locals.admin === 'undefined') {
+    console.log(
+      '403 forbidden. Need to verify admin before sending admin response.',
+    );
+    res.status(403).end();
+    return;
   }
-  verify().catch(console.error);
+
+  try {
+    res.status(200).send({ isAdmin: res.locals.admin });
+    return;
+  } catch (e) {
+    next(e);
+  }
 };
 
 module.exports = {

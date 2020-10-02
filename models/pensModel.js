@@ -15,8 +15,11 @@ const show = async (id) => {
   return res;
 };
 
-const unapprovedIndex = async () => {
-  const res = await db.pool.asyncQuery('SELECT * FROM Pens WHERE approved = 0');
+const isApprovedIndex = async (approved) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT * FROM Pens WHERE approved = ?',
+    [approved],
+  );
   return res;
 };
 
@@ -60,7 +63,7 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
   insert,
   show,
+  isApprovedIndex,
 };

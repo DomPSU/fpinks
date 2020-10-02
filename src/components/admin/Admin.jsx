@@ -22,10 +22,13 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/pens">
-          Approved Pens
+          API Approved Pens
         </Link>
-        <Link className="p-3" to="/pens/unapproved">
-          Unapproved Pens
+        <Link className="p-3" to="/pens/admin/1">
+          Admin Approved Pens
+        </Link>
+        <Link className="p-3" to="/pens/admin/0">
+          Admin Unapproved Pens
         </Link>
         <Link className="p-3" to="/pens/new">
           Pens Insert

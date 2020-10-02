@@ -7,13 +7,35 @@ async function verify(token) {
     idToken: token,
     audience: process.env.GOOGLE_CLIENT_ID,
   });
-  const payload = ticket.getPayload();
-  const userid = payload.sub;
-  console.log(userid);
-  return userid;
+  return ticket;
 }
 verify().catch(console.error);
 
+async function getAdminCredentials(ticket) {
+  const payload = ticket.getPayload();
+
+  const validatedUser = {};
+
+  validatedUser.sub = payload.sub;
+  validatedUser.iss = payload.iss;
+
+  return validatedUser;
+}
+
+async function getInsertCredentials(ticket) {
+  const payload = ticket.getPayload();
+
+  const validatedUser = {};
+
+  validatedUser.sub = payload.sub;
+  validatedUser.iss = payload.iss;
+  validatedUser.email = payload.email;
+
+  return validatedUser;
+}
+
 module.exports = {
   verify,
+  getAdminCredentials,
+  getInsertCredentials,
 };

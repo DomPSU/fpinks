@@ -1,5 +1,6 @@
 const express = require('express');
 const usersService = require('../services/usersService');
+const authService = require('../services/authService');
 
 const usersRouter = express.Router();
 
@@ -10,6 +11,12 @@ usersRouter.get('/', usersService.index);
 
 // POST
 usersRouter.post('/', usersService.insert);
-usersRouter.post('/admin?', usersService.isAdmin);
+
+usersRouter.post(
+  '/admin?',
+  authService.isUser,
+  authService.isAdmin,
+  usersService.isAdmin,
+);
 
 module.exports = usersRouter;

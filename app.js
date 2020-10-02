@@ -3,9 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const path = require('path');
 const createError = require('http-errors');
-const cors = require('cors');
 const util = require('./utils/util');
 const apiRouter = require('./routes');
 
@@ -25,12 +25,13 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// TODO FIX 404 error, may need to fix on frontend, unsure
+// TODO FIX 404 error, may need to fix on front end
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
 });
 
+// TODO FIX 500 error, may need to fix on front end
 // error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development

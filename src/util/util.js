@@ -35,8 +35,8 @@ export const signOut = () => {
   }
 
   if (window.gapiLoaded === true) {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(() => {
+    const googleAuth = window.gapi.auth2.getAuthInstance();
+    googleAuth.signOut().then(() => {
       console.log('User signed out.');
     });
   } else {
@@ -44,12 +44,17 @@ export const signOut = () => {
   }
 };
 
-// TODO
-export const isAdmin = () => {
+export const getIDToken = () => {
   if (isDevelopment()) {
-    return developmentSignIn();
+    console.log('Get ID token in development');
+    return;
   }
 
-  // TODO
-  return true;
+  if (window.gapiLoaded === true) {
+    const googleAuth = window.gapi.auth2.getAuthInstance();
+    const googleUser = googleAuth.currentUser.get();
+    const idToken = googleUser.getAuthResponse().id_token;
+    return idToken;
+  }
+  console.log('Get ID token error due to gapi not loaded');
 };

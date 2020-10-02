@@ -5,25 +5,30 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import Header from './shared/Header';
-import Footer from './shared/Footer';
-import Gallery from './shared/Gallery';
-import Contribute from './contribute/Contribute';
-import About from './about/About';
-import Login from './login/Login';
-import ProfileReviews from './login/Reviews';
-import PrivacyPolicy from './login/PrivacyPolicy';
-import TermsOfService from './login/TermsOfService';
-import Admin from './admin/Admin';
-import GenericMessage from './shared/genericMessage';
 import {
   developmentSignIn,
   developmentAdmin,
   isDevelopment,
 } from '../util/util';
 
+// general
+import Contribute from './contribute/Contribute';
+import About from './about/About';
+
+// login
+import Login from './login/Login';
+import ProfileReviews from './login/Reviews';
+import PrivacyPolicy from './login/PrivacyPolicy';
+import TermsOfService from './login/TermsOfService';
+import Admin from './admin/Admin';
+
 // shared
 import Index from './shared/Index';
+import AdminIndex from './shared/AdminIndex';
+import Gallery from './shared/Gallery';
+import Header from './shared/Header';
+import Footer from './shared/Footer';
+import GenericMessage from './shared/genericMessage';
 
 // users
 
@@ -177,11 +182,11 @@ class App extends Component {
 
             <Route
               exact
-              path="/pens/unapproved"
-              key="/pens/unapproved"
+              path="/pens/admin/:approved"
+              key="/pens/admin/:approved"
               render={() =>
                 isAdmin ? (
-                  <Index link="/pens/unapproved" />
+                  <AdminIndex link="/pens/admin" />
                 ) : (
                   <Redirect to="/unauthorized" />
                 )
