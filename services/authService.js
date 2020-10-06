@@ -1,7 +1,13 @@
 const usersModel = require('../models/usersModel');
 const google = require('../config/google');
+const util = require('../utils/util');
 
 const isUser = async (req, res, next) => {
+  if (util.isDevelopment() === true) {
+    next();
+    return;
+  }
+
   const { idToken } = req.body;
 
   // get validated user from id token
@@ -17,6 +23,11 @@ const isUser = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
+  if (util.isDevelopment() === true) {
+    next();
+    return;
+  }
+
   // check if user was verified
   if (typeof res.locals.ticket === 'undefined') {
     console.log(

@@ -22,8 +22,8 @@ const show = async (req, res, next) => {
   }
 };
 
+// get approved/unapproved pens
 const isApprovedIndex = async (req, res, next) => {
-  // get approved/unapproved pens
   const { approved } = req.params;
   try {
     const data = await pensModel.isApprovedIndex(approved);

@@ -17,7 +17,7 @@ const show = async (id) => {
 
 const isApprovedIndex = async (approved) => {
   const res = await db.pool.asyncQuery(
-    'SELECT * FROM Pens WHERE approved = ?',
+    'SELECT pen_id, brand, model, approved, created_at, updated_at FROM Pens WHERE approved = ?',
     [approved],
   );
   return res;

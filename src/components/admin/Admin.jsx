@@ -40,10 +40,13 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/nibs">
-          Approved Nibs
+          API Approved Nibs
         </Link>
-        <Link className="p-3" to="/nibs/unapproved">
-          Unapproved Nibs
+        <Link className="p-3" to="/nibs/admin/1">
+          Admin Approved Nibs
+        </Link>
+        <Link className="p-3" to="/nibs/admin/0">
+          Admin Unapproved Nibs
         </Link>
         <Link className="p-3" to="/nibs/new">
           Nibs Insert

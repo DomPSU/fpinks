@@ -15,8 +15,11 @@ const show = async (id) => {
   return res;
 };
 
-const unapprovedIndex = async () => {
-  const res = await db.pool.asyncQuery('SELECT * FROM Nibs WHERE approved = 0');
+const isApprovedIndex = async (approved) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT nib_id, size, grind, tune, approved, created_at, updated_at FROM Nibs WHERE approved = ?',
+    [approved],
+  );
   return res;
 };
 
@@ -62,7 +65,7 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
+  isApprovedIndex,
   insert,
   show,
 };
