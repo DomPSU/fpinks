@@ -17,12 +17,13 @@ class AdminIndex extends Component {
 
   componentDidMount() {
     this.getIndex();
+    // eslint-disable-next-line react/destructuring-assignment
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getIndex() {
-    const { link } = this.props;
-    const isApproved = window.location.pathname.replace(`${link}/`, '');
-    const url = `${link.substring(1)}/${isApproved}`;
+    const originLength = window.location.origin.length;
+    const url = window.location.href.slice(originLength);
 
     const idToken = getIDToken();
 
@@ -52,7 +53,3 @@ class AdminIndex extends Component {
 }
 
 export default AdminIndex;
-
-AdminIndex.propTypes = {
-  link: PropTypes.string,
-};

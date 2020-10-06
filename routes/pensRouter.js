@@ -10,10 +10,10 @@ pensRouter.get('/', pensService.index);
 
 // POST
 pensRouter.post(
-  '/admin/:approved',
+  '/admin/',
   authService.isUser,
   authService.isAdmin,
-  pensService.isApprovedIndex,
+  pensService.adminIndex,
 );
 
 pensRouter.post('/', pensService.insert);

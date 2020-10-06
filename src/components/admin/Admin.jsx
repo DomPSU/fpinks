@@ -27,10 +27,10 @@ export default function Admin() {
         <Link className="p-3" to="/pens">
           API Approved Pens
         </Link>
-        <Link className="p-3" to="/pens/admin/1">
+        <Link className="p-3" to="/pens/admin/?approved=1">
           Admin Approved Pens
         </Link>
-        <Link className="p-3" to="/pens/admin/0">
+        <Link className="p-3" to="/pens/admin/?approved=0">
           Admin Unapproved Pens
         </Link>
         <Link className="p-3" to="/pens/new">

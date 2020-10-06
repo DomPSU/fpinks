@@ -1,9 +1,10 @@
 const pensModel = require('../models/pensModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = Object.keys(req.query);
+  const queryValues = Object.values(req.query);
   try {
-    data = await pensModel.index();
+    const data = await pensModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -13,7 +14,6 @@ const index = async (req, res, next) => {
 const show = async (req, res, next) => {
   let data;
   const { id } = req.params;
-
   try {
     data = await pensModel.show(id);
     res.status(200).send(data);
@@ -22,10 +22,11 @@ const show = async (req, res, next) => {
   }
 };
 
-const isApprovedIndex = async (req, res, next) => {
-  const { approved } = req.params;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  const queryValues = Object.values(req.query);
   try {
-    const data = await pensModel.isApprovedIndex(approved);
+    const data = await pensModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -49,5 +50,5 @@ module.exports = {
   index,
   insert,
   show,
-  isApprovedIndex,
+  adminIndex,
 };
