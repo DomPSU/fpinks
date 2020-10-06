@@ -22,10 +22,10 @@ const show = async (req, res, next) => {
   }
 };
 
-const unapprovedIndex = async (req, res, next) => {
-  let data;
+const isApprovedIndex = async (req, res, next) => {
+  const { approved } = req.params;
   try {
-    data = await colorReviewsModel.unapprovedIndex();
+    const data = await colorReviewsModel.isApprovedIndex(approved);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -91,7 +91,7 @@ const remove = async (req, res, next) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
+  isApprovedIndex,
   insert,
   show,
   remove,

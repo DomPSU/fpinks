@@ -400,11 +400,11 @@ class App extends Component {
 
             <Route
               exact
-              path="/color-reviews/unapproved"
-              key="/color-reviews/unapproved"
+              path="/color-reviews/admin/:approved"
+              key="/color-reviews/admin/:approved"
               render={() =>
                 isAdmin ? (
-                  <Index link="/color-reviews/unapproved" />
+                  <AdminIndex link="/color-reviews/admin" />
                 ) : (
                   <Redirect to="/unauthorized" />
                 )

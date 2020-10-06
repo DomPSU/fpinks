@@ -27,7 +27,6 @@ const show = async (req, res, next) => {
   }
 };
 
-// get approved/unapproved pens
 const isApprovedIndex = async (req, res, next) => {
   const { approved } = req.params;
   try {

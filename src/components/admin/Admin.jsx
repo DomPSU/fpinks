@@ -132,8 +132,11 @@ export default function Admin() {
         <Link className="p-3" to="/color-reviews">
           Approved Color Reviews
         </Link>
-        <Link className="p-3" to="/color-reviews/unapproved">
-          Unapproved Color Reviews
+        <Link className="p-3" to="/color-reviews/admin/1">
+          Admin Approved Writing Samples
+        </Link>
+        <Link className="p-3" to="/color-reviews/admin/0">
+          Admin Unapproved Writing Samples
         </Link>
         <Link className="p-3" to="/color-reviews/new">
           Color Reviews Insert
