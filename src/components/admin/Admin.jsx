@@ -133,10 +133,10 @@ export default function Admin() {
           Approved Color Reviews
         </Link>
         <Link className="p-3" to="/color-reviews/admin/1">
-          Admin Approved Writing Samples
+          Admin Approved Color Reviews
         </Link>
         <Link className="p-3" to="/color-reviews/admin/0">
-          Admin Unapproved Writing Samples
+          Admin Unapproved Color Reviews
         </Link>
         <Link className="p-3" to="/color-reviews/new">
           Color Reviews Insert
@@ -150,8 +150,11 @@ export default function Admin() {
         <Link className="p-3" to="/shading-reviews">
           Approved Shading Reviews
         </Link>
-        <Link className="p-3" to="/shading-reviews/unapproved">
-          Unapproved Shading Reviews
+        <Link className="p-3" to="/shading-reviews/admin/1">
+          Admin Approved Shading Reviews
+        </Link>
+        <Link className="p-3" to="/shading-reviews/admin/0">
+          Admin Unapproved Shading Reviews
         </Link>
         <Link className="p-3" to="/shading-reviews/new">
           Shading Reviews Insert
