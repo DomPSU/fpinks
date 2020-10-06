@@ -353,11 +353,11 @@ class App extends Component {
             {/* writingSamples */}
             <Route
               exact
-              path="/writing-samples/unapproved"
-              key="/writing-samples/unapproved"
+              path="/writing-samples/admin/:approved"
+              key="/writing-samples/admin/:approved"
               render={() =>
                 isAdmin ? (
-                  <WritingSamplesIndex link="/writing-samples/unapproved" />
+                  <AdminIndex link="/writing-samples/admin" />
                 ) : (
                   <Redirect to="/unauthorized" />
                 )

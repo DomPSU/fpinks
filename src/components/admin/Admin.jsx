@@ -114,8 +114,11 @@ export default function Admin() {
         <Link className="p-3" to="/writing-samples">
           Approved Writing Samples
         </Link>
-        <Link className="p-3" to="/writing-samples/unapproved">
-          Unapproved Writing Samples
+        <Link className="p-3" to="/writing-samples/admin/1">
+          Admin Approved Writing Samples
+        </Link>
+        <Link className="p-3" to="/writing-samples/admin/0">
+          Admin Unapproved Writing Samples
         </Link>
       </div>
       {/* colorReviews */}
