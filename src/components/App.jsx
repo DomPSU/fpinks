@@ -146,11 +146,11 @@ class App extends Component {
             {/* users */}
             <Route
               exact
-              path="/users/unapproved"
-              key="/users/unapproved"
+              path="/users/admin/:approved"
+              key="/users/admin/:approved"
               render={() =>
                 isAdmin ? (
-                  <Index link="/users/unapproved" />
+                  <AdminIndex link="/users/admin" />
                 ) : (
                   <Redirect to="/unauthorized" />
                 )

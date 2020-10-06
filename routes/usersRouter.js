@@ -5,7 +5,6 @@ const authService = require('../services/authService');
 const usersRouter = express.Router();
 
 // GET
-usersRouter.get('/unapproved', usersService.unapprovedIndex);
 usersRouter.get('/:id', usersService.show);
 usersRouter.get('/', usersService.index);
 
@@ -17,6 +16,13 @@ usersRouter.post(
   authService.isUser,
   authService.isAdmin,
   usersService.isAdmin,
+);
+
+usersRouter.post(
+  '/admin/:approved',
+  authService.isUser,
+  authService.isAdmin,
+  usersService.isApprovedIndex,
 );
 
 module.exports = usersRouter;

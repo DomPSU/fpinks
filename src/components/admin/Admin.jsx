@@ -10,10 +10,13 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/users">
-          Approved Users
+          API Approved Users
         </Link>
-        <Link className="p-3" to="/users/unapproved">
-          Unapproved Users
+        <Link className="p-3" to="/users/admin/1">
+          Admin Approved Users
+        </Link>
+        <Link className="p-3" to="/users/admin/0">
+          Admin Unapproved Users
         </Link>
       </div>
       {/* pens */}
