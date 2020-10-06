@@ -8,9 +8,10 @@ const index = async () => {
   return res;
 };
 
-const unapprovedIndex = async () => {
+const isApprovedIndex = async (approved) => {
   const res = await db.pool.asyncQuery(
-    'SELECT SheenReviews.writing_sample_id, WritingSamples.high_res_aws_key, SheenReviews.user_id, Users.username, SheenReviews.color_id, Colors.name, SheenReviews.amount, SheenReviews.approved, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=SheenReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE SheenReviews.approved = 0',
+    'SELECT Colors.name, SheenReviews.amount, SheenReviews.approved, SheenReviews.created_at, SheenReviews.updated_at, WritingSamples.high_res_aws_key FROM SheenReviews LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id = SheenReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id = SheenReviews.color_id WHERE SheenReviews.approved = ?',
+    [approved],
   );
   await awsUrls.addHighResUrls(res);
   return res;
@@ -64,7 +65,7 @@ const remove = async (data) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
+  isApprovedIndex,
   insert,
   show,
   remove,

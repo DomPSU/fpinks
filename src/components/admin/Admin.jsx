@@ -168,8 +168,11 @@ export default function Admin() {
         <Link className="p-3" to="/sheen-reviews">
           Approved Sheen Reviews
         </Link>
-        <Link className="p-3" to="/sheen-reviews/unapproved">
-          Unapproved Sheen Reviews
+        <Link className="p-3" to="/sheen-reviews/admin/1">
+          Admin Approved Sheen Reviews
+        </Link>
+        <Link className="p-3" to="/sheen-reviews/admin/0">
+          Admin Unapproved Sheen Reviews
         </Link>
         <Link className="p-3" to="/sheen-reviews/new">
           Sheen Reviews Insert
