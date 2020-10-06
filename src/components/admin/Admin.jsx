@@ -96,8 +96,11 @@ export default function Admin() {
         <Link className="p-3" to="/papers">
           Approved Papers
         </Link>
-        <Link className="p-3" to="/papers/unapproved">
-          Unapproved Papers
+        <Link className="p-3" to="/papers/admin/1">
+          Admin Approved Papers
+        </Link>
+        <Link className="p-3" to="/papers/admin/0">
+          Admin Unapproved Papers
         </Link>
         <Link className="p-3" to="/papers/new">
           Papers Insert
