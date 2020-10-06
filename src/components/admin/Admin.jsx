@@ -58,10 +58,13 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/pen-nibs">
-          Approved PenNibs
+          API Approved PenNibs
         </Link>
-        <Link className="p-3" to="/pen-nibs/unapproved">
-          Unapproved PenNibs
+        <Link className="p-3" to="/pen-nibs/admin/1">
+          Admin Approved PenNibs
+        </Link>
+        <Link className="p-3" to="/pen-nibs/admin/0">
+          Admin Unapproved PenNibs
         </Link>
         <Link className="p-3" to="/pen-nibs/new">
           PenNibs Insert

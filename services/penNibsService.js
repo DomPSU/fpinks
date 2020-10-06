@@ -10,10 +10,11 @@ const index = async (req, res, next) => {
   }
 };
 
-const unapprovedIndex = async (req, res, next) => {
-  let data;
+// get approved/unapproved pens
+const isApprovedIndex = async (req, res, next) => {
+  const { approved } = req.params;
   try {
-    data = await penNibsModel.unapprovedIndex();
+    const data = await penNibsModel.isApprovedIndex(approved);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -35,6 +36,6 @@ const insert = async (req, res, next) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
+  isApprovedIndex,
   insert,
 };

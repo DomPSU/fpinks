@@ -2,14 +2,15 @@ const db = require('./db');
 
 const index = async () => {
   const res = await db.pool.asyncQuery(
-    'SELECT Pens.brand, Pens.model, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens On PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs on PenNibs.nib_id = Nibs.nib_id WHERE PenNibs.approved <> 0',
+    'SELECT Pens.brand, Pens.model, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE PenNibs.approved <> 0',
   );
   return res;
 };
 
-const unapprovedIndex = async () => {
+const isApprovedIndex = async (approved) => {
   const res = await db.pool.asyncQuery(
-    'SELECT Pens.brand, Pens.model, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens On PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs on PenNibs.nib_id = Nibs.nib_id WHERE PenNibs.approved = 0',
+    'SELECT PenNibs.pen_id, Pens.brand, Pens.model, PenNibs.nib_id, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.approved, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE PenNibs.approved = ?',
+    [approved],
   );
   return res;
 };
@@ -56,6 +57,6 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
+  isApprovedIndex,
   insert,
 };
