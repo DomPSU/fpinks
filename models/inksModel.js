@@ -15,8 +15,11 @@ const show = async (id) => {
   return res;
 };
 
-const unapprovedIndex = async () => {
-  const res = await db.pool.asyncQuery('SELECT * FROM Inks WHERE approved = 0');
+const isApprovedIndex = async (approved) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT ink_id, brand, name, approved, created_at, updated_at FROM Inks WHERE approved = ?',
+    [approved],
+  );
   return res;
 };
 
@@ -60,10 +63,9 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  unapprovedIndex,
+  isApprovedIndex,
   insert,
   show,
 };
 
 // TODO move parts of validation to controller (services)
-// TODO new Date().toISOString().replace('T', ' ').replace('Z', ' ') HACK
