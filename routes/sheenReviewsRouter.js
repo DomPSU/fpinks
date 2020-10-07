@@ -1,19 +1,25 @@
 const express = require('express');
 const sheenReviewsService = require('../services/sheenReviewsService');
 const authMiddleware = require('../middlewares/authMiddleware');
+const securityMiddleware = require('../middlewares/securityMiddleware');
 
 const sheenReviewsRouter = express.Router();
 
 // GET
 sheenReviewsRouter.get('/:writingSampleID', sheenReviewsService.show);
-sheenReviewsRouter.get('/', sheenReviewsService.index);
+sheenReviewsRouter.get(
+  '/',
+  securityMiddleware.sanitizeQueryString,
+  sheenReviewsService.index,
+);
 
 // POST
 sheenReviewsRouter.post(
-  '/admin/:approved',
+  '/admin/',
   authMiddleware.isUser,
   authMiddleware.isAdmin,
-  sheenReviewsService.isApprovedIndex,
+  securityMiddleware.sanitizeQueryString,
+  sheenReviewsService.adminIndex,
 );
 
 sheenReviewsRouter.post('/', sheenReviewsService.insert);

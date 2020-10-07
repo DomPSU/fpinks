@@ -373,8 +373,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/shading-reviews/admin/:approved"
-              key="/shading-reviews/admin/:approved"
+              path="/shading-reviews/admin/"
               render={() =>
                 isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
@@ -405,8 +404,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/sheen-reviews/admin/:approved"
-              key="/sheen-reviews/admin/:approved"
+              path="/sheen-reviews/admin/"
               render={() =>
                 isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }

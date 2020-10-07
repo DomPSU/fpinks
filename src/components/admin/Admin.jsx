@@ -156,10 +156,16 @@ export default function Admin() {
         <Link className="p-3" to="/shading-reviews">
           Approved Shading Reviews
         </Link>
-        <Link className="p-3" to="/shading-reviews/admin/1">
+        <Link
+          className="p-3"
+          to="/shading-reviews/admin/?ShadingReviews.approved=1"
+        >
           Admin Approved Shading Reviews
         </Link>
-        <Link className="p-3" to="/shading-reviews/admin/0">
+        <Link
+          className="p-3"
+          to="/shading-reviews/admin/?ShadingReviews.approved=0"
+        >
           Admin Unapproved Shading Reviews
         </Link>
         <Link className="p-3" to="/shading-reviews/new">
@@ -174,10 +180,16 @@ export default function Admin() {
         <Link className="p-3" to="/sheen-reviews">
           Approved Sheen Reviews
         </Link>
-        <Link className="p-3" to="/sheen-reviews/admin/1">
+        <Link
+          className="p-3"
+          to="/sheen-reviews/admin/?SheenReviews.approved=1"
+        >
           Admin Approved Sheen Reviews
         </Link>
-        <Link className="p-3" to="/sheen-reviews/admin/0">
+        <Link
+          className="p-3"
+          to="/sheen-reviews/admin/?SheenReviews.approved=0"
+        >
           Admin Unapproved Sheen Reviews
         </Link>
         <Link className="p-3" to="/sheen-reviews/new">

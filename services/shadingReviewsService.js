@@ -1,9 +1,11 @@
 const shadingReviewsModel = require('../models/shadingReviewsModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await shadingReviewsModel.index();
+    const data = await shadingReviewsModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -22,10 +24,12 @@ const show = async (req, res, next) => {
   }
 };
 
-const isApprovedIndex = async (req, res, next) => {
-  const { approved } = req.params;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    const data = await shadingReviewsModel.isApprovedIndex(approved);
+    const data = await shadingReviewsModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -67,7 +71,7 @@ const remove = async (req, res, next) => {
 };
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
   remove,
