@@ -4,14 +4,13 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT size, grind, tune, created_at, updated_at FROM Nibs WHERE';
+    'SELECT size, grind, tune, created_at, updated_at FROM Nibs WHERE Nibs.approved=1 AND';
 
   const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
 
-  const unsanitizedSQL = sqlUtil.concatWhere(
+  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
     partialSQL,
     queryKeys.length,
-    'approved',
   );
 
   const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
@@ -34,10 +33,9 @@ const adminIndex = async (queryKeys, queryValues) => {
 
   const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
 
-  const unsanitizedSQL = sqlUtil.concatWhere(
+  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
     partialSQL,
     queryKeys.length,
-    'approved',
   );
 
   const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);

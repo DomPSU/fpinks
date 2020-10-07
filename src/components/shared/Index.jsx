@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import API from '../../apis/API';
 import Table from './Table';
 
@@ -19,9 +18,11 @@ class Index extends Component {
   }
 
   getIndex() {
-    const { link } = this.props;
+    const originLength = window.location.origin.length;
+    const url = window.location.href.slice(originLength);
+
     API.instance
-      .get(link)
+      .get(url)
       .then((res) => {
         this.setState({ index: res.data });
       })
@@ -44,7 +45,3 @@ class Index extends Component {
 }
 
 export default Index;
-
-Index.propTypes = {
-  link: PropTypes.string,
-};

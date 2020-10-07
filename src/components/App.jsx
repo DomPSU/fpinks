@@ -149,11 +149,7 @@ class App extends Component {
               path="/users/admin/:approved"
               key="/users/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/users/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -162,11 +158,7 @@ class App extends Component {
               path="/users"
               key="/users"
               render={() =>
-                isAdmin ? (
-                  <Index link="/users" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -193,11 +185,7 @@ class App extends Component {
               path="/pens"
               key="/pens"
               render={() =>
-                isAdmin ? (
-                  <Index link="/pens" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -224,11 +212,7 @@ class App extends Component {
               path="/nibs"
               key="/nibs"
               render={() =>
-                isAdmin ? (
-                  <Index link="/nibs" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -247,11 +231,7 @@ class App extends Component {
               path="/pen-nibs/admin/:approved"
               key="/pen-nibs/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/pen-nibs/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -260,11 +240,7 @@ class App extends Component {
               path="/pen-nibs"
               key="/pen-nibs"
               render={() =>
-                isAdmin ? (
-                  <PenNibsIndex link="/pen-nibs/" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <PenNibsIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -283,11 +259,7 @@ class App extends Component {
               path="/inks/admin/:approved"
               key="/inks/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/inks/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -296,11 +268,7 @@ class App extends Component {
               path="/inks"
               key="/inks"
               render={() =>
-                isAdmin ? (
-                  <Index link="/inks" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -319,11 +287,7 @@ class App extends Component {
               path="/papers/admin/:approved"
               key="/papers/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/papers/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -332,11 +296,7 @@ class App extends Component {
               path="/papers"
               key="/papers"
               render={() =>
-                isAdmin ? (
-                  <Index link="/papers" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -346,11 +306,7 @@ class App extends Component {
               path="/writing-samples/admin/:approved"
               key="/writing-samples/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/writing-samples/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -367,7 +323,7 @@ class App extends Component {
               key="/writing-samples"
               render={() =>
                 isAdmin ? (
-                  <WritingSamplesIndex link="/writing-samples" />
+                  <WritingSamplesIndex />
                 ) : (
                   <Redirect to="/unauthorized" />
                 )
@@ -401,11 +357,7 @@ class App extends Component {
               path="/color-reviews"
               key="/color-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/color-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -428,11 +380,7 @@ class App extends Component {
               path="/shading-reviews/admin/:approved"
               key="/shading-reviews/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/shading-reviews/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -441,11 +389,7 @@ class App extends Component {
               path="/shading-reviews"
               key="/shading-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/shading-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -468,11 +412,7 @@ class App extends Component {
               path="/sheen-reviews/admin/:approved"
               key="/sheen-reviews/admin/:approved"
               render={() =>
-                isAdmin ? (
-                  <AdminIndex link="/sheen-reviews/admin" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -481,11 +421,7 @@ class App extends Component {
               path="/sheen-reviews"
               key="/sheen-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/sheen-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -508,11 +444,7 @@ class App extends Component {
               path="/feathering-reviews/unapproved"
               key="/feathering-reviews/unapproved"
               render={() =>
-                isAdmin ? (
-                  <Index link="/feathering-reviews/unapproved" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -521,11 +453,7 @@ class App extends Component {
               path="/feathering-reviews"
               key="/feathering-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/feathering-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -548,11 +476,7 @@ class App extends Component {
               path="/water-reviews/unapproved"
               key="/water-reviews/unapproved"
               render={() =>
-                isAdmin ? (
-                  <Index link="/water-reviews/unapproved" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -561,11 +485,7 @@ class App extends Component {
               path="/water-reviews"
               key="/water-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/water-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -588,11 +508,7 @@ class App extends Component {
               path="/drying-reviews/unapproved"
               key="/drying-reviews/unapproved"
               render={() =>
-                isAdmin ? (
-                  <Index link="/drying-reviews/unapproved" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -601,11 +517,7 @@ class App extends Component {
               path="/drying-reviews"
               key="/drying-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/drying-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -628,11 +540,7 @@ class App extends Component {
               path="/transparency-reviews/unapproved"
               key="/transparency-reviews/unapproved"
               render={() =>
-                isAdmin ? (
-                  <Index link="/transparency-reviews/unapproved" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -641,11 +549,7 @@ class App extends Component {
               path="/transparency-reviews"
               key="/transparency-reviews"
               render={() =>
-                isAdmin ? (
-                  <Index link="/transparency-reviews" />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
