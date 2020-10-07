@@ -22,6 +22,11 @@ export default function Footer() {
               Terms
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/developers">
+              Developers
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

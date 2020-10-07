@@ -12,15 +12,16 @@ import {
 } from '../util/util';
 
 // general
-import Contribute from './contribute/Contribute';
-import About from './about/About';
+import About from './general/About';
+import Developers from './general/Developers';
 
 // login
+import Admin from './login/Admin';
 import Login from './login/Login';
+import Contribute from './login/Contribute';
 import ProfileReviews from './login/Reviews';
 import PrivacyPolicy from './login/PrivacyPolicy';
 import TermsOfService from './login/TermsOfService';
-import Admin from './admin/Admin';
 
 // shared
 import Index from './shared/Index';
@@ -618,6 +619,8 @@ class App extends Component {
             />
 
             <Route exact path="/about" render={() => <About />} />
+
+            <Route exact path="/developers" render={() => <Developers />} />
 
             <Route
               exact
