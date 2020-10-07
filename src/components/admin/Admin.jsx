@@ -117,10 +117,10 @@ export default function Admin() {
         <Link className="p-3" to="/writing-samples">
           Approved Writing Samples
         </Link>
-        <Link className="p-3" to="/writing-samples/admin/1">
+        <Link className="p-3" to="/writing-samples/admin/?approved=1">
           Admin Approved Writing Samples
         </Link>
-        <Link className="p-3" to="/writing-samples/admin/0">
+        <Link className="p-3" to="/writing-samples/admin/?approved=0">
           Admin Unapproved Writing Samples
         </Link>
       </div>

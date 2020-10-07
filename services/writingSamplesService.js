@@ -6,9 +6,11 @@ const inksModel = require('../models/inksModel');
 const papersModel = require('../models/papersModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await writingSamplesModel.index();
+    const data = await writingSamplesModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -27,10 +29,12 @@ const show = async (req, res, next) => {
   }
 };
 
-const isApprovedIndex = async (req, res, next) => {
-  const { approved } = req.params;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    const data = await writingSamplesModel.isApprovedIndex(approved);
+    const data = await writingSamplesModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -38,6 +42,10 @@ const isApprovedIndex = async (req, res, next) => {
 };
 
 const search = async (req, res, next) => {
+  // TODO HACK
+  const queryKeys = [];
+  const queryValues = [];
+
   const { query } = req.params;
 
   let data;
@@ -45,7 +53,7 @@ const search = async (req, res, next) => {
   // blank query
   if (query === undefined) {
     try {
-      data = await writingSamplesModel.index();
+      data = await writingSamplesModel.index(queryKeys, queryValues);
       res.status(200).send(data);
       return;
     } catch (e) {
@@ -56,7 +64,7 @@ const search = async (req, res, next) => {
   // whitespace query
   if (query.trim === '') {
     try {
-      data = await writingSamplesModel.index();
+      data = await writingSamplesModel.index(queryKeys, queryValues);
       res.status(200).send(data);
       return;
     } catch (e) {
@@ -193,7 +201,7 @@ const insert = async (req, res, next) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
   search,
