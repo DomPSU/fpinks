@@ -1,9 +1,10 @@
 const nibsModel = require('../models/nibsModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = Object.keys(req.query);
+  const queryValues = Object.values(req.query);
   try {
-    data = await nibsModel.index();
+    const data = await nibsModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -22,10 +23,11 @@ const show = async (req, res, next) => {
   }
 };
 
-const isApprovedIndex = async (req, res, next) => {
-  const { approved } = req.params;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  const queryValues = Object.values(req.query);
   try {
-    const data = await nibsModel.isApprovedIndex(approved);
+    const data = await nibsModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -47,7 +49,7 @@ const insert = async (req, res, next) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
 };

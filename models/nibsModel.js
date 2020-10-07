@@ -1,9 +1,22 @@
+const mysql = require('mysql');
 const db = require('./db');
+const sqlUtil = require('../utils/sql');
 
-const index = async () => {
-  const res = await db.pool.asyncQuery(
-    'SELECT size, grind, tune, created_at, updated_at FROM Nibs WHERE approved <> 0',
+const index = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT size, grind, tune, created_at, updated_at FROM Nibs WHERE';
+
+  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
+
+  const unsanitizedSQL = sqlUtil.concatWhere(
+    partialSQL,
+    queryKeys.length,
+    'approved',
   );
+
+  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -15,11 +28,21 @@ const show = async (id) => {
   return res;
 };
 
-const isApprovedIndex = async (approved) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT nib_id, size, grind, tune, approved, created_at, updated_at FROM Nibs WHERE approved = ?',
-    [approved],
+const adminIndex = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT nib_id, size, grind, tune, approved, created_at, updated_at FROM Nibs WHERE';
+
+  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
+
+  const unsanitizedSQL = sqlUtil.concatWhere(
+    partialSQL,
+    queryKeys.length,
+    'approved',
   );
+
+  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -65,7 +88,7 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
 };

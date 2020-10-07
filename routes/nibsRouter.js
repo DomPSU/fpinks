@@ -10,10 +10,10 @@ nibsRouter.get('/', nibsService.index);
 
 // POST
 nibsRouter.post(
-  '/admin/:approved',
+  '/admin/',
   authService.isUser,
   authService.isAdmin,
-  nibsService.isApprovedIndex,
+  nibsService.adminIndex,
 );
 
 nibsRouter.post('/', nibsService.insert);
