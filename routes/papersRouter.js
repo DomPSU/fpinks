@@ -1,19 +1,25 @@
 const express = require('express');
 const papersService = require('../services/papersService');
 const authMiddleware = require('../middlewares/authMiddleware');
+const securityMiddleware = require('../middlewares/securityMiddleware');
 
 const papersRouter = express.Router();
 
 // GET
 papersRouter.get('/:id', papersService.show);
-papersRouter.get('/', papersService.index);
+papersRouter.get(
+  '/',
+  securityMiddleware.sanitizeQueryString,
+  papersService.index,
+);
 
 // POST
 papersRouter.post(
-  '/admin/:approved',
+  '/admin/',
   authMiddleware.isUser,
   authMiddleware.isAdmin,
-  papersService.isApprovedIndex,
+  securityMiddleware.sanitizeQueryString,
+  papersService.adminIndex,
 );
 
 papersRouter.post('/', papersService.insert);

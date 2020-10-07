@@ -1,9 +1,17 @@
 const db = require('./db');
+const sqlUtil = require('../utils/sql');
 
-const index = async () => {
-  const res = await db.pool.asyncQuery(
-    'SELECT brand, name, style, lbs, grams, created_at, updated_at FROM Papers WHERE approved <> 0',
+const index = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT brand, name, style, lbs, grams, created_at, updated_at FROM Papers WHERE approved=1 AND';
+
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
+    partialSQL,
+    queryKeys,
+    queryValues,
   );
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -15,11 +23,17 @@ const show = async (id) => {
   return res;
 };
 
-const isApprovedIndex = async (approved) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT paper_id, brand, name, style, lbs, grams, approved, created_at, updated_at FROM Papers WHERE approved = ?',
-    [approved],
+const adminIndex = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT paper_id, brand, name, style, lbs, grams, approved, created_at, updated_at FROM Papers WHERE';
+
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
+    partialSQL,
+    queryKeys,
+    queryValues,
   );
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -69,7 +83,7 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
 };

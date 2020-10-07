@@ -282,8 +282,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/papers/admin/:approved"
-              key="/papers/admin/:approved"
+              path="/papers/admin/"
               render={() =>
                 isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }

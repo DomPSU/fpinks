@@ -1,9 +1,11 @@
 const papersModel = require('../models/papersModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await papersModel.index();
+    const data = await papersModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -22,10 +24,12 @@ const show = async (req, res, next) => {
   }
 };
 
-const isApprovedIndex = async (req, res, next) => {
-  const { approved } = req.params;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    const data = await papersModel.isApprovedIndex(approved);
+    const data = await papersModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -47,7 +51,7 @@ const insert = async (req, res, next) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
 };
