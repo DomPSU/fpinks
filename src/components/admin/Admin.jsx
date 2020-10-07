@@ -276,8 +276,17 @@ export default function Admin() {
         <Link className="p-3" to="/transparency-reviews">
           Approved Transparency Reviews
         </Link>
-        <Link className="p-3" to="/transparency-reviews/unapproved">
-          Unapproved Transparency Reviews
+        <Link
+          className="p-3"
+          to="/transparency-reviews/admin/?TransparencyReviews.approved=1"
+        >
+          Admin Approved Transparency Reviews
+        </Link>
+        <Link
+          className="p-3"
+          to="/transparency-reviews/admin/?TransparencyReviews.approved=0"
+        >
+          Admin Unapproved Transparency Reviews
         </Link>
         <Link className="p-3" to="/transparency-reviews/new">
           Transparency Reviews Insert

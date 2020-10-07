@@ -1,15 +1,16 @@
 const transparencyReviewsModel = require('../models/transparencyReviewsModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await transparencyReviewsModel.index();
+    const data = await transparencyReviewsModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
   }
 };
-
 const show = async (req, res, next) => {
   let data;
   const { writingSampleID } = req.params;
@@ -22,10 +23,15 @@ const show = async (req, res, next) => {
   }
 };
 
-const unapprovedIndex = async (req, res, next) => {
-  let data;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await transparencyReviewsModel.unapprovedIndex();
+    const data = await transparencyReviewsModel.adminIndex(
+      queryKeys,
+      queryValues,
+    );
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -67,7 +73,7 @@ const remove = async (req, res, next) => {
 };
 module.exports = {
   index,
-  unapprovedIndex,
+  adminIndex,
   insert,
   show,
   remove,

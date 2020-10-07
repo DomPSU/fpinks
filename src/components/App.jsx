@@ -528,10 +528,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/transparency-reviews/unapproved"
-              key="/transparency-reviews/unapproved"
+              path="/transparency-reviews/admin/"
               render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
