@@ -1,9 +1,17 @@
 const db = require('./db');
+const sqlUtil = require('../utils/sql');
 
-const index = async () => {
-  const res = await db.pool.asyncQuery(
-    'SELECT brand, name, created_at, updated_at FROM Inks WHERE approved <> 0',
+const index = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT brand, name, created_at, updated_at FROM Inks WHERE approved=1 AND';
+
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
+    partialSQL,
+    queryKeys,
+    queryValues,
   );
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -15,11 +23,17 @@ const show = async (id) => {
   return res;
 };
 
-const isApprovedIndex = async (approved) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT ink_id, brand, name, approved, created_at, updated_at FROM Inks WHERE approved = ?',
-    [approved],
+const adminIndex = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT ink_id, brand, name, approved, created_at, updated_at FROM Inks WHERE';
+
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
+    partialSQL,
+    queryKeys,
+    queryValues,
   );
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -63,7 +77,7 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
 };

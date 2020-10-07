@@ -1,19 +1,21 @@
 const express = require('express');
 const inksService = require('../services/inksService');
 const authMiddleware = require('../middlewares/authMiddleware');
+const securityMiddleware = require('../middlewares/securityMiddleware');
 
 const inksRouter = express.Router();
 
 // GET
 inksRouter.get('/:id', inksService.show);
-inksRouter.get('/', inksService.index);
+inksRouter.get('/', securityMiddleware.sanitizeQueryString, inksService.index);
 
 // POST
 inksRouter.post(
-  '/admin/:approved',
+  '/admin/',
   authMiddleware.isUser,
   authMiddleware.isAdmin,
-  inksService.isApprovedIndex,
+  securityMiddleware.sanitizeQueryString,
+  inksService.adminIndex,
 );
 
 inksRouter.post('/', inksService.insert);

@@ -81,10 +81,10 @@ export default function Admin() {
         <Link className="p-3" to="/inks">
           Approved Inks
         </Link>
-        <Link className="p-3" to="/inks/admin/1">
+        <Link className="p-3" to="/inks/admin/?approved=1">
           Admin Approved Inks
         </Link>
-        <Link className="p-3" to="/inks/admin/0">
+        <Link className="p-3" to="/inks/admin/?approved=0">
           Admin Unapproved Inks
         </Link>
         <Link className="p-3" to="/inks/new">
