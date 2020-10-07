@@ -1,3 +1,5 @@
+const mysql = require('mysql');
+
 const getIndexInserts = (queryKeys, queryValues) => {
   const inserts = [];
 
@@ -21,7 +23,16 @@ const concatStringQueryInserts = (partialSQL, numOfKeys) => {
   return unsanitizedSQL;
 };
 
+const getSanitizedSQL = (partialSQL, queryKeys, queryValues) => {
+  const inserts = getIndexInserts(queryKeys, queryValues);
+
+  const unsanitizedSQL = concatStringQueryInserts(partialSQL, queryKeys.length);
+
+  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
+
+  return sanitizedSQL;
+};
+
 module.exports = {
-  getIndexInserts,
-  concatStringQueryInserts,
+  getSanitizedSQL,
 };

@@ -1,4 +1,3 @@
-const mysql = require('mysql');
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 const awsUrls = require('../utils/awsUrls');
@@ -7,14 +6,11 @@ const index = async (queryKeys, queryValues) => {
   const partialSQL =
     'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.approved = 1 AND';
 
-  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
-
-  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
-    queryKeys.length,
+    queryKeys,
+    queryValues,
   );
-
-  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
@@ -24,14 +20,11 @@ const adminIndex = async (queryKeys, queryValues) => {
   const partialSQL =
     'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE';
 
-  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
-
-  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
-    queryKeys.length,
+    queryKeys,
+    queryValues,
   );
-
-  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
 

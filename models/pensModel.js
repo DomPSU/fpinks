@@ -1,4 +1,3 @@
-const mysql = require('mysql');
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
@@ -6,14 +5,11 @@ const index = async (queryKeys, queryValues) => {
   const partialSQL =
     'SELECT brand, model, created_at, updated_at FROM Pens WHERE Pens.approved=1 AND';
 
-  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
-
-  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
-    queryKeys.length,
+    queryKeys,
+    queryValues,
   );
-
-  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
@@ -31,14 +27,11 @@ const adminIndex = async (queryKeys, queryValues) => {
   const partialSQL =
     'SELECT pen_id, brand, model, approved, created_at, updated_at FROM Pens WHERE';
 
-  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
-
-  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
-    queryKeys.length,
+    queryKeys,
+    queryValues,
   );
-
-  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
