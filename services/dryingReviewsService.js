@@ -1,9 +1,11 @@
 const dryingReviewsModel = require('../models/dryingReviewsModel');
 
 const index = async (req, res, next) => {
-  let data;
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await dryingReviewsModel.index();
+    const data = await dryingReviewsModel.index(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -22,16 +24,17 @@ const show = async (req, res, next) => {
   }
 };
 
-const unapprovedIndex = async (req, res, next) => {
-  let data;
+const adminIndex = async (req, res, next) => {
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
-    data = await dryingReviewsModel.unapprovedIndex();
+    const data = await dryingReviewsModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
   }
 };
-
 const insert = async (req, res, next) => {
   const dryingReview = {
     ...req.body,
@@ -67,7 +70,7 @@ const remove = async (req, res, next) => {
 };
 module.exports = {
   index,
-  unapprovedIndex,
+  adminIndex,
   insert,
   show,
   remove,

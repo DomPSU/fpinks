@@ -497,10 +497,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/drying-reviews/unapproved"
-              key="/drying-reviews/unapproved"
+              path="/drying-reviews/admin/"
               render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 

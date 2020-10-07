@@ -252,8 +252,17 @@ export default function Admin() {
         <Link className="p-3" to="/drying-reviews">
           Approved Drying Time Reviews
         </Link>
-        <Link className="p-3" to="/drying-reviews/unapproved">
-          Unapproved Drying TimeReviews
+        <Link
+          className="p-3"
+          to="/drying-reviews/admin/?DryingReviews.approved=1"
+        >
+          Admin Approved Drying Time Reviews
+        </Link>
+        <Link
+          className="p-3"
+          to="/drying-reviews/admin/?DryingReviews.approved=0"
+        >
+          Admin Unapproved Drying Time Reviews
         </Link>
         <Link className="p-3" to="/drying-reviews/new">
           Drying Time Reviews Insert
