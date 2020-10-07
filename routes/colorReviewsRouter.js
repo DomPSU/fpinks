@@ -7,6 +7,7 @@ const colorReviewsRouter = express.Router();
 
 // GET
 colorReviewsRouter.get('/:writingSampleID', colorReviewsService.show);
+
 colorReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,

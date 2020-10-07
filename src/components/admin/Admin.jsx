@@ -204,8 +204,17 @@ export default function Admin() {
         <Link className="p-3" to="/feathering-reviews">
           Approved Feathering Reviews
         </Link>
-        <Link className="p-3" to="/feathering-reviews/unapproved">
-          Unapproved Feathering Reviews
+        <Link
+          className="p-3"
+          to="/feathering-reviews/admin/?FeatheringReviews.approved=1"
+        >
+          Admin Approved Feathering Reviews
+        </Link>
+        <Link
+          className="p-3"
+          to="/feathering-reviews/admin/?FeatheringReviews.approved=0"
+        >
+          Admin Unapproved Feathering Reviews
         </Link>
         <Link className="p-3" to="/feathering-reviews/new">
           Feathering Reviews Insert
