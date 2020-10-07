@@ -228,8 +228,7 @@ class App extends Component {
 
             <Route
               exact
-              path="/pen-nibs/admin/:approved"
-              key="/pen-nibs/admin/:approved"
+              path="/pen-nibs/admin/"
               render={() =>
                 isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }

@@ -63,10 +63,10 @@ export default function Admin() {
         <Link className="p-3" to="/pen-nibs">
           API Approved PenNibs
         </Link>
-        <Link className="p-3" to="/pen-nibs/admin/1">
+        <Link className="p-3" to="/pen-nibs/admin/?PenNibs.approved=1">
           Admin Approved PenNibs
         </Link>
-        <Link className="p-3" to="/pen-nibs/admin/0">
+        <Link className="p-3" to="/pen-nibs/admin/?PenNibs.approved=0">
           Admin Unapproved PenNibs
         </Link>
         <Link className="p-3" to="/pen-nibs/new">
