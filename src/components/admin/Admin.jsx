@@ -228,8 +228,17 @@ export default function Admin() {
         <Link className="p-3" to="/water-reviews">
           Approved Waterproofness Reviews
         </Link>
-        <Link className="p-3" to="/water-reviews/unapproved">
-          Unapproved Waterproofness Reviews
+        <Link
+          className="p-3"
+          to="/water-reviews/admin/?WaterReviews.approved=1"
+        >
+          Admin Approved Waterproofness Reviews
+        </Link>
+        <Link
+          className="p-3"
+          to="/water-reviews/admin/?WaterReviews.approved=0"
+        >
+          Admin Unapproved Waterproofness Reviews
         </Link>
         <Link className="p-3" to="/water-reviews/new">
           Waterproofness Reviews Insert

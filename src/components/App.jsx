@@ -466,10 +466,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/water-reviews/unapproved"
-              key="/water-reviews/unapproved"
+              path="/water-reviews/admin/"
               render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
+                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
               }
             />
 
