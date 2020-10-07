@@ -18,7 +18,7 @@ const index = async (queryKeys, queryValues) => {
 
 const adminIndex = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT FeatheringReviews.writing_sample_id, WritingSamples.high_res_aws_key, FeatheringReviews.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE';
+    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at, WritingSamples.high_res_aws_key FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
