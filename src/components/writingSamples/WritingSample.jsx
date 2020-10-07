@@ -61,7 +61,7 @@ class WritingSample extends Component {
 
   getColorReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `color-reviews/${id}`;
+    const url = `color-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)
@@ -73,7 +73,7 @@ class WritingSample extends Component {
 
   getShadingReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `shading-reviews/${id}`;
+    const url = `shading-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)
@@ -85,7 +85,7 @@ class WritingSample extends Component {
 
   getSheenReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `sheen-reviews/${id}`;
+    const url = `sheen-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)
@@ -97,7 +97,7 @@ class WritingSample extends Component {
 
   getWaterReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `water-reviews/${id}`;
+    const url = `water-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)
@@ -109,7 +109,7 @@ class WritingSample extends Component {
 
   getDryingReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `drying-reviews/${id}`;
+    const url = `drying-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)
@@ -121,7 +121,7 @@ class WritingSample extends Component {
 
   getTransparencyReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `transparency-reviews/${id}`;
+    const url = `transparency-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)
@@ -133,7 +133,7 @@ class WritingSample extends Component {
 
   getFeatheringReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `feathering-reviews/${id}`;
+    const url = `feathering-reviews/?writing_sample_id=${id}`;
 
     API.instance
       .get(url)

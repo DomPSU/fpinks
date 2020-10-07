@@ -33,14 +33,6 @@ const adminIndex = async (queryKeys, queryValues) => {
   return res;
 };
 
-const show = async (writingSampleID) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE ShadingReviews.writing_sample_id=? AND ShadingReviews.approved <> 0',
-    [writingSampleID],
-  );
-  return res;
-};
-
 const insert = async (data) => {
   // TODO validate all needed keys
 
@@ -75,6 +67,5 @@ module.exports = {
   index,
   adminIndex,
   insert,
-  show,
   remove,
 };

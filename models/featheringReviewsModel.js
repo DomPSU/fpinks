@@ -33,14 +33,6 @@ const adminIndex = async (queryKeys, queryValues) => {
   return res;
 };
 
-const show = async (writingSampleID) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE FeatheringReviews.writing_sample_id=? AND FeatheringReviews.approved <> 0',
-    [writingSampleID],
-  );
-  return res;
-};
-
 const insert = async (data) => {
   // TODO validate all needed keys
 
@@ -75,6 +67,5 @@ module.exports = {
   index,
   adminIndex,
   insert,
-  show,
   remove,
 };

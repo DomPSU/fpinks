@@ -12,18 +12,6 @@ const index = async (req, res, next) => {
   }
 };
 
-const show = async (req, res, next) => {
-  let data;
-  const { writingSampleID } = req.params;
-
-  try {
-    data = await colorReviewsModel.show(writingSampleID);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
 const adminIndex = async (req, res, next) => {
   const queryKeys = res.locals.queryKeys || [];
   const queryValues = res.locals.queryValues || [];
@@ -97,6 +85,5 @@ module.exports = {
   index,
   adminIndex,
   insert,
-  show,
   remove,
 };

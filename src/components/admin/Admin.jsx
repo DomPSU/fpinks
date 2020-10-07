@@ -79,7 +79,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/inks">
-          Approved Inks
+          API Approved Inks
         </Link>
         <Link className="p-3" to="/inks/admin/?approved=1">
           Admin Approved Inks
@@ -97,7 +97,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/papers">
-          Approved Papers
+          API Approved Papers
         </Link>
         <Link className="p-3" to="/papers/admin/?approved=1">
           Admin Approved Papers
@@ -115,7 +115,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/writing-samples">
-          Approved Writing Samples
+          API Approved Writing Samples
         </Link>
         <Link className="p-3" to="/writing-samples/admin/?approved=1">
           Admin Approved Writing Samples
@@ -130,7 +130,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/color-reviews">
-          Approved Color Reviews
+          API Approved Color Reviews
         </Link>
         <Link
           className="p-3"
@@ -154,7 +154,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/shading-reviews">
-          Approved Shading Reviews
+          API Approved Shading Reviews
         </Link>
         <Link
           className="p-3"
@@ -178,7 +178,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/sheen-reviews">
-          Approved Sheen Reviews
+          API Approved Sheen Reviews
         </Link>
         <Link
           className="p-3"
@@ -202,7 +202,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/feathering-reviews">
-          Approved Feathering Reviews
+          API Approved Feathering Reviews
         </Link>
         <Link
           className="p-3"
@@ -226,7 +226,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/water-reviews">
-          Approved Waterproofness Reviews
+          API Approved Waterproofness Reviews
         </Link>
         <Link
           className="p-3"
@@ -250,7 +250,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/drying-reviews">
-          Approved Drying Time Reviews
+          API Approved Drying Time Reviews
         </Link>
         <Link
           className="p-3"
@@ -274,7 +274,7 @@ export default function Admin() {
       </div>
       <div className="row border-bottom border-dark">
         <Link className="p-3" to="/transparency-reviews">
-          Approved Transparency Reviews
+          API Approved Transparency Reviews
         </Link>
         <Link
           className="p-3"

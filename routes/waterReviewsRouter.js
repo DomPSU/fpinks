@@ -6,8 +6,6 @@ const securityMiddleware = require('../middlewares/securityMiddleware');
 const waterReviewsRouter = express.Router();
 
 // GET
-waterReviewsRouter.get('/:writingSampleID', waterReviewsService.show);
-
 waterReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,

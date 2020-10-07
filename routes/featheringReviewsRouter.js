@@ -6,8 +6,6 @@ const securityMiddleware = require('../middlewares/securityMiddleware');
 const featheringReviewsRouter = express.Router();
 
 // GET
-featheringReviewsRouter.get('/:writingSampleID', featheringReviewsService.show);
-
 featheringReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,

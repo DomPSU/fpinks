@@ -7,10 +7,6 @@ const transparencyReviewsRouter = express.Router();
 
 // GET
 transparencyReviewsRouter.get(
-  '/:writingSampleID',
-  transparencyReviewsService.show,
-);
-transparencyReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,
   transparencyReviewsService.index,

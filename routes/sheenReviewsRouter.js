@@ -6,7 +6,6 @@ const securityMiddleware = require('../middlewares/securityMiddleware');
 const sheenReviewsRouter = express.Router();
 
 // GET
-sheenReviewsRouter.get('/:writingSampleID', sheenReviewsService.show);
 sheenReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,

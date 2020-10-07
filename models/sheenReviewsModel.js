@@ -33,13 +33,6 @@ const adminIndex = async (queryKeys, queryValues) => {
   return res;
 };
 
-const show = async (writingSampleID) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT SheenReviews.writing_sample_id, Users.username, Colors.name AS color, SheenReviews.amount, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE SheenReviews.writing_sample_id=? AND SheenReviews.approved <> 0',
-    [writingSampleID],
-  );
-  return res;
-};
 const insert = async (data) => {
   // TODO validate all needed keys
 
@@ -83,6 +76,5 @@ module.exports = {
   index,
   adminIndex,
   insert,
-  show,
   remove,
 };

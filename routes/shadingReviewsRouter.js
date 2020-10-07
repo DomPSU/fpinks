@@ -6,7 +6,6 @@ const securityMiddleware = require('../middlewares/securityMiddleware');
 const shadingReviewsRouter = express.Router();
 
 // GET
-shadingReviewsRouter.get('/:writingSampleID', shadingReviewsService.show);
 shadingReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,

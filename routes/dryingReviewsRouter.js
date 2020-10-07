@@ -6,8 +6,6 @@ const securityMiddleware = require('../middlewares/securityMiddleware');
 const dryingReviewsRouter = express.Router();
 
 // GET
-dryingReviewsRouter.get('/:writingSampleID', dryingReviewsService.show);
-
 dryingReviewsRouter.get(
   '/',
   securityMiddleware.sanitizeQueryString,

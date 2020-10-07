@@ -11,17 +11,6 @@ const index = async (req, res, next) => {
     next(e);
   }
 };
-const show = async (req, res, next) => {
-  let data;
-  const { writingSampleID } = req.params;
-
-  try {
-    data = await transparencyReviewsModel.show(writingSampleID);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
 
 const adminIndex = async (req, res, next) => {
   const queryKeys = res.locals.queryKeys || [];
@@ -75,6 +64,5 @@ module.exports = {
   index,
   adminIndex,
   insert,
-  show,
   remove,
 };
