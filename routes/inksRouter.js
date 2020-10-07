@@ -1,6 +1,6 @@
 const express = require('express');
 const inksService = require('../services/inksService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const inksRouter = express.Router();
 
@@ -11,8 +11,8 @@ inksRouter.get('/', inksService.index);
 // POST
 inksRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   inksService.isApprovedIndex,
 );
 

@@ -9,23 +9,19 @@ const getIndexInserts = (queryKeys, queryValues) => {
   return inserts;
 };
 
-const concatWhere = (partialSQL, numOfKeys, isApproved) => {
+const concatStringQueryInserts = (partialSQL, numOfKeys) => {
   let unsanitizedSQL = partialSQL;
   for (let i = 0; i < numOfKeys; i += 1) {
     unsanitizedSQL = unsanitizedSQL.concat(' ?? = ? AND');
   }
 
-  if (isApproved === 'unapproved') {
-    unsanitizedSQL = unsanitizedSQL.concat(' approved = 0');
-  } else {
-    // default to approved for safety
-    unsanitizedSQL = unsanitizedSQL.concat(' approved <> 0');
-  }
+  // trim final ' AND '
+  unsanitizedSQL = unsanitizedSQL.substring(0, unsanitizedSQL.length - 4);
 
   return unsanitizedSQL;
 };
 
 module.exports = {
   getIndexInserts,
-  concatWhere,
+  concatStringQueryInserts,
 };

@@ -1,8 +1,9 @@
 const pensModel = require('../models/pensModel');
 
 const index = async (req, res, next) => {
-  const queryKeys = Object.keys(req.query);
-  const queryValues = Object.values(req.query);
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
     const data = await pensModel.index(queryKeys, queryValues);
     res.status(200).send(data);
@@ -23,8 +24,9 @@ const show = async (req, res, next) => {
 };
 
 const adminIndex = async (req, res, next) => {
-  const queryKeys = Object.keys(req.query);
-  const queryValues = Object.values(req.query);
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
   try {
     const data = await pensModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);

@@ -1,6 +1,6 @@
 const express = require('express');
 const usersService = require('../services/usersService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const usersRouter = express.Router();
 
@@ -13,15 +13,15 @@ usersRouter.post('/', usersService.insert);
 
 usersRouter.post(
   '/admin?',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   usersService.isAdmin,
 );
 
 usersRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   usersService.isApprovedIndex,
 );
 

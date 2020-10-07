@@ -1,6 +1,6 @@
 const express = require('express');
 const shadingReviewsService = require('../services/shadingReviewsService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const shadingReviewsRouter = express.Router();
 
@@ -11,8 +11,8 @@ shadingReviewsRouter.get('/', shadingReviewsService.index);
 // POST
 shadingReviewsRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   shadingReviewsService.isApprovedIndex,
 );
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import API from '../../apis/API';
 import Table from './Table';
 import { getIDToken } from '../../util/util';
@@ -17,7 +16,6 @@ class AdminIndex extends Component {
 
   componentDidMount() {
     this.getIndex();
-    // eslint-disable-next-line react/destructuring-assignment
   }
 
   // eslint-disable-next-line class-methods-use-this

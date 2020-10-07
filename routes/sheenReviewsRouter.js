@@ -1,6 +1,6 @@
 const express = require('express');
 const sheenReviewsService = require('../services/sheenReviewsService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const sheenReviewsRouter = express.Router();
 
@@ -11,8 +11,8 @@ sheenReviewsRouter.get('/', sheenReviewsService.index);
 // POST
 sheenReviewsRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   sheenReviewsService.isApprovedIndex,
 );
 

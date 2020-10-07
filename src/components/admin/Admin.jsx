@@ -132,10 +132,16 @@ export default function Admin() {
         <Link className="p-3" to="/color-reviews">
           Approved Color Reviews
         </Link>
-        <Link className="p-3" to="/color-reviews/admin/1">
+        <Link
+          className="p-3"
+          to="/color-reviews/admin/?ColorReviews.approved=1"
+        >
           Admin Approved Color Reviews
         </Link>
-        <Link className="p-3" to="/color-reviews/admin/0">
+        <Link
+          className="p-3"
+          to="/color-reviews/admin/?ColorReviews.approved=0"
+        >
           Admin Unapproved Color Reviews
         </Link>
         <Link className="p-3" to="/color-reviews/new">

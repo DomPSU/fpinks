@@ -1,6 +1,6 @@
 const express = require('express');
 const writingSamplesService = require('../services/writingSamplesService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 const AWS = require('../config/aws'); // TODO env based
 
 const { upload } = AWS; // TODO env based
@@ -18,8 +18,8 @@ writingSamplesRouter.get('/', writingSamplesService.index);
 // POST
 writingSamplesRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   writingSamplesService.isApprovedIndex,
 );
 

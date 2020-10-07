@@ -1,25 +1,48 @@
+const mysql = require('mysql');
 const db = require('./db');
+const sqlUtil = require('../utils/sql');
 const awsUrls = require('../utils/awsUrls');
 
-const index = async () => {
-  const res = await db.pool.asyncQuery(
-    'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.approved <> 0',
+const index = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.approved = 1 AND';
+
+  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
+
+  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
+    partialSQL,
+    queryKeys.length,
   );
+
+  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
-const isApprovedIndex = async (approved) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT Colors.name, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at, WritingSamples.high_res_aws_key FROM ColorReviews LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id = ColorReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id = ColorReviews.color_id WHERE ColorReviews.approved = ?',
-    [approved],
+const adminIndex = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE';
+
+  const inserts = sqlUtil.getIndexInserts(queryKeys, queryValues);
+
+  const unsanitizedSQL = sqlUtil.concatStringQueryInserts(
+    partialSQL,
+    queryKeys.length,
   );
+
+  const sanitizedSQL = mysql.format(unsanitizedSQL, inserts);
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
+
   await awsUrls.addHighResUrls(res);
+
   return res;
 };
 
 const show = async (writingSampleID) => {
   const res = await db.pool.asyncQuery(
-    'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ColorReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.writing_sample_id=? AND ColorReviews.approved <> 0',
+    'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=ColorReviews.writing_sample_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE ColorReviews.writing_sample_id=? AND ColorReviews.approved = 1',
     [writingSampleID],
   );
   return res;
@@ -65,7 +88,7 @@ const remove = async (data) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
+  adminIndex,
   insert,
   show,
   remove,

@@ -1,6 +1,6 @@
 const express = require('express');
 const nibsService = require('../services/nibsService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const nibsRouter = express.Router();
 
@@ -11,8 +11,8 @@ nibsRouter.get('/', nibsService.index);
 // POST
 nibsRouter.post(
   '/admin/',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   nibsService.adminIndex,
 );
 

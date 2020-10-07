@@ -1,6 +1,6 @@
 const express = require('express');
 const papersService = require('../services/papersService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const papersRouter = express.Router();
 
@@ -11,8 +11,8 @@ papersRouter.get('/', papersService.index);
 // POST
 papersRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   papersService.isApprovedIndex,
 );
 

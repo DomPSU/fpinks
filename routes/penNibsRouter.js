@@ -1,6 +1,6 @@
 const express = require('express');
 const penNibsService = require('../services/penNibsService');
-const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const penNibsRouter = express.Router();
 
@@ -10,8 +10,8 @@ penNibsRouter.get('/', penNibsService.index);
 // POST
 penNibsRouter.post(
   '/admin/:approved',
-  authService.isUser,
-  authService.isAdmin,
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
   penNibsService.isApprovedIndex,
 );
 penNibsRouter.post('/', penNibsService.insert);
