@@ -18,7 +18,6 @@ class AdminIndex extends Component {
     this.getIndex();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   getIndex() {
     const originLength = window.location.origin.length;
     const url = window.location.href.slice(originLength);
@@ -38,8 +37,38 @@ class AdminIndex extends Component {
   render() {
     const { index } = this.state;
 
-    const tableHeaders = index.length ? Object.keys(index[0]) : [];
+    let tableHeaders = [];
+    if (index.length) {
+      tableHeaders = Object.keys(index[0]);
+      tableHeaders.push('edit');
+    }
 
+    // get model from url
+    const originLength = window.location.origin.length;
+    const url = window.location.href.slice(originLength);
+    const model = url.split('/')[1];
+
+    // get string query keys from models
+    let queryKeys = [];
+    if (model === 'pens') {
+      queryKeys = ['pen_id'];
+    }
+
+    const partialEditURL = `/${model}/edit/?`;
+
+    if (model === 'pens') {
+      index.forEach((row) => {
+        let editURL = partialEditURL;
+
+        queryKeys.forEach((key) => {
+          editURL = editURL.concat(`${key}=${row[key]}&`);
+        });
+
+        editURL = editURL.substring(0, editURL.length - 1);
+        // eslint-disable-next-line no-param-reassign
+        row.edit = editURL;
+      });
+    }
     return (
       <div>
         <div className="container-fluid text-center">

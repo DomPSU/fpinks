@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class TableRow extends Component {
   render() {
@@ -18,6 +19,10 @@ class TableRow extends Component {
         return <a href={value}>original writing sample</a>;
       }
 
+      if (key === 'edit') {
+        return <Link to={value}>edit</Link>;
+      }
+
       return value;
     });
 
@@ -30,5 +35,4 @@ class TableRow extends Component {
     );
   }
 }
-
 export default TableRow;

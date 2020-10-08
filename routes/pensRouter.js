@@ -18,6 +18,13 @@ pensRouter.post(
   pensService.adminIndex,
 );
 
+pensRouter.post(
+  '/edit/:id',
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
+  pensService.update,
+);
+
 pensRouter.post('/', pensService.insert);
 
 module.exports = pensRouter;

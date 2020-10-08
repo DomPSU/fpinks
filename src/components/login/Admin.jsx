@@ -36,6 +36,9 @@ export default function Admin() {
         <Link className="p-3" to="/pens/new">
           Pens Insert
         </Link>
+        <Link className="p-3" to="/pens/edit">
+          Pens Update
+        </Link>
       </div>
       {/* nibs */}
       <div className="row">

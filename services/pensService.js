@@ -13,10 +13,9 @@ const index = async (req, res, next) => {
 };
 
 const show = async (req, res, next) => {
-  let data;
   const { id } = req.params;
   try {
-    data = await pensModel.show(id);
+    const data = await pensModel.show(id);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -48,9 +47,26 @@ const insert = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const { id } = req.params;
+  const pen = {
+    ...req.body,
+  };
+
+  try {
+    const data = await pensModel.update(id, pen);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   insert,
   show,
   adminIndex,
+  update,
 };

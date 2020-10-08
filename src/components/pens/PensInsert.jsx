@@ -47,11 +47,11 @@ class PensInsert extends Component {
     console.log(this.state);
     return (
       <div className="container text-center">
-        <h1 className="mt-5">Add a Pen</h1>
-        <form className="bg-secondary">
+        <h1 className="p-5">Add a Pen</h1>
+        <form>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="penBrand">
+              <label htmlFor="penBrand" className="p-3">
                 Pen Brand
                 <input
                   type="text"
@@ -60,7 +60,7 @@ class PensInsert extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <label htmlFor="penModel">
+              <label htmlFor="penModel" className="p-3">
                 Pen Model
                 <input
                   type="text"

@@ -75,9 +75,29 @@ const insert = async (data) => {
   }
 };
 
+const update = async (id, data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE Pens SET brand = ?, model = ?, approved = ?, updated_at = ? WHERE pen_id = ?',
+    [
+      data.penBrand.toLowerCase(),
+      data.penModel.toLowerCase(),
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      id,
+    ],
+  );
+  console.log(updateRes);
+  return updateRes;
+};
+
 module.exports = {
   index,
   insert,
   show,
   adminIndex,
+  update,
 };

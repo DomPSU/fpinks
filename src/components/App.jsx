@@ -35,6 +35,7 @@ import GenericMessage from './shared/genericMessage';
 
 // pens
 import PensInsert from './pens/PensInsert';
+import PensUpdate from './pens/PensUpdate';
 
 // nibs
 import NibsInsert from './nibs/NibsInsert';
@@ -164,6 +165,15 @@ class App extends Component {
             />
 
             {/* pens */}
+            <Route
+              exact
+              path="/pens/edit/"
+              key="/pens/edit/"
+              render={() =>
+                isAdmin ? <PensUpdate /> : <Redirect to="/unauthorized" />
+              }
+            />
+
             <Route
               exact
               path="/pens/new"
