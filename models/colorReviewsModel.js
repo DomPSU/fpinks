@@ -18,7 +18,7 @@ const index = async (queryKeys, queryValues) => {
 
 const adminIndex = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT ColorReviews.writing_sample_id, Users.username, Colors.name AS color, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at, WritingSamples.high_res_aws_key FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id LEFT JOIN WritingSamples ON ColorReviews.writing_sample_id = WritingSamples.writing_sample_id WHERE';
+    'SELECT ColorReviews.writing_sample_id, Users.username, Users.user_id, Colors.color_id, Colors.name AS color, ColorReviews.approved, ColorReviews.created_at, ColorReviews.updated_at, WritingSamples.high_res_aws_key FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id LEFT JOIN WritingSamples ON ColorReviews.writing_sample_id = WritingSamples.writing_sample_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -71,9 +71,29 @@ const remove = async (data) => {
   return deleteRes;
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE ColorReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND color_id = ? and writing_sample_id = ?',
+    [
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.userID,
+      data.colorID,
+      data.writingSampleID,
+    ],
+  );
+  console.log(updateRes);
+  return updateRes;
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   remove,
+  update,
 };

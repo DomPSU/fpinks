@@ -81,9 +81,25 @@ const remove = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const colorReview = {
+    ...req.body,
+  };
+
+  try {
+    const data = await colorReviewsModel.update(colorReview);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   remove,
+  update,
 };

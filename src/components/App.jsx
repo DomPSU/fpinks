@@ -56,6 +56,7 @@ import WritingSample from './writingSamples/WritingSample';
 
 // colorReviews
 import ColorReviewsInsert from './colorReviews/ColorReviewsInsert';
+import ColorReviewsUpdate from './colorReviews/ColorReviewsUpdate';
 
 // shadingReviews
 import ShadingReviewsInsert from './shadingReviews/ShadingReviewsInsert';
@@ -338,6 +339,19 @@ class App extends Component {
             />
 
             {/* colorReviews */}
+            <Route
+              exact
+              path="/color-reviews/edit/"
+              key="/color-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <ColorReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/color-reviews/new"

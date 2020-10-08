@@ -52,6 +52,8 @@ class AdminIndex extends Component {
     let queryKeys = [];
     if (model === 'pens') {
       queryKeys = ['pen_id'];
+    } else if (model === 'color-reviews') {
+      queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
     }
 
     const partialEditURL = `/${model}/edit/?`;
@@ -69,6 +71,25 @@ class AdminIndex extends Component {
         row.edit = editURL;
       });
     }
+
+    if (model === 'color-reviews') {
+      index.forEach((row) => {
+        let editURL = partialEditURL;
+
+        queryKeys.forEach((key) => {
+          editURL = editURL.concat(`ColorReviews.${key}=${row[key]}&`);
+        });
+
+        // TODO REMOVE
+        console.log('EDIT URL');
+        console.log(editURL);
+
+        editURL = editURL.substring(0, editURL.length - 1);
+        // eslint-disable-next-line no-param-reassign
+        row.edit = editURL;
+      });
+    }
+
     return (
       <div>
         <div className="container-fluid text-center">

@@ -21,6 +21,13 @@ colorReviewsRouter.post(
   colorReviewsService.adminIndex,
 );
 
+colorReviewsRouter.post(
+  '/edit/',
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
+  colorReviewsService.update,
+);
+
 colorReviewsRouter.post('/', colorReviewsService.insert);
 
 module.exports = colorReviewsRouter;
