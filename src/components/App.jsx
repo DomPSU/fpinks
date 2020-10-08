@@ -42,7 +42,6 @@ import NibsInsert from './nibs/NibsInsert';
 import NibsUpdate from './nibs/NibsUpdate';
 
 // penNibs
-import PenNibsIndex from './penNibs/PenNibsIndex';
 import PenNibsInsert from './penNibs/PenNibsInsert';
 
 // inks
@@ -54,7 +53,6 @@ import PapersInsert from './papers/PapersInsert';
 import PapersUpdate from './papers/PapersUpdate';
 
 // writingSamples
-import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
 import WritingSample from './writingSamples/WritingSample';
 
 // colorReviews
@@ -263,7 +261,7 @@ class App extends Component {
               path="/pen-nibs"
               key="/pen-nibs"
               render={() =>
-                isAdmin ? <PenNibsIndex /> : <Redirect to="/unauthorized" />
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
@@ -360,11 +358,7 @@ class App extends Component {
               path="/writing-samples"
               key="/writing-samples"
               render={() =>
-                isAdmin ? (
-                  <WritingSamplesIndex />
-                ) : (
-                  <Redirect to="/unauthorized" />
-                )
+                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
               }
             />
 
