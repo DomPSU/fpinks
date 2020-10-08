@@ -47,6 +47,7 @@ import PenNibsInsert from './penNibs/PenNibsInsert';
 
 // inks
 import InksInsert from './inks/InksInsert';
+import InksUpdate from './inks/InksUpdate';
 
 // papers
 import PapersInsert from './papers/PapersInsert';
@@ -266,6 +267,15 @@ class App extends Component {
             />
 
             {/* inks */}
+            <Route
+              exact
+              path="/inks/edit/"
+              key="/inks/edit/"
+              render={() =>
+                isAdmin ? <InksUpdate /> : <Redirect to="/unauthorized" />
+              }
+            />
+
             <Route
               exact
               path="/inks/new"

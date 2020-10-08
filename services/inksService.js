@@ -49,9 +49,28 @@ const insert = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const { id } = req.params;
+  const ink = {
+    ...req.body,
+  };
+
+  ink.inkID = id;
+
+  try {
+    const data = await inksModel.update(ink);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   show,
+  update,
 };

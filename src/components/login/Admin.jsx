@@ -96,6 +96,9 @@ export default function Admin() {
         <Link className="p-3" to="/inks/new">
           Inks Insert
         </Link>
+        <Link className="p-3" to="/inks/edit">
+          Inks Update
+        </Link>
       </div>
       {/* papers */}
       <div className="row">

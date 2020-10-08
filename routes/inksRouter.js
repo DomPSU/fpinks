@@ -18,6 +18,13 @@ inksRouter.post(
   inksService.adminIndex,
 );
 
+inksRouter.post(
+  '/edit/:id',
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
+  inksService.update,
+);
+
 inksRouter.post('/', inksService.insert);
 
 module.exports = inksRouter;

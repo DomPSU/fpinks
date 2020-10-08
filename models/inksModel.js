@@ -75,11 +75,31 @@ const insert = async (data) => {
   }
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE Inks SET brand = ?, name = ?, approved = ?, updated_at = ? WHERE ink_id = ?',
+    [
+      data.inkBrand.toLowerCase(),
+      data.inkName.toLowerCase(),
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.inkID,
+    ],
+  );
+  console.log(updateRes);
+  return updateRes;
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   show,
+  update,
 };
 
 // TODO move parts of validation to controller (services)
