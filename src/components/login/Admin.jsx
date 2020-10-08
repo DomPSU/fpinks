@@ -117,6 +117,9 @@ export default function Admin() {
         <Link className="p-3" to="/papers/new">
           Papers Insert
         </Link>
+        <Link className="p-3" to="/papers/edit">
+          Papers Update
+        </Link>
       </div>
       {/* writingSamples */}
       <div className="row">

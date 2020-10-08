@@ -81,9 +81,32 @@ const insert = async (data) => {
   }
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE Papers SET brand = ?, name = ?, style = ?, lbs = ?, grams = ?, approved = ?, updated_at = ? WHERE paper_id = ?',
+    [
+      data.paperBrand.toLowerCase(),
+      data.paperName.toLowerCase(),
+      data.paperStyle.toLowerCase(),
+      data.lbs,
+      data.grams,
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.paperID,
+    ],
+  );
+  console.log(updateRes);
+  return updateRes;
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   show,
+  update,
 };

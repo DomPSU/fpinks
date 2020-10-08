@@ -22,6 +22,13 @@ papersRouter.post(
   papersService.adminIndex,
 );
 
+papersRouter.post(
+  '/edit/:id',
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
+  papersService.update,
+);
+
 papersRouter.post('/', papersService.insert);
 
 module.exports = papersRouter;

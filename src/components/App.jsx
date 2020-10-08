@@ -51,6 +51,7 @@ import InksUpdate from './inks/InksUpdate';
 
 // papers
 import PapersInsert from './papers/PapersInsert';
+import PapersUpdate from './papers/PapersUpdate';
 
 // writingSamples
 import WritingSamplesIndex from './writingSamples/WritingSamplesIndex';
@@ -303,6 +304,15 @@ class App extends Component {
             />
 
             {/* papers */}
+            <Route
+              exact
+              path="/papers/edit/"
+              key="/papers/edit/"
+              render={() =>
+                isAdmin ? <PapersUpdate /> : <Redirect to="/unauthorized" />
+              }
+            />
+
             <Route
               exact
               path="/papers/new"

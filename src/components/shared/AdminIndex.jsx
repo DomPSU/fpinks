@@ -56,13 +56,20 @@ class AdminIndex extends Component {
       queryKeys = ['nib_id'];
     } else if (model === 'inks') {
       queryKeys = ['ink_id'];
+    } else if (model === 'papers') {
+      queryKeys = ['paper_id'];
     } else if (model === 'color-reviews') {
       queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
     }
 
     const partialEditURL = `/${model}/edit/?`;
 
-    if (model === 'pens' || model === 'nibs' || model === 'inks') {
+    if (
+      model === 'pens' ||
+      model === 'nibs' ||
+      model === 'inks' ||
+      model === 'papers'
+    ) {
       index.forEach((row) => {
         let editURL = partialEditURL;
 
