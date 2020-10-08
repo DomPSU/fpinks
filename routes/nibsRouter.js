@@ -18,6 +18,13 @@ nibsRouter.post(
   nibsService.adminIndex,
 );
 
+nibsRouter.post(
+  '/edit/:id',
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
+  nibsService.update,
+);
+
 nibsRouter.post('/', nibsService.insert);
 
 module.exports = nibsRouter;

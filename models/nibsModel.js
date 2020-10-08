@@ -77,9 +77,30 @@ const insert = async (data) => {
   }
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE Nibs SET size= ?, grind = ?, tune = ?, approved = ?, updated_at = ? WHERE nib_id = ?',
+    [
+      data.nibSize.toLowerCase(),
+      data.nibGrind.toLowerCase(),
+      data.nibTune.toLowerCase(),
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.nibID,
+    ],
+  );
+  console.log(updateRes);
+  return updateRes;
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   show,
+  update,
 };

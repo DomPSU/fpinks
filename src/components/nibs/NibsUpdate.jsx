@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import API from '../../apis/API';
 import { getIDToken } from '../../util/util';
 
-class PensUpdate extends Component {
+class NibsUpdate extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      penID: '',
-      penBrand: '',
-      penModel: '',
+      nibID: '',
+      nibSize: '',
+      nibGrind: '',
+      nibTune: '',
       approved: '',
       disableForm: true,
       serverResponse: '',
     };
 
-    this.getPen = this.getPen.bind(this);
+    this.getNib = this.getNib.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -25,30 +26,33 @@ class PensUpdate extends Component {
     const editURL = window.location.href.slice(originLength);
     const getURL = editURL.replace('edit', 'admin');
 
-    // if url contains query string, get pen
+    // if url contains query string, get nib
     if (getURL.indexOf('?') !== -1) {
-      this.getPen(getURL);
+      this.getNib(getURL);
     }
   }
 
-  getPen(url) {
+  getNib(url) {
     const idToken = getIDToken();
 
     API.instance
       .post(url, { idToken })
       .then((res) => {
         this.setState({
-          penID: res.data[0].pen_id,
-          penBrand: res.data[0].brand,
-          penModel: res.data[0].model,
+          nibID: res.data[0].nib_id,
+          nibSize: res.data[0].size,
+          nibGrind: res.data[0].grind,
+          nibTune: res.data[0].tune,
           approved: res.data[0].approved,
           disableForm: false,
         });
       })
       .catch((error) => {
         this.setState({
-          penBrand: '',
-          penModel: '',
+          nibID: '',
+          nibSize: '',
+          nibGrind: '',
+          nibTune: '',
           approved: '',
           disableForm: true,
         });
@@ -66,11 +70,11 @@ class PensUpdate extends Component {
         serverResponse: '',
       },
       () => {
-        if (id === 'penID') {
-          const { penID } = this.state;
+        if (id === 'nibID') {
+          const { nibID } = this.state;
 
           this.setState({ disableForm: true }, () => {
-            this.getPen(`/pens/admin/?pen_id=${penID}`);
+            this.getNib(`/nibs/admin/?nib_id=${nibID}`);
           });
         }
       },
@@ -78,16 +82,17 @@ class PensUpdate extends Component {
   }
 
   handleSubmit(e) {
-    const { penID, penBrand, penModel, approved } = this.state;
+    const { nibID, nibSize, nibGrind, nibTune, approved } = this.state;
     const idToken = getIDToken();
 
     // TODO add frontend validation
 
     API.instance
-      .post(`/pens/edit/${penID}`, {
+      .post(`/nibs/edit/${nibID}`, {
         idToken,
-        penBrand,
-        penModel,
+        nibSize,
+        nibGrind,
+        nibTune,
         approved,
       })
       .then((res) => {
@@ -113,9 +118,10 @@ class PensUpdate extends Component {
 
   render() {
     const {
-      penID,
-      penBrand,
-      penModel,
+      nibID,
+      nibSize,
+      nibGrind,
+      nibTune,
       approved,
       disableForm,
       serverResponse,
@@ -123,39 +129,50 @@ class PensUpdate extends Component {
 
     return (
       <div className="container text-center">
-        <h1 className="p-5">Update a Pen</h1>
+        <h1 className="p-5">Update a Nib</h1>
         <form>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
-              <label htmlFor="penID" className="p-3">
-                Pen ID
+              <label htmlFor="nibID" className="p-3">
+                Nib ID
                 <input
                   type="text"
-                  id="penID"
+                  id="nibID"
                   className="form-control"
                   onChange={this.handleChange}
-                  value={penID}
+                  value={nibID}
                 />
               </label>
-              <label htmlFor="penBrand" className="p-3">
-                Pen Brand
+              <label htmlFor="nibSize" className="p-3">
+                Nib Size
                 <input
                   type="text"
-                  id="penBrand"
+                  id="nibSize"
                   className="form-control"
                   onChange={this.handleChange}
-                  value={penBrand}
+                  value={nibSize}
                   disabled={disableForm}
                 />
               </label>
-              <label htmlFor="penModel" className="p-3">
-                Pen Model
+              <label htmlFor="nibGrind" className="p-3">
+                Nib Grind
                 <input
                   type="text"
-                  id="penModel"
+                  id="nibGrind"
                   className="form-control"
                   onChange={this.handleChange}
-                  value={penModel}
+                  value={nibGrind}
+                  disabled={disableForm}
+                />
+              </label>
+              <label htmlFor="nibTune" className="p-3">
+                Nib Tune
+                <input
+                  type="text"
+                  id="nibTune"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={nibTune}
                   disabled={disableForm}
                 />
               </label>
@@ -187,4 +204,4 @@ class PensUpdate extends Component {
   }
 }
 
-export default PensUpdate;
+export default NibsUpdate;

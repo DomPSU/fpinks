@@ -68,7 +68,7 @@ class ColorReviewsUpdate extends Component {
         serverResponse: '',
       },
       () => {
-        const { userID, colorID, writingSampleID } = this.state; // TODO should probably do this for PensUpdate
+        const { userID, colorID, writingSampleID } = this.state;
 
         if (id === 'userID' || id === 'colorID' || id === 'writingSampleID') {
           this.setState({ disableForm: true }, () => {

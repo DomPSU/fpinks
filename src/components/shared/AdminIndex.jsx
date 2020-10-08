@@ -52,13 +52,15 @@ class AdminIndex extends Component {
     let queryKeys = [];
     if (model === 'pens') {
       queryKeys = ['pen_id'];
+    } else if (model === 'nibs') {
+      queryKeys = ['nib_id'];
     } else if (model === 'color-reviews') {
       queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
     }
 
     const partialEditURL = `/${model}/edit/?`;
 
-    if (model === 'pens') {
+    if (model === 'pens' || model === 'nibs') {
       index.forEach((row) => {
         let editURL = partialEditURL;
 

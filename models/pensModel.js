@@ -75,7 +75,7 @@ const insert = async (data) => {
   }
 };
 
-const update = async (id, data) => {
+const update = async (data) => {
   // TODO validate all needed keys
 
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
@@ -87,7 +87,7 @@ const update = async (id, data) => {
       data.penModel.toLowerCase(),
       data.approved,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
-      id,
+      data.penID,
     ],
   );
   console.log(updateRes);

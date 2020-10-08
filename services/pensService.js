@@ -53,8 +53,10 @@ const update = async (req, res, next) => {
     ...req.body,
   };
 
+  pen.penID = id;
+
   try {
-    const data = await pensModel.update(id, pen);
+    const data = await pensModel.update(pen);
     res.statusMessage = 'Update succesful.';
     res.status(200).send(data);
   } catch (e) {

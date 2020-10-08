@@ -39,6 +39,7 @@ import PensUpdate from './pens/PensUpdate';
 
 // nibs
 import NibsInsert from './nibs/NibsInsert';
+import NibsUpdate from './nibs/NibsUpdate';
 
 // penNibs
 import PenNibsIndex from './penNibs/PenNibsIndex';
@@ -202,6 +203,15 @@ class App extends Component {
             />
 
             {/* nibs */}
+            <Route
+              exact
+              path="/nibs/edit/"
+              key="/nibs/edit/"
+              render={() =>
+                isAdmin ? <NibsUpdate /> : <Redirect to="/unauthorized" />
+              }
+            />
+
             <Route
               exact
               path="/nibs/new"

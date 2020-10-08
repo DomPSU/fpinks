@@ -49,9 +49,28 @@ const insert = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const { id } = req.params;
+  const nib = {
+    ...req.body,
+  };
+
+  nib.nibID = id;
+
+  try {
+    const data = await nibsModel.update(nib);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   adminIndex,
   insert,
   show,
+  update,
 };
