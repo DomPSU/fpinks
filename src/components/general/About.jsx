@@ -12,12 +12,7 @@ export default function About() {
         the subjective qualities of the writing sample.
       </h3>
       <h1 className="pt-3 font-weight-bold">Contact</h1>
-      <h3 className="font-weight-bold">
-        Dom@fpinks.com,&nbsp;
-        <a href="https://www.linkedin.com/public-profile/in/dominiclupo">
-          Linkedin
-        </a>
-      </h3>
+      <h3 className="font-weight-bold">DominicFPinks@gmail.com&nbsp;</h3>
       <h3 className="pb-3">
         Feel free to contact for suggestions, bug reports or questions.
       </h3>

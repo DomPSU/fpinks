@@ -2,27 +2,20 @@ const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-async function verify(token) {
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: process.env.GOOGLE_CLIENT_ID,
-  });
-  return ticket;
-}
-verify().catch(console.error);
+const verify = async (token) => {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
 
-async function getAdminCredentials(ticket) {
-  const payload = ticket.getPayload();
+    return ticket;
+  } catch (err) {
+    throw new Error();
+  }
+};
 
-  const validatedUser = {};
-
-  validatedUser.sub = payload.sub;
-  validatedUser.iss = payload.iss;
-
-  return validatedUser;
-}
-
-async function getInsertCredentials(ticket) {
+const getInsertCredentials = (ticket) => {
   const payload = ticket.getPayload();
 
   const validatedUser = {};
@@ -32,10 +25,9 @@ async function getInsertCredentials(ticket) {
   validatedUser.email = payload.email;
 
   return validatedUser;
-}
+};
 
 module.exports = {
   verify,
-  getAdminCredentials,
   getInsertCredentials,
 };

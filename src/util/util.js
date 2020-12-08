@@ -1,11 +1,3 @@
-export const developmentSignIn = () => {
-  return true; // toggle true/false for development
-};
-
-export const developmentAdmin = () => {
-  return true; // toggle true/false for development
-};
-
 export const isDevelopment = () => {
   return process.env.NODE_ENV === 'development';
 };
@@ -29,11 +21,6 @@ export const capitalize = (string) => {
 };
 
 export const signOut = () => {
-  if (isDevelopment()) {
-    console.log('Signed out in development');
-    return;
-  }
-
   if (window.gapiLoaded === true) {
     const googleAuth = window.gapi.auth2.getAuthInstance();
     googleAuth.signOut().then(() => {
@@ -45,11 +32,6 @@ export const signOut = () => {
 };
 
 export const getIDToken = () => {
-  if (isDevelopment()) {
-    console.log('Get ID token in development');
-    return;
-  }
-
   if (window.gapiLoaded === true) {
     const googleAuth = window.gapi.auth2.getAuthInstance();
     const googleUser = googleAuth.currentUser.get();

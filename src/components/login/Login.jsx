@@ -42,14 +42,22 @@ class Login extends Component {
   // TODO
   // eslint-disable-next-line class-methods-use-this
   isAdmin(idToken) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    };
+
     API.instance
-      .post('/users/admin?', {
-        idToken,
-      })
+      .post('/users/admin', {}, config)
       .then((res) => {
         const { handleAdminSignIn } = this.props;
 
-        handleAdminSignIn(res.data.isAdmin);
+        if (res.status === 200) {
+          handleAdminSignIn(true);
+        } else {
+          handleAdminSignIn(false);
+        }
 
         console.log(res);
       })
@@ -87,18 +95,7 @@ class Login extends Component {
 
     return (
       <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-2" />
-            <h3 className="col-12 col-md-8 p-5 text-center">
-              An account is only needed to submit reviews. An account also lets
-              you track your contributed writing samples and allows us to email
-              you if we have questions about your contributed writing samples.
-            </h3>
-            <div className="col-md-2" />
-          </div>
-        </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center p-5">
           <a href="/login" id="loginButton">
             Sign in with Google
           </a>

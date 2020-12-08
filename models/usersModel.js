@@ -64,40 +64,15 @@ const insert = async (data) => {
   }
 };
 
-const isAdmin = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-
-  // TODO REMOVE
-  console.log('DATA IN USERS MODEL');
-  console.log(data);
-
-  // search database for admin
+const getUserFromSubAndIss = async (data) => {
   const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM Users WHERE sub = ? AND iss = ? AND level = ?',
-    [data.sub, data.iss, 'admin'],
+    'SELECT * FROM Users WHERE sub = ? AND iss = ?',
+    [data.sub, data.iss],
   );
 
-  // TODO REMOVE
-  console.log('SELECT LENGTH');
-  console.log(selectRes.length);
+  // TODO throw error if length !== 1
 
-  // insert user if he or she doesnt exist
-  if (selectRes.length === 0) {
-    return false;
-  }
-
-  // return user if he already exists
-  if (selectRes.length === 1) {
-    return true;
-  }
-
-  if (selectRes.length >= 2) {
-    throw Object.assign(new Error('duplicate admin in database'), {
-      code: 500,
-    });
-  }
+  return selectRes[0];
 };
 
 module.exports = {
@@ -105,5 +80,5 @@ module.exports = {
   isApprovedIndex,
   show,
   insert,
-  isAdmin,
+  getUserFromSubAndIss,
 };

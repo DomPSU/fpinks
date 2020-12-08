@@ -12,17 +12,17 @@ usersRouter.get('/', usersService.index);
 usersRouter.post('/', usersService.insert);
 
 usersRouter.post(
-  '/admin?',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  usersService.isAdmin,
-);
-
-usersRouter.post(
   '/admin/:approved',
   authMiddleware.isUser,
   authMiddleware.isAdmin,
   usersService.isApprovedIndex,
+);
+
+usersRouter.post(
+  '/admin',
+  authMiddleware.isUser,
+  authMiddleware.isAdmin,
+  usersService.validAdmin,
 );
 
 module.exports = usersRouter;

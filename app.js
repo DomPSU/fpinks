@@ -25,23 +25,20 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// TODO FIX 404 error, may need to fix on front end
-// catch 404 and forward to error handler
+// catch 404
 app.use((req, res, next) => {
-  next(createError(404));
+  next(createError(404, 'Not Found'));
 });
 
-// TODO FIX 500 error, may need to fix on front end
 // error handler
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  err.status = err.status ? err.status : 500;
+  err.message = err.message ? err.message : 'Server error';
+  res.status(err.status);
 
-  console.error(err);
+  console.log(`${err.status} : ${err.message}`);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.send({ error: err.message });
+  res.json({ Error: err.message }).end();
 });
+
 module.exports = app;

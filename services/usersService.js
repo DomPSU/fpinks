@@ -54,22 +54,8 @@ const insert = async (req, res, next) => {
   verify().catch(console.error);
 };
 
-const isAdmin = async (req, res, next) => {
-  // check if admin was verified
-  if (typeof res.locals.admin === 'undefined') {
-    console.log(
-      '403 forbidden. Need to verify admin before sending admin response.',
-    );
-    res.status(403).end();
-    return;
-  }
-
-  try {
-    res.status(200).send({ isAdmin: res.locals.admin });
-    return;
-  } catch (e) {
-    next(e);
-  }
+const validAdmin = async (req, res, next) => {
+  res.status(200).end();
 };
 
 module.exports = {
@@ -77,5 +63,5 @@ module.exports = {
   isApprovedIndex,
   show,
   insert,
-  isAdmin,
+  validAdmin,
 };

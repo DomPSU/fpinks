@@ -5,11 +5,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import {
-  developmentSignIn,
-  developmentAdmin,
-  isDevelopment,
-} from '../util/util';
 
 // general
 import About from './general/About';
@@ -83,36 +78,37 @@ class App extends Component {
 
     this.state = { isSignedIn: false, isAdmin: false };
 
-    if (isDevelopment()) {
-      this.state.isSignedIn = developmentSignIn();
-      this.state.isAdmin = developmentAdmin();
-    } else {
-      this.handleSignIn = this.handleSignIn.bind(this);
-      this.handleAdminSignIn = this.handleAdminSignIn.bind(this);
-      this.handleSignOut = this.handleSignOut.bind(this);
-      this.initializeGoogleSignIn = this.initializeGoogleSignIn.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleAdminSignIn = this.handleAdminSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
+    this.initializeGoogleSignIn = this.initializeGoogleSignIn.bind(this);
 
-      // call initializeGoogleSignIn right after gapi is loaded
-      document
-        .getElementById('gapiScript')
-        .addEventListener('load', this.initializeGoogleSignIn);
+    // call initializeGoogleSignIn right after gapi is loaded
+    document
+      .getElementById('gapiScript')
+      .addEventListener('load', this.initializeGoogleSignIn);
 
-      // call initializeGoogleSignIn  if gapi is already loaded to avoid race condition
-      if (window.gapiLoaded === true) {
-        this.initializeGoogleSignIn();
-      }
+    // call initializeGoogleSignIn  if gapi is already loaded to avoid race condition
+    if (window.gapiLoaded === true) {
+      this.initializeGoogleSignIn();
     }
   }
 
   handleSignIn = () => {
+    // TODO handle refresh bug
+
     this.setState({ isSignedIn: true });
   };
 
   handleAdminSignIn = (isAdminRes) => {
+    // TODO handle refresh bug
+
     this.setState({ isAdmin: isAdminRes });
   };
 
   handleSignOut = () => {
+    // TODO delete cookie
+
     this.setState({ isSignedIn: false, isAdmin: false });
   };
 
