@@ -9,14 +9,14 @@ export default function TermsOfService() {
         </h1>
         <h3 className="text-center font-weight-bold p-1">Introduction</h3>
         <h5 className="p-1">
-          These website standard terms and conditons written on this webpage
+          These website standard terms and conditions written on this webpage
           shall manage your use of our website, FPinks accessible at FPinks.com
         </h5>
         <h5 className="p-1">
           These Terms will be applied fully and affect your use of this Website.
           By using this Website, you agree to accept all terms and conditions
           written in here. You must not use this Website if you disagree with
-          any of these website standard erms and conditions.
+          any of these website standard terms and conditions.
         </h5>
         <h5 className="p-1">
           Minors or people below 18 years old are not allowed to use this

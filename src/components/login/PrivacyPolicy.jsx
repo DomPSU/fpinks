@@ -20,7 +20,7 @@ export default function PrivacyPolicy() {
           If you choose to use our service, then you agree to the collection and
           use of information in relation with this policy. The personal
           information that we collect is used for providing and improving the
-          service. We will not use or share your information with anyonce except
+          service. We will not use or share your information with anyone except
           as described in this privacy policy.
         </h5>
         <h5 className="p-1">
