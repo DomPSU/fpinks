@@ -27,6 +27,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'PenNibs.approved';
   }
 
+  if (path === 'color-reviews') {
+    return 'ColorReviews.approved';
+  }
+
   // TODO throw error if no match?
 };
 
