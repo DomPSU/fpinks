@@ -1,14 +1,24 @@
 const express = require('express');
 const { index, insert } = require('../controllers/dryingReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const dryingReviewsRouter = express.Router();
 
 // GET
-dryingReviewsRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString, index);
+dryingReviewsRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 // TODO show
-dryingReviewsRouter.get('/', sanitizeQueryString, index);
+dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
 dryingReviewsRouter.post('/', isAuth, insert);

@@ -47,6 +47,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'WaterReviews.approved';
   }
 
+  if (path === 'drying-reviews') {
+    return 'DryingReviews.approved';
+  }
+
   // TODO throw error if no match?
 };
 
