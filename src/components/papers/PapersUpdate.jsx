@@ -35,10 +35,14 @@ class PapersUpdate extends Component {
   }
 
   getPaper(url) {
-    const idToken = getIDToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(url, { idToken })
+      .get(url, config)
       .then((res) => {
         this.setState({
           paperID: res.data[0].paper_id,
@@ -100,16 +104,26 @@ class PapersUpdate extends Component {
 
     // TODO add frontend validation
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
     API.instance
-      .post(`/papers/edit/${paperID}`, {
-        idToken,
-        paperBrand,
-        paperName,
-        paperStyle,
-        lbs,
-        grams,
-        approved,
-      })
+      .put(
+        `/papers/edit/${paperID}`,
+        {
+          idToken,
+          paperBrand,
+          paperName,
+          paperStyle,
+          lbs,
+          grams,
+          approved,
+        },
+        config,
+      )
       .then((res) => {
         const serverResponse = document.getElementById('serverResponse');
         serverResponse.classList.remove('text-danger');

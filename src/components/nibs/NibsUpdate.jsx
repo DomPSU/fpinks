@@ -33,10 +33,14 @@ class NibsUpdate extends Component {
   }
 
   getNib(url) {
-    const idToken = getIDToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(url, { idToken })
+      .get(url, config)
       .then((res) => {
         this.setState({
           nibID: res.data[0].nib_id,
@@ -83,18 +87,26 @@ class NibsUpdate extends Component {
 
   handleSubmit(e) {
     const { nibID, nibSize, nibGrind, nibTune, approved } = this.state;
-    const idToken = getIDToken();
 
     // TODO add frontend validation
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
     API.instance
-      .post(`/nibs/edit/${nibID}`, {
-        idToken,
-        nibSize,
-        nibGrind,
-        nibTune,
-        approved,
-      })
+      .post(
+        `/nibs/edit/${nibID}`,
+        {
+          nibSize,
+          nibGrind,
+          nibTune,
+          approved,
+        },
+        config,
+      )
       .then((res) => {
         const serverResponse = document.getElementById('serverResponse');
         serverResponse.classList.remove('text-danger');

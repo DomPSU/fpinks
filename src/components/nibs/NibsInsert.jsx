@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
+import { getIDToken } from '../../util/util';
 
 class NibsInsert extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class NibsInsert extends Component {
     this.state = {
       nibSize: '',
       nibGrind: '',
-      nibTuen: '',
+      nibTune: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,12 +30,22 @@ class NibsInsert extends Component {
 
     // TODO add frontend validation
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
     API.instance
-      .post('/nibs', {
-        nibSize,
-        nibGrind,
-        nibTune,
-      })
+      .post(
+        '/nibs',
+        {
+          nibSize,
+          nibGrind,
+          nibTune,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })
@@ -50,7 +61,7 @@ class NibsInsert extends Component {
     return (
       <div className="container text-center">
         <h1 className="mt-5">Add a Nib</h1>
-        <form className="bg-secondary">
+        <form>
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
               <label htmlFor="nibSize">

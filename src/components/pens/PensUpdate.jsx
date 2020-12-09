@@ -32,10 +32,14 @@ class PensUpdate extends Component {
   }
 
   getPen(url) {
-    const idToken = getIDToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(url, { idToken })
+      .get(url, config)
       .then((res) => {
         this.setState({
           penID: res.data[0].pen_id,
@@ -79,17 +83,24 @@ class PensUpdate extends Component {
 
   handleSubmit(e) {
     const { penID, penBrand, penModel, approved } = this.state;
-    const idToken = getIDToken();
 
     // TODO add frontend validation
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(`/pens/edit/${penID}`, {
-        idToken,
-        penBrand,
-        penModel,
-        approved,
-      })
+      .put(
+        `/pens/edit/${penID}`,
+        {
+          penBrand,
+          penModel,
+          approved,
+        },
+        config,
+      )
       .then((res) => {
         const serverResponse = document.getElementById('serverResponse');
         serverResponse.classList.remove('text-danger');

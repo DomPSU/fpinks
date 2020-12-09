@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
 import dryingTimesJSON from '../../constants/dryingTimes.json';
+import { getIDToken } from '../../util/util';
 
 class DryingReviewsInsert extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class DryingReviewsInsert extends Component {
     this.state = {
       dryingTime: '',
       writingSampleID: '',
-      userID: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,19 +26,25 @@ class DryingReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { dryingTime, writingSampleID, userID } = this.state;
+    const { dryingTime, writingSampleID } = this.state;
 
     // TODO add frontend validation
 
-    // TODO get user ID from login instead of html input
-    // Also delete html view for user id input
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post('/drying-reviews', {
-        dryingTime,
-        writingSampleID,
-        userID,
-      })
+      .post(
+        '/drying-reviews',
+        {
+          dryingTime,
+          writingSampleID,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })

@@ -14,11 +14,12 @@ const usersRouter = express.Router();
 // GET
 usersRouter.get('/level', isAuth, isAdmin, validAdmin);
 usersRouter.get('/:id', show);
-usersRouter.get('/', index); // TODO sanitize query string?
+usersRouter.get('/', sanitizeQueryString, index);
 
 // POST
 usersRouter.post('/', insert);
 
+// TODO why is this different from other adminIndex? /admin/:approved and isApprovedIndex are both different
 usersRouter.post('/admin/:approved', isAuth, isAdmin, isApprovedIndex);
 
 module.exports = usersRouter;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from '../../apis/API';
 import nibsJSON from '../../constants/nibs.json';
 import papersJSON from '../../constants/papers.json';
+import { getIDToken } from '../../util/util';
 
 class Contribute extends Component {
   constructor(props) {
@@ -72,8 +73,14 @@ class Contribute extends Component {
     formData.append('paperName', paperName);
     formData.append('paperStyle', paperStyle);
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
     API.instance
-      .post('/writing-samples', formData)
+      .post('/writing-samples', formData, config)
       .then((res) => {
         console.log(res);
       })

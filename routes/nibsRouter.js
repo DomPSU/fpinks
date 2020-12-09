@@ -2,7 +2,6 @@ const express = require('express');
 const {
   show,
   index,
-  adminIndex,
   update,
   insert,
 } = require('../controllers/nibsController');
@@ -12,14 +11,14 @@ const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 const nibsRouter = express.Router();
 
 // GET
+nibsRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString);
 nibsRouter.get('/:id', show);
 nibsRouter.get('/', sanitizeQueryString, index);
 
 // POST
-nibsRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
+nibsRouter.post('/', isAuth, isAdmin, insert);
 
-nibsRouter.post('/edit/:id', isAuth, isAdmin, update);
-
-nibsRouter.post('/', insert);
+// PUT
+nibsRouter.put('/edit/:id', isAuth, isAdmin, update);
 
 module.exports = nibsRouter;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
 import transparenciesJSON from '../../constants/transparencies.json';
+import { getIDToken } from '../../util/util';
 
 class TransparencyReviewsInsert extends Component {
   constructor(props) {
@@ -26,19 +27,25 @@ class TransparencyReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { transparency, writingSampleID, userID } = this.state;
+    const { transparency, writingSampleID } = this.state;
 
     // TODO add frontend validation
 
-    // TODO get user ID from login instead of html input
-    // Also delete html view for user id input
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post('/transparency-reviews', {
-        transparency,
-        writingSampleID,
-        userID,
-      })
+      .post(
+        '/transparency-reviews',
+        {
+          transparency,
+          writingSampleID,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })

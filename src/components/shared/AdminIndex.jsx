@@ -29,7 +29,7 @@ class AdminIndex extends Component {
     };
 
     API.instance
-      .post(url, {}, config)
+      .get(url, config)
       .then((res) => {
         this.setState({ index: res.data });
       })

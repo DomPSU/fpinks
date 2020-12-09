@@ -32,10 +32,14 @@ class InksUpdate extends Component {
   }
 
   getInk(url) {
-    const idToken = getIDToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(url, { idToken })
+      .get(url, config)
       .then((res) => {
         this.setState({
           inkID: res.data[0].ink_id,
@@ -79,17 +83,25 @@ class InksUpdate extends Component {
 
   handleSubmit(e) {
     const { inkID, inkBrand, inkName, approved } = this.state;
-    const idToken = getIDToken();
 
     // TODO add frontend validation
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
     API.instance
-      .post(`/inks/edit/${inkID}`, {
-        idToken,
-        inkBrand,
-        inkName,
-        approved,
-      })
+      .put(
+        `/inks/edit/${inkID}`,
+        {
+          inkBrand,
+          inkName,
+          approved,
+        },
+        config,
+      )
       .then((res) => {
         const serverResponse = document.getElementById('serverResponse');
         serverResponse.classList.remove('text-danger');

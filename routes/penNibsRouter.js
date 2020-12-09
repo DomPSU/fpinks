@@ -1,22 +1,18 @@
 const express = require('express');
-const {
-  index,
-  adminIndex,
-  insert,
-} = require('../controllers/penNibsController');
+const { index, insert } = require('../controllers/penNibsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const penNibsRouter = express.Router();
 
 // GET
+penNibsRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString, index);
 // TODO show
 penNibsRouter.get('/', sanitizeQueryString, index);
 
 // POST
-penNibsRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
-penNibsRouter.post('/', insert);
+penNibsRouter.post('/', isAuth, isAdmin, insert);
 
-// TODO update
+// TODO PUT
 
 module.exports = penNibsRouter;

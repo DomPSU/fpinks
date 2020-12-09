@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from '../../apis/API';
 import sheensJSON from '../../constants/sheens.json';
 import colorsJSON from '../../constants/colors.json';
+import { getIDToken } from '../../util/util';
 
 class SheenReviewsInsert extends Component {
   constructor(props) {
@@ -28,20 +29,26 @@ class SheenReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { color, amount, writingSampleID, userID } = this.state;
+    const { color, amount, writingSampleID } = this.state;
 
     // TODO add frontend validation
 
-    // TODO get user ID from login instead of html input
-    // Also delete html view for user id input
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post('/sheen-reviews', {
-        color,
-        amount,
-        writingSampleID,
-        userID,
-      })
+      .post(
+        '/sheen-reviews',
+        {
+          color,
+          amount,
+          writingSampleID,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })

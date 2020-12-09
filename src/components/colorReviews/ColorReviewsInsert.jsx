@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
 import colorsJSON from '../../constants/colors.json';
+import { getIDToken } from '../../util/util';
 
 class ColorReviewsInsert extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class ColorReviewsInsert extends Component {
       colorOne: '',
       colorTwo: '',
       writingSampleID: '',
-      userID: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,20 +27,25 @@ class ColorReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { colorOne, colorTwo, writingSampleID, userID } = this.state;
+    const { colorOne, colorTwo, writingSampleID } = this.state;
 
     // TODO add frontend validation
-
-    // TODO get user ID from login instead of html input
-    // Also delete html view for user id input
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post('/color-reviews', {
-        colorOne,
-        colorTwo,
-        writingSampleID,
-        userID,
-      })
+      .post(
+        '/color-reviews',
+        {
+          colorOne,
+          colorTwo,
+          writingSampleID,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })

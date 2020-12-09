@@ -2,7 +2,6 @@ const express = require('express');
 const {
   show,
   index,
-  adminIndex,
   insert,
   search,
 } = require('../controllers/writingSamplesController');
@@ -22,21 +21,12 @@ const writingSamplesRouter = express.Router();
 // Might need to remove middleware. Might need to refactor search.
 // Might need to sanitize search
 writingSamplesRouter.get('/search/:query', sanitizeQueryString, search);
-writingSamplesRouter.get('/search/', sanitizeQueryString, search);
+writingSamplesRouter.get('/search', sanitizeQueryString, search);
+writingSamplesRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString, index);
 writingSamplesRouter.get('/:id', show);
 writingSamplesRouter.get('/', sanitizeQueryString, index);
 
 // POST
-writingSamplesRouter.post(
-  '/admin/',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  adminIndex,
-);
-
 writingSamplesRouter.post('/', upload.single('writingSampleImage'), insert);
-
-// TODO update
 
 module.exports = writingSamplesRouter;

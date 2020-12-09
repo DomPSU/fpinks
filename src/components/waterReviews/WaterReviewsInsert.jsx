@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
 import watersJSON from '../../constants/waters.json';
+import { getIDToken } from '../../util/util';
 
 class WaterReviewsInsert extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class WaterReviewsInsert extends Component {
     this.state = {
       waterproofness: '',
       writingSampleID: '',
-      userID: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,19 +26,25 @@ class WaterReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { waterproofness, writingSampleID, userID } = this.state;
+    const { waterproofness, writingSampleID } = this.state;
 
     // TODO add frontend validation
 
-    // TODO get user ID from login instead of html input
-    // Also delete html view for user id input
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post('/water-reviews', {
-        waterproofness,
-        writingSampleID,
-        userID,
-      })
+      .post(
+        '/water-reviews',
+        {
+          waterproofness,
+          writingSampleID,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })

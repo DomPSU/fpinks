@@ -1,7 +1,6 @@
 const express = require('express');
 const {
   index,
-  adminIndex,
   update,
   insert,
 } = require('../controllers/colorReviewsController');
@@ -11,20 +10,14 @@ const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 const colorReviewsRouter = express.Router();
 
 // GET
+colorReviewsRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString, index);
 // TODO show
 colorReviewsRouter.get('/', sanitizeQueryString, index);
 
 // POST
-colorReviewsRouter.post(
-  '/admin/',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  adminIndex,
-);
+colorReviewsRouter.post('/', isAuth, insert);
 
-colorReviewsRouter.post('/edit/', isAuth, isAdmin, update);
-
-colorReviewsRouter.post('/', insert);
+// PUT
+colorReviewsRouter.put('/edit', isAuth, update);
 
 module.exports = colorReviewsRouter;

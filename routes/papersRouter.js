@@ -2,7 +2,6 @@ const express = require('express');
 const {
   show,
   index,
-  adminIndex,
   update,
   insert,
 } = require('../controllers/papersController');
@@ -12,14 +11,14 @@ const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 const papersRouter = express.Router();
 
 // GET
+papersRouter.get('/admin/', isAuth, isAdmin, sanitizeQueryString, index);
 papersRouter.get('/:id', show);
 papersRouter.get('/', sanitizeQueryString, index);
 
 // POST
-papersRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
+papersRouter.post('/', isAuth, isAdmin, insert);
 
-papersRouter.post('/edit/:id', isAuth, isAdmin, update);
-
-papersRouter.post('/', insert);
+// PUT
+papersRouter.put('/edit/:id', isAuth, isAdmin, update);
 
 module.exports = papersRouter;

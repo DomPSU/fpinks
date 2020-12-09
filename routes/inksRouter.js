@@ -2,24 +2,33 @@ const express = require('express');
 const {
   show,
   index,
-  adminIndex,
   update,
   insert,
 } = require('../controllers/inksController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const inksRouter = express.Router();
 
 // GET
+inksRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 inksRouter.get('/:id', show);
-inksRouter.get('/', sanitizeQueryString, index);
+inksRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
-inksRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
+inksRouter.post('/', isAuth, isAdmin, insert);
 
-inksRouter.post('/edit/:id', isAuth, isAdmin, update);
-
-inksRouter.post('/', insert);
+// PUT
+inksRouter.put('/edit/:id', isAuth, isAdmin, update);
 
 module.exports = inksRouter;

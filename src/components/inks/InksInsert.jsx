@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../apis/API';
+import { getIDToken } from '../../util/util';
 
 class InksInsert extends Component {
   constructor(props) {
@@ -27,12 +28,21 @@ class InksInsert extends Component {
     const { inkBrand, inkName } = this.state;
 
     // TODO add frontend validation
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post('/inks', {
-        inkBrand,
-        inkName,
-      })
+      .post(
+        '/inks',
+        {
+          inkBrand,
+          inkName,
+        },
+        config,
+      )
       .then((res) => {
         console.log(res);
       })

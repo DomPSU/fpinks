@@ -32,10 +32,14 @@ class ColorReviewsUpdate extends Component {
   }
 
   getColorReview(url) {
-    const idToken = getIDToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(url, { idToken })
+      .get(url, {}, config)
       .then((res) => {
         console.log(res);
         this.setState({
@@ -83,20 +87,24 @@ class ColorReviewsUpdate extends Component {
 
   handleSubmit(e) {
     const { userID, colorID, writingSampleID, approved } = this.state;
-    const idToken = getIDToken();
 
     // TODO add frontend validation
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
       .post(
         `/color-reviews/edit/?user_id=${userID}&color_id=${colorID}&writing_sample_id=${writingSampleID}`,
         {
-          idToken,
           userID,
           colorID,
           writingSampleID,
           approved,
         },
+        config,
       )
       .then((res) => {
         const serverResponse = document.getElementById('serverResponse');
