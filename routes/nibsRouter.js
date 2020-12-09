@@ -1,30 +1,25 @@
 const express = require('express');
-const nibsService = require('../services/nibsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  show,
+  index,
+  adminIndex,
+  update,
+  insert,
+} = require('../services/nibsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const nibsRouter = express.Router();
 
 // GET
-nibsRouter.get('/:id', nibsService.show);
-nibsRouter.get('/', securityMiddleware.sanitizeQueryString, nibsService.index);
+nibsRouter.get('/:id', show);
+nibsRouter.get('/', sanitizeQueryString, index);
 
 // POST
-nibsRouter.post(
-  '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  nibsService.adminIndex,
-);
+nibsRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
 
-nibsRouter.post(
-  '/edit/:id',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  nibsService.update,
-);
+nibsRouter.post('/edit/:id', isAuth, isAdmin, update);
 
-nibsRouter.post('/', nibsService.insert);
+nibsRouter.post('/', insert);
 
 module.exports = nibsRouter;

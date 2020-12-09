@@ -1,33 +1,30 @@
 const express = require('express');
-const colorReviewsService = require('../services/colorReviewsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  index,
+  adminIndex,
+  update,
+  insert,
+} = require('../services/colorReviewsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const colorReviewsRouter = express.Router();
 
 // GET
-colorReviewsRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  colorReviewsService.index,
-);
+// TODO show
+colorReviewsRouter.get('/', sanitizeQueryString, index);
 
 // POST
 colorReviewsRouter.post(
   '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  colorReviewsService.adminIndex,
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  adminIndex,
 );
 
-colorReviewsRouter.post(
-  '/edit/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  colorReviewsService.update,
-);
+colorReviewsRouter.post('/edit/', isAuth, isAdmin, update);
 
-colorReviewsRouter.post('/', colorReviewsService.insert);
+colorReviewsRouter.post('/', insert);
 
 module.exports = colorReviewsRouter;

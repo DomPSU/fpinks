@@ -1,30 +1,25 @@
 const express = require('express');
-const pensService = require('../services/pensService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  show,
+  index,
+  adminIndex,
+  update,
+  insert,
+} = require('../services/pensService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const pensRouter = express.Router();
 
 // GET
-pensRouter.get('/:id', pensService.show);
-pensRouter.get('/', securityMiddleware.sanitizeQueryString, pensService.index);
+pensRouter.get('/:id', show);
+pensRouter.get('/', sanitizeQueryString, index);
 
 // POST
-pensRouter.post(
-  '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  pensService.adminIndex,
-);
+pensRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
 
-pensRouter.post(
-  '/edit/:id',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  pensService.update,
-);
+pensRouter.post('/edit/:id', isAuth, isAdmin, update);
 
-pensRouter.post('/', pensService.insert);
+pensRouter.post('/', insert);
 
 module.exports = pensRouter;

@@ -1,25 +1,18 @@
 const express = require('express');
-const penNibsService = require('../services/penNibsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const { index, adminIndex, insert } = require('../services/penNibsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const penNibsRouter = express.Router();
 
 // GET
-penNibsRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  penNibsService.index,
-);
+// TODO show
+penNibsRouter.get('/', sanitizeQueryString, index);
 
 // POST
-penNibsRouter.post(
-  '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  penNibsService.adminIndex,
-);
-penNibsRouter.post('/', penNibsService.insert);
+penNibsRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
+penNibsRouter.post('/', insert);
+
+// TODO update
 
 module.exports = penNibsRouter;

@@ -1,26 +1,29 @@
 const express = require('express');
-const waterReviewsService = require('../services/waterReviewsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  index,
+  adminIndex,
+  insert,
+} = require('../services/waterReviewsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const waterReviewsRouter = express.Router();
 
 // GET
-waterReviewsRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  waterReviewsService.index,
-);
+// TODO show
+waterReviewsRouter.get('/', sanitizeQueryString, index);
 
 // POST
 waterReviewsRouter.post(
   '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  waterReviewsService.adminIndex,
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  adminIndex,
 );
 
-waterReviewsRouter.post('/', waterReviewsService.insert);
+waterReviewsRouter.post('/', insert);
+
+// TOOD update
 
 module.exports = waterReviewsRouter;

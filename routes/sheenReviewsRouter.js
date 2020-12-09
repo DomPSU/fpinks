@@ -1,26 +1,29 @@
 const express = require('express');
-const sheenReviewsService = require('../services/sheenReviewsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  index,
+  adminIndex,
+  insert,
+} = require('../services/sheenReviewsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const sheenReviewsRouter = express.Router();
 
 // GET
-sheenReviewsRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  sheenReviewsService.index,
-);
+// TODO show
+sheenReviewsRouter.get('/', sanitizeQueryString, index);
 
 // POST
 sheenReviewsRouter.post(
   '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  sheenReviewsService.adminIndex,
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  adminIndex,
 );
 
-sheenReviewsRouter.post('/', sheenReviewsService.insert);
+// TODO update
+
+sheenReviewsRouter.post('/', insert);
 
 module.exports = sheenReviewsRouter;

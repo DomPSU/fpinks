@@ -1,3 +1,5 @@
+const createError = require('http-errors');
+
 const forbiddenQueryStringKeys = [
   'sub',
   'iss',
@@ -9,25 +11,24 @@ const forbiddenQueryStringKeys = [
   'users.level',
 ];
 
-const sanitizeQueryString = async (req, res, next) => {
-  // get validated user from id token
-  try {
-    const queryKeys = Object.keys(req.query);
-    const queryValues = Object.values(req.query);
+const sanitizeQueryString = (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  const queryValues = Object.values(req.query);
 
+  try {
     for (let i = 0; i < queryKeys.length; i += 1) {
       if (forbiddenQueryStringKeys.includes(queryKeys[i].toLowerCase())) {
         throw new Error();
       }
     }
-
-    res.locals.queryKeys = queryKeys;
-    res.locals.queryValues = queryValues;
-    next();
   } catch (e) {
-    console.log('403 forbidden string query key.');
-    res.status(403).end();
+    return next(createError(403, 'Forbidden query string key.'));
   }
+
+  res.locals.queryKeys = queryKeys;
+  res.locals.queryValues = queryValues;
+
+  next();
 };
 
 module.exports = {

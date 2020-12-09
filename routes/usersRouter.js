@@ -1,28 +1,25 @@
 const express = require('express');
-const usersService = require('../services/usersService');
-const authMiddleware = require('../middlewares/authMiddleware');
+const {
+  show,
+  index,
+  insert,
+  isApprovedIndex,
+  validAdmin,
+} = require('../services/usersService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const usersRouter = express.Router();
 
 // GET
-usersRouter.get('/:id', usersService.show);
-usersRouter.get('/', usersService.index);
+usersRouter.get('/:id', show);
+usersRouter.get('/', index);
 
 // POST
-usersRouter.post('/', usersService.insert);
+usersRouter.post('/', insert);
 
-usersRouter.post(
-  '/admin/:approved',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  usersService.isApprovedIndex,
-);
+usersRouter.post('/admin/:approved', isAuth, isAdmin, isApprovedIndex);
 
-usersRouter.post(
-  '/admin',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  usersService.validAdmin,
-);
+usersRouter.post('/admin', isAuth, isAdmin, validAdmin);
 
 module.exports = usersRouter;

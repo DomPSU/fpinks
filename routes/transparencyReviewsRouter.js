@@ -1,26 +1,30 @@
 const express = require('express');
-const transparencyReviewsService = require('../services/transparencyReviewsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  index,
+  adminIndex,
+  insert,
+} = require('../services/transparencyReviewsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const transparencyReviewsRouter = express.Router();
 
 // GET
-transparencyReviewsRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  transparencyReviewsService.index,
-);
+// TODO SHOW
+transparencyReviewsRouter.get('/', sanitizeQueryString, index);
 
 // POST
 transparencyReviewsRouter.post(
   '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  transparencyReviewsService.adminIndex,
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  adminIndex,
 );
 
-transparencyReviewsRouter.post('/', transparencyReviewsService.insert);
+// TODO UPDATE
+
+transparencyReviewsRouter.post('/', insert);
 
 module.exports = transparencyReviewsRouter;

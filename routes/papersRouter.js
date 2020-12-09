@@ -1,34 +1,25 @@
 const express = require('express');
-const papersService = require('../services/papersService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  show,
+  index,
+  adminIndex,
+  update,
+  insert,
+} = require('../services/papersService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const papersRouter = express.Router();
 
 // GET
-papersRouter.get('/:id', papersService.show);
-papersRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  papersService.index,
-);
+papersRouter.get('/:id', show);
+papersRouter.get('/', sanitizeQueryString, index);
 
 // POST
-papersRouter.post(
-  '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  papersService.adminIndex,
-);
+papersRouter.post('/admin/', isAuth, isAdmin, sanitizeQueryString, adminIndex);
 
-papersRouter.post(
-  '/edit/:id',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  papersService.update,
-);
+papersRouter.post('/edit/:id', isAuth, isAdmin, update);
 
-papersRouter.post('/', papersService.insert);
+papersRouter.post('/', insert);
 
 module.exports = papersRouter;

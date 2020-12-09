@@ -1,26 +1,29 @@
 const express = require('express');
-const shadingReviewsService = require('../services/shadingReviewsService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const securityMiddleware = require('../middlewares/securityMiddleware');
+const {
+  index,
+  adminIndex,
+  insert,
+} = require('../services/shadingReviewsService');
+const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
 const shadingReviewsRouter = express.Router();
 
 // GET
-shadingReviewsRouter.get(
-  '/',
-  securityMiddleware.sanitizeQueryString,
-  shadingReviewsService.index,
-);
+// TODO show
+shadingReviewsRouter.get('/', sanitizeQueryString, index);
 
 // POST
 shadingReviewsRouter.post(
   '/admin/',
-  authMiddleware.isUser,
-  authMiddleware.isAdmin,
-  securityMiddleware.sanitizeQueryString,
-  shadingReviewsService.adminIndex,
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  adminIndex,
 );
 
-shadingReviewsRouter.post('/', shadingReviewsService.insert);
+shadingReviewsRouter.post('/', insert);
+
+// TODO update
 
 module.exports = shadingReviewsRouter;
