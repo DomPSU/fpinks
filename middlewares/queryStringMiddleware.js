@@ -55,6 +55,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'TransparencyReviews.approved';
   }
 
+  if (path === 'writing-samples') {
+    return 'WritingSamples.approved';
+  }
+
   // TODO throw error if no match?
 };
 

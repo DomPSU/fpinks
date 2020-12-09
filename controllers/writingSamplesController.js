@@ -6,11 +6,11 @@ const inksModel = require('../models/inksModel');
 const papersModel = require('../models/papersModel');
 
 const index = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
   try {
-    const data = await writingSamplesModel.index(queryKeys, queryValues);
+    const data = await writingSamplesModel.index(
+      res.locals.processedQueryKeys,
+      res.locals.processedQueryValues,
+    );
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -29,22 +29,10 @@ const show = async (req, res, next) => {
   }
 };
 
-const adminIndex = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
-  try {
-    const data = await writingSamplesModel.adminIndex(queryKeys, queryValues);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
 const search = async (req, res, next) => {
   // TODO HACK
-  const queryKeys = [];
-  const queryValues = [];
+  const queryKeys = ['WritingSamples.approved'];
+  const queryValues = ['1'];
 
   const { query } = req.params;
 
@@ -201,7 +189,6 @@ const insert = async (req, res, next) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
   show,
   search,

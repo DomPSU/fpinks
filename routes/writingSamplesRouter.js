@@ -6,7 +6,10 @@ const {
   search,
 } = require('../controllers/writingSamplesController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 const AWS = require('../config/aws'); // TODO env based
 
 const { upload } = AWS; // TODO env based
@@ -22,9 +25,16 @@ const writingSamplesRouter = express.Router();
 // Might need to sanitize search
 writingSamplesRouter.get('/search/:query', sanitizeQueryString, search);
 writingSamplesRouter.get('/search', sanitizeQueryString, search);
-writingSamplesRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString, index);
+writingSamplesRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 writingSamplesRouter.get('/:id', show);
-writingSamplesRouter.get('/', sanitizeQueryString, index);
+writingSamplesRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
 writingSamplesRouter.post('/', upload.single('writingSampleImage'), insert);
