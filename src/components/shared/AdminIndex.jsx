@@ -22,10 +22,14 @@ class AdminIndex extends Component {
     const originLength = window.location.origin.length;
     const url = window.location.href.slice(originLength);
 
-    const idToken = getIDToken();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
 
     API.instance
-      .post(url, { idToken })
+      .post(url, {}, config)
       .then((res) => {
         this.setState({ index: res.data });
       })
@@ -90,10 +94,6 @@ class AdminIndex extends Component {
         queryKeys.forEach((key) => {
           editURL = editURL.concat(`ColorReviews.${key}=${row[key]}&`);
         });
-
-        // TODO REMOVE
-        console.log('EDIT URL');
-        console.log(editURL);
 
         editURL = editURL.substring(0, editURL.length - 1);
         // eslint-disable-next-line no-param-reassign
