@@ -31,6 +31,22 @@ const sanitizeQueryString = (req, res, next) => {
   next();
 };
 
+const processQueryString = (req, res, next) => {
+  const queryKeys = res.locals.queryKeys || [];
+  const queryValues = res.locals.queryValues || [];
+
+  if (res.locals.user === undefined || res.locals.user.level !== 'admin') {
+    queryKeys.push('approved');
+    queryValues.push('1');
+  }
+
+  res.locals.processedQueryKeys = queryKeys;
+  res.locals.processedQueryValues = queryValues;
+
+  next();
+};
+
 module.exports = {
   sanitizeQueryString,
+  processQueryString,
 };
