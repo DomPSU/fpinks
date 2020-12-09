@@ -4,8 +4,10 @@ const {
   insert,
 } = require('../controllers/transparencyReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const transparencyReviewsRouter = express.Router();
 
@@ -15,10 +17,16 @@ transparencyReviewsRouter.get(
   isAuth,
   isAdmin,
   sanitizeQueryString,
+  processQueryString,
   index,
 );
 // TODO SHOW
-transparencyReviewsRouter.get('/', sanitizeQueryString, index);
+transparencyReviewsRouter.get(
+  '/',
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 
 // POST
 transparencyReviewsRouter.post('/', isAuth, insert);

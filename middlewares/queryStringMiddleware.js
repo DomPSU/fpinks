@@ -51,6 +51,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'DryingReviews.approved';
   }
 
+  if (path === 'transparency-reviews') {
+    return 'TransparencyReviews.approved';
+  }
+
   // TODO throw error if no match?
 };
 
