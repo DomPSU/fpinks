@@ -39,6 +39,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'SheenReviews.approved';
   }
 
+  if (path === 'feathering-reviews') {
+    return 'FeatheringReviews.approved';
+  }
+
   // TODO throw error if no match?
 };
 

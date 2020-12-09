@@ -1,25 +1,10 @@
 const featheringReviewsModel = require('../models/featheringReviewsModel');
 
 const index = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
   try {
-    const data = await featheringReviewsModel.index(queryKeys, queryValues);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
-const adminIndex = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
-  try {
-    const data = await featheringReviewsModel.adminIndex(
-      queryKeys,
-      queryValues,
+    const data = await featheringReviewsModel.index(
+      res.locals.processedQueryKeys,
+      res.locals.processedQueryValues,
     );
     res.status(200).send(data);
   } catch (e) {
@@ -62,7 +47,6 @@ const remove = async (req, res, next) => {
 };
 module.exports = {
   index,
-  adminIndex,
   insert,
   remove,
 };

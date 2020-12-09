@@ -1,10 +1,9 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
-const awsUrls = require('../utils/awsUrls');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE FeatheringReviews.approved = 1 AND';
+    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -13,23 +12,6 @@ const index = async (queryKeys, queryValues) => {
   );
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
-  return res;
-};
-
-const adminIndex = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT FeatheringReviews.writing_sample_id, Users.username, FeatheringReviews.amount, FeatheringReviews.approved, FeatheringReviews.created_at, FeatheringReviews.updated_at, WritingSamples.high_res_aws_key FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id=FeatheringReviews.writing_sample_id WHERE';
-
-  const sanitizedSQL = sqlUtil.getSanitizedSQL(
-    partialSQL,
-    queryKeys,
-    queryValues,
-  );
-
-  const res = await db.pool.asyncQuery(sanitizedSQL);
-
-  await awsUrls.addHighResUrls(res);
-
   return res;
 };
 
@@ -65,7 +47,6 @@ const remove = async (data) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
   remove,
 };

@@ -1,7 +1,10 @@
 const express = require('express');
 const { index, insert } = require('../controllers/featheringReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const featheringReviewsRouter = express.Router();
 
@@ -11,10 +14,16 @@ featheringReviewsRouter.get(
   isAuth,
   isAdmin,
   sanitizeQueryString,
+  processQueryString,
   index,
 );
 // TODO show
-featheringReviewsRouter.get('/', sanitizeQueryString, index);
+featheringReviewsRouter.get(
+  '/',
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 
 // POST
 featheringReviewsRouter.post('/', isAuth, insert);
