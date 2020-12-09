@@ -43,6 +43,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'FeatheringReviews.approved';
   }
 
+  if (path === 'water-reviews') {
+    return 'WaterReviews.approved';
+  }
+
   // TODO throw error if no match?
 };
 
