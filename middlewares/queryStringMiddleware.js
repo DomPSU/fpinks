@@ -31,6 +31,10 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'ColorReviews.approved';
   }
 
+  if (path === 'shading-reviews') {
+    return 'ShadingReviews.approved';
+  }
+
   // TODO throw error if no match?
 };
 

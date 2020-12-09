@@ -1,10 +1,9 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
-const awsUrls = require('../utils/awsUrls');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE ShadingReviews.approved = 1 AND';
+    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -13,23 +12,6 @@ const index = async (queryKeys, queryValues) => {
   );
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
-  return res;
-};
-
-const adminIndex = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.approved, ShadingReviews.created_at, ShadingReviews.updated_at, WritingSamples.high_res_aws_key FROM ShadingReviews LEFT JOIN WritingSamples ON WritingSamples.writing_sample_id = ShadingReviews.writing_sample_id LEFT JOIN Users ON ShadingReviews.user_id = Users.user_id WHERE';
-
-  const sanitizedSQL = sqlUtil.getSanitizedSQL(
-    partialSQL,
-    queryKeys,
-    queryValues,
-  );
-
-  const res = await db.pool.asyncQuery(sanitizedSQL);
-
-  await awsUrls.addHighResUrls(res);
-
   return res;
 };
 
@@ -65,7 +47,6 @@ const remove = async (data) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
   remove,
 };
