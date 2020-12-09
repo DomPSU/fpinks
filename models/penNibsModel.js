@@ -3,21 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT Pens.brand, Pens.model, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE PenNibs.approved = 1 AND';
-
-  const sanitizedSQL = sqlUtil.getSanitizedSQL(
-    partialSQL,
-    queryKeys,
-    queryValues,
-  );
-
-  const res = await db.pool.asyncQuery(sanitizedSQL);
-  return res;
-};
-
-const adminIndex = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT PenNibs.pen_id, Pens.brand, Pens.model, PenNibs.nib_id, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.approved, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE';
+    'SELECT Pens.brand, Pens.model, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -71,6 +57,5 @@ const insert = async (data) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
 };
