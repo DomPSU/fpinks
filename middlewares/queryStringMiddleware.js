@@ -11,6 +11,20 @@ const forbiddenQueryStringKeys = [
   'users.level',
 ];
 
+const getApprovedKeyFromPath = (originalUrl) => {
+  const path = originalUrl.substring(5); // trim '/api'
+
+  if (path === 'pens' || path === 'inks' || path === 'papers') {
+    return 'approved';
+  }
+
+  if (path === 'pen-nibs') {
+    return 'PenNibs.approved';
+  }
+
+  // TODO throw error if no match?
+};
+
 const sanitizeQueryString = (req, res, next) => {
   const queryKeys = Object.keys(req.query);
   const queryValues = Object.values(req.query);
@@ -36,7 +50,7 @@ const processQueryString = (req, res, next) => {
   const queryValues = res.locals.queryValues || [];
 
   if (res.locals.user === undefined || res.locals.user.level !== 'admin') {
-    queryKeys.push('approved');
+    queryKeys.push(getApprovedKeyFromPath(req.originalUrl));
     queryValues.push('1');
   }
 
