@@ -6,14 +6,24 @@ const {
   insert,
 } = require('../controllers/pensController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const pensRouter = express.Router();
 
 // GET
-pensRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString, index);
+pensRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 pensRouter.get('/:id', show);
-pensRouter.get('/', sanitizeQueryString, index);
+pensRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
 pensRouter.post('/', isAuth, isAdmin, insert);

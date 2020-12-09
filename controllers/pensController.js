@@ -1,11 +1,11 @@
 const pensModel = require('../models/pensModel');
 
 const index = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
   try {
-    const data = await pensModel.index(queryKeys, queryValues);
+    const data = await pensModel.index(
+      res.locals.processedQueryKeys,
+      res.locals.processedQueryValues,
+    );
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -16,18 +16,6 @@ const show = async (req, res, next) => {
   const { id } = req.params;
   try {
     const data = await pensModel.show(id);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
-const adminIndex = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
-  try {
-    const data = await pensModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -69,6 +57,5 @@ module.exports = {
   index,
   insert,
   show,
-  adminIndex,
   update,
 };
