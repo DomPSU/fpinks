@@ -6,14 +6,24 @@ const {
   insert,
 } = require('../controllers/papersController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const papersRouter = express.Router();
 
 // GET
-papersRouter.get('/admin/', isAuth, isAdmin, sanitizeQueryString, index);
+papersRouter.get(
+  '/admin/',
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 papersRouter.get('/:id', show);
-papersRouter.get('/', sanitizeQueryString, index);
+papersRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
 papersRouter.post('/', isAuth, isAdmin, insert);

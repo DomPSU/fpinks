@@ -1,11 +1,11 @@
 const papersModel = require('../models/papersModel');
 
 const index = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
   try {
-    const data = await papersModel.index(queryKeys, queryValues);
+    const data = await papersModel.index(
+      res.locals.processedQueryKeys,
+      res.locals.processedQueryValues,
+    );
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -18,18 +18,6 @@ const show = async (req, res, next) => {
 
   try {
     data = await papersModel.show(id);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
-const adminIndex = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
-  try {
-    const data = await papersModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -69,7 +57,6 @@ const update = async (req, res, next) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
   show,
   update,
