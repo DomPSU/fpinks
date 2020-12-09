@@ -3,7 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT brand, name, created_at, updated_at FROM Inks WHERE approved=1 AND';
+    'SELECT brand, name, created_at, updated_at FROM Inks WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -20,20 +20,6 @@ const show = async (id) => {
     'SELECT brand, name, created_at, updated_at FROM Inks WHERE ink_id = ? ',
     [id],
   );
-  return res;
-};
-
-const adminIndex = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT ink_id, brand, name, approved, created_at, updated_at FROM Inks WHERE';
-
-  const sanitizedSQL = sqlUtil.getSanitizedSQL(
-    partialSQL,
-    queryKeys,
-    queryValues,
-  );
-
-  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -96,7 +82,6 @@ const update = async (data) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
   show,
   update,
