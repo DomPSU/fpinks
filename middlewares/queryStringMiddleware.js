@@ -15,6 +15,7 @@ const getApprovedKeyFromPath = (originalUrl) => {
   const path = originalUrl.substring(5); // trim '/api'
 
   if (
+    path === 'users' ||
     path === 'pens' ||
     path === 'inks' ||
     path === 'papers' ||

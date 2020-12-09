@@ -1,9 +1,16 @@
 const db = require('./db');
+const sqlUtil = require('../utils/sql');
 
-const index = async () => {
-  const res = await db.pool.asyncQuery(
-    'SELECT username, created_at, updated_at FROM Users WHERE approved <> 0',
+const index = async (queryKeys, queryValues) => {
+  const partialSQL = 'SELECT username, created_at, updated_at FROM Users WHERE';
+
+  const sanitizedSQL = sqlUtil.getSanitizedSQL(
+    partialSQL,
+    queryKeys,
+    queryValues,
   );
+
+  const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
 };
 
@@ -11,14 +18,6 @@ const show = async (id) => {
   const res = await db.pool.asyncQuery(
     'SELECT username, created_at, updated_at FROM Users WHERE user_id = ? ',
     [id],
-  );
-  return res;
-};
-
-const isApprovedIndex = async (approved) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT username, level, approved, created_at, updated_at FROM Users WHERE approved = ?',
-    [approved],
   );
   return res;
 };
@@ -77,7 +76,6 @@ const getUserFromSubAndIss = async (data) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
   show,
   insert,
   getUserFromSubAndIss,

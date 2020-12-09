@@ -2,9 +2,11 @@ const usersModel = require('../models/usersModel');
 const google = require('../config/google');
 
 const index = async (req, res, next) => {
-  let data;
   try {
-    data = await usersModel.index();
+    const data = await usersModel.index(
+      res.locals.processedQueryKeys,
+      res.locals.processedQueryValues,
+    );
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -17,16 +19,6 @@ const show = async (req, res, next) => {
 
   try {
     data = await usersModel.show(id);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
-const isApprovedIndex = async (req, res, next) => {
-  const { approved } = req.params;
-  try {
-    const data = await usersModel.isApprovedIndex(approved);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -60,7 +52,6 @@ const validAdmin = async (req, res, next) => {
 
 module.exports = {
   index,
-  isApprovedIndex,
   show,
   insert,
   validAdmin,

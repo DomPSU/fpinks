@@ -12,10 +12,10 @@ export default function Admin() {
         <Link className="p-3" to="/users">
           API Approved Users
         </Link>
-        <Link className="p-3" to="/users/admin/1">
+        <Link className="p-3" to="/users/admin/?approved=1">
           Admin Approved Users
         </Link>
-        <Link className="p-3" to="/users/admin/0">
+        <Link className="p-3" to="/users/admin/?approved=0">
           Admin Unapproved Users
         </Link>
       </div>
