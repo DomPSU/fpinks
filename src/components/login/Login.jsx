@@ -49,7 +49,7 @@ class Login extends Component {
     };
 
     API.instance
-      .post('/users/admin', {}, config)
+      .get('/users/level', config)
       .then((res) => {
         const { handleAdminSignIn } = this.props;
 

@@ -12,6 +12,7 @@ const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 const usersRouter = express.Router();
 
 // GET
+usersRouter.get('/level', isAuth, isAdmin, validAdmin);
 usersRouter.get('/:id', show);
 usersRouter.get('/', index); // TODO sanitize query string?
 
@@ -19,7 +20,5 @@ usersRouter.get('/', index); // TODO sanitize query string?
 usersRouter.post('/', insert);
 
 usersRouter.post('/admin/:approved', isAuth, isAdmin, isApprovedIndex);
-
-usersRouter.post('/admin', isAuth, isAdmin, validAdmin);
 
 module.exports = usersRouter;
