@@ -39,7 +39,7 @@ class ColorReviewsUpdate extends Component {
     };
 
     API.instance
-      .get(url, {}, config)
+      .get(url, config)
       .then((res) => {
         console.log(res);
         this.setState({

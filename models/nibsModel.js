@@ -3,7 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT size, grind, tune, created_at, updated_at FROM Nibs WHERE';
+    'SELECT nib_id, size, grind, tune, created_at, updated_at, approved FROM Nibs WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -17,7 +17,7 @@ const index = async (queryKeys, queryValues) => {
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT size, grind, tune, created_at, updated_at FROM Nibs WHERE nib_id = ? ',
+    'SELECT nib_id, size, grind, tune, created_at, updated_at, approved FROM Nibs WHERE nib_id = ? ',
     [id],
   );
   return res;
