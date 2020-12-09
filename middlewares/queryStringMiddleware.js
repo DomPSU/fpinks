@@ -14,7 +14,12 @@ const forbiddenQueryStringKeys = [
 const getApprovedKeyFromPath = (originalUrl) => {
   const path = originalUrl.substring(5); // trim '/api'
 
-  if (path === 'pens' || path === 'inks' || path === 'papers') {
+  if (
+    path === 'pens' ||
+    path === 'inks' ||
+    path === 'papers' ||
+    path === 'nibs'
+  ) {
     return 'approved';
   }
 

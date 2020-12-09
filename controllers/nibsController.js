@@ -1,11 +1,11 @@
 const nibsModel = require('../models/nibsModel');
 
 const index = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
   try {
-    const data = await nibsModel.index(queryKeys, queryValues);
+    const data = await nibsModel.index(
+      res.locals.processedQueryKeys,
+      res.locals.processedQueryValues,
+    );
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -18,18 +18,6 @@ const show = async (req, res, next) => {
 
   try {
     data = await nibsModel.show(id);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
-  }
-};
-
-const adminIndex = async (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
-
-  try {
-    const data = await nibsModel.adminIndex(queryKeys, queryValues);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -69,7 +57,6 @@ const update = async (req, res, next) => {
 
 module.exports = {
   index,
-  adminIndex,
   insert,
   show,
   update,

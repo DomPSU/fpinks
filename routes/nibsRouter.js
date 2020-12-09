@@ -6,14 +6,24 @@ const {
   insert,
 } = require('../controllers/nibsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
-const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
+const {
+  sanitizeQueryString,
+  processQueryString,
+} = require('../middlewares/queryStringMiddleware');
 
 const nibsRouter = express.Router();
 
 // GET
-nibsRouter.get('/admin', isAuth, isAdmin, sanitizeQueryString);
+nibsRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  sanitizeQueryString,
+  processQueryString,
+  index,
+);
 nibsRouter.get('/:id', show);
-nibsRouter.get('/', sanitizeQueryString, index);
+nibsRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
 nibsRouter.post('/', isAuth, isAdmin, insert);
