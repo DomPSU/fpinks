@@ -5,7 +5,7 @@ const {
   adminIndex,
   update,
   insert,
-} = require('../services/pensService');
+} = require('../controllers/pensController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 

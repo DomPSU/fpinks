@@ -5,7 +5,7 @@ const {
   adminIndex,
   insert,
   search,
-} = require('../services/writingSamplesService');
+} = require('../controllers/writingSamplesController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 const AWS = require('../config/aws'); // TODO env based

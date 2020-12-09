@@ -1,5 +1,9 @@
 const express = require('express');
-const { index, adminIndex, insert } = require('../services/penNibsService');
+const {
+  index,
+  adminIndex,
+  insert,
+} = require('../controllers/penNibsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 

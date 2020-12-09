@@ -3,7 +3,7 @@ const {
   index,
   adminIndex,
   insert,
-} = require('../services/featheringReviewsService');
+} = require('../controllers/featheringReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 

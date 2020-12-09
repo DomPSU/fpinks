@@ -4,7 +4,7 @@ const {
   adminIndex,
   update,
   insert,
-} = require('../services/colorReviewsService');
+} = require('../controllers/colorReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 

@@ -5,7 +5,7 @@ const {
   adminIndex,
   update,
   insert,
-} = require('../services/papersService');
+} = require('../controllers/papersController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 

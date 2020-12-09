@@ -5,7 +5,7 @@ const {
   insert,
   isApprovedIndex,
   validAdmin,
-} = require('../services/usersService');
+} = require('../controllers/usersController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
@@ -13,7 +13,7 @@ const usersRouter = express.Router();
 
 // GET
 usersRouter.get('/:id', show);
-usersRouter.get('/', index);
+usersRouter.get('/', index); // TODO sanitize query string?
 
 // POST
 usersRouter.post('/', insert);

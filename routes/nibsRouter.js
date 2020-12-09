@@ -5,7 +5,7 @@ const {
   adminIndex,
   update,
   insert,
-} = require('../services/nibsService');
+} = require('../controllers/nibsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const { sanitizeQueryString } = require('../middlewares/queryStringMiddleware');
 
