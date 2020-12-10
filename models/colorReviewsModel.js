@@ -55,7 +55,7 @@ const update = async (data) => {
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
 
   const updateRes = await db.pool.asyncQuery(
-    'UPDATE ColorReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND color_id = ? and writing_sample_id = ?',
+    'UPDATE ColorReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND color_id = ? AND writing_sample_id = ?',
     [
       data.approved,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),

@@ -56,6 +56,7 @@ import ColorReviewsUpdate from './colorReviews/ColorReviewsUpdate';
 
 // shadingReviews
 import ShadingReviewsInsert from './shadingReviews/ShadingReviewsInsert';
+import ShadingReviewsUpdate from './shadingReviews/ShadingReviewsUpdate';
 
 // sheenReviews
 import SheenReviewsInsert from './sheenReviews/SheenReviewsInsert';
@@ -403,6 +404,19 @@ class App extends Component {
             />
 
             {/* shadingReviews */}
+            <Route
+              exact
+              path="/shading-reviews/edit/"
+              key="/shading-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <ShadingReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/shading-reviews/new"

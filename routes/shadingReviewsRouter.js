@@ -1,5 +1,9 @@
 const express = require('express');
-const { index, insert } = require('../controllers/shadingReviewsController');
+const {
+  index,
+  insert,
+  update,
+} = require('../controllers/shadingReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
@@ -23,6 +27,7 @@ shadingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 // POST
 shadingReviewsRouter.post('/', isAuth, insert);
 
-// TODO PUT
+// PUT
+shadingReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = shadingReviewsRouter;

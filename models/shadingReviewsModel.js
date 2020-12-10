@@ -3,7 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT ShadingReviews.writing_sample_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
+    'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -45,8 +45,25 @@ const remove = async (data) => {
   return deleteRes;
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE ShadingReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND writing_sample_id = ?',
+    [
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.userID,
+      data.writingSampleID,
+    ],
+  );
+  return updateRes;
+};
+
 module.exports = {
   index,
   insert,
   remove,
+  update,
 };
