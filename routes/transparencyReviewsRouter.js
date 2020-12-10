@@ -2,6 +2,7 @@ const express = require('express');
 const {
   index,
   insert,
+  update,
 } = require('../controllers/transparencyReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -30,5 +31,8 @@ transparencyReviewsRouter.get(
 
 // POST
 transparencyReviewsRouter.post('/', isAuth, insert);
+
+// PUT
+transparencyReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = transparencyReviewsRouter;

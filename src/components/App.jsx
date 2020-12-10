@@ -76,6 +76,7 @@ import DryingReviewsUpdate from './dryingReviews/DryingReviewsUpdate';
 
 // transparencyReviews
 import TransparencyReviewsInsert from './transparencyReviews/TransparencyReviewsInsert';
+import TransparencyReviewsUpdate from './transparencyReviews/TransparencyReviewsUpdate';
 
 class App extends Component {
   constructor(props) {
@@ -628,6 +629,19 @@ class App extends Component {
             />
 
             {/* transparencyReviews */}
+            <Route
+              exact
+              path="/transparency-reviews/edit/"
+              key="/transparency-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <TransparencyReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/transparency-reviews/new"

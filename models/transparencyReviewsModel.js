@@ -3,7 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT TransparencyReviews.writing_sample_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id WHERE';
+    'SELECT TransparencyReviews.writing_sample_id, Users.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -45,8 +45,25 @@ const remove = async (data) => {
   return deleteRes;
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE TransparencyReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND writing_sample_id = ?',
+    [
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.userID,
+      data.writingSampleID,
+    ],
+  );
+  return updateRes;
+};
+
 module.exports = {
   index,
   insert,
   remove,
+  update,
 };
