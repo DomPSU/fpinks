@@ -1,5 +1,9 @@
 const express = require('express');
-const { index, insert } = require('../controllers/dryingReviewsController');
+const {
+  index,
+  insert,
+  update,
+} = require('../controllers/dryingReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
@@ -23,6 +27,7 @@ dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 // POST
 dryingReviewsRouter.post('/', isAuth, insert);
 
-// TODO PUT
+// PUT
+dryingReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = dryingReviewsRouter;

@@ -70,6 +70,8 @@ class AdminIndex extends Component {
       prefix = 'FeatheringReviews.';
     } else if (model === 'water-reviews') {
       prefix = 'WaterReviews.';
+    } else if (model === 'drying-reviews') {
+      prefix = 'DryingReviews.';
     }
 
     let queryKeys;
@@ -89,7 +91,8 @@ class AdminIndex extends Component {
     } else if (
       model === 'shading-reviews' ||
       model === 'feathering-reviews' ||
-      model === 'water-reviews'
+      model === 'water-reviews' ||
+      model === 'drying-reviews'
     ) {
       queryKeys = ['user_id', 'writing_sample_id'];
     }

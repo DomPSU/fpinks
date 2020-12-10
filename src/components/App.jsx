@@ -72,6 +72,7 @@ import WaterReviewsUpdate from './waterReviews/WaterReviewsUpdate';
 
 // dryingReviews
 import DryingReviewsInsert from './dryingReviews/DryingReviewsInsert';
+import DryingReviewsUpdate from './dryingReviews/DryingReviewsUpdate';
 
 // transparencyReviews
 import TransparencyReviewsInsert from './transparencyReviews/TransparencyReviewsInsert';
@@ -583,6 +584,19 @@ class App extends Component {
             />
 
             {/* dryingReviews */}
+            <Route
+              exact
+              path="/drying-reviews/edit/"
+              key="/drying-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <DryingReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/drying-reviews/new"
