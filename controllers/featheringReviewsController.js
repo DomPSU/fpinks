@@ -45,8 +45,26 @@ const remove = async (req, res, next) => {
     next(e);
   }
 };
+
+const update = async (req, res, next) => {
+  const shadingReview = {
+    ...req.body,
+    userID: res.locals.user.user_id,
+  };
+
+  try {
+    const data = await featheringReviewsModel.update(shadingReview);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   insert,
   remove,
+  update,
 };

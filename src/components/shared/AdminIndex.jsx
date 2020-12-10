@@ -75,6 +75,9 @@ class AdminIndex extends Component {
     } else if (model === 'sheen-reviews') {
       prefix = 'SheenReviews.';
       queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
+    } else if (model === 'feathering-reviews') {
+      prefix = 'FeatheringReviews.';
+      queryKeys = ['user_id', 'writing_sample_id'];
     }
 
     const partialEditURL = `/${model}/edit/?`;

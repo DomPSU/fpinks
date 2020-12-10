@@ -64,6 +64,7 @@ import SheenReviewsUpdate from './sheenReviews/SheenReviewsUpdate';
 
 // featheringReviews
 import FeatheringReviewsInsert from './featheringReviews/FeatheringReviewsInsert';
+import FeatheringReviewsUpdate from './featheringReviews/FeatheringReviewsUpdate';
 
 // waterReviews
 import WaterReviewsInsert from './waterReviews/WaterReviewsInsert';
@@ -493,6 +494,19 @@ class App extends Component {
             />
 
             {/* featheringReviews */}
+            <Route
+              exact
+              path="/feathering-reviews/edit/"
+              key="/feathering-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <FeatheringReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/feathering-reviews/new"

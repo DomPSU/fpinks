@@ -1,5 +1,9 @@
 const express = require('express');
-const { index, insert } = require('../controllers/featheringReviewsController');
+const {
+  index,
+  insert,
+  update,
+} = require('../controllers/featheringReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
@@ -28,6 +32,7 @@ featheringReviewsRouter.get(
 // POST
 featheringReviewsRouter.post('/', isAuth, insert);
 
-// TODO PUT
+// PUT
+featheringReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = featheringReviewsRouter;
