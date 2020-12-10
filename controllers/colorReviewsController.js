@@ -13,15 +13,34 @@ const index = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
+  console.log(res.locals.user);
+
   const colorReview = {
     ...req.body,
+    userID: res.locals.user.user_id,
   };
 
   // delete all existing color reviews for user and writing sample
   try {
-    const data = await colorReviewsModel.remove(colorReview);
+    await colorReviewsModel.remove(colorReview);
   } catch (e) {
     next(e);
+  }
+
+  // insert third color review if needed
+  if (colorReview.colorThree !== '' && colorReview.colorThree !== null) {
+    // set up second color review
+    const colorReviewThree = {
+      writingSampleID: colorReview.writingSampleID,
+      userID: colorReview.userID,
+      colorName: colorReview.colorThree,
+    };
+
+    try {
+      await colorReviewsModel.insert(colorReviewThree);
+    } catch (e) {
+      next(e);
+    }
   }
 
   // insert second color review if needed
@@ -72,6 +91,7 @@ const remove = async (req, res, next) => {
 const update = async (req, res, next) => {
   const colorReview = {
     ...req.body,
+    userID: res.locals.user.user_id,
   };
 
   try {

@@ -96,7 +96,7 @@ class ColorReviewsUpdate extends Component {
     };
 
     API.instance
-      .post(
+      .put(
         `/color-reviews/edit/?user_id=${userID}&color_id=${colorID}&writing_sample_id=${writingSampleID}`,
         {
           userID,

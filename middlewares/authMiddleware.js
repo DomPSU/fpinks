@@ -36,7 +36,7 @@ const isAuth = async (req, res, next) => {
   }
 
   res.locals.user = {
-    id: user.user_id,
+    user_id: user.user_id,
     email: user.email,
     username: user.username,
     sub: user.sub,

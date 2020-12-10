@@ -10,6 +10,7 @@ class ColorReviewsInsert extends Component {
     this.state = {
       colorOne: '',
       colorTwo: '',
+      colorThree: '',
       writingSampleID: '',
     };
 
@@ -27,7 +28,7 @@ class ColorReviewsInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { colorOne, colorTwo, writingSampleID } = this.state;
+    const { colorOne, colorTwo, colorThree, writingSampleID } = this.state;
 
     // TODO add frontend validation
     const config = {
@@ -42,6 +43,7 @@ class ColorReviewsInsert extends Component {
         {
           colorOne,
           colorTwo,
+          colorThree,
           writingSampleID,
         },
         config,
@@ -91,6 +93,18 @@ class ColorReviewsInsert extends Component {
                       })}
                     </select>
                   </div>
+                  <div className="col-12">
+                    <select
+                      className="form-control m-1"
+                      id="colorThree"
+                      onBlur={this.handleChange}
+                    >
+                      <option> </option>
+                      {colorsJSON.names.map((color) => {
+                        return <option>{color}</option>;
+                      })}
+                    </select>
+                  </div>
                 </div>
               </label>
               <label htmlFor="writingSampleID" className="p-3 m-0">
@@ -100,19 +114,6 @@ class ColorReviewsInsert extends Component {
                     <input
                       type="text"
                       id="writingSampleID"
-                      className="form-control m-1 text-center"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-              </label>
-              <label htmlFor="userID" className="p-3 m-0">
-                User ID
-                <div className="row">
-                  <div className="col-12">
-                    <input
-                      type="text"
-                      id="userID"
                       className="form-control m-1 text-center"
                       onChange={this.handleChange}
                     />

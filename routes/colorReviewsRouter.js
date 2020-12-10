@@ -28,6 +28,6 @@ colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 colorReviewsRouter.post('/', isAuth, insert);
 
 // PUT
-colorReviewsRouter.put('/edit', isAuth, update);
+colorReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = colorReviewsRouter;

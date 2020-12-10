@@ -1,15 +1,11 @@
 const db = require('./db');
-const sqlUtil = require('../utils/sql');
+const { getSanitizedSQL } = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
     'SELECT ColorReviews.writing_sample_id, ColorReviews.user_id, ColorReviews.color_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at, ColorReviews.approved FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE';
 
-  const sanitizedSQL = sqlUtil.getSanitizedSQL(
-    partialSQL,
-    queryKeys,
-    queryValues,
-  );
+  const sanitizedSQL = getSanitizedSQL(partialSQL, queryKeys, queryValues);
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
   return res;
@@ -68,7 +64,6 @@ const update = async (data) => {
       data.writingSampleID,
     ],
   );
-  console.log(updateRes);
   return updateRes;
 };
 
