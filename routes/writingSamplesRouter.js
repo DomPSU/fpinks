@@ -37,6 +37,11 @@ writingSamplesRouter.get('/:id', show);
 writingSamplesRouter.get('/', sanitizeQueryString, processQueryString, index);
 
 // POST
-writingSamplesRouter.post('/', upload.single('writingSampleImage'), insert);
+writingSamplesRouter.post(
+  '/',
+  isAuth,
+  upload.single('writingSampleImage'),
+  insert,
+);
 
 module.exports = writingSamplesRouter;

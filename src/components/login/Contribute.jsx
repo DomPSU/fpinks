@@ -20,6 +20,7 @@ class Contribute extends Component {
       paperBrand: '',
       paperName: '',
       paperStyle: '',
+      comment: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,6 +56,7 @@ class Contribute extends Component {
       paperBrand,
       paperName,
       paperStyle,
+      comment,
     } = this.state;
 
     // TODO add frontend validation
@@ -72,6 +74,7 @@ class Contribute extends Component {
     formData.append('paperBrand', paperBrand);
     formData.append('paperName', paperName);
     formData.append('paperStyle', paperStyle);
+    formData.append('comment', comment);
 
     const config = {
       headers: {

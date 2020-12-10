@@ -33,6 +33,13 @@ const getSanitizedSQL = (partialSQL, queryKeys, queryValues) => {
   return sanitizedSQL;
 };
 
+const deleteWritingSampleComment = (data) => {
+  data.forEach((writingSample) => {
+    delete writingSample.comment;
+  });
+};
+
 module.exports = {
   getSanitizedSQL,
+  deleteWritingSampleComment,
 };

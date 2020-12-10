@@ -88,12 +88,13 @@ Create TABLE WritingSamples(
   ink_id INT NOT NULL,
   paper_id INT NOT NULL,
   user_id INT NOT NULL,
-  low_res_aws_key VARCHAR(1024), -- TODO seeds aws_key -> low_res_aws_key
-  high_res_aws_key VARCHAR(1024), -- TODO seeds
-  original_aws_key VARCHAR(2014) NOT NULL, -- TODO seeds
-  valid_waterproofness TINYINT NOT NULL, -- TODO seeds
-  valid_transparency TINYINT NOT NULL, -- TODO seeds
-  valid_drying_time TINYINT NOT NULL, -- TODO seeds
+  comment VARCHAR(1024),
+  low_res_aws_key VARCHAR(1024), 
+  high_res_aws_key VARCHAR(1024), 
+  original_aws_key VARCHAR(1024) NOT NULL, 
+  valid_waterproofness TINYINT NOT NULL,
+  valid_transparency TINYINT NOT NULL, 
+  valid_drying_time TINYINT NOT NULL, 
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,

@@ -52,11 +52,12 @@ const storage = multer.diskStorage({
 const multerS3Config = multerS3({
   s3,
   bucket: bucketName,
+  contentType: multerS3.AUTO_CONTENT_TYPE, // display image in browser, instead of downloading
   metadata(req, file, cb) {
     cb(null, { fieldName: file.fieldname });
   },
   key(req, file, cb) {
-    cb(null, `${new Date().toISOString()}-${file.originalname}`);
+    cb(null, `original/${new Date().toISOString()}-${file.originalname}`);
   },
 });
 

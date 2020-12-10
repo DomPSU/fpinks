@@ -4,17 +4,37 @@ const nibsModel = require('../models/nibsModel');
 const penNibsModel = require('../models/penNibsModel');
 const inksModel = require('../models/inksModel');
 const papersModel = require('../models/papersModel');
+const {
+  addAPIUrlsToRes,
+  addUrlsToRes,
+  deleteAllAWSKeys,
+} = require('../utils/awsUrls');
+const { deleteWritingSampleComment } = require('../utils/sql');
 
 const index = async (req, res, next) => {
+  let data;
   try {
-    const data = await writingSamplesModel.index(
+    data = await writingSamplesModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
     );
-    res.status(200).send(data);
   } catch (e) {
     next(e);
   }
+
+  try {
+    if (res.locals.user && res.locals.user.level === 'admin') {
+      await addUrlsToRes(data);
+    } else {
+      await addAPIUrlsToRes(data);
+      deleteAllAWSKeys(data);
+      deleteWritingSampleComment(data);
+    }
+  } catch (e) {
+    next(e);
+  }
+
+  res.status(200).send(data);
 };
 
 const show = async (req, res, next) => {
@@ -42,6 +62,11 @@ const search = async (req, res, next) => {
   if (query === undefined) {
     try {
       data = await writingSamplesModel.index(queryKeys, queryValues);
+
+      // HACK
+      await addAPIUrlsToRes(data);
+      deleteAllAWSKeys(data);
+
       res.status(200).send(data);
       return;
     } catch (e) {
@@ -53,6 +78,11 @@ const search = async (req, res, next) => {
   if (query.trim === '') {
     try {
       data = await writingSamplesModel.index(queryKeys, queryValues);
+
+      // HACK
+      await addAPIUrlsToRes(data);
+      deleteAllAWSKeys(data);
+
       res.status(200).send(data);
       return;
     } catch (e) {
@@ -172,6 +202,8 @@ const insert = async (req, res, next) => {
 
   // process writingSample insert
   const writingSample = {
+    userID: res.locals.user.user_id,
+    comment: req.body.comment,
     penID,
     nibID,
     inkID,
