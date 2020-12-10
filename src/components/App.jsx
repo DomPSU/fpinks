@@ -60,6 +60,7 @@ import ShadingReviewsUpdate from './shadingReviews/ShadingReviewsUpdate';
 
 // sheenReviews
 import SheenReviewsInsert from './sheenReviews/SheenReviewsInsert';
+import SheenReviewsUpdate from './sheenReviews/SheenReviewsUpdate';
 
 // featheringReviews
 import FeatheringReviewsInsert from './featheringReviews/FeatheringReviewsInsert';
@@ -448,6 +449,19 @@ class App extends Component {
             />
 
             {/* sheenReviews */}
+            <Route
+              exact
+              path="/sheen-reviews/edit/"
+              key="/sheen-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <SheenReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/sheen-reviews/new"

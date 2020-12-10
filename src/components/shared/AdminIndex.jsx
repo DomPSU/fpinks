@@ -52,70 +52,44 @@ class AdminIndex extends Component {
     const url = window.location.href.slice(originLength);
     const model = url.split('/')[1];
 
-    // get string query keys from models
     let queryKeys = [];
+    let prefix;
     if (model === 'pens') {
+      prefix = '';
       queryKeys = ['pen_id'];
     } else if (model === 'nibs') {
+      prefix = '';
       queryKeys = ['nib_id'];
     } else if (model === 'inks') {
+      prefix = '';
       queryKeys = ['ink_id'];
     } else if (model === 'papers') {
       queryKeys = ['paper_id'];
+      prefix = '';
     } else if (model === 'color-reviews') {
+      prefix = 'ColorReviews.';
       queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
     } else if (model === 'shading-reviews') {
+      prefix = 'ShadingReviews.';
       queryKeys = ['user_id', 'writing_sample_id'];
+    } else if (model === 'sheen-reviews') {
+      prefix = 'SheenReviews.';
+      queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
     }
 
     const partialEditURL = `/${model}/edit/?`;
 
-    if (
-      model === 'pens' ||
-      model === 'nibs' ||
-      model === 'inks' ||
-      model === 'papers'
-    ) {
-      index.forEach((row) => {
-        let editURL = partialEditURL;
+    index.forEach((row) => {
+      let editURL = partialEditURL;
 
-        queryKeys.forEach((key) => {
-          editURL = editURL.concat(`${key}=${row[key]}&`);
-        });
-
-        editURL = editURL.substring(0, editURL.length - 1);
-        // eslint-disable-next-line no-param-reassign
-        row.edit = editURL;
+      queryKeys.forEach((key) => {
+        editURL = editURL.concat(`${prefix}${key}=${row[key]}&`);
       });
-    }
 
-    if (model === 'color-reviews') {
-      index.forEach((row) => {
-        let editURL = partialEditURL;
-
-        queryKeys.forEach((key) => {
-          editURL = editURL.concat(`ColorReviews.${key}=${row[key]}&`);
-        });
-
-        editURL = editURL.substring(0, editURL.length - 1);
-        // eslint-disable-next-line no-param-reassign
-        row.edit = editURL;
-      });
-    }
-
-    if (model === 'shading-reviews') {
-      index.forEach((row) => {
-        let editURL = partialEditURL;
-
-        queryKeys.forEach((key) => {
-          editURL = editURL.concat(`ShadingReviews.${key}=${row[key]}&`);
-        });
-
-        editURL = editURL.substring(0, editURL.length - 1);
-        // eslint-disable-next-line no-param-reassign
-        row.edit = editURL;
-      });
-    }
+      editURL = editURL.substring(0, editURL.length - 1);
+      // eslint-disable-next-line no-param-reassign
+      row.edit = editURL;
+    });
 
     return (
       <div>

@@ -1,5 +1,9 @@
 const express = require('express');
-const { index, insert } = require('../controllers/sheenReviewsController');
+const {
+  index,
+  insert,
+  update,
+} = require('../controllers/sheenReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
@@ -23,6 +27,7 @@ sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 // POST
 sheenReviewsRouter.post('/', isAuth, insert);
 
-// TODO PUT
+// PUT
+sheenReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = sheenReviewsRouter;

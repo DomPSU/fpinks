@@ -45,8 +45,26 @@ const remove = async (req, res, next) => {
     next(e);
   }
 };
+
+const update = async (req, res, next) => {
+  const colorReview = {
+    ...req.body,
+    userID: res.locals.user.user_id,
+  };
+
+  try {
+    const data = await sheenReviewsModel.update(colorReview);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   insert,
   remove,
+  update,
 };
