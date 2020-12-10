@@ -10,11 +10,9 @@ const {
   sanitizeQueryString,
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
-const AWS = require('../config/aws'); // TODO env based
+const AWS = require('../config/aws');
 
-const { upload } = AWS; // TODO env based
-
-// const upload = multer({ dest: 'uploads/' }); // TODO env based
+const { upload } = AWS;
 
 const writingSamplesRouter = express.Router();
 

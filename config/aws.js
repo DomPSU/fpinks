@@ -38,17 +38,6 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// test locally if multer is working fine, need to upload directory in root
-// also need to reseed db after because writing sample url wont work
-const storage = multer.diskStorage({
-  destination: (req, res, cb) => {
-    cb(null, 'uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${new Date().toISOString()}-${file.originalname}`);
-  },
-});
-
 const multerS3Config = multerS3({
   s3,
   bucket: bucketName,

@@ -5,10 +5,10 @@ const penNibsModel = require('../models/penNibsModel');
 const inksModel = require('../models/inksModel');
 const papersModel = require('../models/papersModel');
 const {
-  addAPIUrlsToRes,
-  addUrlsToRes,
+  addAPIURLs,
+  addAllURLs,
   deleteAllAWSKeys,
-} = require('../utils/awsUrls');
+} = require('../utils/awsURLs');
 const { deleteWritingSampleComment } = require('../utils/sql');
 
 const index = async (req, res, next) => {
@@ -24,9 +24,9 @@ const index = async (req, res, next) => {
 
   try {
     if (res.locals.user && res.locals.user.level === 'admin') {
-      await addUrlsToRes(data);
+      await addAllURLs(data);
     } else {
-      await addAPIUrlsToRes(data);
+      await addAPIURLs(data);
       deleteAllAWSKeys(data);
       deleteWritingSampleComment(data);
     }
@@ -64,7 +64,7 @@ const search = async (req, res, next) => {
       data = await writingSamplesModel.index(queryKeys, queryValues);
 
       // HACK
-      await addAPIUrlsToRes(data);
+      await addAPIURLs(data);
       deleteAllAWSKeys(data);
 
       res.status(200).send(data);
@@ -80,7 +80,7 @@ const search = async (req, res, next) => {
       data = await writingSamplesModel.index(queryKeys, queryValues);
 
       // HACK
-      await addAPIUrlsToRes(data);
+      await addAPIURLs(data);
       deleteAllAWSKeys(data);
 
       res.status(200).send(data);
@@ -116,7 +116,7 @@ const search = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  const awsKey = req.file.key || req.file.filename; // aws or local storage
+  const awsKey = req.file.key;
 
   // process ink insert
   const ink = {
