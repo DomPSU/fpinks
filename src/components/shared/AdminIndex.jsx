@@ -52,10 +52,28 @@ class AdminIndex extends Component {
     const url = window.location.href.slice(originLength);
     const model = url.split('/')[1];
 
-    let queryKeys = [];
     let prefix;
-    if (model === 'pens') {
+    if (
+      model === 'pens' ||
+      model === 'nibs' ||
+      model === 'inks' ||
+      model === 'papers'
+    ) {
       prefix = '';
+    } else if (model === 'color-reviews') {
+      prefix = 'ColorReviews.';
+    } else if (model === 'shading-reviews') {
+      prefix = 'ShadingReviews.';
+    } else if (model === 'sheen-reviews') {
+      prefix = 'SheenReviews.';
+    } else if (model === 'feathering-reviews') {
+      prefix = 'FeatheringReviews.';
+    } else if (model === 'water-reviews') {
+      prefix = 'WaterReviews.';
+    }
+
+    let queryKeys;
+    if (model === 'pens') {
       queryKeys = ['pen_id'];
     } else if (model === 'nibs') {
       prefix = '';
@@ -66,17 +84,13 @@ class AdminIndex extends Component {
     } else if (model === 'papers') {
       queryKeys = ['paper_id'];
       prefix = '';
-    } else if (model === 'color-reviews') {
-      prefix = 'ColorReviews.';
+    } else if (model === 'color-reviews' || model === 'sheen-reviews') {
       queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
-    } else if (model === 'shading-reviews') {
-      prefix = 'ShadingReviews.';
-      queryKeys = ['user_id', 'writing_sample_id'];
-    } else if (model === 'sheen-reviews') {
-      prefix = 'SheenReviews.';
-      queryKeys = ['user_id', 'color_id', 'writing_sample_id'];
-    } else if (model === 'feathering-reviews') {
-      prefix = 'FeatheringReviews.';
+    } else if (
+      model === 'shading-reviews' ||
+      model === 'feathering-reviews' ||
+      model === 'water-reviews'
+    ) {
       queryKeys = ['user_id', 'writing_sample_id'];
     }
 

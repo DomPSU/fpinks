@@ -1,5 +1,9 @@
 const express = require('express');
-const { index, insert } = require('../controllers/waterReviewsController');
+const {
+  index,
+  insert,
+  update,
+} = require('../controllers/waterReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
@@ -24,5 +28,6 @@ waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 waterReviewsRouter.post('/', isAuth, insert);
 
 // TODO PUT
+waterReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = waterReviewsRouter;

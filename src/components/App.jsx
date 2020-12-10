@@ -68,6 +68,7 @@ import FeatheringReviewsUpdate from './featheringReviews/FeatheringReviewsUpdate
 
 // waterReviews
 import WaterReviewsInsert from './waterReviews/WaterReviewsInsert';
+import WaterReviewsUpdate from './waterReviews/WaterReviewsUpdate';
 
 // dryingReviews
 import DryingReviewsInsert from './dryingReviews/DryingReviewsInsert';
@@ -538,6 +539,19 @@ class App extends Component {
             />
 
             {/* waterReviews */}
+            <Route
+              exact
+              path="/water-reviews/edit/"
+              key="/water-reviews/edit/"
+              render={() =>
+                isAdmin ? (
+                  <WaterReviewsUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/water-reviews/new"
