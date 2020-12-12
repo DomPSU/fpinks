@@ -12,15 +12,6 @@ const {
 
 const transparencyReviewsRouter = express.Router();
 
-// GET
-transparencyReviewsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO SHOW
 transparencyReviewsRouter.get(
   '/',
@@ -28,11 +19,7 @@ transparencyReviewsRouter.get(
   processQueryString,
   index,
 );
-
-// POST
 transparencyReviewsRouter.post('/', isAuth, insert);
-
-// PUT
 transparencyReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = transparencyReviewsRouter;

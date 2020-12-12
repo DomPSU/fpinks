@@ -13,22 +13,9 @@ const {
 
 const papersRouter = express.Router();
 
-// GET
-papersRouter.get(
-  '/admin/',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 papersRouter.get('/:id', show);
 papersRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 papersRouter.post('/', isAuth, isAdmin, insert);
-
-// PUT
 papersRouter.put('/edit/:id', isAuth, isAdmin, update);
 
 module.exports = papersRouter;

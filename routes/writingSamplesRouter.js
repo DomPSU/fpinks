@@ -16,25 +16,13 @@ const { upload } = AWS;
 
 const writingSamplesRouter = express.Router();
 
-// GET
-
 // TODO make sure search is secure. Might need to add middleware.
 // Might need to remove middleware. Might need to refactor search.
 // Might need to sanitize search
 writingSamplesRouter.get('/search/:query', sanitizeQueryString, search);
 writingSamplesRouter.get('/search', sanitizeQueryString, search);
-writingSamplesRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 writingSamplesRouter.get('/:id', show);
 writingSamplesRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 writingSamplesRouter.post(
   '/',
   isAuth,

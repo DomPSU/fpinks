@@ -12,22 +12,9 @@ const {
 
 const waterReviewsRouter = express.Router();
 
-// GET
-waterReviewsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO show
 waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 waterReviewsRouter.post('/', isAuth, insert);
-
-// TODO PUT
 waterReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = waterReviewsRouter;

@@ -12,22 +12,9 @@ const {
 
 const shadingReviewsRouter = express.Router();
 
-// GET
-shadingReviewsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO show
 shadingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 shadingReviewsRouter.post('/', isAuth, insert);
-
-// PUT
 shadingReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = shadingReviewsRouter;

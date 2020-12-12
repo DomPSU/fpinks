@@ -9,14 +9,11 @@ export default function Admin() {
         <h1 className="mt-5">Users</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/users">
-          API Approved Users
+        <Link className="p-3" to="/users/?approved=1">
+          Approved Users
         </Link>
-        <Link className="p-3" to="/users/admin/?approved=1">
-          Admin Approved Users
-        </Link>
-        <Link className="p-3" to="/users/admin/?approved=0">
-          Admin Unapproved Users
+        <Link className="p-3" to="/users/?approved=0">
+          Unapproved Users
         </Link>
       </div>
       {/* pens */}
@@ -24,14 +21,11 @@ export default function Admin() {
         <h1 className="mt-5">Pens</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/pens">
-          API Approved Pens
+        <Link className="p-3" to="/pens/?approved=1">
+          Approved Pens
         </Link>
-        <Link className="p-3" to="/pens/admin/?approved=1">
-          Admin Approved Pens
-        </Link>
-        <Link className="p-3" to="/pens/admin/?approved=0">
-          Admin Unapproved Pens
+        <Link className="p-3" to="/pens/?approved=0">
+          Unapproved Pens
         </Link>
         <Link className="p-3" to="/pens/new">
           Pens Insert
@@ -45,14 +39,11 @@ export default function Admin() {
         <h1 className="mt-5">Nibs</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/nibs">
-          API Approved Nibs
+        <Link className="p-3" to="/nibs/?approved=1">
+          Approved Nibs
         </Link>
-        <Link className="p-3" to="/nibs/admin/?approved=1">
-          Admin Approved Nibs
-        </Link>
-        <Link className="p-3" to="/nibs/admin/?approved=0">
-          Admin Unapproved Nibs
+        <Link className="p-3" to="/nibs/?approved=0">
+          Unapproved Nibs
         </Link>
         <Link className="p-3" to="/nibs/new">
           Nibs Insert
@@ -66,14 +57,11 @@ export default function Admin() {
         <h1 className="mt-5">PenNibs</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/pen-nibs">
-          API Approved PenNibs
+        <Link className="p-3" to="/pen-nibs/?PenNibs.approved=1">
+          Approved PenNibs
         </Link>
-        <Link className="p-3" to="/pen-nibs/admin/?PenNibs.approved=1">
-          Admin Approved PenNibs
-        </Link>
-        <Link className="p-3" to="/pen-nibs/admin/?PenNibs.approved=0">
-          Admin Unapproved PenNibs
+        <Link className="p-3" to="/pen-nibs/?PenNibs.approved=0">
+          Unapproved PenNibs
         </Link>
         <Link className="p-3" to="/pen-nibs/new">
           PenNibs Insert
@@ -84,14 +72,11 @@ export default function Admin() {
         <h1 className="mt-5">Inks</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/inks">
-          API Approved Inks
+        <Link className="p-3" to="/inks/?approved=1">
+          Approved Inks
         </Link>
-        <Link className="p-3" to="/inks/admin/?approved=1">
-          Admin Approved Inks
-        </Link>
-        <Link className="p-3" to="/inks/admin/?approved=0">
-          Admin Unapproved Inks
+        <Link className="p-3" to="/inks/?approved=0">
+          Unapproved Inks
         </Link>
         <Link className="p-3" to="/inks/new">
           Inks Insert
@@ -105,14 +90,11 @@ export default function Admin() {
         <h1 className="mt-5">Papers</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/papers">
-          API Approved Papers
+        <Link className="p-3" to="/papers/?approved=1">
+          Approved Papers
         </Link>
-        <Link className="p-3" to="/papers/admin/?approved=1">
-          Admin Approved Papers
-        </Link>
-        <Link className="p-3" to="/papers/admin/?approved=0">
-          Admin Unapproved Papers
+        <Link className="p-3" to="/papers/?approved=0">
+          Unapproved Papers
         </Link>
         <Link className="p-3" to="/papers/new">
           Papers Insert
@@ -126,20 +108,11 @@ export default function Admin() {
         <h1 className="mt-5">Writing Samples</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/writing-samples">
-          API Approved Writing Samples
+        <Link className="p-3" to="/writing-samples/?WritingSamples.approved=1">
+          Approved Writing Samples
         </Link>
-        <Link
-          className="p-3"
-          to="/writing-samples/admin/?WritingSamples.approved=1"
-        >
-          Admin Approved Writing Samples
-        </Link>
-        <Link
-          className="p-3"
-          to="/writing-samples/admin/?WritingSamples.approved=0"
-        >
-          Admin Unapproved Writing Samples
+        <Link className="p-3" to="/writing-samples/?WritingSamples.approved=0">
+          Unapproved Writing Samples
         </Link>
       </div>
       {/* colorReviews */}
@@ -147,20 +120,11 @@ export default function Admin() {
         <h1 className="mt-5">Color Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/color-reviews">
-          API Approved Color Reviews
+        <Link className="p-3" to="/color-reviews/?ColorReviews.approved=1">
+          Approved Color Reviews
         </Link>
-        <Link
-          className="p-3"
-          to="/color-reviews/admin/?ColorReviews.approved=1"
-        >
-          Admin Approved Color Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/color-reviews/admin/?ColorReviews.approved=0"
-        >
-          Admin Unapproved Color Reviews
+        <Link className="p-3" to="/color-reviews/?ColorReviews.approved=0">
+          Unapproved Color Reviews
         </Link>
         <Link className="p-3" to="/color-reviews/new">
           Color Reviews Insert
@@ -171,20 +135,11 @@ export default function Admin() {
         <h1 className="mt-5">Shading Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/shading-reviews">
-          API Approved Shading Reviews
+        <Link className="p-3" to="/shading-reviews/?ShadingReviews.approved=1">
+          Approved Shading Reviews
         </Link>
-        <Link
-          className="p-3"
-          to="/shading-reviews/admin/?ShadingReviews.approved=1"
-        >
-          Admin Approved Shading Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/shading-reviews/admin/?ShadingReviews.approved=0"
-        >
-          Admin Unapproved Shading Reviews
+        <Link className="p-3" to="/shading-reviews/?ShadingReviews.approved=0">
+          Unapproved Shading Reviews
         </Link>
         <Link className="p-3" to="/shading-reviews/new">
           Shading Reviews Insert
@@ -195,20 +150,11 @@ export default function Admin() {
         <h1 className="mt-5">Sheen Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/sheen-reviews">
-          API Approved Sheen Reviews
+        <Link className="p-3" to="/sheen-reviews/?SheenReviews.approved=1">
+          Approved Sheen Reviews
         </Link>
-        <Link
-          className="p-3"
-          to="/sheen-reviews/admin/?SheenReviews.approved=1"
-        >
-          Admin Approved Sheen Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/sheen-reviews/admin/?SheenReviews.approved=0"
-        >
-          Admin Unapproved Sheen Reviews
+        <Link className="p-3" to="/sheen-reviews/?SheenReviews.approved=0">
+          Unapproved Sheen Reviews
         </Link>
         <Link className="p-3" to="/sheen-reviews/new">
           Sheen Reviews Insert
@@ -219,20 +165,17 @@ export default function Admin() {
         <h1 className="mt-5">Feathering Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/feathering-reviews">
-          API Approved Feathering Reviews
+        <Link
+          className="p-3"
+          to="/feathering-reviews/?FeatheringReviews.approved=1"
+        >
+          Approved Feathering Reviews
         </Link>
         <Link
           className="p-3"
-          to="/feathering-reviews/admin/?FeatheringReviews.approved=1"
+          to="/feathering-reviews/?FeatheringReviews.approved=0"
         >
-          Admin Approved Feathering Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/feathering-reviews/admin/?FeatheringReviews.approved=0"
-        >
-          Admin Unapproved Feathering Reviews
+          Unapproved Feathering Reviews
         </Link>
         <Link className="p-3" to="/feathering-reviews/new">
           Feathering Reviews Insert
@@ -243,20 +186,11 @@ export default function Admin() {
         <h1 className="mt-5">Water Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/water-reviews">
-          API Approved Waterproofness Reviews
+        <Link className="p-3" to="/water-reviews/?WaterReviews.approved=1">
+          Approved Waterproofness Reviews
         </Link>
-        <Link
-          className="p-3"
-          to="/water-reviews/admin/?WaterReviews.approved=1"
-        >
-          Admin Approved Waterproofness Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/water-reviews/admin/?WaterReviews.approved=0"
-        >
-          Admin Unapproved Waterproofness Reviews
+        <Link className="p-3" to="/water-reviews/?WaterReviews.approved=0">
+          Unapproved Waterproofness Reviews
         </Link>
         <Link className="p-3" to="/water-reviews/new">
           Waterproofness Reviews Insert
@@ -267,20 +201,11 @@ export default function Admin() {
         <h1 className="mt-5">Drying Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/drying-reviews">
-          API Approved Drying Time Reviews
+        <Link className="p-3" to="/drying-reviews/?DryingReviews.approved=1">
+          Approved Drying Time Reviews
         </Link>
-        <Link
-          className="p-3"
-          to="/drying-reviews/admin/?DryingReviews.approved=1"
-        >
-          Admin Approved Drying Time Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/drying-reviews/admin/?DryingReviews.approved=0"
-        >
-          Admin Unapproved Drying Time Reviews
+        <Link className="p-3" to="/drying-reviews/?DryingReviews.approved=0">
+          Unapproved Drying Time Reviews
         </Link>
         <Link className="p-3" to="/drying-reviews/new">
           Drying Time Reviews Insert
@@ -291,20 +216,17 @@ export default function Admin() {
         <h1 className="mt-5">Transparency Reviews</h1>
       </div>
       <div className="row border-bottom border-dark">
-        <Link className="p-3" to="/transparency-reviews">
-          API Approved Transparency Reviews
+        <Link
+          className="p-3"
+          to="/transparency-reviews/?TransparencyReviews.approved=1"
+        >
+          Approved Transparency Reviews
         </Link>
         <Link
           className="p-3"
-          to="/transparency-reviews/admin/?TransparencyReviews.approved=1"
+          to="/transparency-reviews/?TransparencyReviews.approved=0"
         >
-          Admin Approved Transparency Reviews
-        </Link>
-        <Link
-          className="p-3"
-          to="/transparency-reviews/admin/?TransparencyReviews.approved=0"
-        >
-          Admin Unapproved Transparency Reviews
+          Unapproved Transparency Reviews
         </Link>
         <Link className="p-3" to="/transparency-reviews/new">
           Transparency Reviews Insert

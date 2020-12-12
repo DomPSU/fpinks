@@ -8,6 +8,7 @@ const path = require('path');
 const createError = require('http-errors');
 const util = require('./utils/util');
 const apiRouter = require('./routes');
+const { setAuth } = require('./middlewares/authMiddleware');
 
 const app = express();
 
@@ -18,9 +19,10 @@ if (util.isDevelopment()) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(setAuth);
 app.use(express.static(path.join(__dirname, 'build')));
-
 app.use('/api', apiRouter);
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

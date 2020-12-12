@@ -12,22 +12,9 @@ const {
 
 const colorReviewsRouter = express.Router();
 
-// GET
-colorReviewsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO show
 colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 colorReviewsRouter.post('/', isAuth, insert);
-
-// PUT
 colorReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = colorReviewsRouter;

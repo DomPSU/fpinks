@@ -2,16 +2,11 @@ const createError = require('http-errors');
 const google = require('../config/google');
 const usersModel = require('../models/usersModel');
 
-const isAuth = async (req, res, next) => {
+const setAuth = async (req, res, next) => {
   let idToken = req.headers.authorization;
 
   if (idToken === undefined) {
-    return next(
-      createError(
-        401,
-        'Unauthorized. Please send jwt in Authorization header.',
-      ),
-    );
+    return next();
   }
 
   idToken = idToken.substring(7); // strip off "Bearer " from jwt
@@ -20,7 +15,7 @@ const isAuth = async (req, res, next) => {
   try {
     ticket = await google.verify(idToken);
   } catch (err) {
-    return next(createError(401, 'Unauthorized. Please send valid jwt.'));
+    return next();
   }
 
   const subAndIss = {
@@ -50,14 +45,17 @@ const isAuth = async (req, res, next) => {
   next();
 };
 
+const isAuth = async (req, res, next) => {
+  if (res.locals.user === undefined) {
+    return next(createError(401, 'Unauthorized. Please send valid jwt.'));
+  }
+
+  next();
+};
+
 const isAdmin = async (req, res, next) => {
   if (res.locals.user === undefined || res.locals.user.level === undefined) {
-    return next(
-      createError(
-        500,
-        'Need to use isAuth middleware before checking if admin.',
-      ),
-    );
+    return next(createError(500, 'User was not set before checking level.'));
   }
 
   if (res.locals.user.level !== 'admin') {
@@ -68,6 +66,7 @@ const isAdmin = async (req, res, next) => {
 };
 
 module.exports = {
+  setAuth,
   isAuth,
   isAdmin,
 };

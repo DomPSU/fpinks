@@ -8,19 +8,8 @@ const {
 
 const penNibsRouter = express.Router();
 
-// GET
-penNibsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO show
 penNibsRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 penNibsRouter.post('/', isAuth, isAdmin, insert);
 
 // TODO PUT

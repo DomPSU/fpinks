@@ -60,6 +60,8 @@ class AdminIndex extends Component {
       model === 'papers'
     ) {
       prefix = '';
+    } else if (model === 'writing-samples') {
+      prefix = 'WritingSamples.';
     } else if (model === 'color-reviews') {
       prefix = 'ColorReviews.';
     } else if (model === 'shading-reviews') {
@@ -87,6 +89,9 @@ class AdminIndex extends Component {
       queryKeys = ['ink_id'];
     } else if (model === 'papers') {
       queryKeys = ['paper_id'];
+      prefix = '';
+    } else if (model === 'writing-samples') {
+      queryKeys = ['writing_sample_id'];
       prefix = '';
     } else if (model === 'color-reviews' || model === 'sheen-reviews') {
       queryKeys = ['user_id', 'color_id', 'writing_sample_id'];

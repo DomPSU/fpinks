@@ -152,20 +152,9 @@ class App extends Component {
             {/* users */}
             <Route
               exact
-              path="/users/admin/"
-              key="/users/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/users"
               key="/users"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* pens */}
@@ -189,19 +178,8 @@ class App extends Component {
 
             <Route
               exact
-              path="/pens/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/pens"
-              key="/pens"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* nibs */}
@@ -225,19 +203,8 @@ class App extends Component {
 
             <Route
               exact
-              path="/nibs/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/nibs"
-              key="/nibs"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* penNibs */}
@@ -252,19 +219,8 @@ class App extends Component {
 
             <Route
               exact
-              path="/pen-nibs/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/pen-nibs"
-              key="/pen-nibs"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* inks */}
@@ -288,19 +244,8 @@ class App extends Component {
 
             <Route
               exact
-              path="/inks/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/inks"
-              key="/inks"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* papers */}
@@ -324,30 +269,11 @@ class App extends Component {
 
             <Route
               exact
-              path="/papers/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
-              path="/papers"
-              key="/papers"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              path="/papers/"
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* writingSamples */}
-            <Route
-              exact
-              path="/writing-samples/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
             <Route
               exact
               path="/writing-samples/:id"
@@ -359,9 +285,7 @@ class App extends Component {
               exact
               path="/writing-samples"
               key="/writing-samples"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* colorReviews */}
@@ -393,19 +317,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/color-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/color-reviews"
               key="/color-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* shadingReviews */}
@@ -437,19 +351,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/shading-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/shading-reviews"
               key="/shading-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* sheenReviews */}
@@ -481,19 +385,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/sheen-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/sheen-reviews"
               key="/sheen-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* featheringReviews */}
@@ -525,19 +419,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/feathering-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/feathering-reviews"
               key="/feathering-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* waterReviews */}
@@ -569,19 +453,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/water-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/water-reviews"
               key="/water-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* dryingReviews */}
@@ -613,19 +487,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/drying-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/drying-reviews"
               key="/drying-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* transparencyReviews */}
@@ -657,19 +521,9 @@ class App extends Component {
 
             <Route
               exact
-              path="/transparency-reviews/admin/"
-              render={() =>
-                isAdmin ? <AdminIndex /> : <Redirect to="/unauthorized" />
-              }
-            />
-
-            <Route
-              exact
               path="/transparency-reviews"
               key="/transparency-reviews"
-              render={() =>
-                isAdmin ? <Index /> : <Redirect to="/unauthorized" />
-              }
+              render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
             {/* other */}

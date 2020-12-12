@@ -12,22 +12,9 @@ const {
 
 const dryingReviewsRouter = express.Router();
 
-// GET
-dryingReviewsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO show
 dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 dryingReviewsRouter.post('/', isAuth, insert);
-
-// PUT
 dryingReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = dryingReviewsRouter;

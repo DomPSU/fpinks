@@ -12,15 +12,6 @@ const {
 
 const featheringReviewsRouter = express.Router();
 
-// GET
-featheringReviewsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 // TODO show
 featheringReviewsRouter.get(
   '/',
@@ -28,11 +19,7 @@ featheringReviewsRouter.get(
   processQueryString,
   index,
 );
-
-// POST
 featheringReviewsRouter.post('/', isAuth, insert);
-
-// PUT
 featheringReviewsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = featheringReviewsRouter;

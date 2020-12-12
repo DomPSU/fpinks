@@ -13,22 +13,9 @@ const {
 
 const nibsRouter = express.Router();
 
-// GET
-nibsRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
 nibsRouter.get('/:id', show);
 nibsRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 nibsRouter.post('/', isAuth, isAdmin, insert);
-
-// PUT
 nibsRouter.put('/edit/:id', isAuth, isAdmin, update);
 
 module.exports = nibsRouter;

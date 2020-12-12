@@ -23,7 +23,7 @@ class InksUpdate extends Component {
   componentDidMount() {
     const originLength = window.location.origin.length;
     const editURL = window.location.href.slice(originLength);
-    const getURL = editURL.replace('edit', 'admin');
+    const getURL = editURL.replace('edit', '');
 
     // if url contains query string, get ink
     if (getURL.indexOf('?') !== -1) {

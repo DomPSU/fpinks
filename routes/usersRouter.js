@@ -5,7 +5,7 @@ const {
   insert,
   validAdmin,
 } = require('../controllers/usersController');
-const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
+const { setAuth, isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
@@ -14,19 +14,9 @@ const {
 const usersRouter = express.Router();
 
 // GET
-usersRouter.get('/level', isAuth, isAdmin, validAdmin);
-usersRouter.get(
-  '/admin',
-  isAuth,
-  isAdmin,
-  sanitizeQueryString,
-  processQueryString,
-  index,
-);
+usersRouter.get('/level', setAuth, isAuth, isAdmin, validAdmin); // TODO HACK
 usersRouter.get('/:id', show);
 usersRouter.get('/', sanitizeQueryString, processQueryString, index);
-
-// POST
 usersRouter.post('/', insert);
 
 module.exports = usersRouter;
