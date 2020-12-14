@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import API from '../../apis/API';
 
@@ -31,65 +30,30 @@ class Login extends Component {
       .post('/users', {
         idToken,
       })
-      .then((res) => {
-        console.log(res);
-      })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  // TODO
-  // eslint-disable-next-line class-methods-use-this
-  isAdmin(idToken) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    };
-
-    API.instance
-      .get('/users/level', config)
-      .then((res) => {
-        const { handleAdminSignIn } = this.props;
-
-        if (res.status === 200) {
-          handleAdminSignIn(true);
-        } else {
-          handleAdminSignIn(false);
-        }
-
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  renderSignIn() {
-    const { handleSignIn } = this.props;
-
+  renderSignIn = async () => {
     window.gapi.load('signin2', () => {
       const params = {
         onsuccess: (googleUser) => {
-          console.log('User has finished signing in!');
-
           const idToken = googleUser.getAuthResponse().id_token;
-
           this.sendIDToken(idToken);
-          this.isAdmin(idToken);
-
-          handleSignIn();
           this.setState({ redirect: true });
         },
       };
       window.gapi.signin2.render('loginButton', params);
     });
-  }
+  };
 
   render() {
     const { redirect } = this.state;
+    const { signIn } = this.props;
+
     if (redirect) {
+      signIn();
       return <Redirect push to="/" />;
     }
 
@@ -104,10 +68,5 @@ class Login extends Component {
     );
   }
 }
-
-Login.propTypes = {
-  handleSignIn: PropTypes.func.isRequired,
-  handleAdminSignIn: PropTypes.func.isRequired,
-};
 
 export default Login;

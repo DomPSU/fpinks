@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import API from '../apis/API';
 
 // general
 import About from './general/About';
@@ -84,12 +85,12 @@ class App extends Component {
 
     this.state = { isSignedIn: false, isAdmin: false };
 
-    this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleAdminSignIn = this.handleAdminSignIn.bind(this);
+    this.signIn = this.signIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
     this.initializeGoogleSignIn = this.initializeGoogleSignIn.bind(this);
+  }
 
-    // call initializeGoogleSignIn right after gapi is loaded
+  componentDidMount() {
     document
       .getElementById('gapiScript')
       .addEventListener('load', this.initializeGoogleSignIn);
@@ -100,46 +101,62 @@ class App extends Component {
     }
   }
 
-  handleSignIn = () => {
-    // TODO handle refresh bug
+  signIn = async () => {
+    const authInstance = window.gapi.auth2.getAuthInstance();
+    this.setState({
+      isSignedIn: authInstance.isSignedIn.get(),
+    });
 
-    this.setState({ isSignedIn: true });
+    authInstance.isSignedIn.listen((isSignedIn) => {
+      this.setState({ isSignedIn, isAdmin: false });
+    });
+
+    const googleUser = authInstance.currentUser.get();
+    const authRes = await googleUser.reloadAuthResponse();
+    this.isAdmin(authRes.id_token);
   };
 
-  handleAdminSignIn = (isAdminRes) => {
-    // TODO handle refresh bug
-
-    this.setState({ isAdmin: isAdminRes });
-  };
-
-  handleSignOut = () => {
-    // TODO delete cookie
-
-    this.setState({ isSignedIn: false, isAdmin: false });
+  handleSignOut = async () => {
+    const authInstance = window.gapi.auth2.getAuthInstance();
+    await authInstance.signOut();
   };
 
   initializeGoogleSignIn = () => {
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2
-        .init({
-          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-        })
-        .then(() => {
-          const authInstance = window.gapi.auth2.getAuthInstance();
-          const isSignedIn = authInstance.isSignedIn.get();
-          this.setState({ isSignedIn });
-
-          // eslint-disable-next-line no-shadow
-          authInstance.isSignedIn.listen((isSignedIn) => {
-            this.setState({ isSignedIn });
-          });
-        });
+    window.gapi.load('auth2', async () => {
+      await window.gapi.auth2.init({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      });
+      this.signIn();
     });
   };
 
-  render = () => {
-    const { isSignedIn, isAdmin } = this.state;
+  // TODO
+  // eslint-disable-next-line class-methods-use-this
+  isAdmin(idToken) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    };
 
+    API.instance
+      .get('/users/level', config)
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ isAdmin: true });
+        } else {
+          this.setState({ isAdmin: false });
+        }
+      })
+      .catch((error) => {
+        this.setState({ isAdmin: false });
+        console.log(error);
+      });
+  }
+
+  render = () => {
+    console.log(this.state);
+    const { isSignedIn, isAdmin } = this.state;
     return (
       <Router>
         <div>
@@ -526,7 +543,6 @@ class App extends Component {
               render={() => (isAdmin ? <AdminIndex /> : <Index />)}
             />
 
-            {/* other */}
             {/* Admin */}
             <Route
               exact
@@ -538,17 +554,11 @@ class App extends Component {
             />
 
             {/* Login */}
-            {/* TODO Maybe add a redirect here to make google login quicker? Although redirect might never render button. */}
             <Route
               exact
               path="/login"
               key="/login"
-              render={() => (
-                <Login
-                  handleSignIn={this.handleSignIn}
-                  handleAdminSignIn={this.handleAdminSignIn}
-                />
-              )}
+              render={() => <Login signIn={this.signIn} />}
             />
 
             <Route

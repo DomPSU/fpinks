@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './navigation.css';
-import { signOut } from '../../util/util';
 
 export default function Header(props) {
   const history = useHistory();
@@ -75,7 +74,6 @@ export default function Header(props) {
                   type="button"
                   className="dropdown-item dropdown-item-overwrite text-white"
                   onClick={() => {
-                    signOut();
                     handleSignOut();
                     redirect();
                   }}

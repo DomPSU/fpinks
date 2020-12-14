@@ -20,17 +20,6 @@ export const capitalize = (string) => {
   return splitStr.join(' ');
 };
 
-export const signOut = () => {
-  if (window.gapiLoaded === true) {
-    const googleAuth = window.gapi.auth2.getAuthInstance();
-    googleAuth.signOut().then(() => {
-      console.log('User signed out.');
-    });
-  } else {
-    console.log('Sign out error due to gapi not loaded');
-  }
-};
-
 export const getIDToken = () => {
   if (window.gapiLoaded === true) {
     const googleAuth = window.gapi.auth2.getAuthInstance();
