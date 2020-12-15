@@ -54,6 +54,7 @@ class AdminIndex extends Component {
 
     let prefix;
     if (
+      model === 'users' ||
       model === 'pens' ||
       model === 'nibs' ||
       model === 'inks' ||
@@ -79,7 +80,9 @@ class AdminIndex extends Component {
     }
 
     let queryKeys;
-    if (model === 'pens') {
+    if (model === 'users') {
+      queryKeys = ['user_id'];
+    } else if (model === 'pens') {
       queryKeys = ['pen_id'];
     } else if (model === 'nibs') {
       prefix = '';
