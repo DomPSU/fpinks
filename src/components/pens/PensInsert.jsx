@@ -9,6 +9,7 @@ class PensInsert extends Component {
     this.state = {
       penBrand: '',
       penModel: '',
+      serverResponse: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -45,9 +46,20 @@ class PensInsert extends Component {
         config,
       )
       .then((res) => {
-        console.log(res);
+        const serverResponse = document.getElementById('serverResponse');
+        serverResponse.classList.remove('text-danger');
+        serverResponse.classList.add('text-success');
+        this.setState({
+          serverResponse: res.statusText,
+        });
       })
       .catch((error) => {
+        const serverResponse = document.getElementById('serverResponse');
+        serverResponse.classList.remove('text-success');
+        serverResponse.classList.add('text-danger');
+        this.setState({
+          serverResponse: error.response.status,
+        });
         console.log(error);
       });
 
@@ -55,7 +67,8 @@ class PensInsert extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const { serverResponse } = this.state;
+
     return (
       <div className="container text-center">
         <h1 className="p-5">Add a Pen</h1>
@@ -90,6 +103,7 @@ class PensInsert extends Component {
             Submit
           </button>
         </form>
+        <h3 id="serverResponse">{serverResponse}</h3>
       </div>
     );
   }

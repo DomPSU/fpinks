@@ -12,6 +12,7 @@ class SheenReviewsInsert extends Component {
       amount: '',
       color: '',
       writingSampleID: '',
+      serverResponse: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -49,9 +50,20 @@ class SheenReviewsInsert extends Component {
         config,
       )
       .then((res) => {
-        console.log(res);
+        const serverResponse = document.getElementById('serverResponse');
+        serverResponse.classList.remove('text-danger');
+        serverResponse.classList.add('text-success');
+        this.setState({
+          serverResponse: res.statusText,
+        });
       })
       .catch((error) => {
+        const serverResponse = document.getElementById('serverResponse');
+        serverResponse.classList.remove('text-success');
+        serverResponse.classList.add('text-danger');
+        this.setState({
+          serverResponse: error.response.status,
+        });
         console.log(error);
       });
 
@@ -59,7 +71,8 @@ class SheenReviewsInsert extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const { serverResponse } = this.state;
+
     return (
       <div className="container text-center">
         <h1 className="pt-5">Add a Sheen Review</h1>
@@ -118,6 +131,7 @@ class SheenReviewsInsert extends Component {
             Submit
           </button>
         </form>
+        <h3 id="serverResponse">{serverResponse}</h3>
       </div>
     );
   }

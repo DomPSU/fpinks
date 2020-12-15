@@ -10,6 +10,7 @@ class FeatheringReviewsInsert extends Component {
     this.state = {
       amount: '',
       writingSampleID: '',
+      serverResponse: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -46,9 +47,20 @@ class FeatheringReviewsInsert extends Component {
         config,
       )
       .then((res) => {
-        console.log(res);
+        const serverResponse = document.getElementById('serverResponse');
+        serverResponse.classList.remove('text-danger');
+        serverResponse.classList.add('text-success');
+        this.setState({
+          serverResponse: res.statusText,
+        });
       })
       .catch((error) => {
+        const serverResponse = document.getElementById('serverResponse');
+        serverResponse.classList.remove('text-success');
+        serverResponse.classList.add('text-danger');
+        this.setState({
+          serverResponse: error.response.status,
+        });
         console.log(error);
       });
 
@@ -56,7 +68,8 @@ class FeatheringReviewsInsert extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const { serverResponse } = this.state;
+
     return (
       <div className="container text-center">
         <h1 className="pt-5">Add a Feathering Review</h1>
@@ -103,6 +116,7 @@ class FeatheringReviewsInsert extends Component {
             Submit
           </button>
         </form>
+        <h3 id="serverResponse">{serverResponse}</h3>
       </div>
     );
   }
