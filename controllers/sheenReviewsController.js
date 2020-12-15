@@ -15,6 +15,7 @@ const index = async (req, res, next) => {
 const insert = async (req, res, next) => {
   const sheenReview = {
     ...req.body,
+    userID: res.locals.user.user_id,
   };
 
   // delete existing sheen review for user and writing sample

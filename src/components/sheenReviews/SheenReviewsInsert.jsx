@@ -12,7 +12,6 @@ class SheenReviewsInsert extends Component {
       amount: '',
       color: '',
       writingSampleID: '',
-      userID: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -103,19 +102,6 @@ class SheenReviewsInsert extends Component {
                     <input
                       type="text"
                       id="writingSampleID"
-                      className="form-control m-1 text-center"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-              </label>
-              <label htmlFor="userID" className="p-3 m-0">
-                User ID
-                <div className="row">
-                  <div className="col-12">
-                    <input
-                      type="text"
-                      id="userID"
                       className="form-control m-1 text-center"
                       onChange={this.handleChange}
                     />

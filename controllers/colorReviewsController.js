@@ -13,8 +13,6 @@ const index = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  console.log(res.locals.user);
-
   const colorReview = {
     ...req.body,
     userID: res.locals.user.user_id,
