@@ -27,57 +27,35 @@ import Header from './shared/Header';
 import Footer from './shared/Footer';
 import GenericMessage from './shared/genericMessage';
 
-// users
+// insert
+import PensInsert from './insert/PensInsert';
+import NibsInsert from './insert/NibsInsert';
+import PenNibsInsert from './insert/PenNibsInsert';
+import InksInsert from './insert/InksInsert';
+import PapersInsert from './insert/PapersInsert';
+import ColorReviewsInsert from './insert/ColorReviewsInsert';
+import ShadingReviewsInsert from './insert/ShadingReviewsInsert';
+import SheenReviewsInsert from './insert/SheenReviewsInsert';
+import FeatheringReviewsInsert from './insert/FeatheringReviewsInsert';
+import WaterReviewsInsert from './insert/WaterReviewsInsert';
+import DryingReviewsInsert from './insert/DryingReviewsInsert';
+import TransparencyReviewsInsert from './insert/TransparencyReviewsInsert';
 
-// pens
-import PensInsert from './pens/PensInsert';
-import PensUpdate from './pens/PensUpdate';
+// update
+import PensUpdate from './update/PensUpdate';
+import NibsUpdate from './update/NibsUpdate';
+import InksUpdate from './update/InksUpdate';
+import PapersUpdate from './update/PapersUpdate';
+import ColorReviewsUpdate from './update/ColorReviewsUpdate';
+import ShadingReviewsUpdate from './update/ShadingReviewsUpdate';
+import SheenReviewsUpdate from './update/SheenReviewsUpdate';
+import FeatheringReviewsUpdate from './update/FeatheringReviewsUpdate';
+import WaterReviewsUpdate from './update/WaterReviewsUpdate';
+import DryingReviewsUpdate from './update/DryingReviewsUpdate';
+import TransparencyReviewsUpdate from './update/TransparencyReviewsUpdate';
 
-// nibs
-import NibsInsert from './nibs/NibsInsert';
-import NibsUpdate from './nibs/NibsUpdate';
-
-// penNibs
-import PenNibsInsert from './penNibs/PenNibsInsert';
-
-// inks
-import InksInsert from './inks/InksInsert';
-import InksUpdate from './inks/InksUpdate';
-
-// papers
-import PapersInsert from './papers/PapersInsert';
-import PapersUpdate from './papers/PapersUpdate';
-
-// writingSamples
+// TODO fix directory and import
 import WritingSample from './writingSamples/WritingSample';
-
-// colorReviews
-import ColorReviewsInsert from './colorReviews/ColorReviewsInsert';
-import ColorReviewsUpdate from './colorReviews/ColorReviewsUpdate';
-
-// shadingReviews
-import ShadingReviewsInsert from './shadingReviews/ShadingReviewsInsert';
-import ShadingReviewsUpdate from './shadingReviews/ShadingReviewsUpdate';
-
-// sheenReviews
-import SheenReviewsInsert from './sheenReviews/SheenReviewsInsert';
-import SheenReviewsUpdate from './sheenReviews/SheenReviewsUpdate';
-
-// featheringReviews
-import FeatheringReviewsInsert from './featheringReviews/FeatheringReviewsInsert';
-import FeatheringReviewsUpdate from './featheringReviews/FeatheringReviewsUpdate';
-
-// waterReviews
-import WaterReviewsInsert from './waterReviews/WaterReviewsInsert';
-import WaterReviewsUpdate from './waterReviews/WaterReviewsUpdate';
-
-// dryingReviews
-import DryingReviewsInsert from './dryingReviews/DryingReviewsInsert';
-import DryingReviewsUpdate from './dryingReviews/DryingReviewsUpdate';
-
-// transparencyReviews
-import TransparencyReviewsInsert from './transparencyReviews/TransparencyReviewsInsert';
-import TransparencyReviewsUpdate from './transparencyReviews/TransparencyReviewsUpdate';
 
 class App extends Component {
   constructor(props) {
