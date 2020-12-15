@@ -15,6 +15,7 @@ const index = async (req, res, next) => {
 const insert = async (req, res, next) => {
   const waterReview = {
     ...req.body,
+    userID: res.locals.user.user_id,
   };
 
   // delete existing waterproofness review for user and writing sample
