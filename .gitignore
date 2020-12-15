@@ -24,3 +24,7 @@ yarn.lock
 
 # storage
 /uploads
+
+# swap
+*.swp
+*.swo
