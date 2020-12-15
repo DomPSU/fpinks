@@ -15,6 +15,7 @@ const index = async (req, res, next) => {
 const insert = async (req, res, next) => {
   const transparencyReview = {
     ...req.body,
+    userID: res.locals.user.user_id,
   };
 
   // delete existing transparency review for user and writing sample
