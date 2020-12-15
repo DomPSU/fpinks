@@ -42,6 +42,7 @@ import DryingReviewsInsert from './insert/DryingReviewsInsert';
 import TransparencyReviewsInsert from './insert/TransparencyReviewsInsert';
 
 // update
+import UsersUpdate from './update/UsersUpdate';
 import PensUpdate from './update/PensUpdate';
 import NibsUpdate from './update/NibsUpdate';
 import InksUpdate from './update/InksUpdate';
@@ -145,6 +146,15 @@ class App extends Component {
           />
           <Switch>
             {/* users */}
+            <Route
+              exact
+              path="/users/edit/"
+              key="/users/edit/"
+              render={() =>
+                isAdmin ? <UsersUpdate /> : <Redirect to="/unauthorized" />
+              }
+            />
+
             <Route
               exact
               path="/users"

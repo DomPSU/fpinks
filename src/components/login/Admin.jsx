@@ -15,6 +15,9 @@ export default function Admin() {
         <Link className="p-3" to="/users/?approved=0">
           Unapproved Users
         </Link>
+        <Link className="p-3" to="/users/edit">
+          Users Update
+        </Link>
       </div>
       {/* pens */}
       <div className="row">

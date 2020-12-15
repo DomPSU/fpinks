@@ -46,6 +46,22 @@ const insert = async (req, res, next) => {
   verify().catch(console.error);
 };
 
+const update = async (req, res, next) => {
+  const user = {
+    ...req.body,
+    userID: req.params.id,
+  };
+
+  try {
+    const data = await usersModel.update(user);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 const validAdmin = async (req, res, next) => {
   res.status(200).end();
 };
@@ -54,5 +70,6 @@ module.exports = {
   index,
   show,
   insert,
+  update,
   validAdmin,
 };

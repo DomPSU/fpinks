@@ -2,7 +2,8 @@ const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
-  const partialSQL = 'SELECT username, created_at, updated_at FROM Users WHERE';
+  const partialSQL =
+    'SELECT user_id, username, created_at, updated_at, approved FROM Users WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -16,7 +17,7 @@ const index = async (queryKeys, queryValues) => {
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT username, created_at, updated_at FROM Users WHERE user_id = ? ',
+    'SELECT user_id,  username, created_at, updated_at, approved FROM Users WHERE user_id = ? ',
     [id],
   );
   return res;
@@ -63,6 +64,23 @@ const insert = async (data) => {
   }
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE Users SET approved = ?, updated_at = ? WHERE user_id = ?',
+    [
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.userID,
+    ],
+  );
+  console.log(updateRes);
+  return updateRes;
+};
+
 const getUserFromSubAndIss = async (data) => {
   const selectRes = await db.pool.asyncQuery(
     'SELECT * FROM Users WHERE sub = ? AND iss = ?',
@@ -78,5 +96,6 @@ module.exports = {
   index,
   show,
   insert,
+  update,
   getUserFromSubAndIss,
 };
