@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const partialSQL =
-  'SELECT DryingReviews.writing_sample_id, Users.user_id, Users.username, DryingReviews.drying_time, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id WHERE';
-
 const index = async (queryKeys, queryValues) => {
+  const partialSQL =
+    'SELECT DryingReviews.writing_sample_id, Users.user_id, Users.username, DryingReviews.drying_time, DryingReviews.created_at, DryingReviews.updated_at FROM DryingReviews LEFT JOIN Users ON Users.user_id=DryingReviews.user_id WHERE';
+
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -12,15 +12,6 @@ const index = async (queryKeys, queryValues) => {
   );
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
-  return res;
-};
-
-const show = async (data) => {
-  const res = await db.pool.asyncQuery(
-    `${partialSQL} DryingReviews.writing_sample_id=? AND Users.user_id=?`,
-    [data.writingSampleID, data.userID],
-  );
-
   return res;
 };
 
@@ -72,7 +63,6 @@ const update = async (data) => {
 
 module.exports = {
   index,
-  show,
   insert,
   remove,
   update,

@@ -9,11 +9,21 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 
 const dryingReviewsRouter = express.Router();
 
-dryingReviewsRouter.get('/:writing_sample_id', isAuth, show);
+dryingReviewsRouter.get(
+  '/:writing_sample_id',
+  isAuth,
+  sanitizeQueryString,
+  processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
+  index,
+);
 dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 dryingReviewsRouter.post('/', isAuth, insert);
 dryingReviewsRouter.put('/edit', isAuth, isAdmin, update);
