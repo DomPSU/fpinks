@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT user_id, username, created_at, updated_at, approved FROM Users WHERE';
+const partialSQL =
+  'SELECT user_id, username, created_at, updated_at, approved FROM Users WHERE';
 
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -16,10 +16,7 @@ const index = async (queryKeys, queryValues) => {
 };
 
 const show = async (id) => {
-  const res = await db.pool.asyncQuery(
-    'SELECT user_id,  username, created_at, updated_at, approved FROM Users WHERE user_id = ? ',
-    [id],
-  );
+  const res = await db.pool.asyncQuery(`${partialSQL} user_id = ?`, [id]);
   return res;
 };
 

@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
+const partialSQL =
+  'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
 
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -17,7 +17,7 @@ const index = async (queryKeys, queryValues) => {
 
 const show = async (data) => {
   const res = await db.pool.asyncQuery(
-    'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE ShadingReviews.writing_sample_id = ? AND Users.user_id = ?',
+    `${partialSQL} ShadingReviews.writing_sample_id = ? AND Users.user_id = ?`,
     [data.writingSampleID, data.userID],
   );
   return res;

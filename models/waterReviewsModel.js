@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT WaterReviews.writing_sample_id, Users.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE';
+const partialSQL =
+  'SELECT WaterReviews.writing_sample_id, Users.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE';
 
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -17,7 +17,7 @@ const index = async (queryKeys, queryValues) => {
 
 const show = async (data) => {
   const res = await db.pool.asyncQuery(
-    'SELECT WaterReviews.writing_sample_id, Users.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE WaterReviews.writing_sample_id=? AND Users.user_id=?',
+    `${partialSQL} WaterReviews.writing_sample_id=? AND Users.user_id=?`,
     [data.writingSampleID, data.userID],
   );
 

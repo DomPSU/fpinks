@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT TransparencyReviews.writing_sample_id, Users.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id WHERE';
+const partialSQL =
+  'SELECT TransparencyReviews.writing_sample_id, Users.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id WHERE';
 
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -17,7 +17,7 @@ const index = async (queryKeys, queryValues) => {
 
 const show = async (data) => {
   const res = await db.pool.asyncQuery(
-    'SELECT TransparencyReviews.writing_sample_id, Users.user_id, Users.username, TransparencyReviews.transparency, TransparencyReviews.created_at, TransparencyReviews.updated_at FROM TransparencyReviews LEFT JOIN Users ON Users.user_id=TransparencyReviews.user_id WHERE TransparencyReviews.writing_sample_id=? AND Users.user_id=?',
+    `${partialSQL} TransparencyReviews.writing_sample_id=? AND Users.user_id=?`,
     [data.writingSampleID, data.userID],
   );
 

@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT FeatheringReviews.writing_sample_id, Users.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE';
+const partialSQL =
+  'SELECT FeatheringReviews.writing_sample_id, Users.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE';
 
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -17,7 +17,7 @@ const index = async (queryKeys, queryValues) => {
 
 const show = async (data) => {
   const res = await db.pool.asyncQuery(
-    'SELECT FeatheringReviews.writing_sample_id, Users.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE FeatheringReviews.writing_sample_id = ? AND Users.user_id = ?',
+    `${partialSQL} FeatheringReviews.writing_sample_id = ? AND Users.user_id = ?`,
     [data.writingSampleID, data.userID],
   );
 
