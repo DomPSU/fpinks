@@ -9,11 +9,21 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 
 const transparencyReviewsRouter = express.Router();
 
-transparencyReviewsRouter.get('/:writing_sample_id', isAuth, show);
+transparencyReviewsRouter.get(
+  '/:writing_sample_id',
+  isAuth,
+  sanitizeQueryString,
+  processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
+  index,
+);
 transparencyReviewsRouter.get(
   '/',
   sanitizeQueryString,
