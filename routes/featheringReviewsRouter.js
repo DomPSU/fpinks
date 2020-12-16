@@ -9,11 +9,21 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 
 const featheringReviewsRouter = express.Router();
 
-featheringReviewsRouter.get('/:writing_sample_id', isAuth, show);
+featheringReviewsRouter.get(
+  '/:writing_sample_id',
+  isAuth,
+  sanitizeQueryString,
+  processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
+  index,
+);
 featheringReviewsRouter.get(
   '/',
   sanitizeQueryString,
