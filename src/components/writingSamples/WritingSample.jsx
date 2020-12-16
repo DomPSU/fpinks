@@ -25,19 +25,19 @@ class WritingSample extends Component {
       dryingReviews: [],
       transparencyReviews: [],
       featheringReviews: [],
-      priorColorOne: '',
-      priorColorTwo: '',
-      priorColorThree: '',
+      priorColorOneChoice: '',
+      priorColorTwoChoice: '',
+      priorColorThreeChoice: '',
       priorShadingChoice: '',
       priorSheenAmountChoice: '',
       priorSheenColorChoice: '',
       priorFeatheringChoice: '',
       priorWaterChoice: '',
-      priordryingTimeChoice: '',
+      priorDryingTimeChoice: '',
       priorTransparencyChoice: '',
-      colorOne: '',
-      colorTwo: '',
-      colorThree: '',
+      colorOneChoice: '',
+      colorTwoChoice: '',
+      colorThreeChoice: '',
       shadingChoice: '',
       sheenAmountChoice: '',
       sheenColorChoice: '',
@@ -47,6 +47,7 @@ class WritingSample extends Component {
       transparencyChoice: '',
     };
 
+    this.getPriorColorReviews = this.getPriorColorReviews.bind(this);
     this.getPriorShadingReview = this.getPriorShadingReview.bind(this);
     this.getPriorSheenReview = this.getPriorSheenReview.bind(this);
     this.getPriorFeatheringReview = this.getPriorFeatheringReview.bind(this);
@@ -81,6 +82,7 @@ class WritingSample extends Component {
     this.getFeatheringReviews();
 
     if (isSignedIn) {
+      this.getPriorColorReviews();
       this.getPriorShadingReview();
       this.getPriorSheenReview();
       this.getPriorFeatheringReview();
@@ -98,6 +100,40 @@ class WritingSample extends Component {
       .get(url)
       .then((res) => {
         this.setState({ writingSample: res.data[0] });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getPriorColorReviews() {
+    console.log('get prior color reviews');
+
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `color-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
+        const priorColorOneChoice =
+          res.data.length >= 1 ? capitalize(res.data[0].color) : '';
+        const priorColorTwoChoice =
+          res.data.length >= 2 ? capitalize(res.data[1].color) : '';
+        const priorColorThreeChoice =
+          res.data.length >= 3 ? capitalize(res.data[2].color) : '';
+
+        this.setState({
+          priorColorOneChoice,
+          colorOneChoice: priorColorOneChoice,
+          priorColorTwoChoice,
+          colorTwoChoice: priorColorTwoChoice,
+          priorColorThreeChoice,
+          colorThreeChoice: priorColorThreeChoice,
+        });
       })
       .catch((error) => console.log(error.response));
   }
@@ -139,8 +175,6 @@ class WritingSample extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log('res');
-        console.log(res);
         if (res.data.length === 1) {
           const priorSheenColorChoice = capitalize(res.data[0].color);
           const priorSheenAmountChoice = capitalize(res.data[0].amount);
@@ -358,9 +392,9 @@ class WritingSample extends Component {
       dryingReviews,
       transparencyReviews,
       featheringReviews,
-      priorColorOne,
-      priorColorTwo,
-      priorColorThree,
+      priorColorOneChoice,
+      priorColorTwoChoice,
+      priorColorThreeChoice,
       priorShadingChoice,
       priorSheenAmountChoice,
       priorSheenColorChoice,
@@ -368,6 +402,16 @@ class WritingSample extends Component {
       priorWaterChoice,
       priorDryingTimeChoice,
       priorTransparencyChoice,
+      colorOneChoice,
+      colorTwoChoice,
+      colorThreeChoice,
+      shadingChoice,
+      sheenAmountChoice,
+      sheenColorChoice,
+      featheringChoice,
+      waterChoice,
+      dryingTimeChoice,
+      transparencyChoice,
     } = this.state;
 
     // process colorReviews
@@ -581,16 +625,18 @@ class WritingSample extends Component {
                   <form className="m-1">
                     <div className="row">
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="colorReview" className="p-3 m-0">
+                        <label htmlFor="colorChoices" className="p-3 m-0">
                           Color
                           <div className="row">
                             <div className="col-4">
                               <select
                                 className="form-control m-1"
-                                id="colorReviewOne"
+                                id="colorOneChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option> </option>
+                                <option value="" disabled selected>
+                                  {priorColorOneChoice}
+                                </option>
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -599,10 +645,12 @@ class WritingSample extends Component {
                             <div className="col-4">
                               <select
                                 className="form-control m-1"
-                                id="colorReviewTwo"
+                                id="colorTwoChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option> </option>
+                                <option value="" disabled selected>
+                                  {priorColorTwoChoice}
+                                </option>
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -611,10 +659,12 @@ class WritingSample extends Component {
                             <div className="col-4">
                               <select
                                 className="form-control m-1"
-                                id="colorReviewThree"
+                                id="colorThreeChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option> </option>
+                                <option value="" disabled selected>
+                                  {priorColorThreeChoice}
+                                </option>
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}

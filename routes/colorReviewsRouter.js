@@ -8,11 +8,21 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 
 const colorReviewsRouter = express.Router();
 
-// TODO show
+colorReviewsRouter.get(
+  '/:writing_sample_id',
+  isAuth,
+  sanitizeQueryString,
+  processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
+  index,
+);
 colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 colorReviewsRouter.post('/', isAuth, insert);
 colorReviewsRouter.put('/edit', isAuth, isAdmin, update);

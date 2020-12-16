@@ -102,7 +102,23 @@ const processQueryString = (req, res, next) => {
   next();
 };
 
+const appendUserToQS = (req, res, next) => {
+  res.locals.processedQueryKeys.push('Users.user_id');
+  res.locals.processedQueryValues.push(res.locals.user.user_id);
+
+  next();
+};
+
+const appendWritingSampleToQS = (req, res, next) => {
+  res.locals.processedQueryKeys.push('writing_sample_id');
+  res.locals.processedQueryValues.push(req.params.writing_sample_id);
+
+  next();
+};
+
 module.exports = {
   sanitizeQueryString,
   processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
 };
