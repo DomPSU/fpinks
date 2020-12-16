@@ -28,22 +28,24 @@ class WritingSample extends Component {
       colorOne: '',
       colorTwo: '',
       colorThree: '',
-      shadingAmount: '',
-      sheenAmount: '',
-      sheenColor: '',
-      featheringAmount: '',
-      waterAmount: '',
-      dryingTimeReview: '',
+      shadingChoice: '',
+      sheenAmountChoice: '',
+      sheenColorChoice: '',
+      featheringChoice: '',
+      waterChoice: '',
+      dryingTimeChoice: '',
       transparencyChoice: '',
     };
 
-    this.getWritingSample = this.getWritingSample.bind(this);
-    this.getShadingReview = this.getShadingReview.bind(this);
-    this.getFeatheringReview = this.getFeatheringReview.bind(this);
-    this.getWaterReview = this.getWaterReview.bind(this);
-    this.getDryingReview = this.getDryingReview.bind(this);
-    this.getTransparencyReview = this.getTransparencyReview.bind(this);
+    this.getPriorShadingReview = this.getPriorShadingReview.bind(this);
+    this.getPriorFeatheringReview = this.getPriorFeatheringReview.bind(this);
+    this.getPriorWaterReview = this.getPriorWaterReview.bind(this);
+    this.getPriorDryingReview = this.getPriorDryingReview.bind(this);
+    this.getPriorTransparencyReview = this.getPriorTransparencyReview.bind(
+      this,
+    );
 
+    this.getWritingSample = this.getWritingSample.bind(this);
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
     this.getSheenReviews = this.getSheenReviews.bind(this);
@@ -68,11 +70,11 @@ class WritingSample extends Component {
     this.getFeatheringReviews();
 
     if (isSignedIn) {
-      this.getShadingReview();
-      this.getFeatheringReview();
-      this.getWaterReview();
-      this.getDryingReview();
-      this.getTransparencyReview();
+      this.getPriorShadingReview();
+      this.getPriorFeatheringReview();
+      this.getPriorWaterReview();
+      this.getPriorDryingReview();
+      this.getPriorTransparencyReview();
     }
   }
 
@@ -88,7 +90,7 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
-  getShadingReview() {
+  getPriorShadingReview() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `shading-reviews/${id}`;
 
@@ -102,13 +104,13 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
-          this.setState({ shadingAmount: capitalize(res.data[0].amount) });
+          this.setState({ shadingChoice: capitalize(res.data[0].amount) });
         }
       })
       .catch((error) => console.log(error.response));
   }
 
-  getFeatheringReview() {
+  getPriorFeatheringReview() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `feathering-reviews/${id}`;
 
@@ -122,13 +124,13 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
-          this.setState({ featheringAmount: capitalize(res.data[0].amount) });
+          this.setState({ featheringChoice: capitalize(res.data[0].amount) });
         }
       })
       .catch((error) => console.log(error.response));
   }
 
-  getWaterReview() {
+  getPriorWaterReview() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `water-reviews/${id}`;
 
@@ -143,14 +145,14 @@ class WritingSample extends Component {
       .then((res) => {
         if (res.data.length === 1) {
           this.setState({
-            waterAmount: capitalize(res.data[0].waterproofness),
+            waterChoice: capitalize(res.data[0].waterproofness),
           });
         }
       })
       .catch((error) => console.log(error.response));
   }
 
-  getDryingReview() {
+  getPriorDryingReview() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `drying-reviews/${id}`;
 
@@ -165,14 +167,14 @@ class WritingSample extends Component {
       .then((res) => {
         if (res.data.length === 1) {
           this.setState({
-            dryingTimeReview: capitalize(res.data[0].drying_time),
+            dryingTimeChoice: capitalize(res.data[0].drying_time),
           });
         }
       })
       .catch((error) => console.log(error.response));
   }
 
-  getTransparencyReview() {
+  getPriorTransparencyReview() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `transparency-reviews/${id}`;
 
@@ -185,9 +187,6 @@ class WritingSample extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log('res');
-        console.log(res);
-
         if (res.data.length === 1) {
           this.setState({
             transparencyChoice: capitalize(res.data[0].transparency),
@@ -307,12 +306,12 @@ class WritingSample extends Component {
       colorOne,
       colorTwo,
       colorThree,
-      shadingAmount,
+      shadingChoice,
       sheenAmount,
       sheenColor,
-      featheringAmount,
-      waterAmount,
-      dryingTimeReview,
+      featheringChoice,
+      waterChoice,
+      dryingTimeChoice,
       transparencyChoice,
     } = this.state;
 
@@ -528,7 +527,7 @@ class WritingSample extends Component {
                     <div className="row">
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
                         <label htmlFor="colorReview" className="p-3 m-0">
-                          Color Review
+                          Color
                           <div className="row">
                             <div className="col-4">
                               <select
@@ -570,15 +569,15 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="shadingAmount" className="p-3 m-0">
-                          Shading Review
+                        <label htmlFor="shadingChoice" className="p-3 m-0">
+                          Shading
                           <select
                             className="form-control m-1"
-                            id="shadingAmount"
+                            id="shadingChoice"
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {shadingAmount}
+                              {shadingChoice}
                             </option>
                             {shadingsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
@@ -588,7 +587,7 @@ class WritingSample extends Component {
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
                         <label htmlFor="sheenReview" className="p-3 m-0">
-                          Sheen Review
+                          Sheen
                           <div className="row">
                             <div className="col-6">
                               <select
@@ -618,15 +617,15 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="featheringAmount" className="p-3 m-0">
-                          Feathering Review
+                        <label htmlFor="featheringChoice" className="p-3 m-0">
+                          Feathering
                           <select
                             className="form-control m-1"
-                            id="featheringAmount"
+                            id="featheringChoice"
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {featheringAmount}
+                              {featheringChoice}
                             </option>
                             {featheringsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
@@ -635,15 +634,15 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="waterAmount" className="p-3 m-0">
-                          Waterproofness Amount
+                        <label htmlFor="waterChoice" className="p-3 m-0">
+                          Waterproofness
                           <select
                             className="form-control m-1"
-                            id="waterAmount"
+                            id="waterChoice"
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {waterAmount}
+                              {waterChoice}
                             </option>
                             {watersJSON.names.map((amount) => {
                               return <option>{amount}</option>;
@@ -652,15 +651,15 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="dryingTimeReview" className="p-3 m-0">
-                          Drying Time Review
+                        <label htmlFor="dryingTimeChoice" className="p-3 m-0">
+                          Drying Time
                           <select
                             className="form-control m-1"
-                            id="dryingTimeReview"
+                            id="dryingTimeChoice"
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {dryingTimeReview}
+                              {dryingTimeChoice}
                             </option>
                             {dryingTimesJSON.names.map((time) => {
                               return <option>{time}</option>;
@@ -670,7 +669,7 @@ class WritingSample extends Component {
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
                         <label htmlFor="transparencyChoice" className="p-3 m-0">
-                          Transparency Review
+                          Transparency
                           <select
                             className="form-control m-1"
                             id="transparencyChoice"
