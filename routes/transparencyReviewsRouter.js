@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   index,
+  show,
   insert,
   update,
 } = require('../controllers/transparencyReviewsController');
@@ -12,7 +13,7 @@ const {
 
 const transparencyReviewsRouter = express.Router();
 
-// TODO SHOW
+transparencyReviewsRouter.get('/:writing_sample_id', isAuth, show);
 transparencyReviewsRouter.get(
   '/',
   sanitizeQueryString,

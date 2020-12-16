@@ -33,8 +33,8 @@ class WritingSample extends Component {
       sheenColor: '',
       featheringAmount: '',
       waterAmount: '',
-      dryingTime: '',
-      transparencyAmount: '',
+      dryingTimeReview: '',
+      transparencyChoice: '',
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
@@ -42,6 +42,7 @@ class WritingSample extends Component {
     this.getFeatheringReview = this.getFeatheringReview.bind(this);
     this.getWaterReview = this.getWaterReview.bind(this);
     this.getDryingReview = this.getDryingReview.bind(this);
+    this.getTransparencyReview = this.getTransparencyReview.bind(this);
 
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
@@ -71,6 +72,7 @@ class WritingSample extends Component {
       this.getFeatheringReview();
       this.getWaterReview();
       this.getDryingReview();
+      this.getTransparencyReview();
     }
   }
 
@@ -161,12 +163,34 @@ class WritingSample extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
+        if (res.data.length === 1) {
+          this.setState({
+            dryingTimeReview: capitalize(res.data[0].drying_time),
+          });
+        }
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getTransparencyReview() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `transparency-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
         console.log('res');
         console.log(res);
 
         if (res.data.length === 1) {
           this.setState({
-            dryingTimeReview: capitalize(res.data[0].drying_time),
+            transparencyChoice: capitalize(res.data[0].transparency),
           });
         }
       })
@@ -289,7 +313,7 @@ class WritingSample extends Component {
       featheringAmount,
       waterAmount,
       dryingTimeReview,
-      transparencyAmount,
+      transparencyChoice,
     } = this.state;
 
     // process colorReviews
@@ -645,14 +669,16 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="transparencyReview" className="p-3 m-0">
+                        <label htmlFor="transparencyChoice" className="p-3 m-0">
                           Transparency Review
                           <select
                             className="form-control m-1"
-                            id="transparencyReview"
+                            id="transparencyChoice"
                             onBlur={this.handleChange}
                           >
-                            <option> </option>
+                            <option value="" disabled selected>
+                              {transparencyChoice}
+                            </option>
                             {transparenciesJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
