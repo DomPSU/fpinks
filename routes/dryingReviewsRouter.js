@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   index,
+  show,
   insert,
   update,
 } = require('../controllers/dryingReviewsController');
@@ -12,7 +13,7 @@ const {
 
 const dryingReviewsRouter = express.Router();
 
-// TODO show
+dryingReviewsRouter.get('/:writing_sample_id', isAuth, show);
 dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 dryingReviewsRouter.post('/', isAuth, insert);
 dryingReviewsRouter.put('/edit', isAuth, isAdmin, update);

@@ -33,7 +33,7 @@ class WritingSample extends Component {
       sheenColor: '',
       featheringAmount: '',
       waterAmount: '',
-      dryingTimeAmount: '',
+      dryingTime: '',
       transparencyAmount: '',
     };
 
@@ -41,6 +41,7 @@ class WritingSample extends Component {
     this.getShadingReview = this.getShadingReview.bind(this);
     this.getFeatheringReview = this.getFeatheringReview.bind(this);
     this.getWaterReview = this.getWaterReview.bind(this);
+    this.getDryingReview = this.getDryingReview.bind(this);
 
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
@@ -69,6 +70,7 @@ class WritingSample extends Component {
       this.getShadingReview();
       this.getFeatheringReview();
       this.getWaterReview();
+      this.getDryingReview();
     }
   }
 
@@ -137,12 +139,34 @@ class WritingSample extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
+        if (res.data.length === 1) {
+          this.setState({
+            waterAmount: capitalize(res.data[0].waterproofness),
+          });
+        }
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getDryingReview() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `drying-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
         console.log('res');
         console.log(res);
 
         if (res.data.length === 1) {
           this.setState({
-            waterAmount: capitalize(res.data[0].waterproofness),
+            dryingTimeReview: capitalize(res.data[0].drying_time),
           });
         }
       })
@@ -264,7 +288,7 @@ class WritingSample extends Component {
       sheenColor,
       featheringAmount,
       waterAmount,
-      dryingTimeAmount,
+      dryingTimeReview,
       transparencyAmount,
     } = this.state;
 
@@ -611,7 +635,9 @@ class WritingSample extends Component {
                             id="dryingTimeReview"
                             onBlur={this.handleChange}
                           >
-                            <option> </option>
+                            <option value="" disabled selected>
+                              {dryingTimeReview}
+                            </option>
                             {dryingTimesJSON.names.map((time) => {
                               return <option>{time}</option>;
                             })}
