@@ -45,6 +45,7 @@ class WritingSample extends Component {
       waterChoice: '',
       dryingTimeChoice: '',
       transparencyChoice: '',
+      reviewError: false,
     };
 
     this.getPriorColorReviews = this.getPriorColorReviews.bind(this);
@@ -378,6 +379,10 @@ class WritingSample extends Component {
   }
 
   handleSubmit(e) {
+    this.setState({
+      reviewError: false,
+    });
+
     const {
       colorOneChoice,
       colorTwoChoice,
@@ -412,7 +417,12 @@ class WritingSample extends Component {
     API.instance
       .post('color-reviews', colorReviews, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     const shadingReview = {
       writingSampleID,
@@ -422,7 +432,12 @@ class WritingSample extends Component {
     API.instance
       .post('shading-reviews', shadingReview, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     const sheenReview = {
       writingSampleID,
@@ -433,7 +448,12 @@ class WritingSample extends Component {
     API.instance
       .post('sheen-reviews', sheenReview, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     const featheringReview = {
       writingSampleID,
@@ -443,7 +463,12 @@ class WritingSample extends Component {
     API.instance
       .post('feathering-reviews', featheringReview, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     const waterReview = {
       writingSampleID,
@@ -453,7 +478,12 @@ class WritingSample extends Component {
     API.instance
       .post('water-reviews', waterReview, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     const dryingReview = {
       writingSampleID,
@@ -463,7 +493,12 @@ class WritingSample extends Component {
     API.instance
       .post('drying-reviews', dryingReview, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     const transparencyReview = {
       writingSampleID,
@@ -473,7 +508,12 @@ class WritingSample extends Component {
     API.instance
       .post('transparency-reviews', transparencyReview, config)
       .then((res) => {})
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        this.setState({
+          reviewError: true,
+        });
+        console.log(error.response);
+      });
 
     e.preventDefault();
   }
@@ -510,6 +550,7 @@ class WritingSample extends Component {
       waterChoice,
       dryingTimeChoice,
       transparencyChoice,
+      reviewError,
     } = this.state;
 
     // process colorReviews
@@ -895,6 +936,8 @@ class WritingSample extends Component {
                     <button
                       type="submit"
                       className="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#reviewModal"
                       onClick={this.handleSubmit}
                     >
                       Submit Reviews
@@ -902,6 +945,25 @@ class WritingSample extends Component {
                   </form>
                 </div>
               )}
+              <div
+                className="modal fade"
+                id="reviewModal"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="reviewModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-body">
+                      {reviewError &&
+                        'An error occured. Please resubmit your reviews.'}
+                      {!reviewError &&
+                        'Thanks! Your reviews are being processed.'}
+                    </div>
+                  </div>
+                </div>
+              </div>
               {!isSignedIn && <Login signIn={signIn} />}
             </div>
           </div>
