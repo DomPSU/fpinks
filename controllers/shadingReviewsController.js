@@ -12,20 +12,6 @@ const index = async (req, res, next) => {
   }
 };
 
-const show = async (req, res, next) => {
-  const data = {
-    writingSampleID: req.params.writing_sample_id,
-    userID: res.locals.user.user_id,
-  };
-
-  try {
-    const dbRes = await shadingReviewsModel.show(data);
-    res.status(200).send(dbRes);
-  } catch (e) {
-    next(e);
-  }
-};
-
 const insert = async (req, res, next) => {
   const shadingReview = {
     ...req.body,
@@ -79,7 +65,6 @@ const update = async (req, res, next) => {
 
 module.exports = {
   index,
-  show,
   insert,
   remove,
   update,
