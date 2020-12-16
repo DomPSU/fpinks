@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   index,
+  show,
   insert,
   update,
 } = require('../controllers/waterReviewsController');
@@ -12,7 +13,7 @@ const {
 
 const waterReviewsRouter = express.Router();
 
-// TODO show
+waterReviewsRouter.get('/:writing_sample_id', isAuth, show);
 waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 waterReviewsRouter.post('/', isAuth, insert);
 waterReviewsRouter.put('/edit', isAuth, isAdmin, update);

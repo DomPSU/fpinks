@@ -32,7 +32,7 @@ class WritingSample extends Component {
       sheenAmount: '',
       sheenColor: '',
       featheringAmount: '',
-      waterproofnessAmount: '',
+      waterAmount: '',
       dryingTimeAmount: '',
       transparencyAmount: '',
     };
@@ -40,6 +40,7 @@ class WritingSample extends Component {
     this.getWritingSample = this.getWritingSample.bind(this);
     this.getShadingReview = this.getShadingReview.bind(this);
     this.getFeatheringReview = this.getFeatheringReview.bind(this);
+    this.getWaterReview = this.getWaterReview.bind(this);
 
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
@@ -67,6 +68,7 @@ class WritingSample extends Component {
     if (isSignedIn) {
       this.getShadingReview();
       this.getFeatheringReview();
+      this.getWaterReview();
     }
   }
 
@@ -96,7 +98,6 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
-          console.log('set state');
           this.setState({ shadingAmount: capitalize(res.data[0].amount) });
         }
       })
@@ -116,12 +117,33 @@ class WritingSample extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log('get user specific feathering review');
+        if (res.data.length === 1) {
+          this.setState({ featheringAmount: capitalize(res.data[0].amount) });
+        }
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getWaterReview() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `water-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
+        console.log('res');
         console.log(res);
 
         if (res.data.length === 1) {
-          console.log('set state');
-          this.setState({ featheringAmount: capitalize(res.data[0].amount) });
+          this.setState({
+            waterAmount: capitalize(res.data[0].waterproofness),
+          });
         }
       })
       .catch((error) => console.log(error.response));
@@ -241,7 +263,7 @@ class WritingSample extends Component {
       sheenAmount,
       sheenColor,
       featheringAmount,
-      waterproofnessAmount,
+      waterAmount,
       dryingTimeAmount,
       transparencyAmount,
     } = this.state;
@@ -565,17 +587,16 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label
-                          htmlFor="waterproofnessReview"
-                          className="p-3 m-0"
-                        >
-                          Waterproofness Review
+                        <label htmlFor="waterAmount" className="p-3 m-0">
+                          Waterproofness Amount
                           <select
                             className="form-control m-1"
-                            id="waterproofnessReview"
+                            id="waterAmount"
                             onBlur={this.handleChange}
                           >
-                            <option> </option>
+                            <option value="" disabled selected>
+                              {waterAmount}
+                            </option>
                             {watersJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}

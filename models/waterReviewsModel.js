@@ -15,6 +15,15 @@ const index = async (queryKeys, queryValues) => {
   return res;
 };
 
+const show = async (data) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT WaterReviews.writing_sample_id, Users.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE WaterReviews.writing_sample_id=? AND Users.user_id=?',
+    [data.writingSampleID, data.userID],
+  );
+
+  return res;
+};
+
 const insert = async (data) => {
   // TODO validate all needed keys
 
@@ -63,6 +72,7 @@ const update = async (data) => {
 
 module.exports = {
   index,
+  show,
   insert,
   remove,
   update,
