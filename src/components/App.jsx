@@ -283,7 +283,9 @@ class App extends Component {
               exact
               path="/writing-samples/:id"
               key="/writing-samples/:id"
-              render={() => <WritingSample />}
+              render={() => (
+                <WritingSample signIn={this.signIn} isSignedIn={isSignedIn} />
+              )}
             />
 
             <Route

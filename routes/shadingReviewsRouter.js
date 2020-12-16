@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   index,
+  show,
   insert,
   update,
 } = require('../controllers/shadingReviewsController');
@@ -12,7 +13,7 @@ const {
 
 const shadingReviewsRouter = express.Router();
 
-// TODO show
+shadingReviewsRouter.get('/:writing_sample_id', isAuth, show);
 shadingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 shadingReviewsRouter.post('/', isAuth, insert);
 shadingReviewsRouter.put('/edit', isAuth, isAdmin, update);

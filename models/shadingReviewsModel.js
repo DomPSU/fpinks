@@ -15,6 +15,14 @@ const index = async (queryKeys, queryValues) => {
   return res;
 };
 
+const show = async (data) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE ShadingReviews.writing_sample_id = ? AND Users.user_id = ?',
+    [data.writingSampleID, data.userID],
+  );
+  return res;
+};
+
 const insert = async (data) => {
   // TODO validate all needed keys
 
@@ -63,6 +71,7 @@ const update = async (data) => {
 
 module.exports = {
   index,
+  show,
   insert,
   remove,
   update,

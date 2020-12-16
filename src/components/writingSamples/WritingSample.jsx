@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
 import API from '../../apis/API';
-import { capitalize } from '../../util/util';
+import Login from '../login/Login';
+import { capitalize, getIDToken } from '../../util/util';
 import colorsJSON from '../../constants/colors.json';
 import shadingsJSON from '../../constants/shadings.json';
 import sheensJSON from '../../constants/sheens.json';
@@ -24,9 +25,21 @@ class WritingSample extends Component {
       dryingReviews: [],
       transparencyReviews: [],
       featheringReviews: [],
+      colorOne: '',
+      colorTwo: '',
+      colorThree: '',
+      shadingAmount: '',
+      sheenAmount: '',
+      sheenColor: '',
+      featheringAmount: '',
+      waterproofnessAmount: '',
+      dryingTimeAmount: '',
+      transparencyAmount: '',
     };
 
     this.getWritingSample = this.getWritingSample.bind(this);
+    this.getShadingReview = this.getShadingReview.bind(this);
+
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
     this.getSheenReviews = this.getSheenReviews.bind(this);
@@ -37,6 +50,8 @@ class WritingSample extends Component {
   }
 
   componentDidMount() {
+    const { isSignedIn } = this.props;
+
     this.getWritingSample();
     this.getColorReviews();
     this.getShadingReviews();
@@ -45,6 +60,10 @@ class WritingSample extends Component {
     this.getDryingReviews();
     this.getTransparencyReviews();
     this.getFeatheringReviews();
+
+    if (isSignedIn) {
+      this.getShadingReview();
+    }
   }
 
   getWritingSample() {
@@ -55,6 +74,30 @@ class WritingSample extends Component {
       .get(url)
       .then((res) => {
         this.setState({ writingSample: res.data[0] });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getShadingReview() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `shading-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
+        console.log('get user specific shading review');
+        console.log(res);
+
+        if (res.data.length === 1) {
+          console.log('set state');
+          this.setState({ shadingAmount: capitalize(res.data[0].amount) });
+        }
       })
       .catch((error) => console.log(error.response));
   }
@@ -143,7 +186,18 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  handleChange(e) {
+    const { value } = e.target;
+    const { id } = e.target;
+
+    this.setState({
+      [id]: value,
+    });
+  }
+
   render() {
+    const { isSignedIn, signIn } = this.props;
+
     const {
       writingSample,
       colorReviews,
@@ -153,6 +207,16 @@ class WritingSample extends Component {
       dryingReviews,
       transparencyReviews,
       featheringReviews,
+      colorOne,
+      colorTwo,
+      colorThree,
+      shadingAmount,
+      sheenAmount,
+      sheenColor,
+      featheringAmount,
+      waterproofnessAmount,
+      dryingTimeAmount,
+      transparencyAmount,
     } = this.state;
 
     // process colorReviews
@@ -358,169 +422,178 @@ class WritingSample extends Component {
               aria-labelledby="headingThree"
               data-parent="#accordionExample"
             >
-              <h3 className="p-5">
-                Feel free to leave any review category blank.
-              </h3>
-              <form className="m-1">
-                <div className="row">
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="colorReview" className="p-3 m-0">
-                      Color Review
-                      <div className="row">
-                        <div className="col-4">
-                          <select
-                            className="form-control m-1"
-                            id="colorReviewOne"
-                            onBlur={this.handleChange}
-                          >
-                            <option> </option>
-                            {colorsJSON.names.map((color) => {
-                              return <option>{color}</option>;
-                            })}
-                          </select>
-                        </div>
-                        <div className="col-4">
-                          <select
-                            className="form-control m-1"
-                            id="colorReviewTwo"
-                            onBlur={this.handleChange}
-                          >
-                            <option> </option>
-                            {colorsJSON.names.map((color) => {
-                              return <option>{color}</option>;
-                            })}
-                          </select>
-                        </div>
-                        <div className="col-4">
-                          <select
-                            className="form-control m-1"
-                            id="colorReviewThree"
-                            onBlur={this.handleChange}
-                          >
-                            <option> </option>
-                            {colorsJSON.names.map((color) => {
-                              return <option>{color}</option>;
-                            })}
-                          </select>
-                        </div>
+              {isSignedIn && (
+                <div>
+                  <h3 className="p-5">
+                    Feel free to leave any review category blank.
+                  </h3>
+                  <form className="m-1">
+                    <div className="row">
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label htmlFor="colorReview" className="p-3 m-0">
+                          Color Review
+                          <div className="row">
+                            <div className="col-4">
+                              <select
+                                className="form-control m-1"
+                                id="colorReviewOne"
+                                onBlur={this.handleChange}
+                              >
+                                <option> </option>
+                                {colorsJSON.names.map((color) => {
+                                  return <option>{color}</option>;
+                                })}
+                              </select>
+                            </div>
+                            <div className="col-4">
+                              <select
+                                className="form-control m-1"
+                                id="colorReviewTwo"
+                                onBlur={this.handleChange}
+                              >
+                                <option> </option>
+                                {colorsJSON.names.map((color) => {
+                                  return <option>{color}</option>;
+                                })}
+                              </select>
+                            </div>
+                            <div className="col-4">
+                              <select
+                                className="form-control m-1"
+                                id="colorReviewThree"
+                                onBlur={this.handleChange}
+                              >
+                                <option> </option>
+                                {colorsJSON.names.map((color) => {
+                                  return <option>{color}</option>;
+                                })}
+                              </select>
+                            </div>
+                          </div>
+                        </label>
                       </div>
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="shadingReview" className="p-3 m-0">
-                      Shading Review
-                      <select
-                        className="form-control m-1"
-                        id="shadingReview"
-                        onBlur={this.handleChange}
-                      >
-                        <option> </option>
-                        {shadingsJSON.names.map((amount) => {
-                          return <option>{amount}</option>;
-                        })}
-                      </select>
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="sheenReview" className="p-3 m-0">
-                      Sheen Review
-                      <div className="row">
-                        <div className="col-6">
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label htmlFor="shadingReview" className="p-3 m-0">
+                          Shading Review
                           <select
                             className="form-control m-1"
-                            id="sheenAmountReview"
+                            id="shadingReview"
                             onBlur={this.handleChange}
+                            value={shadingAmount}
                           >
                             <option> </option>
-                            {sheensJSON.names.map((amount) => {
+                            {shadingsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
                           </select>
-                        </div>
-                        <div className="col-6">
+                        </label>
+                      </div>
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label htmlFor="sheenReview" className="p-3 m-0">
+                          Sheen Review
+                          <div className="row">
+                            <div className="col-6">
+                              <select
+                                className="form-control m-1"
+                                id="sheenAmountReview"
+                                onBlur={this.handleChange}
+                              >
+                                <option> </option>
+                                {sheensJSON.names.map((amount) => {
+                                  return <option>{amount}</option>;
+                                })}
+                              </select>
+                            </div>
+                            <div className="col-6">
+                              <select
+                                className="form-control m-1"
+                                id="sheenColorReview"
+                                onBlur={this.handleChange}
+                              >
+                                <option> </option>
+                                {colorsJSON.names.map((color) => {
+                                  return <option>{color}</option>;
+                                })}
+                              </select>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label htmlFor="featheringReview" className="p-3 m-0">
+                          Feathering Review
                           <select
                             className="form-control m-1"
-                            id="sheenColorReview"
+                            id="featheringReview"
                             onBlur={this.handleChange}
                           >
                             <option> </option>
-                            {colorsJSON.names.map((color) => {
-                              return <option>{color}</option>;
+                            {featheringsJSON.names.map((amount) => {
+                              return <option>{amount}</option>;
                             })}
                           </select>
-                        </div>
+                        </label>
                       </div>
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="featheringReview" className="p-3 m-0">
-                      Feathering Review
-                      <select
-                        className="form-control m-1"
-                        id="featheringReview"
-                        onBlur={this.handleChange}
-                      >
-                        <option> </option>
-                        {featheringsJSON.names.map((amount) => {
-                          return <option>{amount}</option>;
-                        })}
-                      </select>
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="waterproofnessReview" className="p-3 m-0">
-                      Waterproofness Review
-                      <select
-                        className="form-control m-1"
-                        id="waterproofnessReview"
-                        onBlur={this.handleChange}
-                      >
-                        <option> </option>
-                        {watersJSON.names.map((amount) => {
-                          return <option>{amount}</option>;
-                        })}
-                      </select>
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="dryingTimeReview" className="p-3 m-0">
-                      Drying Time Review
-                      <select
-                        className="form-control m-1"
-                        id="dryingTimeReview"
-                        onBlur={this.handleChange}
-                      >
-                        <option> </option>
-                        {dryingTimesJSON.names.map((time) => {
-                          return <option>{time}</option>;
-                        })}
-                      </select>
-                    </label>
-                  </div>
-                  <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <label htmlFor="transparencyReview" className="p-3 m-0">
-                      Transparency Review
-                      <select
-                        className="form-control m-1"
-                        id="transparencyReview"
-                        onBlur={this.handleChange}
-                      >
-                        <option> </option>
-                        {transparenciesJSON.names.map((amount) => {
-                          return <option>{amount}</option>;
-                        })}
-                      </select>
-                    </label>
-                  </div>
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label
+                          htmlFor="waterproofnessReview"
+                          className="p-3 m-0"
+                        >
+                          Waterproofness Review
+                          <select
+                            className="form-control m-1"
+                            id="waterproofnessReview"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {watersJSON.names.map((amount) => {
+                              return <option>{amount}</option>;
+                            })}
+                          </select>
+                        </label>
+                      </div>
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label htmlFor="dryingTimeReview" className="p-3 m-0">
+                          Drying Time Review
+                          <select
+                            className="form-control m-1"
+                            id="dryingTimeReview"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {dryingTimesJSON.names.map((time) => {
+                              return <option>{time}</option>;
+                            })}
+                          </select>
+                        </label>
+                      </div>
+                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <label htmlFor="transparencyReview" className="p-3 m-0">
+                          Transparency Review
+                          <select
+                            className="form-control m-1"
+                            id="transparencyReview"
+                            onBlur={this.handleChange}
+                          >
+                            <option> </option>
+                            {transparenciesJSON.names.map((amount) => {
+                              return <option>{amount}</option>;
+                            })}
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      onClick={this.handleSubmit}
+                    >
+                      Submit Reviews
+                    </button>
+                  </form>
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={this.handleSubmit}
-                >
-                  Submit Reviews
-                </button>
-              </form>
+              )}
+              {!isSignedIn && <Login signIn={signIn} />}
             </div>
           </div>
         </div>
