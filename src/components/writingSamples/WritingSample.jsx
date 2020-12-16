@@ -25,6 +25,16 @@ class WritingSample extends Component {
       dryingReviews: [],
       transparencyReviews: [],
       featheringReviews: [],
+      priorColorOne: '',
+      priorColorTwo: '',
+      priorColorThree: '',
+      priorShadingChoice: '',
+      priorSheenAmountChoice: '',
+      priorSheenColorChoice: '',
+      priorFeatheringChoice: '',
+      priorWaterChoice: '',
+      priordryingTimeChoice: '',
+      priorTransparencyChoice: '',
       colorOne: '',
       colorTwo: '',
       colorThree: '',
@@ -104,7 +114,11 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
-          this.setState({ shadingChoice: capitalize(res.data[0].amount) });
+          const priorShadingChoice = capitalize(res.data[0].amount);
+          this.setState({
+            priorShadingChoice,
+            shadingChoice: priorShadingChoice,
+          });
         }
       })
       .catch((error) => console.log(error.response));
@@ -124,7 +138,11 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
-          this.setState({ featheringChoice: capitalize(res.data[0].amount) });
+          const priorFeatheringChoice = capitalize(res.data[0].amount);
+          this.setState({
+            priorFeatheringChoice,
+            featheringChoice: priorFeatheringChoice,
+          });
         }
       })
       .catch((error) => console.log(error.response));
@@ -144,8 +162,10 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
+          const priorWaterChoice = capitalize(res.data[0].waterproofness);
           this.setState({
-            waterChoice: capitalize(res.data[0].waterproofness),
+            priorWaterChoice,
+            waterChoice: priorWaterChoice,
           });
         }
       })
@@ -166,8 +186,10 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
+          const priorDryingTimeChoice = capitalize(res.data[0].drying_time);
           this.setState({
-            dryingTimeChoice: capitalize(res.data[0].drying_time),
+            priorDryingTimeChoice,
+            dryingTimeChoice: priorDryingTimeChoice,
           });
         }
       })
@@ -188,8 +210,10 @@ class WritingSample extends Component {
       .get(url, config)
       .then((res) => {
         if (res.data.length === 1) {
+          const priorTransparencyChoice = capitalize(res.data[0].transparency);
           this.setState({
-            transparencyChoice: capitalize(res.data[0].transparency),
+            priorTransparencyChoice,
+            transparencyChoice: priorTransparencyChoice,
           });
         }
       })
@@ -303,6 +327,16 @@ class WritingSample extends Component {
       dryingReviews,
       transparencyReviews,
       featheringReviews,
+      priorColorOne,
+      priorColorTwo,
+      priorColorThree,
+      priorShadingChoice,
+      priorSheenAmount,
+      priorSheenColor,
+      priorFeatheringChoice,
+      priorWaterChoice,
+      priorDryingTimeChoice,
+      priorTransparencyChoice,
       colorOne,
       colorTwo,
       colorThree,
@@ -577,7 +611,7 @@ class WritingSample extends Component {
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {shadingChoice}
+                              {priorShadingChoice}
                             </option>
                             {shadingsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
@@ -625,7 +659,7 @@ class WritingSample extends Component {
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {featheringChoice}
+                              {priorFeatheringChoice}
                             </option>
                             {featheringsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
@@ -642,7 +676,7 @@ class WritingSample extends Component {
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {waterChoice}
+                              {priorWaterChoice}
                             </option>
                             {watersJSON.names.map((amount) => {
                               return <option>{amount}</option>;
@@ -659,7 +693,7 @@ class WritingSample extends Component {
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {dryingTimeChoice}
+                              {priorDryingTimeChoice}
                             </option>
                             {dryingTimesJSON.names.map((time) => {
                               return <option>{time}</option>;
