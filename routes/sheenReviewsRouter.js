@@ -9,11 +9,21 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 
 const sheenReviewsRouter = express.Router();
 
-sheenReviewsRouter.get('/:writing_sample_id', isAuth, show);
+sheenReviewsRouter.get(
+  '/:writing_sample_id',
+  isAuth,
+  sanitizeQueryString,
+  processQueryString,
+  appendUserToQS,
+  appendWritingSampleToQS,
+  index,
+);
 sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 sheenReviewsRouter.post('/', isAuth, insert);
 sheenReviewsRouter.put('/edit', isAuth, isAdmin, update);
