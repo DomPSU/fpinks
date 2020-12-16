@@ -9,7 +9,6 @@ import API from '../apis/API';
 
 // general
 import About from './general/About';
-import Developers from './general/Developers';
 
 // login
 import Admin from './login/Admin';
