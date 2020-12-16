@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   index,
+  show,
   insert,
   update,
 } = require('../controllers/featheringReviewsController');
@@ -12,7 +13,7 @@ const {
 
 const featheringReviewsRouter = express.Router();
 
-// TODO show
+featheringReviewsRouter.get('/:writing_sample_id', isAuth, show);
 featheringReviewsRouter.get(
   '/',
   sanitizeQueryString,

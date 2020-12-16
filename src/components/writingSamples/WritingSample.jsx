@@ -39,6 +39,7 @@ class WritingSample extends Component {
 
     this.getWritingSample = this.getWritingSample.bind(this);
     this.getShadingReview = this.getShadingReview.bind(this);
+    this.getFeatheringReview = this.getFeatheringReview.bind(this);
 
     this.getColorReviews = this.getColorReviews.bind(this);
     this.getShadingReviews = this.getShadingReviews.bind(this);
@@ -47,6 +48,8 @@ class WritingSample extends Component {
     this.getDryingReviews = this.getDryingReviews.bind(this);
     this.getTransparencyReviews = this.getTransparencyReviews.bind(this);
     this.getFeatheringReviews = this.getFeatheringReviews.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +66,7 @@ class WritingSample extends Component {
 
     if (isSignedIn) {
       this.getShadingReview();
+      this.getFeatheringReview();
     }
   }
 
@@ -91,12 +95,33 @@ class WritingSample extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log('get user specific shading review');
+        if (res.data.length === 1) {
+          console.log('set state');
+          this.setState({ shadingAmount: capitalize(res.data[0].amount) });
+        }
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getFeatheringReview() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `feathering-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
+        console.log('get user specific feathering review');
         console.log(res);
 
         if (res.data.length === 1) {
           console.log('set state');
-          this.setState({ shadingAmount: capitalize(res.data[0].amount) });
+          this.setState({ featheringAmount: capitalize(res.data[0].amount) });
         }
       })
       .catch((error) => console.log(error.response));
@@ -196,6 +221,8 @@ class WritingSample extends Component {
   }
 
   render() {
+    console.log(this.state);
+
     const { isSignedIn, signIn } = this.props;
 
     const {
@@ -473,15 +500,16 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="shadingReview" className="p-3 m-0">
+                        <label htmlFor="shadingAmount" className="p-3 m-0">
                           Shading Review
                           <select
                             className="form-control m-1"
-                            id="shadingReview"
+                            id="shadingAmount"
                             onBlur={this.handleChange}
-                            value={shadingAmount}
                           >
-                            <option> </option>
+                            <option value="" disabled selected>
+                              {shadingAmount}
+                            </option>
                             {shadingsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
@@ -520,14 +548,16 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="featheringReview" className="p-3 m-0">
+                        <label htmlFor="featheringAmount" className="p-3 m-0">
                           Feathering Review
                           <select
                             className="form-control m-1"
-                            id="featheringReview"
+                            id="featheringAmount"
                             onBlur={this.handleChange}
                           >
-                            <option> </option>
+                            <option value="" disabled selected>
+                              {featheringAmount}
+                            </option>
                             {featheringsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}

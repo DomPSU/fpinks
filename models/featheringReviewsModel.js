@@ -15,6 +15,15 @@ const index = async (queryKeys, queryValues) => {
   return res;
 };
 
+const show = async (data) => {
+  const res = await db.pool.asyncQuery(
+    'SELECT FeatheringReviews.writing_sample_id, Users.user_id, Users.username, FeatheringReviews.amount, FeatheringReviews.created_at, FeatheringReviews.updated_at FROM FeatheringReviews LEFT JOIN Users ON Users.user_id=FeatheringReviews.user_id WHERE FeatheringReviews.writing_sample_id = ? AND Users.user_id = ?',
+    [data.writingSampleID, data.userID],
+  );
+
+  return res;
+};
+
 const insert = async (data) => {
   // TODO validate all needed keys
 
@@ -63,6 +72,7 @@ const update = async (data) => {
 
 module.exports = {
   index,
+  show,
   insert,
   remove,
   update,
