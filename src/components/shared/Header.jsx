@@ -63,12 +63,6 @@ export default function Header(props) {
                 >
                   Writing Samples
                 </Link>
-                <Link
-                  className="dropdown-item dropdown-item-overwrite text-white"
-                  to="/profile-reviews"
-                >
-                  Reviews
-                </Link>
                 <div className="dropdown-divider" />
                 <button
                   type="button"

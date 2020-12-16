@@ -551,15 +551,6 @@ class App extends Component {
               render={() => <Login signIn={this.signIn} />}
             />
 
-            <Route
-              exact
-              path="/profile-reviews"
-              key="/profile-reviews"
-              render={() =>
-                isSignedIn ? <ProfileReviews /> : <Redirect to="/login" />
-              }
-            />
-
             {/* Profile Writing Samples */}
             <Route
               exact
