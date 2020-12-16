@@ -3,8 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT WaterReviews.writing_sample_id, Users.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE';
-
+    'SELECT WaterReviews.writing_sample_id, Users.user_id, Users.username, WaterReviews.waterproofness, WaterReviews.created_at, WaterReviews.updated_at, WaterReviews.approved FROM WaterReviews LEFT JOIN Users ON Users.user_id=WaterReviews.user_id WHERE';
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,

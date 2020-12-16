@@ -50,7 +50,6 @@ const remove = async (req, res, next) => {
 const update = async (req, res, next) => {
   const shadingReview = {
     ...req.body,
-    userID: res.locals.user.user_id,
   };
 
   try {
