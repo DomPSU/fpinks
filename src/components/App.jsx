@@ -593,8 +593,6 @@ class App extends Component {
 
             <Route exact path="/about" render={() => <About />} />
 
-            <Route exact path="/developers" render={() => <Developers />} />
-
             <Route
               exact
               path="/contribute"
