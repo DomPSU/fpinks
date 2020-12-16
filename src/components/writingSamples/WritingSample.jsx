@@ -67,6 +67,7 @@ class WritingSample extends Component {
     this.getFeatheringReviews = this.getFeatheringReviews.bind(this);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -105,8 +106,6 @@ class WritingSample extends Component {
   }
 
   getPriorColorReviews() {
-    console.log('get prior color reviews');
-
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `color-reviews/${id}`;
 
@@ -378,9 +377,108 @@ class WritingSample extends Component {
     });
   }
 
-  render() {
-    console.log(this.state);
+  handleSubmit(e) {
+    const {
+      colorOneChoice,
+      colorTwoChoice,
+      colorThreeChoice,
+      shadingChoice,
+      sheenAmountChoice,
+      sheenColorChoice,
+      featheringChoice,
+      waterChoice,
+      dryingTimeChoice,
+      transparencyChoice,
+    } = this.state;
 
+    const writingSampleID = window.location.pathname.replace(
+      '/writing-samples/',
+      '',
+    );
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    const colorReviews = {
+      writingSampleID,
+      colorOne: colorOneChoice,
+      colorTwo: colorTwoChoice,
+      colorThree: colorThreeChoice,
+    };
+
+    API.instance
+      .post('color-reviews', colorReviews, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    const shadingReview = {
+      writingSampleID,
+      amount: shadingChoice,
+    };
+
+    API.instance
+      .post('shading-reviews', shadingReview, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    const sheenReview = {
+      writingSampleID,
+      color: sheenColorChoice,
+      amount: sheenAmountChoice,
+    };
+
+    API.instance
+      .post('sheen-reviews', sheenReview, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    const featheringReview = {
+      writingSampleID,
+      amount: featheringChoice,
+    };
+
+    API.instance
+      .post('feathering-reviews', featheringReview, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    const waterReview = {
+      writingSampleID,
+      waterproofness: waterChoice,
+    };
+
+    API.instance
+      .post('water-reviews', waterReview, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    const dryingReview = {
+      writingSampleID,
+      dryingTime: dryingTimeChoice,
+    };
+
+    API.instance
+      .post('drying-reviews', dryingReview, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    const transparencyReview = {
+      writingSampleID,
+      transparency: transparencyChoice,
+    };
+
+    API.instance
+      .post('transparency-reviews', transparencyReview, config)
+      .then((res) => {})
+      .catch((error) => console.log(error.response));
+
+    e.preventDefault();
+  }
+
+  render() {
     const { isSignedIn, signIn } = this.props;
 
     const {
