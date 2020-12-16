@@ -1,10 +1,10 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT SheenReviews.writing_sample_id, Users.username, Users.user_id, Colors.color_id AS color_id, Colors.name AS color, SheenReviews.amount, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE';
+const partialSQL =
+  'SELECT SheenReviews.writing_sample_id, Users.username, Users.user_id, Colors.color_id AS color_id, Colors.name AS color, SheenReviews.amount, SheenReviews.created_at, SheenReviews.updated_at FROM SheenReviews LEFT JOIN Users ON Users.user_id=SheenReviews.user_id LEFT JOIN Colors ON Colors.color_id=SheenReviews.color_id WHERE';
 
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
@@ -12,6 +12,14 @@ const index = async (queryKeys, queryValues) => {
   );
 
   const res = await db.pool.asyncQuery(sanitizedSQL);
+  return res;
+};
+
+const show = async (data) => {
+  const res = await db.pool.asyncQuery(
+    `${partialSQL} SheenReviews.writing_sample_id = ? AND Users.user_id = ?`,
+    [data.writingSampleID, data.userID],
+  );
   return res;
 };
 
@@ -74,6 +82,7 @@ const update = async (data) => {
 
 module.exports = {
   index,
+  show,
   insert,
   remove,
   update,

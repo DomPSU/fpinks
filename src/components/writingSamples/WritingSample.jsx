@@ -48,6 +48,7 @@ class WritingSample extends Component {
     };
 
     this.getPriorShadingReview = this.getPriorShadingReview.bind(this);
+    this.getPriorSheenReview = this.getPriorSheenReview.bind(this);
     this.getPriorFeatheringReview = this.getPriorFeatheringReview.bind(this);
     this.getPriorWaterReview = this.getPriorWaterReview.bind(this);
     this.getPriorDryingReview = this.getPriorDryingReview.bind(this);
@@ -81,6 +82,7 @@ class WritingSample extends Component {
 
     if (isSignedIn) {
       this.getPriorShadingReview();
+      this.getPriorSheenReview();
       this.getPriorFeatheringReview();
       this.getPriorWaterReview();
       this.getPriorDryingReview();
@@ -118,6 +120,35 @@ class WritingSample extends Component {
           this.setState({
             priorShadingChoice,
             shadingChoice: priorShadingChoice,
+          });
+        }
+      })
+      .catch((error) => console.log(error.response));
+  }
+
+  getPriorSheenReview() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `sheen-reviews/${id}`;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getIDToken()}`,
+      },
+    };
+
+    API.instance
+      .get(url, config)
+      .then((res) => {
+        console.log('res');
+        console.log(res);
+        if (res.data.length === 1) {
+          const priorSheenColorChoice = capitalize(res.data[0].color);
+          const priorSheenAmountChoice = capitalize(res.data[0].amount);
+          this.setState({
+            priorSheenColorChoice,
+            sheenColorChoice: priorSheenColorChoice,
+            priorSheenAmountChoice,
+            sheenAmountChoice: priorSheenAmountChoice,
           });
         }
       })
@@ -331,22 +362,12 @@ class WritingSample extends Component {
       priorColorTwo,
       priorColorThree,
       priorShadingChoice,
-      priorSheenAmount,
-      priorSheenColor,
+      priorSheenAmountChoice,
+      priorSheenColorChoice,
       priorFeatheringChoice,
       priorWaterChoice,
       priorDryingTimeChoice,
       priorTransparencyChoice,
-      colorOne,
-      colorTwo,
-      colorThree,
-      shadingChoice,
-      sheenAmount,
-      sheenColor,
-      featheringChoice,
-      waterChoice,
-      dryingTimeChoice,
-      transparencyChoice,
     } = this.state;
 
     // process colorReviews
@@ -620,16 +641,18 @@ class WritingSample extends Component {
                         </label>
                       </div>
                       <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="sheenReview" className="p-3 m-0">
+                        <label htmlFor="sheenChoices" className="p-3 m-0">
                           Sheen
                           <div className="row">
                             <div className="col-6">
                               <select
                                 className="form-control m-1"
-                                id="sheenAmountReview"
+                                id="sheenAmountChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option> </option>
+                                <option value="" disabled selected>
+                                  {priorSheenAmountChoice}
+                                </option>
                                 {sheensJSON.names.map((amount) => {
                                   return <option>{amount}</option>;
                                 })}
@@ -638,10 +661,12 @@ class WritingSample extends Component {
                             <div className="col-6">
                               <select
                                 className="form-control m-1"
-                                id="sheenColorReview"
+                                id="sheenColorChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option> </option>
+                                <option value="" disabled selected>
+                                  {priorSheenColorChoice}
+                                </option>
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -710,7 +735,7 @@ class WritingSample extends Component {
                             onBlur={this.handleChange}
                           >
                             <option value="" disabled selected>
-                              {transparencyChoice}
+                              {priorTransparencyChoice}
                             </option>
                             {transparenciesJSON.names.map((amount) => {
                               return <option>{amount}</option>;

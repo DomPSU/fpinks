@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   index,
+  show,
   insert,
   update,
 } = require('../controllers/sheenReviewsController');
@@ -12,7 +13,7 @@ const {
 
 const sheenReviewsRouter = express.Router();
 
-// TODO show
+sheenReviewsRouter.get('/:writing_sample_id', isAuth, show);
 sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 sheenReviewsRouter.post('/', isAuth, insert);
 sheenReviewsRouter.put('/edit', isAuth, isAdmin, update);
