@@ -148,8 +148,8 @@ class App extends Component {
             {/* users */}
             <Route
               exact
-              path="/users/edit/"
-              key="/users/edit/"
+              path="/users/edit"
+              key="/users/edit"
               render={() =>
                 isAdmin ? <UsersUpdate /> : <Redirect to="/unauthorized" />
               }
@@ -165,8 +165,8 @@ class App extends Component {
             {/* pens */}
             <Route
               exact
-              path="/pens/edit/"
-              key="/pens/edit/"
+              path="/pens/edit"
+              key="/pens/edit"
               render={() =>
                 isAdmin ? <PensUpdate /> : <Redirect to="/unauthorized" />
               }
@@ -190,8 +190,8 @@ class App extends Component {
             {/* nibs */}
             <Route
               exact
-              path="/nibs/edit/"
-              key="/nibs/edit/"
+              path="/nibs/edit"
+              key="/nibs/edit"
               render={() =>
                 isAdmin ? <NibsUpdate /> : <Redirect to="/unauthorized" />
               }
@@ -265,8 +265,8 @@ class App extends Component {
             {/* papers */}
             <Route
               exact
-              path="/papers/edit/"
-              key="/papers/edit/"
+              path="/papers/edit"
+              key="/papers/edit"
               render={() =>
                 isAdmin ? <PapersUpdate /> : <Redirect to="/unauthorized" />
               }
@@ -307,8 +307,8 @@ class App extends Component {
             {/* colorReviews */}
             <Route
               exact
-              path="/color-reviews/edit/"
-              key="/color-reviews/edit/"
+              path="/color-reviews/edit"
+              key="/color-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <ColorReviewsUpdate />
@@ -341,8 +341,8 @@ class App extends Component {
             {/* shadingReviews */}
             <Route
               exact
-              path="/shading-reviews/edit/"
-              key="/shading-reviews/edit/"
+              path="/shading-reviews/edit"
+              key="/shading-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <ShadingReviewsUpdate />
@@ -375,8 +375,8 @@ class App extends Component {
             {/* sheenReviews */}
             <Route
               exact
-              path="/sheen-reviews/edit/"
-              key="/sheen-reviews/edit/"
+              path="/sheen-reviews/edit"
+              key="/sheen-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <SheenReviewsUpdate />
@@ -409,8 +409,8 @@ class App extends Component {
             {/* featheringReviews */}
             <Route
               exact
-              path="/feathering-reviews/edit/"
-              key="/feathering-reviews/edit/"
+              path="/feathering-reviews/edit"
+              key="/feathering-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <FeatheringReviewsUpdate />
@@ -443,8 +443,8 @@ class App extends Component {
             {/* waterReviews */}
             <Route
               exact
-              path="/water-reviews/edit/"
-              key="/water-reviews/edit/"
+              path="/water-reviews/edit"
+              key="/water-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <WaterReviewsUpdate />
@@ -477,8 +477,8 @@ class App extends Component {
             {/* dryingReviews */}
             <Route
               exact
-              path="/drying-reviews/edit/"
-              key="/drying-reviews/edit/"
+              path="/drying-reviews/edit"
+              key="/drying-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <DryingReviewsUpdate />
@@ -511,8 +511,8 @@ class App extends Component {
             {/* transparencyReviews */}
             <Route
               exact
-              path="/transparency-reviews/edit/"
-              key="/transparency-reviews/edit/"
+              path="/transparency-reviews/edit"
+              key="/transparency-reviews/edit"
               render={() =>
                 isAdmin ? (
                   <TransparencyReviewsUpdate />

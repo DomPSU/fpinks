@@ -23,7 +23,7 @@ class SheenReviewsUpdate extends Component {
   componentDidMount() {
     const originLength = window.location.origin.length;
     const editURL = window.location.href.slice(originLength);
-    const getURL = editURL.replace('edit', '');
+    const getURL = editURL.replace('edit/', '');
 
     // if url contains query string, get Sheen Review
     if (getURL.indexOf('?') !== -1) {
@@ -41,7 +41,6 @@ class SheenReviewsUpdate extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log(res);
         this.setState({
           userID: res.data[0].user_id,
           colorID: res.data[0].color_id,
@@ -77,7 +76,7 @@ class SheenReviewsUpdate extends Component {
         if (id === 'userID' || id === 'colorID' || id === 'writingSampleID') {
           this.setState({ disableForm: true }, () => {
             this.getSheenReview(
-              `/sheen-reviews/admin/?SheenReviews.user_id=${userID}&SheenReviews.color_id=${colorID}&SheenReviews.writing_sample_id=${writingSampleID}`,
+              `/sheen-reviews/?SheenReviews.user_id=${userID}&SheenReviews.color_id=${colorID}&SheenReviews.writing_sample_id=${writingSampleID}`,
             );
           });
         }

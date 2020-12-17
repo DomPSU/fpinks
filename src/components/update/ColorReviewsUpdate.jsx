@@ -23,7 +23,7 @@ class ColorReviewsUpdate extends Component {
   componentDidMount() {
     const originLength = window.location.origin.length;
     const editURL = window.location.href.slice(originLength);
-    const getURL = editURL.replace('edit', '');
+    const getURL = editURL.replace('edit/', '');
 
     // if url contains query string, get Color Review
     if (getURL.indexOf('?') !== -1) {
@@ -41,7 +41,6 @@ class ColorReviewsUpdate extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log(res);
         this.setState({
           userID: res.data[0].user_id,
           colorID: res.data[0].color_id,
@@ -77,7 +76,7 @@ class ColorReviewsUpdate extends Component {
         if (id === 'userID' || id === 'colorID' || id === 'writingSampleID') {
           this.setState({ disableForm: true }, () => {
             this.getColorReview(
-              `/color-reviews/admin/?ColorReviews.user_id=${userID}&ColorReviews.color_id=${colorID}&ColorReviews.writing_sample_id=${writingSampleID}`,
+              `/color-reviews/?ColorReviews.user_id=${userID}&ColorReviews.color_id=${colorID}&ColorReviews.writing_sample_id=${writingSampleID}`,
             );
           });
         }

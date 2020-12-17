@@ -22,7 +22,7 @@ class DryingReviewsUpdate extends Component {
   componentDidMount() {
     const originLength = window.location.origin.length;
     const editURL = window.location.href.slice(originLength);
-    const getURL = editURL.replace('edit', '');
+    const getURL = editURL.replace('edit/', '');
 
     // if url contains query string, get Drying Review
     if (getURL.indexOf('?') !== -1) {
@@ -40,7 +40,6 @@ class DryingReviewsUpdate extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log(res);
         this.setState({
           userID: res.data[0].user_id,
           writingSampleID: res.data[0].writing_sample_id,

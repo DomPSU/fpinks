@@ -22,7 +22,7 @@ class WaterReviewsUpdate extends Component {
   componentDidMount() {
     const originLength = window.location.origin.length;
     const editURL = window.location.href.slice(originLength);
-    const getURL = editURL.replace('edit', '');
+    const getURL = editURL.replace('edit/', '');
 
     // if url contains query string, get Shading Review
     if (getURL.indexOf('?') !== -1) {
@@ -40,7 +40,6 @@ class WaterReviewsUpdate extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log(res);
         this.setState({
           userID: res.data[0].user_id,
           writingSampleID: res.data[0].writing_sample_id,
@@ -74,7 +73,7 @@ class WaterReviewsUpdate extends Component {
         if (id === 'userID' || id === 'writingSampleID') {
           this.setState({ disableForm: true }, () => {
             this.getWaterReview(
-              `/water-reviews/admin/?WaterReviews.user_id=${userID}&WaterReviews.writing_sample_id=${writingSampleID}`,
+              `/water-reviews/?WaterReviews.user_id=${userID}&WaterReviews.writing_sample_id=${writingSampleID}`,
             );
           });
         }

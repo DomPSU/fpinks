@@ -22,7 +22,7 @@ class TransparencyReviewsUpdate extends Component {
   componentDidMount() {
     const originLength = window.location.origin.length;
     const editURL = window.location.href.slice(originLength);
-    const getURL = editURL.replace('edit', '');
+    const getURL = editURL.replace('edit/', '');
 
     // if url contains query string, get Transparency Review
     if (getURL.indexOf('?') !== -1) {
@@ -40,7 +40,6 @@ class TransparencyReviewsUpdate extends Component {
     API.instance
       .get(url, config)
       .then((res) => {
-        console.log(res);
         this.setState({
           userID: res.data[0].user_id,
           writingSampleID: res.data[0].writing_sample_id,
@@ -74,7 +73,7 @@ class TransparencyReviewsUpdate extends Component {
         if (id === 'userID' || id === 'writingSampleID') {
           this.setState({ disableForm: true }, () => {
             this.getTransparencyReview(
-              `/transparency-reviews/admin/?TransparencyReviews.user_id=${userID}&TransparencyReviews.writing_sample_id=${writingSampleID}`,
+              `/transparency-reviews/?TransparencyReviews.user_id=${userID}&TransparencyReviews.writing_sample_id=${writingSampleID}`,
             );
           });
         }
