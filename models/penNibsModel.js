@@ -3,7 +3,7 @@ const sqlUtil = require('../utils/sql');
 
 const index = async (queryKeys, queryValues) => {
   const partialSQL =
-    'SELECT Pens.brand, Pens.model, Nibs.size, Nibs.grind, Nibs.tune, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE';
+    'SELECT Pens.brand, Pens.model, Pens.pen_id, Nibs.size, Nibs.grind, Nibs.tune, Nibs.nib_id, PenNibs.approved, PenNibs.created_at, PenNibs.updated_at FROM PenNibs LEFT JOIN Pens ON PenNibs.pen_id = Pens.pen_id LEFT JOIN Nibs ON PenNibs.nib_id = Nibs.nib_id WHERE';
 
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
@@ -55,7 +55,24 @@ const insert = async (data) => {
   }
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE PenNibs SET approved=?, updated_at=? WHERE pen_id=? AND nib_id=?',
+    [
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.penID,
+      data.nibID,
+    ],
+  );
+  return updateRes;
+};
+
 module.exports = {
   index,
   insert,
+  update,
 };

@@ -41,6 +41,7 @@ import DryingReviewsInsert from './insert/DryingReviewsInsert';
 import TransparencyReviewsInsert from './insert/TransparencyReviewsInsert';
 
 // update
+import PenNibsUpdate from './update/PenNibsUpdate';
 import UsersUpdate from './update/UsersUpdate';
 import PensUpdate from './update/PensUpdate';
 import NibsUpdate from './update/NibsUpdate';
@@ -214,6 +215,15 @@ class App extends Component {
             {/* penNibs */}
             <Route
               exact
+              path="/pen-nibs/edit"
+              key="/pen-nibs/edit"
+              render={() =>
+                isAdmin ? <PenNibsUpdate /> : <Redirect to="/unauthorized" />
+              }
+            />
+
+            <Route
+              exact
               path="/pen-nibs/new"
               key="/pen-nibs/new"
               render={() =>
@@ -230,8 +240,8 @@ class App extends Component {
             {/* inks */}
             <Route
               exact
-              path="/inks/edit/"
-              key="/inks/edit/"
+              path="/inks/edit"
+              key="/inks/edit"
               render={() =>
                 isAdmin ? <InksUpdate /> : <Redirect to="/unauthorized" />
               }

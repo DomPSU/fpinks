@@ -25,7 +25,23 @@ const insert = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const penNib = {
+    ...req.body,
+  };
+
+  try {
+    const data = await penNibsModel.update(penNib);
+    res.statusMessage = 'Update succesful.';
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(400).end();
+    next(e);
+  }
+};
+
 module.exports = {
   index,
   insert,
+  update,
 };

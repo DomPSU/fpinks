@@ -1,5 +1,5 @@
 const express = require('express');
-const { index, insert } = require('../controllers/penNibsController');
+const { index, insert, update } = require('../controllers/penNibsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
@@ -8,10 +8,8 @@ const {
 
 const penNibsRouter = express.Router();
 
-// TODO show
 penNibsRouter.get('/', sanitizeQueryString, processQueryString, index);
 penNibsRouter.post('/', isAuth, isAdmin, insert);
-
-// TODO PUT
+penNibsRouter.put('/edit', isAuth, isAdmin, update);
 
 module.exports = penNibsRouter;
