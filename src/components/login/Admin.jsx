@@ -15,9 +15,6 @@ export default function Admin() {
         <Link className="p-3" to="/users/?approved=0">
           Unapproved Users
         </Link>
-        <Link className="p-3" to="/users/edit">
-          Users Update
-        </Link>
       </div>
       {/* pens */}
       <div className="row">
@@ -33,9 +30,6 @@ export default function Admin() {
         <Link className="p-3" to="/pens/new">
           Pens Insert
         </Link>
-        <Link className="p-3" to="/pens/edit">
-          Pens Update
-        </Link>
       </div>
       {/* nibs */}
       <div className="row">
@@ -50,9 +44,6 @@ export default function Admin() {
         </Link>
         <Link className="p-3" to="/nibs/new">
           Nibs Insert
-        </Link>
-        <Link className="p-3" to="/nibs/edit">
-          Nibs Update
         </Link>
       </div>
       {/* penNibs */}
@@ -84,9 +75,6 @@ export default function Admin() {
         <Link className="p-3" to="/inks/new">
           Inks Insert
         </Link>
-        <Link className="p-3" to="/inks/edit">
-          Inks Update
-        </Link>
       </div>
       {/* papers */}
       <div className="row">
@@ -101,9 +89,6 @@ export default function Admin() {
         </Link>
         <Link className="p-3" to="/papers/new">
           Papers Insert
-        </Link>
-        <Link className="p-3" to="/papers/edit">
-          Papers Update
         </Link>
       </div>
       {/* writingSamples */}
