@@ -14,19 +14,17 @@ const index = async (req, res, next) => {
 
 const insert = async (req, res, next) => {
   const shadingReview = {
-    ...req.body,
+    userID: res.locals.user.user_id,
+    writingSampleID: req.body.writingSampleID,
+    amount: req.body.amount,
   };
 
-  shadingReview.userID = res.locals.user.user_id;
-
-  // delete existing shading review for user and writing sample
   try {
     await shadingReviewsModel.remove(shadingReview);
   } catch (e) {
     next(e);
   }
 
-  // insert new shading review
   try {
     const data = await shadingReviewsModel.insert(shadingReview);
     res.status(200).send(data);
@@ -40,11 +38,10 @@ const remove = async (req, res, next) => {
     writingSampleID: req.params.writingSampleID,
   };
 
-  if (res.locals.user.level === 'admin') {
-    shadingReview.userID = req.body.userID;
-  } else {
-    shadingReview.userID = res.locals.user.user_id;
-  }
+  shadingReview.userID =
+    res.locals.user.level === 'admin'
+      ? req.body.userID
+      : res.locals.user.user_id;
 
   try {
     const data = await shadingReviewsModel.remove(shadingReview);
@@ -56,7 +53,9 @@ const remove = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const shadingReview = {
-    ...req.body,
+    userID: req.body.userID,
+    writingSampleID: req.body.writingSampleID,
+    approved: req.body.approved,
   };
 
   try {
