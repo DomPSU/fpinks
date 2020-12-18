@@ -14,18 +14,17 @@ const index = async (req, res, next) => {
 
 const insert = async (req, res, next) => {
   const dryingReview = {
-    ...req.body,
     userID: res.locals.user.user_id,
+    writingSampleID: req.body.writingSampleID,
+    dryingTime: req.body.dryingTime,
   };
 
-  // delete existing waterproofness review for user and writing sample
   try {
     await dryingReviewsModel.remove(dryingReview);
   } catch (e) {
     next(e);
   }
 
-  // insert new waterproofness review
   try {
     const data = await dryingReviewsModel.insert(dryingReview);
     res.status(200).send(data);
@@ -36,8 +35,13 @@ const insert = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   const dryingReview = {
-    ...req.body,
+    userID: res.locals.user.user_id,
+    writingSampleID: req.params.writingSampleID,
   };
+
+  if (req.locals.user.level === 'admin' && req.body.userID !== undefined) {
+    dryingReview.userID = req.body.userID;
+  }
 
   try {
     const data = await dryingReviewsModel.remove(dryingReview);
@@ -49,7 +53,9 @@ const remove = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const shadingReview = {
-    ...req.body,
+    userID: req.body.userID,
+    writingSampleID: req.body.writingSampleID,
+    approved: req.body.approved,
   };
 
   try {

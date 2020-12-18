@@ -4,6 +4,7 @@ const {
   show,
   insert,
   update,
+  remove,
 } = require('../controllers/dryingReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -27,5 +28,6 @@ dryingReviewsRouter.get(
 dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 dryingReviewsRouter.post('/', isAuth, insert);
 dryingReviewsRouter.put('/edit', isAuth, isAdmin, update);
+dryingReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = dryingReviewsRouter;

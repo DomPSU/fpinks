@@ -503,7 +503,7 @@ class WritingSample extends Component {
       waterproofness: waterChoice,
     };
 
-    if (waterReview.amount === '') {
+    if (waterReview.waterproofness === '') {
       const url = `water-reviews/${writingSampleID}`;
 
       API.instance
@@ -532,15 +532,29 @@ class WritingSample extends Component {
       dryingTime: dryingTimeChoice,
     };
 
-    API.instance
-      .post('drying-reviews', dryingReview, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
+    if (dryingReview.dryingTime === '') {
+      const url = `drying-reviews/${writingSampleID}`;
+
+      API.instance
+        .delete(url, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
         });
-        console.log(error.response);
-      });
+    } else {
+      API.instance
+        .post('drying-reviews', dryingReview, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
+        });
+    }
 
     const transparencyReview = {
       writingSampleID,
