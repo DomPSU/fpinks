@@ -459,15 +459,29 @@ class WritingSample extends Component {
       amount: sheenAmountChoice,
     };
 
-    API.instance
-      .post('sheen-reviews', sheenReview, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
+    if (sheenColorChoice === '' && sheenAmountChoice === '') {
+      const url = `sheen-reviews/${writingSampleID}`;
+
+      API.instance
+        .delete(url, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
         });
-        console.log(error.response);
-      });
+    } else {
+      API.instance
+        .post('sheen-reviews', sheenReview, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
+        });
+    }
 
     const featheringReview = {
       writingSampleID,

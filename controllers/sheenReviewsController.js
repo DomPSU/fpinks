@@ -14,18 +14,18 @@ const index = async (req, res, next) => {
 
 const insert = async (req, res, next) => {
   const sheenReview = {
-    ...req.body,
     userID: res.locals.user.user_id,
+    writingSampleID: req.body.writingSampleID,
+    color: req.body.color,
+    amount: req.body.amount,
   };
 
-  // delete existing sheen review for user and writing sample
   try {
     await sheenReviewsModel.remove(sheenReview);
   } catch (e) {
     next(e);
   }
 
-  // insert new sheen review
   try {
     const data = await sheenReviewsModel.insert(sheenReview);
     res.status(200).send(data);
@@ -36,8 +36,13 @@ const insert = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   const sheenReview = {
-    ...req.body,
+    writingSampleID: req.params.writingSampleID,
+    userID: res.locals.user.user_id,
   };
+
+  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
+    sheenReview.userID = req.body.userID;
+  }
 
   try {
     const data = await sheenReviewsModel.remove(sheenReview);
@@ -49,7 +54,9 @@ const remove = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const colorReview = {
-    ...req.body,
+    userID: req.body.userID,
+    writingSampleID: req.body.writingSampleID,
+    approved: req.body.approved,
   };
 
   try {

@@ -4,6 +4,7 @@ const {
   show,
   insert,
   update,
+  remove,
 } = require('../controllers/sheenReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -27,5 +28,6 @@ sheenReviewsRouter.get(
 sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 sheenReviewsRouter.post('/', isAuth, insert);
 sheenReviewsRouter.put('/edit', isAuth, isAdmin, update);
+sheenReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = sheenReviewsRouter;
