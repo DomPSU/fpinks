@@ -17,6 +17,7 @@ const index = async (req, res, next) => {
     data = await writingSamplesModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
+      res.locals.offset,
     );
   } catch (e) {
     next(e);
@@ -50,18 +51,17 @@ const show = async (req, res, next) => {
 };
 
 const search = async (req, res, next) => {
-  // TODO HACK
-  const queryKeys = ['WritingSamples.approved'];
-  const queryValues = ['1'];
-
   const { query } = req.params;
 
   let data;
 
-  // blank query
-  if (query === undefined) {
+  if (query === undefined || query.trim === '') {
     try {
-      data = await writingSamplesModel.index(queryKeys, queryValues);
+      data = await writingSamplesModel.index(
+        res.locals.processedQueryKeys,
+        res.locals.processedQueryValues,
+        res.locals.offset,
+      );
 
       // HACK
       await addAPIURLs(data);
@@ -74,44 +74,12 @@ const search = async (req, res, next) => {
     }
   }
 
-  // whitespace query
-  if (query.trim === '') {
-    try {
-      data = await writingSamplesModel.index(queryKeys, queryValues);
-
-      // HACK
-      await addAPIURLs(data);
-      deleteAllAWSKeys(data);
-
-      res.status(200).send(data);
-      return;
-    } catch (e) {
-      next(e);
-    }
-  }
-
-  // process query
-
-  // TODO
-  // validate number of '=' is the same or one greater than number of ','
-
-  // no equals
-  if (query.search('=') < 0) {
-    try {
-      data = await writingSamplesModel.basicSearch(query);
-      res.status(200).send(data);
-      return;
-    } catch (e) {
-      next(e);
-    }
-
-    // one equals, no commas
-  } else if (query.search(',') < 0) {
-    console.log('equal and no commas');
-
-    // general case
-  } else {
-    console.log('equal and commas');
+  try {
+    data = await writingSamplesModel.basicSearch(query, res.locals.offset);
+    res.status(200).send(data);
+    return;
+  } catch (e) {
+    next(e);
   }
 };
 

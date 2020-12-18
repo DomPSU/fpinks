@@ -6,32 +6,34 @@ const {
 } = require('../utils/awsURLs'); // TODO eventually remove this and put into controller
 const { getSanitizedSQL } = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT Users.username, Users.user_id, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.comment, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE';
+const partialSQL =
+  'SELECT Users.username, Users.user_id, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.comment, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE';
 
-  let sanitizedSQL = getSanitizedSQL(partialSQL, queryKeys, queryValues);
+const index = async (queryKeys, queryValues, offset) => {
+  const sanitizedSQL = getSanitizedSQL(partialSQL, queryKeys, queryValues);
 
-  sanitizedSQL = sanitizedSQL.concat(
-    ' ORDER BY WritingSamples.writing_sample_id DESC',
+  const unsanitizedSQL = sanitizedSQL.concat(
+    ` ORDER BY WritingSamples.writing_sample_id DESC LIMIT ?, 12;`,
   );
 
-  const res = await db.pool.asyncQuery(sanitizedSQL);
+  const res = await db.pool.asyncQuery(unsanitizedSQL, [parseInt(offset, 10)]);
+
   return res;
 };
 
 const show = async (id) => {
   const res = await db.pool.asyncQuery(
-    'SELECT Users.username, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE WritingSamples.writing_sample_id = ? ',
+    `${partialSQL} WritingSamples.writing_sample_id=${id}`,
     [id],
   );
   await addAPIURLs(res);
   deleteAllAWSKeys(res);
   return res;
 };
-const basicSearch = async (query) => {
+
+const basicSearch = async (query, offset) => {
   const res = await db.pool.asyncQuery(
-    'SELECT WritingSamples.writing_sample_id, WritingSamples.low_res_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN ColorReviews ON ColorReviews.writing_sample_id=WritingSamples.writing_sample_id LEFT JOIN Colors ON ColorReviews.color_id=Colors.color_id WHERE WritingSamples.approved <> 0 AND (Inks.brand LIKE ? OR Inks.name LIKE ? OR Papers.brand LIKE ? OR Papers.name LIKE ? OR Papers.style LIKE ? OR Papers.lbs LIKE ? Or Papers.grams LIKE ? OR Pens.brand LIKE ? Or Pens.model LIKE ? OR Nibs.size LIKE ? OR Nibs.grind LIKE ? OR Nibs.tune LIKE ? OR Colors.name LIKE ?) GROUP BY WritingSamples.writing_sample_id ORDER BY WritingSamples.writing_sample_id DESC',
+    'SELECT WritingSamples.writing_sample_id, WritingSamples.low_res_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN ColorReviews ON ColorReviews.writing_sample_id=WritingSamples.writing_sample_id LEFT JOIN Colors ON ColorReviews.color_id=Colors.color_id WHERE WritingSamples.approved <> 0 AND (Inks.brand LIKE ? OR Inks.name LIKE ? OR Papers.brand LIKE ? OR Papers.name LIKE ? OR Papers.style LIKE ? OR Papers.lbs LIKE ? Or Papers.grams LIKE ? OR Pens.brand LIKE ? Or Pens.model LIKE ? OR Nibs.size LIKE ? OR Nibs.grind LIKE ? OR Nibs.tune LIKE ? OR Colors.name LIKE ?) GROUP BY WritingSamples.writing_sample_id ORDER BY WritingSamples.writing_sample_id DESC LIMIT ?, 12;',
     [
       `%${query}%`,
       `%${query}%`,
@@ -46,6 +48,7 @@ const basicSearch = async (query) => {
       `%${query}%`,
       `%${query}%`,
       `%${query}%`,
+      parseInt(offset, 10),
     ],
   );
   await addLowResURLs(res);

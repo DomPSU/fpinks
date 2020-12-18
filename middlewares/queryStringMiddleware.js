@@ -11,8 +11,8 @@ const forbiddenQueryStringKeys = [
   'users.level',
 ];
 
-const getApprovedKeyFromPath = (originalUrl) => {
-  let path = originalUrl.substring(5); // trim '/api'
+const getApprovedKeyFromPath = (originalURL) => {
+  let path = originalURL.replace('/api/', '');
 
   if (path.indexOf('?') > -1) {
     path = path.substring(0, path.indexOf('?') - 1);
@@ -60,7 +60,7 @@ const getApprovedKeyFromPath = (originalUrl) => {
     return 'TransparencyReviews.approved';
   }
 
-  if (path === 'writing-samples') {
+  if (path === 'writing-samples' || path === 'writing-samples/search/') {
     return 'WritingSamples.approved';
   }
 
@@ -81,15 +81,23 @@ const sanitizeQueryString = (req, res, next) => {
     return next(createError(403, 'Forbidden query string key.'));
   }
 
-  res.locals.queryKeys = queryKeys;
-  res.locals.queryValues = queryValues;
-
   next();
 };
 
 const processQueryString = (req, res, next) => {
-  const queryKeys = res.locals.queryKeys || [];
-  const queryValues = res.locals.queryValues || [];
+  const queryKeys = Object.keys(req.query);
+  const queryValues = Object.values(req.query);
+
+  const offsetIndex = queryKeys.indexOf('offset');
+
+  if (offsetIndex > -1) {
+    res.locals.offset = queryValues[offsetIndex];
+
+    queryKeys.splice(offsetIndex, 1);
+    queryValues.splice(offsetIndex, 1);
+  } else {
+    res.locals.offset = 0;
+  }
 
   if (res.locals.user === undefined || res.locals.user.level !== 'admin') {
     queryKeys.push(getApprovedKeyFromPath(req.originalUrl));

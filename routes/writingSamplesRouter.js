@@ -20,8 +20,18 @@ const writingSamplesRouter = express.Router();
 // TODO make sure search is secure. Might need to add middleware.
 // Might need to remove middleware. Might need to refactor search.
 // Might need to sanitize search
-writingSamplesRouter.get('/search/:query', sanitizeQueryString, search);
-writingSamplesRouter.get('/search', sanitizeQueryString, search);
+writingSamplesRouter.get(
+  '/search/:query',
+  sanitizeQueryString,
+  processQueryString,
+  search,
+);
+writingSamplesRouter.get(
+  '/search',
+  sanitizeQueryString,
+  processQueryString,
+  search,
+);
 writingSamplesRouter.get('/:id', show);
 writingSamplesRouter.get('/', sanitizeQueryString, processQueryString, index);
 writingSamplesRouter.post(
