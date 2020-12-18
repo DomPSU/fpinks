@@ -4,6 +4,7 @@ const {
   show,
   insert,
   update,
+  remove,
 } = require('../controllers/transparencyReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -32,5 +33,6 @@ transparencyReviewsRouter.get(
 );
 transparencyReviewsRouter.post('/', isAuth, insert);
 transparencyReviewsRouter.put('/edit', isAuth, isAdmin, update);
+transparencyReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = transparencyReviewsRouter;

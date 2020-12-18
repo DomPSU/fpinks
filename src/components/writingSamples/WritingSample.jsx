@@ -561,15 +561,29 @@ class WritingSample extends Component {
       transparency: transparencyChoice,
     };
 
-    API.instance
-      .post('transparency-reviews', transparencyReview, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
+    if (transparencyChoice === '') {
+      const url = `transparency-reviews/${writingSampleID}`;
+
+      API.instance
+        .delete(url, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
         });
-        console.log(error.response);
-      });
+    } else {
+      API.instance
+        .post('transparency-reviews', transparencyReview, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
+        });
+    }
 
     e.preventDefault();
   }

@@ -14,18 +14,17 @@ const index = async (req, res, next) => {
 
 const insert = async (req, res, next) => {
   const transparencyReview = {
-    ...req.body,
     userID: res.locals.user.user_id,
+    writingSampleID: req.body.writingSampleID,
+    transparency: req.body.transparency,
   };
 
-  // delete existing transparency review for user and writing sample
   try {
     await transparencyReviewsModel.remove(transparencyReview);
   } catch (e) {
     next(e);
   }
 
-  // insert new transparency review
   try {
     const data = await transparencyReviewsModel.insert(transparencyReview);
     res.status(200).send(data);
@@ -36,8 +35,13 @@ const insert = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   const transparencyReview = {
-    ...req.body,
+    userID: res.locals.user.user_id,
+    writingSampleID: req.params.writingSampleID,
   };
+
+  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
+    transparencyReview.userID = req.body.userID;
+  }
 
   try {
     const data = await transparencyReviewsModel.remove(transparencyReview);
@@ -49,7 +53,9 @@ const remove = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const shadingReview = {
-    ...req.body,
+    userID: req.body.userID,
+    writingSampleID: req.body.writingSampleID,
+    approved: req.body.approved,
   };
 
   try {
