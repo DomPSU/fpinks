@@ -13,6 +13,8 @@ const index = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
+  console.log('insert');
+
   const featheringReview = {
     ...req.body,
     userID: res.locals.user.user_id,
@@ -35,9 +37,16 @@ const insert = async (req, res, next) => {
 };
 
 const remove = async (req, res, next) => {
+  console.log('remove');
+
   const featheringReview = {
-    ...req.body,
+    writingSampleID: req.params.writingSampleID,
   };
+
+  featheringReview.userID =
+    res.locals.user.level === 'admin'
+      ? req.body.userID
+      : res.locals.user.user_id;
 
   try {
     const data = await featheringReviewsModel.remove(featheringReview);

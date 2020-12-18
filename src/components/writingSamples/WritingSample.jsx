@@ -474,15 +474,29 @@ class WritingSample extends Component {
       amount: featheringChoice,
     };
 
-    API.instance
-      .post('feathering-reviews', featheringReview, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
+    if (featheringReview.amount === '') {
+      const url = `feathering-reviews/${writingSampleID}`;
+
+      API.instance
+        .delete(url, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
         });
-        console.log(error.response);
-      });
+    } else {
+      API.instance
+        .post('feathering-reviews', featheringReview, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
+        });
+    }
 
     const waterReview = {
       writingSampleID,

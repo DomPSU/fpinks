@@ -4,6 +4,7 @@ const {
   show,
   insert,
   update,
+  remove,
 } = require('../controllers/featheringReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -32,5 +33,6 @@ featheringReviewsRouter.get(
 );
 featheringReviewsRouter.post('/', isAuth, insert);
 featheringReviewsRouter.put('/edit', isAuth, isAdmin, update);
+featheringReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = featheringReviewsRouter;
