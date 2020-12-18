@@ -3,6 +3,7 @@ const {
   show,
   index,
   insert,
+  update,
   search,
 } = require('../controllers/writingSamplesController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
@@ -29,5 +30,6 @@ writingSamplesRouter.post(
   upload.single('writingSampleImage'),
   insert,
 );
+writingSamplesRouter.put('/edit/:id', isAuth, isAdmin, update);
 
 module.exports = writingSamplesRouter;

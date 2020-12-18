@@ -79,9 +79,25 @@ const insert = async (data) => {
   return insertRes;
 };
 
+const update = async (data) => {
+  // TODO validate all needed keys
+
+  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+  const updateRes = await db.pool.asyncQuery(
+    'UPDATE WritingSamples SET approved=?, updated_at=? WHERE writing_sample_id=?',
+    [
+      data.approved,
+      new Date().toISOString().replace('T', ' ').replace('Z', ' '),
+      data.writingSampleID,
+    ],
+  );
+  return updateRes;
+};
+
 module.exports = {
   index,
   insert,
   show,
   basicSearch,
+  update,
 };

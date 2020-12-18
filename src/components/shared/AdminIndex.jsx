@@ -58,13 +58,12 @@ class AdminIndex extends Component {
       model === 'pens' ||
       model === 'nibs' ||
       model === 'inks' ||
-      model === 'papers'
+      model === 'papers' ||
+      model === 'writing-samples'
     ) {
       prefix = '';
     } else if (model === 'pen-nibs') {
       prefix = 'PenNibs.';
-    } else if (model === 'writing-samples') {
-      prefix = 'WritingSamples.';
     } else if (model === 'color-reviews') {
       prefix = 'ColorReviews.';
     } else if (model === 'shading-reviews') {

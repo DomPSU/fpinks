@@ -47,6 +47,7 @@ import PensUpdate from './update/PensUpdate';
 import NibsUpdate from './update/NibsUpdate';
 import InksUpdate from './update/InksUpdate';
 import PapersUpdate from './update/PapersUpdate';
+import WritingSamplesUpdate from './update/WritingSamplesUpdate';
 import ColorReviewsUpdate from './update/ColorReviewsUpdate';
 import ShadingReviewsUpdate from './update/ShadingReviewsUpdate';
 import SheenReviewsUpdate from './update/SheenReviewsUpdate';
@@ -288,6 +289,19 @@ class App extends Component {
             />
 
             {/* writingSamples */}
+            <Route
+              exact
+              path="/writing-samples/edit"
+              key="/writing-samples/edit"
+              render={() =>
+                isAdmin ? (
+                  <WritingSamplesUpdate />
+                ) : (
+                  <Redirect to="/unauthorized" />
+                )
+              }
+            />
+
             <Route
               exact
               path="/writing-samples/:id"
