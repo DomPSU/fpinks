@@ -19,7 +19,7 @@ const insert = async (data) => {
   // get colorID from color name
   const colorNameQuery = await db.pool.asyncQuery(
     'SELECT color_id FROM Colors WHERE name=?',
-    [data.colorName],
+    [data.color],
   );
 
   const colorID = colorNameQuery[0].color_id;

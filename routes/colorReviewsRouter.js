@@ -3,6 +3,7 @@ const {
   index,
   update,
   insert,
+  remove,
 } = require('../controllers/colorReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -26,5 +27,6 @@ colorReviewsRouter.get(
 colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 colorReviewsRouter.post('/', isAuth, insert);
 colorReviewsRouter.put('/edit', isAuth, isAdmin, update);
+colorReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = colorReviewsRouter;

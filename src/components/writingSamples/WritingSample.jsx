@@ -378,12 +378,23 @@ class WritingSample extends Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
+    e.preventDefault();
     this.setState({
       reviewError: false,
     });
 
     const {
+      priorColorOneChoice,
+      priorColorTwoChoice,
+      priorColorThreeChoice,
+      priorShadingChoice,
+      priorSheenAmountChoice,
+      priorSheenColorChoice,
+      priorFeatheringChoice,
+      priorWaterChoice,
+      priorDryingTimeChoice,
+      priorTransparencyChoice,
       colorOneChoice,
       colorTwoChoice,
       colorThreeChoice,
@@ -407,22 +418,64 @@ class WritingSample extends Component {
       },
     };
 
-    const colorReviews = {
-      writingSampleID,
-      colorOne: colorOneChoice,
-      colorTwo: colorTwoChoice,
-      colorThree: colorThreeChoice,
-    };
+    if (
+      colorOneChoice !== priorColorOneChoice ||
+      colorTwoChoice !== priorColorTwoChoice ||
+      colorThreeChoice !== priorColorThreeChoice
+    ) {
+      const url = `color-reviews/${writingSampleID}`;
 
-    API.instance
-      .post('color-reviews', colorReviews, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
-        });
-        console.log(error.response);
-      });
+      const deleteRes = await API.instance.delete(url, config);
+      // TODO catch error for delete
+
+      if (colorOneChoice !== '') {
+        const colorOneReview = {
+          writingSampleID,
+          color: colorOneChoice,
+        };
+
+        const colorOneRes = await API.instance.post(
+          'color-reviews',
+          colorOneReview,
+          config,
+        );
+
+        console.log(colorOneRes);
+        // TODO catch error for insert
+      }
+
+      if (colorTwoChoice !== '') {
+        const colorTwoReview = {
+          writingSampleID,
+          color: colorTwoChoice,
+        };
+
+        const colorTwoRes = await API.instance.post(
+          'color-reviews',
+          colorTwoReview,
+          config,
+        );
+
+        console.log(colorTwoRes);
+        // TODO catch error for insert
+      }
+
+      if (colorThreeChoice !== '') {
+        const colorThreeReview = {
+          writingSampleID,
+          color: colorThreeChoice,
+        };
+
+        const colorThreeRes = await API.instance.post(
+          'color-reviews',
+          colorThreeReview,
+          config,
+        );
+
+        console.log(colorThreeRes);
+        // TODO catch error for insert
+      }
+    }
 
     const shadingReview = {
       writingSampleID,
@@ -598,8 +651,6 @@ class WritingSample extends Component {
           console.log(error.response);
         });
     }
-
-    e.preventDefault();
   }
 
   render() {
