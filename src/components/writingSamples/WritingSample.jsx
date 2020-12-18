@@ -381,6 +381,8 @@ class WritingSample extends Component {
   async handleSubmit(e) {
     e.preventDefault();
 
+    // TODO frontend validation before trying to submit to backend
+
     this.setState({
       errorMessage: '',
     });
@@ -433,7 +435,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}Cannot delete prior color reviews. `,
           };
         });
       }
@@ -451,7 +453,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create first color review. `,
             };
           });
         }
@@ -470,7 +472,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create second color review. `,
             };
           });
         }
@@ -488,7 +490,7 @@ class WritingSample extends Component {
 
             this.setState((prevState) => {
               return {
-                errorMessage: `${prevState.errorMessage}An error occured. `,
+                errorMessage: `${prevState.errorMessage}Cannot create third color review. `,
               };
             });
           }
@@ -506,7 +508,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}Cannot delete prior shading review. `,
           };
         });
       }
@@ -524,7 +526,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create shading review. `,
             };
           });
         }
@@ -544,7 +546,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}Cannot delete prior sheen review. `,
           };
         });
       }
@@ -563,7 +565,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create sheen review. `,
             };
           });
         }
@@ -580,7 +582,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}Cannot delete prior feathering reivew. `,
           };
         });
       }
@@ -602,7 +604,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create feathering review. `,
             };
           });
         }
@@ -619,7 +621,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}.Cannot delete prior waterproofness review `,
           };
         });
       }
@@ -637,7 +639,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create waterproofness review. `,
             };
           });
         }
@@ -654,7 +656,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}Cannot delete prior drying time review. `,
           };
         });
       }
@@ -672,7 +674,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create drying time review. `,
             };
           });
         }
@@ -689,7 +691,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}An error occured. `,
+            errorMessage: `${prevState.errorMessage}Cannot delete prior transparency review. `,
           };
         });
       }
@@ -711,7 +713,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}An error occured. `,
+              errorMessage: `${prevState.errorMessage}Cannot create transparency review. `,
             };
           });
         }
@@ -1162,9 +1164,11 @@ class WritingSample extends Component {
                 >
                   <div className="modal-content">
                     <div className="modal-body">
+                      {errorMessage &&
+                        'Thanks! Most reviews are being processed but at least one error occured. '}
                       {errorMessage}
                       {!errorMessage &&
-                        'Thanks! Your reviews are being processed.'}
+                        'Thanks! All of your reviews are being processed.'}
                     </div>
                   </div>
                 </div>
