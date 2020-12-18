@@ -13,21 +13,18 @@ const index = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  console.log('insert');
-
   const featheringReview = {
-    ...req.body,
     userID: res.locals.user.user_id,
+    writingSampleID: req.body.writingSampleID,
+    amount: req.body.amount,
   };
 
-  // delete existing feathering review for user and writing sample
   try {
     await featheringReviewsModel.remove(featheringReview);
   } catch (e) {
     next(e);
   }
 
-  // insert new feathering review
   try {
     const data = await featheringReviewsModel.insert(featheringReview);
     res.status(200).send(data);
@@ -37,8 +34,6 @@ const insert = async (req, res, next) => {
 };
 
 const remove = async (req, res, next) => {
-  console.log('remove');
-
   const featheringReview = {
     writingSampleID: req.params.writingSampleID,
   };
@@ -57,12 +52,14 @@ const remove = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const shadingReview = {
-    ...req.body,
+  const featheringReview = {
+    userID: req.body.userID,
+    writingSampleID: req.body.writingSampleID,
+    approved: req.body.approved,
   };
 
   try {
-    const data = await featheringReviewsModel.update(shadingReview);
+    const data = await featheringReviewsModel.update(featheringReview);
     res.statusMessage = 'Update succesful.';
     res.status(200).send(data);
   } catch (e) {
