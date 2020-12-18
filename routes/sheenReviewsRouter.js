@@ -16,7 +16,7 @@ const {
 const sheenReviewsRouter = express.Router();
 
 sheenReviewsRouter.get(
-  '/:writing_sample_id',
+  '/:writingSampleID',
   isAuth,
   sanitizeQueryString,
   processQueryString,

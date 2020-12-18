@@ -16,7 +16,7 @@ const {
 const dryingReviewsRouter = express.Router();
 
 dryingReviewsRouter.get(
-  '/:writing_sample_id',
+  '/:writingSampleID',
   isAuth,
   sanitizeQueryString,
   processQueryString,

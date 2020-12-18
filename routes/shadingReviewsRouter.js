@@ -17,7 +17,7 @@ const {
 const shadingReviewsRouter = express.Router();
 
 shadingReviewsRouter.get(
-  '/:writing_sample_id',
+  '/:writingSampleID',
   isAuth,
   sanitizeQueryString,
   processQueryString,

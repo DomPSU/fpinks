@@ -16,7 +16,7 @@ const {
 const transparencyReviewsRouter = express.Router();
 
 transparencyReviewsRouter.get(
-  '/:writing_sample_id',
+  '/:writingSampleID',
   isAuth,
   sanitizeQueryString,
   processQueryString,

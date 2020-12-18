@@ -123,7 +123,7 @@ const appendUserToQS = (req, res, next) => {
 
 const appendWritingSampleToQS = (req, res, next) => {
   res.locals.processedQueryKeys.push('writing_sample_id');
-  res.locals.processedQueryValues.push(req.params.writing_sample_id);
+  res.locals.processedQueryValues.push(req.params.writingSampleID);
 
   next();
 };

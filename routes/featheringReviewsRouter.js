@@ -17,7 +17,7 @@ const {
 const featheringReviewsRouter = express.Router();
 
 featheringReviewsRouter.get(
-  '/:writing_sample_id',
+  '/:writingSampleID',
   isAuth,
   sanitizeQueryString,
   processQueryString,

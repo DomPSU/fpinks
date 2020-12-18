@@ -16,7 +16,7 @@ const {
 const waterReviewsRouter = express.Router();
 
 waterReviewsRouter.get(
-  '/:writing_sample_id',
+  '/:writingSampleID',
   isAuth,
   sanitizeQueryString,
   processQueryString,
