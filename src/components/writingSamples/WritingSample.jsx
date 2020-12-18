@@ -45,7 +45,7 @@ class WritingSample extends Component {
       waterChoice: '',
       dryingTimeChoice: '',
       transparencyChoice: '',
-      reviewError: false,
+      errorMessage: '',
     };
 
     this.getPriorColorReviews = this.getPriorColorReviews.bind(this);
@@ -380,8 +380,9 @@ class WritingSample extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
+
     this.setState({
-      reviewError: false,
+      errorMessage: '',
     });
 
     const {
@@ -425,8 +426,17 @@ class WritingSample extends Component {
     ) {
       const url = `color-reviews/${writingSampleID}`;
 
-      const deleteRes = await API.instance.delete(url, config);
-      // TODO catch error for delete
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
+        });
+      }
 
       if (colorOneChoice !== '') {
         const colorOneReview = {
@@ -434,14 +444,17 @@ class WritingSample extends Component {
           color: colorOneChoice,
         };
 
-        const colorOneRes = await API.instance.post(
-          'color-reviews',
-          colorOneReview,
-          config,
-        );
+        try {
+          await API.instance.post('color-reviews', colorOneReview, config);
+        } catch (err) {
+          console.log(err);
 
-        console.log(colorOneRes);
-        // TODO catch error for insert
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
+          });
+        }
       }
 
       if (colorTwoChoice !== '') {
@@ -450,206 +463,259 @@ class WritingSample extends Component {
           color: colorTwoChoice,
         };
 
-        const colorTwoRes = await API.instance.post(
-          'color-reviews',
-          colorTwoReview,
-          config,
-        );
+        try {
+          await API.instance.post('color-reviews', colorTwoReview, config);
+        } catch (err) {
+          console.log(err);
 
-        console.log(colorTwoRes);
-        // TODO catch error for insert
-      }
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
+          });
+        }
 
-      if (colorThreeChoice !== '') {
-        const colorThreeReview = {
-          writingSampleID,
-          color: colorThreeChoice,
-        };
+        if (colorThreeChoice !== '') {
+          const colorThreeReview = {
+            writingSampleID,
+            color: colorThreeChoice,
+          };
 
-        const colorThreeRes = await API.instance.post(
-          'color-reviews',
-          colorThreeReview,
-          config,
-        );
+          try {
+            await API.instance.post('color-reviews', colorThreeReview, config);
+          } catch (err) {
+            console.log(err);
 
-        console.log(colorThreeRes);
-        // TODO catch error for insert
+            this.setState((prevState) => {
+              return {
+                errorMessage: `${prevState.errorMessage}An error occured. `,
+              };
+            });
+          }
+        }
       }
     }
 
-    const shadingReview = {
-      writingSampleID,
-      amount: shadingChoice,
-    };
-
-    if (shadingChoice === '') {
+    if (shadingChoice !== priorShadingChoice) {
       const url = `shading-reviews/${writingSampleID}`;
 
-      API.instance
-        .delete(url, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
-          });
-          console.log(error.response);
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
         });
-    } else {
-      API.instance
-        .post('shading-reviews', shadingReview, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
+      }
+
+      if (shadingChoice !== '') {
+        const shadingReview = {
+          writingSampleID,
+          amount: shadingChoice,
+        };
+
+        try {
+          await API.instance.post('shading-reviews', shadingReview, config);
+        } catch (err) {
+          console.log(err);
+
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
           });
-          console.log(error.response);
-        });
+        }
+      }
     }
 
-    const sheenReview = {
-      writingSampleID,
-      color: sheenColorChoice,
-      amount: sheenAmountChoice,
-    };
-
-    if (sheenColorChoice === '' && sheenAmountChoice === '') {
+    if (
+      sheenColorChoice !== priorSheenColorChoice ||
+      sheenAmountChoice !== priorSheenAmountChoice
+    ) {
       const url = `sheen-reviews/${writingSampleID}`;
 
-      API.instance
-        .delete(url, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
-          });
-          console.log(error.response);
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
         });
-    } else {
-      API.instance
-        .post('sheen-reviews', sheenReview, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
+      }
+
+      if (sheenColorChoice !== '' || sheenAmountChoice !== '') {
+        const sheenReview = {
+          writingSampleID,
+          color: sheenColorChoice,
+          amount: sheenAmountChoice,
+        };
+
+        try {
+          await API.instance.post('sheen-reviews', sheenReview, config);
+        } catch (err) {
+          console.log(err);
+
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
           });
-          console.log(error.response);
-        });
+        }
+      }
     }
 
-    const featheringReview = {
-      writingSampleID,
-      amount: featheringChoice,
-    };
-
-    if (featheringChoice === '') {
+    if (featheringChoice !== priorFeatheringChoice) {
       const url = `feathering-reviews/${writingSampleID}`;
 
-      API.instance
-        .delete(url, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
-          });
-          console.log(error.response);
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
         });
-    } else {
-      API.instance
-        .post('feathering-reviews', featheringReview, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
+      }
+
+      if (featheringChoice !== '') {
+        const featheringReview = {
+          writingSampleID,
+          amount: featheringChoice,
+        };
+
+        try {
+          await API.instance.post(
+            'feathering-reviews',
+            featheringReview,
+            config,
+          );
+        } catch (err) {
+          console.log(err);
+
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
           });
-          console.log(error.response);
-        });
+        }
+      }
     }
 
-    const waterReview = {
-      writingSampleID,
-      waterproofness: waterChoice,
-    };
-
-    if (waterChoice === '') {
+    if (waterChoice !== priorWaterChoice) {
       const url = `water-reviews/${writingSampleID}`;
 
-      API.instance
-        .delete(url, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
-          });
-          console.log(error.response);
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
         });
-    } else {
-      API.instance
-        .post('water-reviews', waterReview, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
+      }
+
+      if (waterChoice !== '') {
+        const waterReview = {
+          writingSampleID,
+          waterproofness: waterChoice,
+        };
+
+        try {
+          await API.instance.post('water-reviews', waterReview, config);
+        } catch (err) {
+          console.log(err);
+
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
           });
-          console.log(error.response);
-        });
+        }
+      }
     }
 
-    const dryingReview = {
-      writingSampleID,
-      dryingTime: dryingTimeChoice,
-    };
-
-    if (dryingTimeChoice === '') {
+    if (dryingTimeChoice !== priorDryingTimeChoice) {
       const url = `drying-reviews/${writingSampleID}`;
 
-      API.instance
-        .delete(url, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
-          });
-          console.log(error.response);
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
         });
-    } else {
-      API.instance
-        .post('drying-reviews', dryingReview, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
+      }
+
+      if (dryingTimeChoice !== '') {
+        const dryingReview = {
+          writingSampleID,
+          dryingTime: dryingTimeChoice,
+        };
+
+        try {
+          await API.instance.post('drying-reviews', dryingReview, config);
+        } catch (err) {
+          console.log(err);
+
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
           });
-          console.log(error.response);
-        });
+        }
+      }
     }
 
-    const transparencyReview = {
-      writingSampleID,
-      transparency: transparencyChoice,
-    };
-
-    if (transparencyChoice === '') {
+    if (transparencyChoice !== priorTransparencyChoice) {
       const url = `transparency-reviews/${writingSampleID}`;
 
-      API.instance
-        .delete(url, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
-          });
-          console.log(error.response);
+      try {
+        await API.instance.delete(url, config);
+      } catch (err) {
+        console.log(err);
+
+        this.setState((prevState) => {
+          return {
+            errorMessage: `${prevState.errorMessage}An error occured. `,
+          };
         });
-    } else {
-      API.instance
-        .post('transparency-reviews', transparencyReview, config)
-        .then((res) => {})
-        .catch((error) => {
-          this.setState({
-            reviewError: true,
+      }
+
+      if (transparencyChoice !== '') {
+        const transparencyReview = {
+          writingSampleID,
+          transparency: transparencyChoice,
+        };
+
+        try {
+          await API.instance.post(
+            'transparency-reviews',
+            transparencyReview,
+            config,
+          );
+        } catch (err) {
+          console.log(err);
+
+          this.setState((prevState) => {
+            return {
+              errorMessage: `${prevState.errorMessage}An error occured. `,
+            };
           });
-          console.log(error.response);
-        });
+        }
+      }
     }
   }
 
@@ -677,7 +743,7 @@ class WritingSample extends Component {
       priorWaterChoice,
       priorDryingTimeChoice,
       priorTransparencyChoice,
-      reviewError,
+      errorMessage,
     } = this.state;
 
     // process colorReviews
@@ -828,7 +894,6 @@ class WritingSample extends Component {
             <h4>
               Paper: {capitalize(writingSample.paper_brand)}{' '}
               {capitalize(writingSample.paper_name)}{' '}
-              {capitalize(writingSample.paper_style)}
             </h4>
           </div>
         </div>
@@ -1097,9 +1162,8 @@ class WritingSample extends Component {
                 >
                   <div className="modal-content">
                     <div className="modal-body">
-                      {reviewError &&
-                        'An error occured. Please resubmit your reviews.'}
-                      {!reviewError &&
+                      {errorMessage}
+                      {!errorMessage &&
                         'Thanks! Your reviews are being processed.'}
                     </div>
                   </div>
