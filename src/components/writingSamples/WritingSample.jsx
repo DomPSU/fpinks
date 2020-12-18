@@ -429,15 +429,29 @@ class WritingSample extends Component {
       amount: shadingChoice,
     };
 
-    API.instance
-      .post('shading-reviews', shadingReview, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
+    if (shadingReview.amount === '') {
+      const url = `shading-reviews/${writingSampleID}`;
+
+      API.instance
+        .delete(url, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
         });
-        console.log(error.response);
-      });
+    } else {
+      API.instance
+        .post('shading-reviews', shadingReview, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
+        });
+    }
 
     const sheenReview = {
       writingSampleID,

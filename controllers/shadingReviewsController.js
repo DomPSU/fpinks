@@ -15,8 +15,9 @@ const index = async (req, res, next) => {
 const insert = async (req, res, next) => {
   const shadingReview = {
     ...req.body,
-    userID: res.locals.user.user_id,
   };
+
+  shadingReview.userID = res.locals.user.user_id;
 
   // delete existing shading review for user and writing sample
   try {
@@ -36,8 +37,14 @@ const insert = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   const shadingReview = {
-    ...req.body,
+    writingSampleID: req.params.writingSampleID,
   };
+
+  if (res.locals.user.level === 'admin') {
+    shadingReview.userID = req.body.userID;
+  } else {
+    shadingReview.userID = res.locals.user.user_id;
+  }
 
   try {
     const data = await shadingReviewsModel.remove(shadingReview);
