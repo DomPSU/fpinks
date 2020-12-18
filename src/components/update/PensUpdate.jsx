@@ -74,7 +74,7 @@ class PensUpdate extends Component {
           const { penID } = this.state;
 
           this.setState({ disableForm: true }, () => {
-            this.getPen(`/pens/admin/?pen_id=${penID}`);
+            this.getPen(`/pens/?pen_id=${penID}`);
           });
         }
       },

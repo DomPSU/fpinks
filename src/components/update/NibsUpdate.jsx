@@ -78,7 +78,7 @@ class NibsUpdate extends Component {
           const { nibID } = this.state;
 
           this.setState({ disableForm: true }, () => {
-            this.getNib(`/nibs/admin/?nib_id=${nibID}`);
+            this.getNib(`/nibs/?nib_id=${nibID}`);
           });
         }
       },

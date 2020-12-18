@@ -69,7 +69,7 @@ class UsersUpdate extends Component {
           const { userID } = this.state;
 
           this.setState({ disableForm: true }, () => {
-            this.getUser(`/users/admin/?user_id=${userID}`);
+            this.getUser(`/users/?user_id=${userID}`);
           });
         }
       },

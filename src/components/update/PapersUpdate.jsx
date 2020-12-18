@@ -83,7 +83,7 @@ class PapersUpdate extends Component {
           const { paperID } = this.state;
 
           this.setState({ disableForm: true }, () => {
-            this.getPaper(`/papers/admin/?paper_id=${paperID}`);
+            this.getPaper(`/papers/?paper_id=${paperID}`);
           });
         }
       },
