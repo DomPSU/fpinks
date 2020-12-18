@@ -39,7 +39,7 @@ const remove = async (req, res, next) => {
     userID: res.locals.user.user_id,
   };
 
-  if (req.locals.user.level === 'admin' && req.body.userID !== undefined) {
+  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
     shadingReview.userID = req.body.userID;
   }
 

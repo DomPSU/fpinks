@@ -39,7 +39,7 @@ const remove = async (req, res, next) => {
     writingSampleID: req.params.writingSampleID,
   };
 
-  if (req.locals.user.level === 'admin' && req.body.userID !== undefined) {
+  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
     featheringReview.userID = req.body.userID;
   }
 
