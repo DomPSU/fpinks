@@ -519,6 +519,8 @@ class WritingSample extends Component {
   }
 
   render() {
+    console.log(this.state);
+
     const { isSignedIn, signIn } = this.props;
 
     const {
@@ -540,16 +542,6 @@ class WritingSample extends Component {
       priorWaterChoice,
       priorDryingTimeChoice,
       priorTransparencyChoice,
-      colorOneChoice,
-      colorTwoChoice,
-      colorThreeChoice,
-      shadingChoice,
-      sheenAmountChoice,
-      sheenColorChoice,
-      featheringChoice,
-      waterChoice,
-      dryingTimeChoice,
-      transparencyChoice,
       reviewError,
     } = this.state;
 
@@ -759,7 +751,8 @@ class WritingSample extends Component {
               {isSignedIn && (
                 <div>
                   <h3 className="p-5">
-                    Feel free to leave any review category blank.
+                    Feel free to leave a review category blank, but the prior
+                    review will be deleted.
                   </h3>
                   <form className="m-1">
                     <div className="row">
@@ -773,9 +766,10 @@ class WritingSample extends Component {
                                 id="colorOneChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option value="" disabled selected>
+                                <option disabled selected>
                                   {priorColorOneChoice}
                                 </option>
+                                <option />
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -787,9 +781,10 @@ class WritingSample extends Component {
                                 id="colorTwoChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option value="" disabled selected>
+                                <option disabled selected>
                                   {priorColorTwoChoice}
                                 </option>
+                                <option />
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -801,9 +796,10 @@ class WritingSample extends Component {
                                 id="colorThreeChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option value="" disabled selected>
+                                <option disabled selected>
                                   {priorColorThreeChoice}
                                 </option>
+                                <option />
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -820,9 +816,10 @@ class WritingSample extends Component {
                             id="shadingChoice"
                             onBlur={this.handleChange}
                           >
-                            <option value="" disabled selected>
+                            <option disabled selected>
                               {priorShadingChoice}
                             </option>
+                            <option />
                             {shadingsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
@@ -839,9 +836,10 @@ class WritingSample extends Component {
                                 id="sheenAmountChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option value="" disabled selected>
+                                <option disabled selected>
                                   {priorSheenAmountChoice}
                                 </option>
+                                <option />
                                 {sheensJSON.names.map((amount) => {
                                   return <option>{amount}</option>;
                                 })}
@@ -853,9 +851,10 @@ class WritingSample extends Component {
                                 id="sheenColorChoice"
                                 onBlur={this.handleChange}
                               >
-                                <option value="" disabled selected>
+                                <option disabled selected>
                                   {priorSheenColorChoice}
                                 </option>
+                                <option />
                                 {colorsJSON.names.map((color) => {
                                   return <option>{color}</option>;
                                 })}
@@ -872,9 +871,10 @@ class WritingSample extends Component {
                             id="featheringChoice"
                             onBlur={this.handleChange}
                           >
-                            <option value="" disabled selected>
+                            <option disabled selected>
                               {priorFeatheringChoice}
                             </option>
+                            <option />
                             {featheringsJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
@@ -889,9 +889,10 @@ class WritingSample extends Component {
                             id="waterChoice"
                             onBlur={this.handleChange}
                           >
-                            <option value="" disabled selected>
+                            <option disabled selected>
                               {priorWaterChoice}
                             </option>
+                            <option />
                             {watersJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
@@ -906,9 +907,10 @@ class WritingSample extends Component {
                             id="dryingTimeChoice"
                             onBlur={this.handleChange}
                           >
-                            <option value="" disabled selected>
+                            <option disabled selected>
                               {priorDryingTimeChoice}
                             </option>
+                            <option />
                             {dryingTimesJSON.names.map((time) => {
                               return <option>{time}</option>;
                             })}
@@ -923,9 +925,10 @@ class WritingSample extends Component {
                             id="transparencyChoice"
                             onBlur={this.handleChange}
                           >
-                            <option value="" disabled selected>
+                            <option disabled selected>
                               {priorTransparencyChoice}
                             </option>
+                            <option />
                             {transparenciesJSON.names.map((amount) => {
                               return <option>{amount}</option>;
                             })}
