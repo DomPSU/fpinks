@@ -429,7 +429,7 @@ class WritingSample extends Component {
       amount: shadingChoice,
     };
 
-    if (shadingReview.amount === '') {
+    if (shadingChoice === '') {
       const url = `shading-reviews/${writingSampleID}`;
 
       API.instance
@@ -474,7 +474,7 @@ class WritingSample extends Component {
       amount: featheringChoice,
     };
 
-    if (featheringReview.amount === '') {
+    if (featheringChoice === '') {
       const url = `feathering-reviews/${writingSampleID}`;
 
       API.instance
@@ -503,7 +503,7 @@ class WritingSample extends Component {
       waterproofness: waterChoice,
     };
 
-    if (waterReview.waterproofness === '') {
+    if (waterChoice === '') {
       const url = `water-reviews/${writingSampleID}`;
 
       API.instance
@@ -532,7 +532,7 @@ class WritingSample extends Component {
       dryingTime: dryingTimeChoice,
     };
 
-    if (dryingReview.dryingTime === '') {
+    if (dryingTimeChoice === '') {
       const url = `drying-reviews/${writingSampleID}`;
 
       API.instance
