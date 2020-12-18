@@ -60,7 +60,11 @@ const getApprovedKeyFromPath = (originalURL) => {
     return 'TransparencyReviews.approved';
   }
 
-  if (path === 'writing-samples' || path === 'writing-samples/search/') {
+  if (
+    path === 'writing-samples' ||
+    path === 'writing-samples/search' ||
+    path === 'writing-samples/search/'
+  ) {
     return 'WritingSamples.approved';
   }
 

@@ -14,7 +14,7 @@ class Gallery extends Component {
     this.state = {
       results: [],
       query: '',
-      currentPage: '',
+      currentPage: '1',
       loading: true,
     };
 
@@ -69,9 +69,7 @@ class Gallery extends Component {
   async handleIncrementClick() {
     const { currentPage, results } = this.state;
 
-    const maxPage = String(Math.floor(results.length / 12) + 1);
-
-    if (currentPage === maxPage) {
+    if (results.length < 12) {
       return;
     }
 
@@ -79,6 +77,7 @@ class Gallery extends Component {
       currentPage: String(parseInt(state.currentPage, 10) + 1),
     }));
     window.scrollTo(0, 0);
+    this.query();
   }
 
   async handleDecrementClick() {
@@ -91,14 +90,18 @@ class Gallery extends Component {
     await this.setState((state) => ({
       currentPage: String(parseInt(state.currentPage, 10) - 1),
     }));
+    this.query();
   }
 
   query() {
-    const { query } = this.state;
+    const { query, currentPage } = this.state;
     const { path } = this.props;
 
+    const offset = 12 * (parseInt(currentPage, 10) - 1);
+    const url = `${path}${query}?offset=${offset}`;
+
     API.instance
-      .get(path + query)
+      .get(url)
       .then((res) => {
         this.setState({ results: res.data, loading: false });
       })
@@ -130,7 +133,7 @@ class Gallery extends Component {
     const firstIndex = (parseInt(currentPage, 10) - 1) * 12;
     const lastIndex = parseInt(currentPage, 10) * 12;
 
-    const list = results.slice(firstIndex, lastIndex).map((writingSample) => (
+    const list = results.map((writingSample) => (
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
         <Link to={`/writing-samples/${writingSample.writing_sample_id}`}>
           <img
@@ -171,8 +174,17 @@ class Gallery extends Component {
           list.length === 0 &&
           query.toLowerCase() !== 'help' &&
           query.toLowerCase() !== "'help'" && (
-            <div className="row margin-top">
-              <h3 className="col text-center mt-5 pt-5">{noResultsMessage}</h3>
+            <div>
+              <div className="row margin-top">
+                <h3 className="col text-center mt-5 pt-5">
+                  {noResultsMessage}
+                </h3>
+              </div>
+              <Pagination
+                currentPage={currentPage}
+                handleIncrementClick={this.handleIncrementClick}
+                handleDecrementClick={this.handleDecrementClick}
+              />
             </div>
           )}
 
