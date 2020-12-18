@@ -36,12 +36,12 @@ const insert = async (req, res, next) => {
 const remove = async (req, res, next) => {
   const shadingReview = {
     writingSampleID: req.params.writingSampleID,
+    userID: res.locals.user.user_id,
   };
 
-  shadingReview.userID =
-    res.locals.user.level === 'admin'
-      ? req.body.userID
-      : res.locals.user.user_id;
+  if (req.locals.user.level === 'admin' && req.body.userID !== undefined) {
+    shadingReview.userID = req.body.userID;
+  }
 
   try {
     const data = await shadingReviewsModel.remove(shadingReview);

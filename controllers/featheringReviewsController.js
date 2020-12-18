@@ -36,12 +36,12 @@ const insert = async (req, res, next) => {
 const remove = async (req, res, next) => {
   const featheringReview = {
     writingSampleID: req.params.writingSampleID,
+    userID: res.locals.user.user_id,
   };
 
-  featheringReview.userID =
-    res.locals.user.level === 'admin'
-      ? req.body.userID
-      : res.locals.user.user_id;
+  if (req.locals.user.level === 'admin' && req.body.userID !== undefined) {
+    featheringReview.userID = req.body.userID;
+  }
 
   try {
     const data = await featheringReviewsModel.remove(featheringReview);
