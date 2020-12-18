@@ -4,6 +4,7 @@ const {
   show,
   insert,
   update,
+  remove,
 } = require('../controllers/waterReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -27,5 +28,6 @@ waterReviewsRouter.get(
 waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 waterReviewsRouter.post('/', isAuth, insert);
 waterReviewsRouter.put('/edit', isAuth, isAdmin, update);
+waterReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = waterReviewsRouter;

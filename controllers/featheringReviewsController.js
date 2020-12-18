@@ -35,8 +35,8 @@ const insert = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   const featheringReview = {
-    writingSampleID: req.params.writingSampleID,
     userID: res.locals.user.user_id,
+    writingSampleID: req.params.writingSampleID,
   };
 
   if (req.locals.user.level === 'admin' && req.body.userID !== undefined) {

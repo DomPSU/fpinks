@@ -503,15 +503,29 @@ class WritingSample extends Component {
       waterproofness: waterChoice,
     };
 
-    API.instance
-      .post('water-reviews', waterReview, config)
-      .then((res) => {})
-      .catch((error) => {
-        this.setState({
-          reviewError: true,
+    if (waterReview.amount === '') {
+      const url = `water-reviews/${writingSampleID}`;
+
+      API.instance
+        .delete(url, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
         });
-        console.log(error.response);
-      });
+    } else {
+      API.instance
+        .post('water-reviews', waterReview, config)
+        .then((res) => {})
+        .catch((error) => {
+          this.setState({
+            reviewError: true,
+          });
+          console.log(error.response);
+        });
+    }
 
     const dryingReview = {
       writingSampleID,
