@@ -442,6 +442,7 @@ class WritingSample extends Component {
       colorTwoChoice,
       colorThreeChoice,
     ];
+
     const nonBlankColorReviewChoices = colorReviewChoices.filter(function (
       colorReviewChoice,
     ) {
@@ -455,6 +456,18 @@ class WritingSample extends Component {
       this.setState((prevState) => {
         return {
           clientErrorMessage: `${prevState.clientErrorMessage}Color Reviews must have unique colors. `,
+        };
+      });
+    }
+
+    if (
+      uniqueColorReviewChoices.includes('None') &&
+      uniqueColorReviewChoices.length !== 1
+    ) {
+      clientError = true;
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}Color Reviews must contain no other colors if 'None' is selected.`,
         };
       });
     }
