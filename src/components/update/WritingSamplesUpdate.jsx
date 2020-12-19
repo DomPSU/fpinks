@@ -9,6 +9,9 @@ class WritingSamplesUpdate extends Component {
     this.state = {
       writingSampleID: '',
       approved: '',
+      validWaterproofness: '',
+      validDryingTime: '',
+      validTransparency: '',
       disableForm: true,
       serverResponse: '',
     };
@@ -41,6 +44,9 @@ class WritingSamplesUpdate extends Component {
       .then((res) => {
         this.setState({
           writingSampleID: res.data[0].writing_sample_id,
+          validWaterproofness: res.data[0].valid_waterproofness,
+          validDryingTime: res.data[0].valid_drying_time,
+          validTransparency: res.data[0].valid_transparency,
           approved: res.data[0].approved,
           disableForm: false,
         });
@@ -67,9 +73,9 @@ class WritingSamplesUpdate extends Component {
       () => {
         const { writingSampleID } = this.state;
 
-        if (id === 'penID' || id === 'nibID') {
+        if (id === '') {
           this.setState({ disableForm: true }, () => {
-            this.getShadingReview(
+            this.getWritingSample(
               `/writing-samples/?writing_sample_id=${writingSampleID}`,
             );
           });
@@ -79,7 +85,13 @@ class WritingSamplesUpdate extends Component {
   }
 
   handleSubmit(e) {
-    const { writingSampleID, approved } = this.state;
+    const {
+      writingSampleID,
+      approved,
+      validWaterproofness,
+      validDryingTime,
+      validTransparency,
+    } = this.state;
 
     // TODO add frontend validation
     const config = {
@@ -93,6 +105,9 @@ class WritingSamplesUpdate extends Component {
         `/writing-samples/edit/${writingSampleID}`,
         {
           approved,
+          validWaterproofness,
+          validDryingTime,
+          validTransparency,
         },
         config,
       )
@@ -120,6 +135,9 @@ class WritingSamplesUpdate extends Component {
   render() {
     const {
       writingSampleID,
+      validWaterproofness,
+      validDryingTime,
+      validTransparency,
       approved,
       disableForm,
       serverResponse,
@@ -140,6 +158,39 @@ class WritingSamplesUpdate extends Component {
                   onChange={this.handleChange}
                   value={writingSampleID}
                   disabled
+                />
+              </label>
+              <label htmlFor="validWaterproofness" className="p-3">
+                Valid Waterproofness Reviews
+                <input
+                  type="text"
+                  id="validWaterproofness"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={validWaterproofness}
+                  disabled={disableForm}
+                />
+              </label>
+              <label htmlFor="validDryingTime" className="p-3">
+                Valid Drying Time Reviews
+                <input
+                  type="text"
+                  id="validDryingTime"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={validDryingTime}
+                  disabled={disableForm}
+                />
+              </label>
+              <label htmlFor="validTransparency" className="p-3">
+                Valid Transparency Reviews
+                <input
+                  type="text"
+                  id="validTransparency"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={validTransparency}
+                  disabled={disableForm}
                 />
               </label>
               <label htmlFor="approved" className="p-3">

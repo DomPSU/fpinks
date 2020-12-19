@@ -7,7 +7,7 @@ const {
 const { getSanitizedSQL } = require('../utils/sql');
 
 const partialSQL =
-  'SELECT Users.username, Users.user_id, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.comment, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE';
+  'SELECT Users.username, Users.user_id, WritingSamples.writing_sample_id, Pens.brand AS pen_brand, Pens.model AS pen_model, Nibs.size AS nib_size, Nibs.grind AS nib_grind, Nibs.tune AS nib_tune, Inks.brand AS ink_brand, Inks.name AS ink_name, Papers.brand AS paper_brand, Papers.name as paper_name, Papers.style as paper_style, WritingSamples.comment, WritingSamples.valid_waterproofness, WritingSamples.valid_drying_time, WritingSamples.valid_transparency, WritingSamples.approved, WritingSamples.created_at, WritingSamples.updated_at, WritingSamples.low_res_aws_key, WritingSamples.high_res_aws_key, WritingSamples.original_aws_key FROM WritingSamples LEFT JOIN Pens ON WritingSamples.pen_id = Pens.pen_id LEFT JOIN Nibs ON WritingSamples.nib_id = Nibs.nib_id LEFT JOIN Inks ON WritingSamples.ink_id = Inks.ink_id LEFT JOIN Papers ON WritingSamples.paper_id = Papers.paper_id LEFT JOIN Users ON WritingSamples.user_id = Users.user_id WHERE';
 
 const index = async (queryKeys, queryValues, offset) => {
   const sanitizedSQL = getSanitizedSQL(partialSQL, queryKeys, queryValues);
@@ -87,9 +87,12 @@ const update = async (data) => {
 
   // TODO validate all values not blank unless they can be NULL from schema, set up JSON
   const updateRes = await db.pool.asyncQuery(
-    'UPDATE WritingSamples SET approved=?, updated_at=? WHERE writing_sample_id=?',
+    'UPDATE WritingSamples SET approved=?, valid_waterproofness=?, valid_drying_time=?, valid_transparency=?,  updated_at=? WHERE writing_sample_id=?',
     [
       data.approved,
+      data.validWaterproofness,
+      data.validDryingTime,
+      data.validTransparency,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       data.writingSampleID,
     ],
