@@ -72,39 +72,65 @@ class WritingSample extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { isSignedIn } = this.props;
 
-    this.getWritingSample();
+    const writingSample = await this.getWritingSample();
+
+    const validWaterproofness = writingSample.valid_waterproofness;
+    const validDryingTime = writingSample.valid_drying_time;
+    const validTransparency = writingSample.valid_transparency;
+
     this.getColorReviews();
     this.getShadingReviews();
     this.getSheenReviews();
-    this.getWaterReviews();
-    this.getDryingReviews();
-    this.getTransparencyReviews();
     this.getFeatheringReviews();
+
+    if (validWaterproofness) {
+      this.getWaterReviews();
+    }
+
+    if (validDryingTime) {
+      this.getDryingReviews();
+    }
+
+    if (validTransparency) {
+      this.getTransparencyReviews();
+    }
 
     if (isSignedIn) {
       this.getPriorColorReviews();
       this.getPriorShadingReview();
       this.getPriorSheenReview();
       this.getPriorFeatheringReview();
+    }
+
+    if (isSignedIn && validWaterproofness) {
       this.getPriorWaterReview();
+    }
+
+    if (isSignedIn && validDryingTime) {
       this.getPriorDryingReview();
+    }
+
+    if (isSignedIn && validTransparency) {
       this.getPriorTransparencyReview();
     }
   }
 
-  getWritingSample() {
+  async getWritingSample() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `writing-samples/${id}`;
 
-    API.instance
-      .get(url)
-      .then((res) => {
-        this.setState({ writingSample: res.data[0] });
-      })
-      .catch((error) => console.log(error.response));
+    let res;
+    try {
+      res = await API.instance.get(url);
+      this.setState({ writingSample: res.data[0] });
+    } catch (err) {
+      console.log(err);
+    }
+
+    return res.data[0];
   }
 
   getPriorColorReviews() {
@@ -322,6 +348,18 @@ class WritingSample extends Component {
       .catch((error) => console.log(error.response));
   }
 
+  getFeatheringReviews() {
+    const id = window.location.pathname.replace('/writing-samples/', '');
+    const url = `feathering-reviews/?writing_sample_id=${id}`;
+
+    API.instance
+      .get(url)
+      .then((res) => {
+        this.setState({ featheringReviews: res.data });
+      })
+      .catch((error) => console.log(error.response));
+  }
+
   getWaterReviews() {
     const id = window.location.pathname.replace('/writing-samples/', '');
     const url = `water-reviews/?writing_sample_id=${id}`;
@@ -354,18 +392,6 @@ class WritingSample extends Component {
       .get(url)
       .then((res) => {
         this.setState({ transparencyReviews: res.data });
-      })
-      .catch((error) => console.log(error.response));
-  }
-
-  getFeatheringReviews() {
-    const id = window.location.pathname.replace('/writing-samples/', '');
-    const url = `feathering-reviews/?writing_sample_id=${id}`;
-
-    API.instance
-      .get(url)
-      .then((res) => {
-        this.setState({ featheringReviews: res.data });
       })
       .catch((error) => console.log(error.response));
   }
@@ -810,6 +836,16 @@ class WritingSample extends Component {
 
     let { clientErrorMessage, serverErrorMessage } = this.state;
 
+    /* eslint-disable no-unneeded-ternary */
+    const validWaterproofness = writingSample.valid_waterproofness
+      ? true
+      : false;
+
+    const validDryingTime = writingSample.valid_drying_time ? true : false;
+
+    const validTransparency = writingSample.valid_transparency ? true : false;
+    /* eslint-enable no-unneeded-ternary */
+
     if (clientErrorMessage) {
       clientErrorMessage = `No reviews submitted. ${clientErrorMessage}`;
     }
@@ -1153,60 +1189,69 @@ class WritingSample extends Component {
                           </select>
                         </label>
                       </div>
-                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="waterChoice" className="p-3 m-0">
-                          Waterproofness
-                          <select
-                            className="form-control m-1"
-                            id="waterChoice"
-                            onBlur={this.handleChange}
+                      {validWaterproofness && (
+                        <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                          <label htmlFor="waterChoice" className="p-3 m-0">
+                            Waterproofness
+                            <select
+                              className="form-control m-1"
+                              id="waterChoice"
+                              onBlur={this.handleChange}
+                            >
+                              <option disabled selected>
+                                {priorWaterChoice}
+                              </option>
+                              <option />
+                              {watersJSON.names.map((amount) => {
+                                return <option>{amount}</option>;
+                              })}
+                            </select>
+                          </label>
+                        </div>
+                      )}
+                      {validDryingTime && (
+                        <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                          <label htmlFor="dryingTimeChoice" className="p-3 m-0">
+                            Drying Time
+                            <select
+                              className="form-control m-1"
+                              id="dryingTimeChoice"
+                              onBlur={this.handleChange}
+                            >
+                              <option disabled selected>
+                                {priorDryingTimeChoice}
+                              </option>
+                              <option />
+                              {dryingTimesJSON.names.map((time) => {
+                                return <option>{time}</option>;
+                              })}
+                            </select>
+                          </label>
+                        </div>
+                      )}
+                      {validTransparency && (
+                        <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+                          <label
+                            htmlFor="transparencyChoice"
+                            className="p-3 m-0"
                           >
-                            <option disabled selected>
-                              {priorWaterChoice}
-                            </option>
-                            <option />
-                            {watersJSON.names.map((amount) => {
-                              return <option>{amount}</option>;
-                            })}
-                          </select>
-                        </label>
-                      </div>
-                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="dryingTimeChoice" className="p-3 m-0">
-                          Drying Time
-                          <select
-                            className="form-control m-1"
-                            id="dryingTimeChoice"
-                            onBlur={this.handleChange}
-                          >
-                            <option disabled selected>
-                              {priorDryingTimeChoice}
-                            </option>
-                            <option />
-                            {dryingTimesJSON.names.map((time) => {
-                              return <option>{time}</option>;
-                            })}
-                          </select>
-                        </label>
-                      </div>
-                      <div className="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <label htmlFor="transparencyChoice" className="p-3 m-0">
-                          Transparency
-                          <select
-                            className="form-control m-1"
-                            id="transparencyChoice"
-                            onBlur={this.handleChange}
-                          >
-                            <option disabled selected>
-                              {priorTransparencyChoice}
-                            </option>
-                            <option />
-                            {transparenciesJSON.names.map((amount) => {
-                              return <option>{amount}</option>;
-                            })}
-                          </select>
-                        </label>
-                      </div>
+                            Transparency
+                            <select
+                              className="form-control m-1"
+                              id="transparencyChoice"
+                              onBlur={this.handleChange}
+                            >
+                              <option disabled selected>
+                                {priorTransparencyChoice}
+                              </option>
+                              <option />
+                              {transparenciesJSON.names.map((amount) => {
+                                return <option>{amount}</option>;
+                              })}
+                            </select>
+                          </label>
+                        </div>
+                      )}
                     </div>
                     <button
                       type="submit"
@@ -1305,48 +1350,54 @@ class WritingSample extends Component {
               rootProps={{ 'data-testid': '1' }}
             />
           </div>
-          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
-            <Chart
-              className="chart"
-              chartType="PieChart"
-              loader={<div>Loading Chart</div>}
-              data={waterData}
-              options={{
-                title: 'Waterproofness Reviews',
-                pieSliceBorderColor: 'black',
-                pieSliceText: 'none',
-              }}
-              rootProps={{ 'data-testid': '1' }}
-            />
-          </div>
-          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
-            <Chart
-              className="chart"
-              chartType="PieChart"
-              loader={<div>Loading Chart</div>}
-              data={dryingData}
-              options={{
-                title: 'Drying Time Reviews',
-                pieSliceBorderColor: 'black',
-                pieSliceText: 'none',
-              }}
-              rootProps={{ 'data-testid': '1' }}
-            />
-          </div>
-          <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
-            <Chart
-              className="chart"
-              chartType="PieChart"
-              loader={<div>Loading Chart</div>}
-              data={transparencyData}
-              options={{
-                title: 'Transparency Reviews',
-                pieSliceBorderColor: 'black',
-                pieSliceText: 'none',
-              }}
-              rootProps={{ 'data-testid': '1' }}
-            />
-          </div>
+          {validWaterproofness && (
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+              <Chart
+                className="chart"
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={waterData}
+                options={{
+                  title: 'Waterproofness Reviews',
+                  pieSliceBorderColor: 'black',
+                  pieSliceText: 'none',
+                }}
+                rootProps={{ 'data-testid': '1' }}
+              />
+            </div>
+          )}
+          {validDryingTime && (
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+              <Chart
+                className="chart"
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={dryingData}
+                options={{
+                  title: 'Drying Time Reviews',
+                  pieSliceBorderColor: 'black',
+                  pieSliceText: 'none',
+                }}
+                rootProps={{ 'data-testid': '1' }}
+              />
+            </div>
+          )}
+          {validTransparency && (
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 pb-1 pt-1">
+              <Chart
+                className="chart"
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={transparencyData}
+                options={{
+                  title: 'Transparency Reviews',
+                  pieSliceBorderColor: 'black',
+                  pieSliceText: 'none',
+                }}
+                rootProps={{ 'data-testid': '1' }}
+              />
+            </div>
+          )}
         </div>
       </div>
     );
