@@ -585,6 +585,7 @@ class WritingSample extends Component {
           }
         }
       }
+      this.getColorReviews();
     }
 
     if (shadingChoice !== priorShadingChoice) {
@@ -620,6 +621,8 @@ class WritingSample extends Component {
           });
         }
       }
+
+      this.getShadingReviews();
     }
 
     if (
@@ -659,6 +662,8 @@ class WritingSample extends Component {
           });
         }
       }
+
+      this.getSheenReviews();
     }
 
     if (featheringChoice !== priorFeatheringChoice) {
@@ -698,6 +703,8 @@ class WritingSample extends Component {
           });
         }
       }
+
+      this.getFeatheringReviews();
     }
 
     if (waterChoice !== priorWaterChoice) {
@@ -733,6 +740,8 @@ class WritingSample extends Component {
           });
         }
       }
+
+      this.getWaterReviews();
     }
 
     if (dryingTimeChoice !== priorDryingTimeChoice) {
@@ -768,6 +777,8 @@ class WritingSample extends Component {
           });
         }
       }
+
+      this.getDryingReviews();
     }
 
     if (transparencyChoice !== priorTransparencyChoice) {
@@ -807,6 +818,8 @@ class WritingSample extends Component {
           });
         }
       }
+
+      this.getTransparencyReviews();
     }
   }
 
