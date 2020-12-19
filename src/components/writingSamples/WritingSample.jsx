@@ -45,7 +45,8 @@ class WritingSample extends Component {
       waterChoice: '',
       dryingTimeChoice: '',
       transparencyChoice: '',
-      errorMessage: '',
+      clientErrorMessage: '',
+      serverErrorMessage: '',
     };
 
     this.getPriorColorReviews = this.getPriorColorReviews.bind(this);
@@ -381,10 +382,10 @@ class WritingSample extends Component {
   async handleSubmit(e) {
     e.preventDefault();
 
-    // TODO frontend validation before trying to submit to backend
-
+    let clientError = false;
     this.setState({
-      errorMessage: '',
+      clientErrorMessage: '',
+      serverErrorMessage: '',
     });
 
     const {
@@ -409,6 +410,68 @@ class WritingSample extends Component {
       dryingTimeChoice,
       transparencyChoice,
     } = this.state;
+
+    const colorReviewChoices = [
+      colorOneChoice,
+      colorTwoChoice,
+      colorThreeChoice,
+    ];
+    const nonBlankColorReviewChoices = colorReviewChoices.filter(function (
+      colorReviewChoice,
+    ) {
+      return colorReviewChoice !== '';
+    });
+
+    const uniqueColorReviewChoices = [...new Set(nonBlankColorReviewChoices)];
+
+    if (nonBlankColorReviewChoices.length !== uniqueColorReviewChoices.length) {
+      clientError = true;
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}Color Reviews must have unique colors. `,
+        };
+      });
+    }
+
+    if (sheenAmountChoice === '' && sheenColorChoice !== '') {
+      clientError = true;
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}If sheen amount is blank then sheen color must be blank. `,
+        };
+      });
+    }
+
+    if (sheenAmountChoice !== '' && sheenColorChoice === '') {
+      clientError = true;
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}If sheen color is blank then sheen amount must be blank. `,
+        };
+      });
+    }
+
+    if (sheenAmountChoice === 'None' && sheenColorChoice !== 'None') {
+      clientError = true;
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}If sheen amount is 'None' then sheen color must be 'None'. `,
+        };
+      });
+    }
+
+    if (sheenAmountChoice !== 'None' && sheenColorChoice === 'None') {
+      clientError = true;
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}If sheen color is 'None' then sheen amount must be 'None'. `,
+        };
+      });
+    }
+
+    if (clientError) {
+      return;
+    }
 
     const writingSampleID = window.location.pathname.replace(
       '/writing-samples/',
@@ -435,7 +498,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}Cannot delete prior color reviews. `,
+            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior color reviews. `,
           };
         });
       }
@@ -453,7 +516,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create first color review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create first color review. `,
             };
           });
         }
@@ -472,7 +535,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create second color review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create second color review. `,
             };
           });
         }
@@ -490,7 +553,7 @@ class WritingSample extends Component {
 
             this.setState((prevState) => {
               return {
-                errorMessage: `${prevState.errorMessage}Cannot create third color review. `,
+                serverErrorMessage: `${prevState.serverErrorMessage}Cannot create third color review. `,
               };
             });
           }
@@ -508,7 +571,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}Cannot delete prior shading review. `,
+            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior shading review. `,
           };
         });
       }
@@ -526,7 +589,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create shading review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create shading review. `,
             };
           });
         }
@@ -546,7 +609,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}Cannot delete prior sheen review. `,
+            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior sheen review. `,
           };
         });
       }
@@ -565,7 +628,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create sheen review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create sheen review. `,
             };
           });
         }
@@ -582,7 +645,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}Cannot delete prior feathering reivew. `,
+            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior feathering reivew. `,
           };
         });
       }
@@ -604,7 +667,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create feathering review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create feathering review. `,
             };
           });
         }
@@ -621,7 +684,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}.Cannot delete prior waterproofness review `,
+            serverErrorMessage: `${prevState.serverErrorMessage}.Cannot delete prior waterproofness review `,
           };
         });
       }
@@ -639,7 +702,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create waterproofness review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create waterproofness review. `,
             };
           });
         }
@@ -656,7 +719,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}Cannot delete prior drying time review. `,
+            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior drying time review. `,
           };
         });
       }
@@ -674,7 +737,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create drying time review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create drying time review. `,
             };
           });
         }
@@ -691,7 +754,7 @@ class WritingSample extends Component {
 
         this.setState((prevState) => {
           return {
-            errorMessage: `${prevState.errorMessage}Cannot delete prior transparency review. `,
+            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior transparency review. `,
           };
         });
       }
@@ -713,7 +776,7 @@ class WritingSample extends Component {
 
           this.setState((prevState) => {
             return {
-              errorMessage: `${prevState.errorMessage}Cannot create transparency review. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create transparency review. `,
             };
           });
         }
@@ -722,8 +785,6 @@ class WritingSample extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     const { isSignedIn, signIn } = this.props;
 
     const {
@@ -745,8 +806,17 @@ class WritingSample extends Component {
       priorWaterChoice,
       priorDryingTimeChoice,
       priorTransparencyChoice,
-      errorMessage,
     } = this.state;
+
+    let { clientErrorMessage, serverErrorMessage } = this.state;
+
+    if (clientErrorMessage) {
+      clientErrorMessage = `No reviews submitted. ${clientErrorMessage}`;
+    }
+
+    if (serverErrorMessage) {
+      serverErrorMessage = `Most reviews are being processed,  but at least one error occured. ${serverErrorMessage}Please wait 30s and try to resubmit.`;
+    }
 
     // process colorReviews
     const colorCounts = [];
@@ -953,8 +1023,8 @@ class WritingSample extends Component {
               {isSignedIn && (
                 <div>
                   <h3 className="p-5">
-                    Feel free to leave a review category blank, but the prior
-                    review will be deleted.
+                    Feel free to leave a review category blank, but any prior
+                    reviews in that category will be deleted.
                   </h3>
                   <form className="m-1">
                     <div className="row">
@@ -1164,10 +1234,10 @@ class WritingSample extends Component {
                 >
                   <div className="modal-content">
                     <div className="modal-body">
-                      {errorMessage &&
-                        'Thanks! Most reviews are being processed but at least one error occured. '}
-                      {errorMessage}
-                      {!errorMessage &&
+                      {clientErrorMessage}
+                      {serverErrorMessage}
+                      {!clientErrorMessage &&
+                        !serverErrorMessage &&
                         'Thanks! All of your reviews are being processed.'}
                     </div>
                   </div>
