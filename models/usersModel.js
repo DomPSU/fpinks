@@ -41,18 +41,16 @@ const insert = async (data) => {
         data.sub,
         data.iss,
         'user',
-        0,
+        1,
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       ],
     );
-    console.log(insertRes);
     return insertRes;
   }
 
   // return user if it already exists
   if (selectRes.length === 1) {
-    console.log(selectRes);
     return selectRes;
   }
 
@@ -74,7 +72,6 @@ const update = async (data) => {
       data.userID,
     ],
   );
-  console.log(updateRes);
   return updateRes;
 };
 
@@ -83,8 +80,6 @@ const getUserFromSubAndIss = async (data) => {
     'SELECT * FROM Users WHERE sub = ? AND iss = ?',
     [data.sub, data.iss],
   );
-
-  // TODO throw error if length !== 1
 
   return selectRes[0];
 };
