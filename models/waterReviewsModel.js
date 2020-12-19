@@ -25,7 +25,7 @@ const insert = async (data) => {
       data.writingSampleID,
       data.userID,
       data.waterproofness.toLowerCase(),
-      0,
+      1,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
     ],

@@ -35,7 +35,7 @@ const insert = async (data) => {
       data.userID,
       colorID,
       data.amount.toLowerCase(),
-      0,
+      1,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
     ],

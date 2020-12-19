@@ -30,7 +30,7 @@ const insert = async (data) => {
       data.writingSampleID,
       data.userID,
       colorID,
-      0,
+      1,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
     ],
