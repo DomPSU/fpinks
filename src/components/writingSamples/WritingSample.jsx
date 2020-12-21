@@ -530,16 +530,22 @@ class WritingSample extends Component {
     ) {
       const url = `color-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
-      } catch (err) {
-        console.log(err);
+      if (
+        priorColorOneChoice !== '' ||
+        priorColorTwoChoice !== '' ||
+        priorColorThreeChoice !== ''
+      ) {
+        try {
+          await API.instance.delete(url, config);
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior color reviews. `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior color reviews. `,
+            };
+          });
+        }
       }
 
       if (colorOneChoice !== '') {
@@ -617,16 +623,18 @@ class WritingSample extends Component {
     if (shadingChoice !== priorShadingChoice) {
       const url = `shading-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
-      } catch (err) {
-        console.log(err);
+      if (priorShadingChoice !== '') {
+        try {
+          await API.instance.delete(url, config);
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior shading review. `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior shading review. `,
+            };
+          });
+        }
       }
 
       if (shadingChoice !== '') {
@@ -661,16 +669,18 @@ class WritingSample extends Component {
     ) {
       const url = `sheen-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
-      } catch (err) {
-        console.log(err);
+      if (priorSheenColorChoice !== '' || priorSheenAmountChoice !== '') {
+        try {
+          await API.instance.delete(url, config);
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior sheen review. `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior sheen review. `,
+            };
+          });
+        }
       }
 
       if (sheenColorChoice !== '' || sheenAmountChoice !== '') {
@@ -704,20 +714,22 @@ class WritingSample extends Component {
     if (featheringChoice !== priorFeatheringChoice) {
       const url = `feathering-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
+      if (priorFeatheringChoice !== '') {
+        try {
+          await API.instance.delete(url, config);
 
-        this.setState({
-          priorFeatheringChoice: featheringChoice,
-        });
-      } catch (err) {
-        console.log(err);
+          this.setState({
+            priorFeatheringChoice: featheringChoice,
+          });
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior feathering reivew. `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior feathering reivew. `,
+            };
+          });
+        }
       }
 
       if (featheringChoice !== '') {
@@ -749,16 +761,18 @@ class WritingSample extends Component {
     if (waterChoice !== priorWaterChoice) {
       const url = `water-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
-      } catch (err) {
-        console.log(err);
+      if (priorWaterChoice !== '') {
+        try {
+          await API.instance.delete(url, config);
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}.Cannot delete prior waterproofness review `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}.Cannot delete prior waterproofness review `,
+            };
+          });
+        }
       }
 
       if (waterChoice !== '') {
@@ -788,16 +802,18 @@ class WritingSample extends Component {
     if (dryingTimeChoice !== priorDryingTimeChoice) {
       const url = `drying-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
-      } catch (err) {
-        console.log(err);
+      if (priorDryingTimeChoice !== '') {
+        try {
+          await API.instance.delete(url, config);
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior drying time review. `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior drying time review. `,
+            };
+          });
+        }
       }
 
       if (dryingTimeChoice !== '') {
@@ -827,16 +843,18 @@ class WritingSample extends Component {
     if (transparencyChoice !== priorTransparencyChoice) {
       const url = `transparency-reviews/${writingSampleID}`;
 
-      try {
-        await API.instance.delete(url, config);
-      } catch (err) {
-        console.log(err);
+      if (priorTransparencyChoice !== '') {
+        try {
+          await API.instance.delete(url, config);
+        } catch (err) {
+          console.log(err);
 
-        this.setState((prevState) => {
-          return {
-            serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior transparency review. `,
-          };
-        });
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior transparency review. `,
+            };
+          });
+        }
       }
 
       if (transparencyChoice !== '') {
