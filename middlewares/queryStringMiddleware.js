@@ -18,54 +18,50 @@ const getApprovedKeyFromPath = (originalURL) => {
     path = path.substring(0, path.indexOf('?') - 1);
   }
 
-  if (
-    path === 'users' ||
-    path === 'pens' ||
-    path === 'inks' ||
-    path === 'papers' ||
-    path === 'nibs'
-  ) {
-    return 'approved';
-  }
-
-  if (path === 'pen-nibs') {
+  if (path.includes('pen-nibs')) {
     return 'PenNibs.approved';
   }
 
-  if (path === 'color-reviews') {
+  if (path.includes('color-reviews')) {
     return 'ColorReviews.approved';
   }
 
-  if (path === 'shading-reviews') {
+  if (path.includes('shading-reviews')) {
     return 'ShadingReviews.approved';
   }
 
-  if (path === 'sheen-reviews') {
+  if (path.includes('sheen-reviews')) {
     return 'SheenReviews.approved';
   }
 
-  if (path === 'feathering-reviews') {
+  if (path.includes('feathering-reviews')) {
     return 'FeatheringReviews.approved';
   }
 
-  if (path === 'water-reviews') {
+  if (path.includes('water-reviews')) {
     return 'WaterReviews.approved';
   }
 
-  if (path === 'drying-reviews') {
+  if (path.includes('drying-reviews')) {
     return 'DryingReviews.approved';
   }
 
-  if (path === 'transparency-reviews') {
+  if (path.includes('transparency-reviews')) {
     return 'TransparencyReviews.approved';
   }
 
-  if (
-    path === 'writing-samples' ||
-    path === 'writing-samples/search' ||
-    path === 'writing-samples/search/'
-  ) {
+  if (path.includes('writing-samples')) {
     return 'WritingSamples.approved';
+  }
+
+  if (
+    path.includes('users') ||
+    path.includes('pens') ||
+    path.includes('inks') ||
+    path.includes('papers') ||
+    path.includes('nibs')
+  ) {
+    return 'approved';
   }
 
   // TODO throw error if no match?
