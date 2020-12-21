@@ -550,6 +550,10 @@ class WritingSample extends Component {
 
         try {
           await API.instance.post('color-reviews', colorOneReview, config);
+
+          this.setState({
+            priorColorOneChoice: colorOneChoice,
+          });
         } catch (err) {
           console.log(err);
 
@@ -569,6 +573,10 @@ class WritingSample extends Component {
 
         try {
           await API.instance.post('color-reviews', colorTwoReview, config);
+
+          this.setState({
+            priorColorTwoChoice: colorTwoChoice,
+          });
         } catch (err) {
           console.log(err);
 
@@ -588,6 +596,10 @@ class WritingSample extends Component {
 
         try {
           await API.instance.post('color-reviews', colorThreeReview, config);
+
+          this.setState({
+            priorColorThreeChoice: colorThreeChoice,
+          });
         } catch (err) {
           console.log(err);
 
@@ -625,6 +637,10 @@ class WritingSample extends Component {
 
         try {
           await API.instance.post('shading-reviews', shadingReview, config);
+
+          this.setState({
+            priorShadingChoice: shadingChoice,
+          });
         } catch (err) {
           console.log(err);
 
@@ -660,12 +676,17 @@ class WritingSample extends Component {
       if (sheenColorChoice !== '' || sheenAmountChoice !== '') {
         const sheenReview = {
           writingSampleID,
-          color: sheenColorChoice,
           amount: sheenAmountChoice,
+          color: sheenColorChoice,
         };
 
         try {
           await API.instance.post('sheen-reviews', sheenReview, config);
+
+          this.setState({
+            priorSheenAmountChoice: sheenAmountChoice,
+            priorSheenColorChoice: sheenColorChoice,
+          });
         } catch (err) {
           console.log(err);
 
@@ -685,6 +706,10 @@ class WritingSample extends Component {
 
       try {
         await API.instance.delete(url, config);
+
+        this.setState({
+          priorFeatheringChoice: featheringChoice,
+        });
       } catch (err) {
         console.log(err);
 
@@ -744,6 +769,8 @@ class WritingSample extends Component {
 
         try {
           await API.instance.post('water-reviews', waterReview, config);
+
+          this.setState({ priorWaterChoice: waterChoice });
         } catch (err) {
           console.log(err);
 
@@ -781,6 +808,8 @@ class WritingSample extends Component {
 
         try {
           await API.instance.post('drying-reviews', dryingReview, config);
+
+          this.setState({ priorDryingTimeChoice: dryingTimeChoice });
         } catch (err) {
           console.log(err);
 
@@ -822,6 +851,8 @@ class WritingSample extends Component {
             transparencyReview,
             config,
           );
+
+          this.setState({ priorTransparencyChoice: transparencyChoice });
         } catch (err) {
           console.log(err);
 
