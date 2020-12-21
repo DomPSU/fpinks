@@ -5,3 +5,8 @@ html body {
   margin-bottom: 24px;
   background-color: lightgray;
 }
+
+/* https://stackoverflow.com/questions/37902708/google-charts-tooltip-flickering */
+svg > g > g:last-child {
+  pointer-events: none;
+}
