@@ -13,6 +13,12 @@ const {
   appendUserToQS,
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const {
+  setWaterReview,
+  setPriorWaterReview,
+  noPriorWaterReview,
+  priorWaterReviewExists,
+} = require('../middlewares/waterReviewsMiddleware');
 
 const waterReviewsRouter = express.Router();
 
@@ -26,8 +32,22 @@ waterReviewsRouter.get(
   index,
 );
 waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-waterReviewsRouter.post('/', isAuth, insert);
-waterReviewsRouter.put('/edit', isAuth, isAdmin, update);
-waterReviewsRouter.delete('/:writingSampleID', isAuth, remove);
+waterReviewsRouter.post(
+  '/',
+  isAuth,
+  setWaterReview,
+  setPriorWaterReview,
+  noPriorWaterReview,
+  insert,
+);
+waterReviewsRouter.put('/edit', isAuth, isAdmin, setWaterReview, update);
+waterReviewsRouter.delete(
+  '/:writingSampleID',
+  isAuth,
+  setWaterReview,
+  setPriorWaterReview,
+  priorWaterReviewExists,
+  remove,
+);
 
 module.exports = waterReviewsRouter;

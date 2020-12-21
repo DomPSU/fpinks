@@ -1,74 +1,62 @@
 const waterReviewsModel = require('../models/waterReviewsModel');
 
+const show = async (req, res, next) => {
+  try {
+    const waterReview = await waterReviewsModel.show(res.locals.waterReview);
+
+    res.status(200).send(waterReview);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const index = async (req, res, next) => {
   try {
-    const data = await waterReviewsModel.index(
+    const waterReviews = await waterReviewsModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
     );
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+
+    res.status(200).send(waterReviews);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const insert = async (req, res, next) => {
-  const waterReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.body.writingSampleID,
-    waterproofness: req.body.waterproofness,
-  };
-
   try {
-    await waterReviewsModel.remove(waterReview);
-  } catch (e) {
-    next(e);
-  }
+    const waterReview = await waterReviewsModel.insert(res.locals.waterReview);
 
-  try {
-    const data = await waterReviewsModel.insert(waterReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    res.statusMessage = 'Waterproofness Review creation succesful.';
+    res.status(201).send(waterReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const remove = async (req, res, next) => {
-  const waterReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.params.writingSampleID,
-  };
-
-  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
-    waterReview.userID = req.body.userID;
-  }
-
   try {
-    const data = await waterReviewsModel.remove(waterReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    await waterReviewsModel.remove(res.locals.waterReview);
+
+    res.statusMessage = 'Waterproofness Review deletion succesful.';
+    res.status(204).end();
+  } catch (err) {
+    return next(err);
   }
 };
 
 const update = async (req, res, next) => {
-  const shadingReview = {
-    userID: req.body.userID,
-    writingSampleID: req.body.writingSampleID,
-    approved: req.body.approved,
-  };
-
   try {
-    const data = await waterReviewsModel.update(shadingReview);
-    res.statusMessage = 'Update succesful.';
-    res.status(200).send(data);
-  } catch (e) {
-    res.status(400).end();
-    next(e);
+    const waterReview = await waterReviewsModel.update(res.locals.waterReview);
+    res.statusMessage = 'Waterproofness Review update succesful.';
+    res.status(200).send(waterReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,
