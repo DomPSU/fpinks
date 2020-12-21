@@ -33,7 +33,7 @@ const noPriorFeatheringReview = (req, res, next) => {
     return next();
   }
 
-  return next(createError(400, 'A Prior Feathering Review exists.'));
+  return next(createError(400, 'A prior Feathering Review exists.'));
 };
 
 const priorFeatheringReviewExists = (req, res, next) => {

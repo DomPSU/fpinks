@@ -31,7 +31,7 @@ const insert = async (req, res, next) => {
       res.locals.featheringReview,
     );
 
-    res.statusMessage = 'FeatheringReview creation succesful.';
+    res.statusMessage = 'Feathering Review creation succesful.';
     res.status(201).send(featheringReview);
   } catch (err) {
     next(err);

@@ -33,7 +33,7 @@ const noPriorShadingReview = (req, res, next) => {
     return next();
   }
 
-  return next(createError(400, 'A Prior Shading Review exists.'));
+  return next(createError(400, 'A prior Shading Review exists.'));
 };
 
 const priorShadingReviewExists = (req, res, next) => {
