@@ -1323,7 +1323,11 @@ class WritingSample extends Component {
                                   {priorSheenColorChoice}
                                 </option>
                                 <option />
+                                <option>None</option>
                                 {colorsJSON.names.map((color) => {
+                                  if (color === 'None') {
+                                    return null;
+                                  }
                                   return <option>{color}</option>;
                                 })}
                               </select>
