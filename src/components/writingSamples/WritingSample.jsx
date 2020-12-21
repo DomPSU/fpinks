@@ -893,7 +893,36 @@ class WritingSample extends Component {
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(colorCounts)) {
       colorData.push([capitalize(key), value]);
-      colorChartColors.push(key); // TODO conditional when color is none
+
+      if (key === 'red') {
+        colorChartColors.push('FF4136');
+      } else if (key === 'orange') {
+        colorChartColors.push('FF851B');
+      } else if (key === 'yellow') {
+        colorChartColors.push('FFDC00');
+      } else if (key === 'green') {
+        colorChartColors.push('2ECC40');
+      } else if (key === 'blue') {
+        colorChartColors.push('0074D9');
+      } else if (key === 'purple') {
+        colorChartColors.push('B10DC9');
+      } else if (key === 'pink') {
+        colorChartColors.push('F012BE');
+      } else if (key === 'black') {
+        colorChartColors.push('111111');
+      } else if (key === 'grey') {
+        colorChartColors.push('AAAAAA');
+      } else if (key === 'brown') {
+        colorChartColors.push('8b4513');
+      } else if (key === 'gold') {
+        colorChartColors.push('fcc200');
+      } else if (key === 'silver') {
+        colorChartColors.push('DDDDDD');
+      } else if (key === 'white') {
+        colorChartColors.push('FFFFFF');
+      } else if (key === 'none') {
+        colorChartColors.push('444444');
+      }
     }
 
     // process shadingReviews
