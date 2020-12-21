@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import API from '../../apis/API';
+import { isDevelopment } from '../../util/util';
 
 class Login extends Component {
   constructor(props) {
@@ -40,6 +41,12 @@ class Login extends Component {
       const params = {
         onsuccess: (googleUser) => {
           const idToken = googleUser.getAuthResponse().id_token;
+
+          if (isDevelopment()) {
+            console.log('ID token for testing');
+            console.log(idToken);
+          }
+
           this.sendIDToken(idToken);
           this.setState({ redirect: true });
         },

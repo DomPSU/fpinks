@@ -95,7 +95,6 @@ class Contribute extends Component {
   }
 
   render() {
-    console.log(this.state); // TODO
     return (
       <div className="container text-center">
         <div className="row">
