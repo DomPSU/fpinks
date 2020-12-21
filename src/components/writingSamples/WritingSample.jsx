@@ -880,6 +880,38 @@ class WritingSample extends Component {
       serverErrorMessage = `Most reviews are being processed,  but at least one error occured. ${serverErrorMessage}Please wait 30s and try to resubmit.`;
     }
 
+    const red = 'FF4136';
+    const orange = 'FF851B';
+    const yellow = 'FFDC00';
+    const green = '2ECC40';
+    const blue = '0074D9';
+    const purple = 'B10DC9';
+    const pink = 'F012BE';
+    const black = '111111';
+    const grey = 'AAAAAA';
+    const brown = '8b4513';
+    const gold = 'fcc200';
+    const silver = 'DDDDDD';
+    const white = 'FFFFFF';
+    const none = '444444';
+
+    const defaultChartColors = [
+      red,
+      orange,
+      yellow,
+      green,
+      blue,
+      purple,
+      pink,
+      black,
+      grey,
+      brown,
+      gold,
+      silver,
+      white,
+      none,
+    ];
+
     // process colorReviews
     const colorCounts = [];
     colorReviews.forEach((colorReview) => {
@@ -895,33 +927,33 @@ class WritingSample extends Component {
       colorData.push([capitalize(key), value]);
 
       if (key === 'red') {
-        colorChartColors.push('FF4136');
+        colorChartColors.push(red);
       } else if (key === 'orange') {
-        colorChartColors.push('FF851B');
+        colorChartColors.push(orange);
       } else if (key === 'yellow') {
-        colorChartColors.push('FFDC00');
+        colorChartColors.push(yellow);
       } else if (key === 'green') {
-        colorChartColors.push('2ECC40');
+        colorChartColors.push(green);
       } else if (key === 'blue') {
-        colorChartColors.push('0074D9');
+        colorChartColors.push(blue);
       } else if (key === 'purple') {
-        colorChartColors.push('B10DC9');
+        colorChartColors.push(purple);
       } else if (key === 'pink') {
-        colorChartColors.push('F012BE');
+        colorChartColors.push(pink);
       } else if (key === 'black') {
-        colorChartColors.push('111111');
+        colorChartColors.push(black);
       } else if (key === 'grey') {
-        colorChartColors.push('AAAAAA');
+        colorChartColors.push(grey);
       } else if (key === 'brown') {
-        colorChartColors.push('8b4513');
+        colorChartColors.push(brown);
       } else if (key === 'gold') {
-        colorChartColors.push('fcc200');
+        colorChartColors.push(gold);
       } else if (key === 'silver') {
-        colorChartColors.push('DDDDDD');
+        colorChartColors.push(silver);
       } else if (key === 'white') {
-        colorChartColors.push('FFFFFF');
+        colorChartColors.push(white);
       } else if (key === 'none') {
-        colorChartColors.push('444444');
+        colorChartColors.push(none);
       }
     }
 
@@ -1356,6 +1388,7 @@ class WritingSample extends Component {
               data={colorData}
               options={{
                 title: 'Color Reviews',
+                backgroundColor: 'D3D3D3',
                 colors: colorChartColors,
                 pieSliceBorderColor: 'black',
                 pieSliceText: 'none',
@@ -1371,6 +1404,8 @@ class WritingSample extends Component {
               data={shadingData}
               options={{
                 title: 'Shading Reviews',
+                backgroundColor: 'D3D3D3',
+                colors: defaultChartColors,
                 pieSliceBorderColor: 'black',
                 pieSliceText: 'none',
               }}
@@ -1385,6 +1420,7 @@ class WritingSample extends Component {
               data={sheenData}
               options={{
                 title: 'Sheen Reviews',
+                backgroundColor: 'D3D3D3',
                 pieSliceBorderColor: 'black',
                 pieSliceText: 'none',
               }}
@@ -1399,6 +1435,8 @@ class WritingSample extends Component {
               data={featheringData}
               options={{
                 title: 'Feathering Reviews',
+                backgroundColor: 'D3D3D3',
+                colors: defaultChartColors,
                 pieSliceBorderColor: 'black',
                 pieSliceText: 'none',
               }}
@@ -1414,6 +1452,8 @@ class WritingSample extends Component {
                 data={waterData}
                 options={{
                   title: 'Waterproofness Reviews',
+                  backgroundColor: 'D3D3D3',
+                  colors: defaultChartColors,
                   pieSliceBorderColor: 'black',
                   pieSliceText: 'none',
                 }}
@@ -1430,6 +1470,8 @@ class WritingSample extends Component {
                 data={dryingData}
                 options={{
                   title: 'Drying Time Reviews',
+                  backgroundColor: 'D3D3D3',
+                  colors: defaultChartColors,
                   pieSliceBorderColor: 'black',
                   pieSliceText: 'none',
                 }}
@@ -1446,6 +1488,8 @@ class WritingSample extends Component {
                 data={transparencyData}
                 options={{
                   title: 'Transparency Reviews',
+                  backgroundColor: 'D3D3D3',
+                  colors: defaultChartColors,
                   pieSliceBorderColor: 'black',
                   pieSliceText: 'none',
                 }}
