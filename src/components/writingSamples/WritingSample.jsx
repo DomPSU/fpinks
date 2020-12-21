@@ -578,26 +578,27 @@ class WritingSample extends Component {
             };
           });
         }
+      }
 
-        if (colorThreeChoice !== '') {
-          const colorThreeReview = {
-            writingSampleID,
-            color: colorThreeChoice,
-          };
+      if (colorThreeChoice !== '') {
+        const colorThreeReview = {
+          writingSampleID,
+          color: colorThreeChoice,
+        };
 
-          try {
-            await API.instance.post('color-reviews', colorThreeReview, config);
-          } catch (err) {
-            console.log(err);
+        try {
+          await API.instance.post('color-reviews', colorThreeReview, config);
+        } catch (err) {
+          console.log(err);
 
-            this.setState((prevState) => {
-              return {
-                serverErrorMessage: `${prevState.serverErrorMessage}Cannot create third color review. `,
-              };
-            });
-          }
+          this.setState((prevState) => {
+            return {
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot create third color review. `,
+            };
+          });
         }
       }
+
       this.getColorReviews();
     }
 
