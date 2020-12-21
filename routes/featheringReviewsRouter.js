@@ -13,6 +13,12 @@ const {
   appendUserToQS,
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const {
+  setFeatheringReview,
+  setPriorFeatheringReview,
+  noPriorFeatheringReview,
+  priorFeatheringReviewExists,
+} = require('../middlewares/featheringReviewsMiddleware');
 
 const featheringReviewsRouter = express.Router();
 
@@ -31,8 +37,28 @@ featheringReviewsRouter.get(
   processQueryString,
   index,
 );
-featheringReviewsRouter.post('/', isAuth, insert);
-featheringReviewsRouter.put('/edit', isAuth, isAdmin, update);
-featheringReviewsRouter.delete('/:writingSampleID', isAuth, remove);
+featheringReviewsRouter.post(
+  '/',
+  isAuth,
+  setFeatheringReview,
+  setPriorFeatheringReview,
+  noPriorFeatheringReview,
+  insert,
+);
+featheringReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  setFeatheringReview,
+  update,
+);
+featheringReviewsRouter.delete(
+  '/:writingSampleID',
+  isAuth,
+  setFeatheringReview,
+  setPriorFeatheringReview,
+  priorFeatheringReviewExists,
+  remove,
+);
 
 module.exports = featheringReviewsRouter;

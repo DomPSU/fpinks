@@ -1,74 +1,68 @@
 const featheringReviewsModel = require('../models/featheringReviewsModel');
 
+const show = async (req, res, next) => {
+  try {
+    const featheringReview = await featheringReviewsModel.show(
+      res.locals.featheringReview,
+    );
+
+    res.status(200).send(featheringReview);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const index = async (req, res, next) => {
   try {
-    const data = await featheringReviewsModel.index(
+    const featheringReviews = await featheringReviewsModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
     );
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+
+    res.status(200).send(featheringReviews);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const insert = async (req, res, next) => {
-  const featheringReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.body.writingSampleID,
-    amount: req.body.amount,
-  };
-
   try {
-    await featheringReviewsModel.remove(featheringReview);
-  } catch (e) {
-    next(e);
-  }
+    const featheringReview = await featheringReviewsModel.insert(
+      res.locals.featheringReview,
+    );
 
-  try {
-    const data = await featheringReviewsModel.insert(featheringReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    res.statusMessage = 'FeatheringReview creation succesful.';
+    res.status(201).send(featheringReview);
+  } catch (err) {
+    next(err);
   }
 };
 
 const remove = async (req, res, next) => {
-  const featheringReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.params.writingSampleID,
-  };
-
-  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
-    featheringReview.userID = req.body.userID;
-  }
-
   try {
-    const data = await featheringReviewsModel.remove(featheringReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    await featheringReviewsModel.remove(res.locals.featheringReview);
+
+    res.statusMessage = 'Feathering Review deletion succesful.';
+    res.status(204).end();
+  } catch (err) {
+    next(err);
   }
 };
 
 const update = async (req, res, next) => {
-  const featheringReview = {
-    userID: req.body.userID,
-    writingSampleID: req.body.writingSampleID,
-    approved: req.body.approved,
-  };
-
   try {
-    const data = await featheringReviewsModel.update(featheringReview);
-    res.statusMessage = 'Update succesful.';
-    res.status(200).send(data);
-  } catch (e) {
-    res.status(400).end();
-    next(e);
+    const featheringReview = await featheringReviewsModel.update(
+      res.locals.featheringReview,
+    );
+    res.statusMessage = 'Feathering Review update succesful.';
+    res.status(200).send(featheringReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,
