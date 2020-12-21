@@ -881,18 +881,31 @@ class WritingSample extends Component {
     }
 
     const red = 'FF4136';
+    const lightRed = 'FF6E66';
     const orange = 'FF851B';
+    const lightOrange = 'FFA04D';
     const yellow = 'FFDC00';
+    const lightYellow = 'FFE433';
     const green = '2ECC40';
+    const lightGreen = '44D555';
     const blue = '0074D9';
+    const lightBlue = '0088FF';
     const purple = 'B10DC9';
+    const lightPurple = 'D20FF0';
     const pink = 'F012BE';
+    const lightPink = 'F33FC9';
     const black = '111111';
+    const lightBlack = '222222';
     const grey = 'AAAAAA';
+    const lightGrey = 'BBBBBB';
     const brown = '8b4513';
+    const lightBrown = 'b45918';
     const gold = 'fcc200';
+    const lightGold = 'FFC91A';
     const silver = 'DDDDDD';
+    const lightSilver = 'CCCCCC';
     const white = 'FFFFFF';
+    const lightWhite = 'EEEEEE';
     const none = '444444';
 
     const defaultChartColors = [
@@ -973,7 +986,6 @@ class WritingSample extends Component {
       shadingData.push([capitalize(key), value]);
     }
 
-    // TODO sheenChartColors for 'partial color' and 'full color'.
     // process sheenReviews
     const sheenCounts = [];
     sheenReviews.forEach((sheenReview) => {
@@ -985,6 +997,7 @@ class WritingSample extends Component {
     });
 
     const sheenData = [['Sheen', 'Number of reviews']];
+    const sheenChartColors = [];
 
     // eslint-disable-next-line no-restricted-syntax
     for (const [key, value] of Object.entries(sheenCounts)) {
@@ -992,6 +1005,65 @@ class WritingSample extends Component {
         sheenData.push([capitalize(key), value]);
       } else {
         sheenData.push(['None', value]);
+      }
+    }
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(sheenCounts)) {
+      if (key === 'heavy red') {
+        sheenChartColors.push(red);
+      } else if (key === 'light red') {
+        sheenChartColors.push(lightRed);
+      } else if (key === 'heavy orange') {
+        sheenChartColors.push(orange);
+      } else if (key === 'light orange') {
+        sheenChartColors.push(lightOrange);
+      } else if (key === 'heavy yellow') {
+        sheenChartColors.push(yellow);
+      } else if (key === 'light yellow') {
+        sheenChartColors.push(lightYellow);
+      } else if (key === 'heavy green') {
+        sheenChartColors.push(green);
+      } else if (key === 'light green') {
+        sheenChartColors.push(lightGreen);
+      } else if (key === 'heavy blue') {
+        sheenChartColors.push(blue);
+      } else if (key === 'light blue') {
+        sheenChartColors.push(lightBlue);
+      } else if (key === 'heavy purple') {
+        sheenChartColors.push(purple);
+      } else if (key === 'light purple') {
+        sheenChartColors.push(lightPurple);
+      } else if (key === 'heavy pink') {
+        sheenChartColors.push(pink);
+      } else if (key === 'light pink') {
+        sheenChartColors.push(lightPink);
+      } else if (key === 'heavy black') {
+        sheenChartColors.push(black);
+      } else if (key === 'light black') {
+        sheenChartColors.push(lightBlack);
+      } else if (key === 'heavy grey') {
+        sheenChartColors.push(grey);
+      } else if (key === 'light grey') {
+        sheenChartColors.push(lightGrey);
+      } else if (key === 'heavy brown') {
+        sheenChartColors.push(brown);
+      } else if (key === 'light brown') {
+        sheenChartColors.push(lightBrown);
+      } else if (key === 'heavy gold') {
+        sheenChartColors.push(gold);
+      } else if (key === 'light gold') {
+        sheenChartColors.push(lightGold);
+      } else if (key === 'heavy silver') {
+        sheenChartColors.push(silver);
+      } else if (key === 'light silver') {
+        sheenChartColors.push(lightSilver);
+      } else if (key === 'heavy white') {
+        sheenChartColors.push(white);
+      } else if (key === 'light white') {
+        sheenChartColors.push(lightWhite);
+      } else if (key === 'none none') {
+        sheenChartColors.push(none);
       }
     }
 
@@ -1421,6 +1493,7 @@ class WritingSample extends Component {
               options={{
                 title: 'Sheen Reviews',
                 backgroundColor: 'D3D3D3',
+                colors: sheenChartColors,
                 pieSliceBorderColor: 'black',
                 pieSliceText: 'none',
               }}
