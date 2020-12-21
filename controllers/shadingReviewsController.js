@@ -13,20 +13,8 @@ const index = async (req, res, next) => {
 };
 
 const insert = async (req, res, next) => {
-  const shadingReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.body.writingSampleID,
-    amount: req.body.amount,
-  };
-
   try {
-    await shadingReviewsModel.remove(shadingReview);
-  } catch (e) {
-    next(e);
-  }
-
-  try {
-    const data = await shadingReviewsModel.insert(shadingReview);
+    const data = await shadingReviewsModel.insert(res.locals.shadingReview);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -34,17 +22,8 @@ const insert = async (req, res, next) => {
 };
 
 const remove = async (req, res, next) => {
-  const shadingReview = {
-    writingSampleID: req.params.writingSampleID,
-    userID: res.locals.user.user_id,
-  };
-
-  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
-    shadingReview.userID = req.body.userID;
-  }
-
   try {
-    const data = await shadingReviewsModel.remove(shadingReview);
+    const data = await shadingReviewsModel.remove(res.locals.shadingReview);
     res.status(200).send(data);
   } catch (e) {
     next(e);
@@ -52,14 +31,8 @@ const remove = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const shadingReview = {
-    userID: req.body.userID,
-    writingSampleID: req.body.writingSampleID,
-    approved: req.body.approved,
-  };
-
   try {
-    const data = await shadingReviewsModel.update(shadingReview);
+    const data = await shadingReviewsModel.update(res.locals.shadingReview);
     res.statusMessage = 'Update succesful.';
     res.status(200).send(data);
   } catch (e) {

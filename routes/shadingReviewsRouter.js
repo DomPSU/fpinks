@@ -13,6 +13,7 @@ const {
   appendUserToQS,
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const { setShadingReview } = require('../middlewares/shadingReviewsMiddleware');
 
 const shadingReviewsRouter = express.Router();
 
@@ -26,8 +27,13 @@ shadingReviewsRouter.get(
   index,
 );
 shadingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-shadingReviewsRouter.post('/', isAuth, insert);
-shadingReviewsRouter.put('/edit', isAuth, isAdmin, update);
-shadingReviewsRouter.delete('/:writingSampleID', isAuth, remove);
+shadingReviewsRouter.post('/', isAuth, setShadingReview, insert);
+shadingReviewsRouter.put('/edit', isAuth, isAdmin, setShadingReview, update);
+shadingReviewsRouter.delete(
+  '/:writingSampleID',
+  isAuth,
+  setShadingReview,
+  remove,
+);
 
 module.exports = shadingReviewsRouter;
