@@ -1,26 +1,31 @@
 const db = require('./db');
 const sqlUtil = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at, ShadingReviews.approved FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
+const partialSQL =
+  'SELECT ShadingReviews.writing_sample_id, ShadingReviews.user_id, Users.username, ShadingReviews.amount, ShadingReviews.created_at, ShadingReviews.updated_at, ShadingReviews.approved FROM ShadingReviews LEFT JOIN Users ON Users.user_id=ShadingReviews.user_id WHERE';
 
+const show = async (data) => {
+  const dbRes = await db.pool.asyncQuery(
+    `${partialSQL} writing_sample_id=? AND Users.user_id=?;`,
+    [data.writingSampleID, data.userID],
+  );
+
+  return dbRes;
+};
+
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = sqlUtil.getSanitizedSQL(
     partialSQL,
     queryKeys,
     queryValues,
   );
 
-  const res = await db.pool.asyncQuery(sanitizedSQL);
-  return res;
+  const dbRes = await db.pool.asyncQuery(sanitizedSQL);
+  return dbRes;
 };
 
 const insert = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-
-  const insertRes = await db.pool.asyncQuery(
+  const dbRes = await db.pool.asyncQuery(
     'INSERT INTO ShadingReviews (writing_sample_id, user_id, amount, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
     [
       data.writingSampleID,
@@ -32,24 +37,20 @@ const insert = async (data) => {
     ],
   );
 
-  return insertRes;
+  return dbRes;
 };
 
 const remove = async (data) => {
-  // remove existing shading review if it exists
-  const deleteRes = await db.pool.asyncQuery(
+  const dbRes = await db.pool.asyncQuery(
     'DELETE FROM ShadingReviews WHERE writing_sample_id = ? AND user_id = ?',
     [data.writingSampleID, data.userID],
   );
 
-  return deleteRes;
+  return dbRes;
 };
 
 const update = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-  const updateRes = await db.pool.asyncQuery(
+  const dbRes = await db.pool.asyncQuery(
     'UPDATE ShadingReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND writing_sample_id = ?',
     [
       data.approved,
@@ -58,10 +59,11 @@ const update = async (data) => {
       data.writingSampleID,
     ],
   );
-  return updateRes;
+  return dbRes;
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,

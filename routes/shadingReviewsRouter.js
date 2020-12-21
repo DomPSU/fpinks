@@ -10,29 +10,33 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
-const { setShadingReview } = require('../middlewares/shadingReviewsMiddleware');
+const {
+  setShadingReview,
+  setPriorShadingReview,
+  noPriorShadingReview,
+  priorShadingReviewExists,
+} = require('../middlewares/shadingReviewsMiddleware');
 
 const shadingReviewsRouter = express.Router();
 
-shadingReviewsRouter.get(
-  '/:writingSampleID',
-  isAuth,
-  sanitizeQueryString,
-  processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
-  index,
-);
+shadingReviewsRouter.get('/:writingSampleID', isAuth, setShadingReview, show);
 shadingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-shadingReviewsRouter.post('/', isAuth, setShadingReview, insert);
+shadingReviewsRouter.post(
+  '/',
+  isAuth,
+  setShadingReview,
+  setPriorShadingReview,
+  noPriorShadingReview,
+  insert,
+);
 shadingReviewsRouter.put('/edit', isAuth, isAdmin, setShadingReview, update);
 shadingReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,
   setShadingReview,
+  setPriorShadingReview,
+  priorShadingReviewExists,
   remove,
 );
 
