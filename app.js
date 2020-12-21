@@ -9,6 +9,7 @@ const createError = require('http-errors');
 const util = require('./utils/util');
 const apiRouter = require('./routes');
 const { setAuth } = require('./middlewares/authMiddleware');
+const { sanitizeReqBody } = require('./middlewares/reqBodyMiddleware');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(setAuth);
+app.use(sanitizeReqBody);
 app.use(express.static(path.join(__dirname, 'build')));
 app.use('/api', apiRouter);
 

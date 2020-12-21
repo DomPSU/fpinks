@@ -1,18 +1,6 @@
 const createError = require('http-errors');
 const { show } = require('../models/shadingReviewsModel');
 
-const sanitizeReqBody = (req, res, next) => {
-  if (req.body.userID !== undefined && res.locals.user.level !== 'admin') {
-    return next(createError(403, 'Forbidden. Only admins can set user id.'));
-  }
-
-  if (req.body.approved !== undefined && res.locals.user.level !== 'admin') {
-    return next(createError(403, 'Forbidden. Only admins can set approved.'));
-  }
-
-  return next();
-};
-
 const setShadingReview = (req, res, next) => {
   const userID = req.body.userID ? req.body.userID : res.locals.user.user_id;
 
@@ -57,7 +45,6 @@ const priorShadingReviewExists = (req, res, next) => {
 };
 
 module.exports = {
-  sanitizeReqBody,
   setShadingReview,
   setPriorShadingReview,
   noPriorShadingReview,
