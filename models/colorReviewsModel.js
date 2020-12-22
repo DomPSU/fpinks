@@ -1,22 +1,26 @@
 const db = require('./db');
 const { getSanitizedSQL } = require('../utils/sql');
 
-const index = async (queryKeys, queryValues) => {
-  const partialSQL =
-    'SELECT ColorReviews.writing_sample_id, ColorReviews.user_id, ColorReviews.color_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at, ColorReviews.approved FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE';
+const partialSQL =
+  'SELECT ColorReviews.writing_sample_id, ColorReviews.user_id, ColorReviews.color_id, Users.username, Colors.name AS color, ColorReviews.created_at, ColorReviews.updated_at, ColorReviews.approved FROM ColorReviews LEFT JOIN Users ON Users.user_id=ColorReviews.user_id LEFT JOIN Colors ON Colors.color_id=ColorReviews.color_id WHERE';
 
+const show = async (data) => {
+  const dbRes = await db.pool.asyncQuery(
+    `${partialSQL} writing_sample_id=? AND Users.user_id=?;`,
+    [data.writingSampleID, data.userID],
+  );
+
+  return dbRes;
+};
+
+const index = async (queryKeys, queryValues) => {
   const sanitizedSQL = getSanitizedSQL(partialSQL, queryKeys, queryValues);
 
-  const res = await db.pool.asyncQuery(sanitizedSQL);
-  return res;
+  const dbRes = await db.pool.asyncQuery(sanitizedSQL);
+  return dbRes;
 };
 
 const insert = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-
-  // get colorID from color name
   const colorNameQuery = await db.pool.asyncQuery(
     'SELECT color_id FROM Colors WHERE name=?',
     [data.color],
@@ -24,7 +28,7 @@ const insert = async (data) => {
 
   const colorID = colorNameQuery[0].color_id;
 
-  const insertRes = await db.pool.asyncQuery(
+  const dbRes = await db.pool.asyncQuery(
     'INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
     [
       data.writingSampleID,
@@ -36,25 +40,20 @@ const insert = async (data) => {
     ],
   );
 
-  return insertRes;
+  return dbRes;
 };
 
 const remove = async (data) => {
-  // remove existing color reviews if they exist
-  const deleteRes = await db.pool.asyncQuery(
+  const dbRes = await db.pool.asyncQuery(
     'DELETE FROM ColorReviews WHERE writing_sample_id = ? AND user_id = ?',
     [data.writingSampleID, data.userID],
   );
 
-  return deleteRes;
+  return dbRes;
 };
 
 const update = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-
-  const updateRes = await db.pool.asyncQuery(
+  const dbRes = await db.pool.asyncQuery(
     'UPDATE ColorReviews SET approved = ?, updated_at = ? WHERE user_id = ? AND color_id = ? AND writing_sample_id = ?',
     [
       data.approved,
@@ -64,10 +63,11 @@ const update = async (data) => {
       data.writingSampleID,
     ],
   );
-  return updateRes;
+  return dbRes;
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,

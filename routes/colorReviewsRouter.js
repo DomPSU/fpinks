@@ -4,6 +4,7 @@ const {
   update,
   insert,
   remove,
+  show,
 } = require('../controllers/colorReviewsController');
 const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
@@ -12,21 +13,33 @@ const {
   appendUserToQS,
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const {
+  setColorReview,
+  setPriorColorReviews,
+  noMaxPriorColorReviews,
+  priorColorReviewsExists,
+} = require('../middlewares/colorReviewsMiddleware');
 
 const colorReviewsRouter = express.Router();
 
-colorReviewsRouter.get(
+colorReviewsRouter.get('/:writingSampleID', isAuth, setColorReview, show);
+colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
+colorReviewsRouter.post(
+  '/',
+  isAuth,
+  setColorReview,
+  setPriorColorReviews,
+  noMaxPriorColorReviews,
+  insert,
+);
+colorReviewsRouter.put('/edit', isAuth, isAdmin, setColorReview, update);
+colorReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,
-  sanitizeQueryString,
-  processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
-  index,
+  setColorReview,
+  setPriorColorReviews,
+  priorColorReviewsExists,
+  remove,
 );
-colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-colorReviewsRouter.post('/', isAuth, insert);
-colorReviewsRouter.put('/edit', isAuth, isAdmin, update);
-colorReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = colorReviewsRouter;

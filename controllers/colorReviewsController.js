@@ -1,72 +1,63 @@
 const colorReviewsModel = require('../models/colorReviewsModel');
 
+const show = async (req, res, next) => {
+  try {
+    const colorReviews = await colorReviewsModel.show(res.locals.colorReview);
+
+    res.status(200).send(colorReviews);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const index = async (req, res, next) => {
   try {
     const data = await colorReviewsModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
     );
+
     res.status(200).send(data);
-  } catch (e) {
-    next(e);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const insert = async (req, res, next) => {
-  // TOOD validate 2 or less color reviews exist
-
-  const colorReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.body.writingSampleID,
-    color: req.body.color,
-  };
-
   try {
-    const data = await colorReviewsModel.insert(colorReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    const colorReview = await colorReviewsModel.insert(res.locals.colorReview);
+
+    res.statusMessage = 'Color Review creation succesful.';
+    res.status(201).send(colorReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const remove = async (req, res, next) => {
-  const colorReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.params.writingSampleID,
-    colorID: req.params.colorID,
-  };
-
-  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
-    colorReview.userID = req.body.userID;
-  }
-
   try {
-    const data = await colorReviewsModel.remove(colorReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    await colorReviewsModel.remove(res.locals.colorReview);
+
+    res.statusMessage = 'Color Review deletions succesful.';
+    res.status(204).end();
+  } catch (err) {
+    return next(err);
   }
 };
 
 const update = async (req, res, next) => {
-  const colorReview = {
-    userID: req.body.userID,
-    writingSampleID: req.body.writingSampleID,
-    colorID: req.body.colorID,
-    approved: req.body.approved,
-  };
-
   try {
-    const data = await colorReviewsModel.update(colorReview);
-    res.statusMessage = 'Update succesful.';
-    res.status(200).send(data);
-  } catch (e) {
-    res.status(400).end();
-    next(e);
+    const colorReview = await colorReviewsModel.update(res.locals.colorReview);
+
+    res.statusMessage = 'Color Review update succesful.';
+    res.status(200).send(colorReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,
