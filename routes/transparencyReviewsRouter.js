@@ -13,6 +13,12 @@ const {
   appendUserToQS,
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const {
+  setTransparencyReview,
+  setPriorTransparencyReview,
+  noPriorTransparencyReview,
+  priorTransparencyReviewExists,
+} = require('../middlewares/transparencyReviewsMiddleware');
 
 const transparencyReviewsRouter = express.Router();
 
@@ -31,8 +37,28 @@ transparencyReviewsRouter.get(
   processQueryString,
   index,
 );
-transparencyReviewsRouter.post('/', isAuth, insert);
-transparencyReviewsRouter.put('/edit', isAuth, isAdmin, update);
-transparencyReviewsRouter.delete('/:writingSampleID', isAuth, remove);
+transparencyReviewsRouter.post(
+  '/',
+  isAuth,
+  setTransparencyReview,
+  setPriorTransparencyReview,
+  noPriorTransparencyReview,
+  insert,
+);
+transparencyReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  setTransparencyReview,
+  update,
+);
+transparencyReviewsRouter.delete(
+  '/:writingSampleID',
+  isAuth,
+  setTransparencyReview,
+  setPriorTransparencyReview,
+  priorTransparencyReviewExists,
+  remove,
+);
 
 module.exports = transparencyReviewsRouter;
