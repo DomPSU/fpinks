@@ -22,15 +22,7 @@ const {
 
 const waterReviewsRouter = express.Router();
 
-waterReviewsRouter.get(
-  '/:writingSampleID',
-  isAuth,
-  sanitizeQueryString,
-  processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
-  index,
-);
+waterReviewsRouter.get('/:writingSampleID', isAuth, setWaterReview, show);
 waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 waterReviewsRouter.post(
   '/',

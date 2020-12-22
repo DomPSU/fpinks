@@ -22,15 +22,7 @@ const {
 
 const dryingReviewsRouter = express.Router();
 
-dryingReviewsRouter.get(
-  '/:writingSampleID',
-  isAuth,
-  sanitizeQueryString,
-  processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
-  index,
-);
+dryingReviewsRouter.get('/:writingSampleID', isAuth, setDryingReview, show);
 dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 dryingReviewsRouter.post(
   '/',
