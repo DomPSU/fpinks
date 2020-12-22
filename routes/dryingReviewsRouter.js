@@ -13,6 +13,12 @@ const {
   appendUserToQS,
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const {
+  setDryingReview,
+  setPriorDryingReview,
+  noPriorDryingReview,
+  priorDryingReviewExists,
+} = require('../middlewares/dryingReviewsMiddleware');
 
 const dryingReviewsRouter = express.Router();
 
@@ -26,8 +32,22 @@ dryingReviewsRouter.get(
   index,
 );
 dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-dryingReviewsRouter.post('/', isAuth, insert);
-dryingReviewsRouter.put('/edit', isAuth, isAdmin, update);
-dryingReviewsRouter.delete('/:writingSampleID', isAuth, remove);
+dryingReviewsRouter.post(
+  '/',
+  isAuth,
+  setDryingReview,
+  setPriorDryingReview,
+  noPriorDryingReview,
+  insert,
+);
+dryingReviewsRouter.put('/edit', isAuth, isAdmin, setDryingReview, update);
+dryingReviewsRouter.delete(
+  '/:writingSampleID',
+  isAuth,
+  setDryingReview,
+  setPriorDryingReview,
+  priorDryingReviewExists,
+  remove,
+);
 
 module.exports = dryingReviewsRouter;

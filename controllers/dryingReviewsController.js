@@ -1,74 +1,67 @@
 const dryingReviewsModel = require('../models/dryingReviewsModel');
 
+const show = async (req, res, next) => {
+  try {
+    const dryingReview = await dryingReviewsModel.show(res.locals.dryingReview);
+
+    res.status(200).send(dryingReview);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const index = async (req, res, next) => {
   try {
-    const data = await dryingReviewsModel.index(
+    const dryingReviews = await dryingReviewsModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
     );
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+
+    res.status(200).send(dryingReviews);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const insert = async (req, res, next) => {
-  const dryingReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.body.writingSampleID,
-    dryingTime: req.body.dryingTime,
-  };
-
   try {
-    await dryingReviewsModel.remove(dryingReview);
-  } catch (e) {
-    next(e);
-  }
+    const dryingReview = await dryingReviewsModel.insert(
+      res.locals.dryingReview,
+    );
 
-  try {
-    const data = await dryingReviewsModel.insert(dryingReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    res.statusMessage = 'Drying Time Review creation succesful.';
+    res.status(201).send(dryingReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 const remove = async (req, res, next) => {
-  const dryingReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.params.writingSampleID,
-  };
-
-  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
-    dryingReview.userID = req.body.userID;
-  }
-
   try {
-    const data = await dryingReviewsModel.remove(dryingReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    await dryingReviewsModel.remove(res.locals.dryingReview);
+
+    res.statusMessage = 'Drying Time Review deletion succesful.';
+    res.status(204).end();
+  } catch (err) {
+    next(err);
   }
 };
 
 const update = async (req, res, next) => {
-  const shadingReview = {
-    userID: req.body.userID,
-    writingSampleID: req.body.writingSampleID,
-    approved: req.body.approved,
-  };
-
   try {
-    const data = await dryingReviewsModel.update(shadingReview);
-    res.statusMessage = 'Update succesful.';
-    res.status(200).send(data);
-  } catch (e) {
-    res.status(400).end();
-    next(e);
+    const dryingReview = await dryingReviewsModel.update(
+      res.locals.dryingReview,
+    );
+
+    res.statusMessage = 'Drying Time Review deletion succesful.';
+    res.status(200).send(dryingReview);
+  } catch (err) {
+    return next(err);
   }
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,
