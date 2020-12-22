@@ -1,75 +1,63 @@
 const sheenReviewsModel = require('../models/sheenReviewsModel');
 
+const show = async (req, res, next) => {
+  try {
+    const sheenReview = await sheenReviewsModel.show(res.locals.sheenReview);
+
+    res.status(200).send(sheenReview);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const index = async (req, res, next) => {
   try {
-    const data = await sheenReviewsModel.index(
+    const sheenReviews = await sheenReviewsModel.index(
       res.locals.processedQueryKeys,
       res.locals.processedQueryValues,
     );
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+
+    res.status(200).send(sheenReviews);
+  } catch (err) {
+    next(err);
   }
 };
 
 const insert = async (req, res, next) => {
-  const sheenReview = {
-    userID: res.locals.user.user_id,
-    writingSampleID: req.body.writingSampleID,
-    color: req.body.color,
-    amount: req.body.amount,
-  };
-
   try {
-    await sheenReviewsModel.remove(sheenReview);
-  } catch (e) {
-    next(e);
-  }
+    const sheenReview = await sheenReviewsModel.insert(res.locals.sheenReview);
 
-  try {
-    const data = await sheenReviewsModel.insert(sheenReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    res.statusMessage = 'Sheen Review creation succesful.';
+    res.status(201).send(sheenReview);
+  } catch (err) {
+    next(err);
   }
 };
 
 const remove = async (req, res, next) => {
-  const sheenReview = {
-    writingSampleID: req.params.writingSampleID,
-    userID: res.locals.user.user_id,
-  };
-
-  if (res.locals.user.level === 'admin' && req.body.userID !== undefined) {
-    sheenReview.userID = req.body.userID;
-  }
-
   try {
-    const data = await sheenReviewsModel.remove(sheenReview);
-    res.status(200).send(data);
-  } catch (e) {
-    next(e);
+    await sheenReviewsModel.remove(res.locals.sheenReview);
+
+    res.statusMessage = 'Sheen Review deletion succesful.';
+    res.status(204).end();
+  } catch (err) {
+    next(err);
   }
 };
 
 const update = async (req, res, next) => {
-  const colorReview = {
-    userID: req.body.userID,
-    writingSampleID: req.body.writingSampleID,
-    approved: req.body.approved,
-  };
-
   try {
-    const data = await sheenReviewsModel.update(colorReview);
-    res.statusMessage = 'Update succesful.';
-    res.status(200).send(data);
-  } catch (e) {
-    res.status(400).end();
-    next(e);
+    const sheenReview = await sheenReviewsModel.update(res.locals.sheenReview);
+
+    res.statusMessage = 'Sheen Review update succesful.';
+    res.status(200).send(sheenReview);
+  } catch (err) {
+    next(err);
   }
 };
 
 module.exports = {
+  show,
   index,
   insert,
   remove,

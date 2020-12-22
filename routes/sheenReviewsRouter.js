@@ -10,24 +10,34 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
+const {
+  setSheenReview,
+  setPriorSheenReview,
+  noPriorSheenReview,
+  priorSheenReviewExists,
+} = require('../middlewares/sheenReviewsMiddleware');
 
 const sheenReviewsRouter = express.Router();
 
-sheenReviewsRouter.get(
+sheenReviewsRouter.get('/:writingSampleID', isAuth, setSheenReview, show);
+sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
+sheenReviewsRouter.post(
+  '/',
+  isAuth,
+  setSheenReview,
+  setPriorSheenReview,
+  noPriorSheenReview,
+  insert,
+);
+sheenReviewsRouter.put('/edit', isAuth, isAdmin, setSheenReview, update);
+sheenReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,
-  sanitizeQueryString,
-  processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
-  index,
+  setSheenReview,
+  setPriorSheenReview,
+  priorSheenReviewExists,
+  remove,
 );
-sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
-sheenReviewsRouter.post('/', isAuth, insert);
-sheenReviewsRouter.put('/edit', isAuth, isAdmin, update);
-sheenReviewsRouter.delete('/:writingSampleID', isAuth, remove);
 
 module.exports = sheenReviewsRouter;
