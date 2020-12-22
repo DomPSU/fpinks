@@ -12,6 +12,7 @@ const {
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateShadingReview,
   setShadingReview,
   setPriorShadingReview,
   noPriorShadingReview,
@@ -25,12 +26,20 @@ shadingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 shadingReviewsRouter.post(
   '/',
   isAuth,
+  validateShadingReview,
   setShadingReview,
   setPriorShadingReview,
   noPriorShadingReview,
   insert,
 );
-shadingReviewsRouter.put('/edit', isAuth, isAdmin, setShadingReview, update);
+shadingReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  validateShadingReview,
+  setShadingReview,
+  update,
+);
 shadingReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,
