@@ -508,6 +508,25 @@ class WritingSample extends Component {
       });
     }
 
+    if (
+      colorOneChoice === priorColorOneChoice &&
+      colorTwoChoice === priorColorTwoChoice &&
+      colorThreeChoice === priorColorThreeChoice &&
+      shadingChoice === priorShadingChoice &&
+      sheenAmountChoice === priorSheenAmountChoice &&
+      sheenColorChoice === priorSheenColorChoice &&
+      featheringChoice === priorFeatheringChoice &&
+      waterChoice === priorWaterChoice &&
+      dryingTimeChoice === priorDryingTimeChoice &&
+      transparencyChoice === priorTransparencyChoice
+    ) {
+      this.setState((prevState) => {
+        return {
+          clientErrorMessage: `${prevState.clientErrorMessage}All Review choices already exist.`,
+        };
+      });
+    }
+
     if (clientError) {
       return;
     }
@@ -537,6 +556,12 @@ class WritingSample extends Component {
       ) {
         try {
           await API.instance.delete(url, config);
+
+          this.setState({
+            priorColorOneChoice: '',
+            priorColorTwoChoice: '',
+            priorColorThreeChoice: '',
+          });
         } catch (err) {
           console.log(err);
 
@@ -626,6 +651,10 @@ class WritingSample extends Component {
       if (priorShadingChoice !== '') {
         try {
           await API.instance.delete(url, config);
+
+          this.setState({
+            priorShadingChoice: '',
+          });
         } catch (err) {
           console.log(err);
 
@@ -669,9 +698,14 @@ class WritingSample extends Component {
     ) {
       const url = `sheen-reviews/${writingSampleID}`;
 
-      if (priorSheenColorChoice !== '' || priorSheenAmountChoice !== '') {
+      if (priorSheenColorChoice !== '' && priorSheenAmountChoice !== '') {
         try {
           await API.instance.delete(url, config);
+
+          this.setState({
+            priorSheenAmountChoice: '',
+            priorSheenColorChoice: '',
+          });
         } catch (err) {
           console.log(err);
 
@@ -719,14 +753,14 @@ class WritingSample extends Component {
           await API.instance.delete(url, config);
 
           this.setState({
-            priorFeatheringChoice: featheringChoice,
+            priorFeatheringChoice: '',
           });
         } catch (err) {
           console.log(err);
 
           this.setState((prevState) => {
             return {
-              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior feathering reivew. `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior feathering review. `,
             };
           });
         }
@@ -744,6 +778,10 @@ class WritingSample extends Component {
             featheringReview,
             config,
           );
+
+          this.setState({
+            priorFeatheringChoice: featheringChoice,
+          });
         } catch (err) {
           console.log(err);
 
@@ -764,12 +802,14 @@ class WritingSample extends Component {
       if (priorWaterChoice !== '') {
         try {
           await API.instance.delete(url, config);
+
+          this.setState({ priorWaterChoice: '' });
         } catch (err) {
           console.log(err);
 
           this.setState((prevState) => {
             return {
-              serverErrorMessage: `${prevState.serverErrorMessage}.Cannot delete prior waterproofness review `,
+              serverErrorMessage: `${prevState.serverErrorMessage}Cannot delete prior waterproofness review. `,
             };
           });
         }
@@ -805,6 +845,8 @@ class WritingSample extends Component {
       if (priorDryingTimeChoice !== '') {
         try {
           await API.instance.delete(url, config);
+
+          this.setState({ priorDryingTimeChoice: '' });
         } catch (err) {
           console.log(err);
 
@@ -846,6 +888,8 @@ class WritingSample extends Component {
       if (priorTransparencyChoice !== '') {
         try {
           await API.instance.delete(url, config);
+
+          this.setState({ priorTransparencyChoice: '' });
         } catch (err) {
           console.log(err);
 
