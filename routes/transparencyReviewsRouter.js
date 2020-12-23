@@ -10,8 +10,6 @@ const { isAuth, isAdmin } = require('../middlewares/authMiddleware');
 const {
   sanitizeQueryString,
   processQueryString,
-  appendUserToQS,
-  appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 const {
   setTransparencyReview,
