@@ -1,4 +1,5 @@
 const express = require('express');
+const AWS = require('../config/aws');
 const {
   show,
   index,
@@ -11,7 +12,9 @@ const {
   sanitizeQueryString,
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
-const AWS = require('../config/aws');
+const {
+  validateWritingSample,
+} = require('../middlewares/writingSamplesMiddleware');
 
 const { upload } = AWS;
 
@@ -35,6 +38,7 @@ writingSamplesRouter.post(
   '/',
   isAuth,
   upload.single('writingSampleImage'),
+  validateWritingSample,
   insert,
 );
 writingSamplesRouter.put('/edit/:writingSampleID', isAuth, isAdmin, update);
