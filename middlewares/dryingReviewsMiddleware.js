@@ -3,12 +3,14 @@ const { show } = require('../models/dryingReviewsModel');
 const { dryingTimes } = require('../constants');
 
 const validateDryingReview = (req, res, next) => {
-  if (req.body.dryingTime !== undefined) {
-    if (typeof req.body.dryingTime !== 'string') {
+  const { dryingTime } = req.body;
+
+  if (dryingTime !== undefined) {
+    if (typeof dryingTime !== 'string') {
       return next(createError(400, 'Drying Time must be a string.'));
     }
 
-    if (!dryingTimes.includes(req.body.dryingTime.toLowerCase())) {
+    if (!dryingTimes.includes(dryingTime.toLowerCase())) {
       return next(
         createError(
           400,

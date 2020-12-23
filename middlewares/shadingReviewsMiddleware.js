@@ -3,12 +3,14 @@ const { show } = require('../models/shadingReviewsModel');
 const { amounts } = require('../constants');
 
 const validateShadingReview = (req, res, next) => {
-  if (req.body.amount !== undefined) {
-    if (typeof req.body.amount !== 'string') {
+  const { amount } = req.body;
+
+  if (amount !== undefined) {
+    if (typeof amount !== 'string') {
       return next(createError(400, 'Amount must be a string.'));
     }
 
-    if (!amounts.includes(req.body.amount.toLowerCase())) {
+    if (!amounts.includes(amount.toLowerCase())) {
       return next(
         createError(
           400,

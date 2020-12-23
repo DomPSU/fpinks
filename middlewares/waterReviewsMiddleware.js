@@ -3,16 +3,18 @@ const { show } = require('../models/waterReviewsModel');
 const { waterproofnesses } = require('../constants');
 
 const validateWaterReview = (req, res, next) => {
-  if (req.body.waterproofness !== undefined) {
-    if (typeof req.body.waterproofness !== 'string') {
+  const { waterproofness } = req.body;
+
+  if (waterproofness !== undefined) {
+    if (typeof waterproofness !== 'string') {
       return next(createError(400, 'Waterproofness must be a string.'));
     }
 
-    if (!waterproofnesses.includes(req.body.waterproofness.toLowerCase())) {
+    if (!waterproofnesses.includes(waterproofness.toLowerCase())) {
       return next(
         createError(
           400,
-          `Amount must equal one of the following non case-sensitive choices: ${waterproofnesses.join(
+          `Waterproofness must equal one of the following non case-sensitive choices: ${waterproofnesses.join(
             ', ',
           )}.`,
         ),

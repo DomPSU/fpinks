@@ -3,16 +3,18 @@ const { show } = require('../models/transparencyReviewsModel');
 const { transparencies } = require('../constants');
 
 const validateTransparencyReview = (req, res, next) => {
-  if (req.body.transparency !== undefined) {
-    if (typeof req.body.transparency !== 'string') {
-      return next(createError(400, 'Amount must be a string.'));
+  const { transparency } = req.body;
+
+  if (transparency !== undefined) {
+    if (typeof transparency !== 'string') {
+      return next(createError(400, 'Transparency must be a string.'));
     }
 
-    if (!transparencies.includes(req.body.transparency.toLowerCase())) {
+    if (!transparencies.includes(transparency.toLowerCase())) {
       return next(
         createError(
           400,
-          `Transpaerency must equal one of the following non case-sensitive choices: ${transparencies.join(
+          `Transparency must equal one of the following non case-sensitive choices: ${transparencies.join(
             ', ',
           )}.`,
         ),

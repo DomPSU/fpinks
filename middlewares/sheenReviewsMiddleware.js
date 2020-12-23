@@ -3,10 +3,10 @@ const { show } = require('../models/sheenReviewsModel');
 const { colors, amounts } = require('../constants');
 
 const validateSheenReview = (req, res, next) => {
+  const { color, amount } = req.body;
+
   let stringError = '';
   let choiceError = '';
-
-  const { color, amount } = req.body;
 
   if (color !== undefined) {
     if (typeof color !== 'string') {
