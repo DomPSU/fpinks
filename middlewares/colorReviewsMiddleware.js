@@ -58,7 +58,7 @@ const underMaxPriorColorReviews = (req, res, next) => {
     return next();
   }
 
-  return next(createError(400, 'Maximum number of Color Review exists.'));
+  return next(createError(400, 'Maximum number of Color Review exist.'));
 };
 
 const priorColorReviewsExists = (req, res, next) => {
@@ -73,10 +73,37 @@ const priorColorReviewsExists = (req, res, next) => {
   return next(createError(404, 'Color Reviews not found.'));
 };
 
+const noNoneColorReviewConflict = (req, res, next) => {
+  const { colorReview, priorColorReviews } = res.locals;
+
+  if (priorColorReviews.length > 0) {
+    if (priorColorReviews[0].color === 'none') {
+      return next(
+        createError(
+          400,
+          "Another Color Review cannot exist with a 'none' Color Review.",
+        ),
+      );
+    }
+
+    if (colorReview.color.toLowerCase() === 'none') {
+      return next(
+        createError(
+          400,
+          "A Color Review choice of 'none' cannot exist with other color reviews.",
+        ),
+      );
+    }
+  }
+
+  next();
+};
+
 module.exports = {
   validateColorReview,
   setColorReview,
   setPriorColorReviews,
   underMaxPriorColorReviews,
   priorColorReviewsExists,
+  noNoneColorReviewConflict,
 };

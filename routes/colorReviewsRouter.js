@@ -17,6 +17,7 @@ const {
   setPriorColorReviews,
   underMaxPriorColorReviews,
   priorColorReviewsExists,
+  noNoneColorReviewConflict,
 } = require('../middlewares/colorReviewsMiddleware');
 
 const colorReviewsRouter = express.Router();
@@ -30,6 +31,7 @@ colorReviewsRouter.post(
   setColorReview,
   setPriorColorReviews,
   underMaxPriorColorReviews,
+  noNoneColorReviewConflict,
   insert,
 );
 colorReviewsRouter.put(
@@ -38,6 +40,7 @@ colorReviewsRouter.put(
   isAdmin,
   validateColorReview,
   setColorReview,
+  noNoneColorReviewConflict,
   update,
 );
 colorReviewsRouter.delete(
