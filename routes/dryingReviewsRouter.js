@@ -12,6 +12,7 @@ const {
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateDryingReview,
   setDryingReview,
   setPriorDryingReview,
   noPriorDryingReview,
@@ -25,12 +26,20 @@ dryingReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 dryingReviewsRouter.post(
   '/',
   isAuth,
+  validateDryingReview,
   setDryingReview,
   setPriorDryingReview,
   noPriorDryingReview,
   insert,
 );
-dryingReviewsRouter.put('/edit', isAuth, isAdmin, setDryingReview, update);
+dryingReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  validateDryingReview,
+  setDryingReview,
+  update,
+);
 dryingReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,

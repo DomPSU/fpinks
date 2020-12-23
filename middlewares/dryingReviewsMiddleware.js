@@ -1,5 +1,27 @@
 const createError = require('http-errors');
 const { show } = require('../models/dryingReviewsModel');
+const { dryingTimes } = require('../constants');
+
+const validateDryingReview = (req, res, next) => {
+  if (req.body.dryingTime !== undefined) {
+    if (typeof req.body.dryingTime !== 'string') {
+      return next(createError(400, 'Drying Time must be a string.'));
+    }
+
+    if (!dryingTimes.includes(req.body.dryingTime.toLowerCase())) {
+      return next(
+        createError(
+          400,
+          `Drying Time must equal one of the following non case-sensitive choices: ${dryingTimes.join(
+            ', ',
+          )}.`,
+        ),
+      );
+    }
+  }
+
+  next();
+};
 
 const setDryingReview = (req, res, next) => {
   const userID = req.body.userID ? req.body.userID : res.locals.user.user_id;
@@ -45,6 +67,7 @@ const priorDryingReviewExists = (req, res, next) => {
 };
 
 module.exports = {
+  validateDryingReview,
   setDryingReview,
   setPriorDryingReview,
   noPriorDryingReview,
