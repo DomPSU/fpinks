@@ -1,5 +1,27 @@
 const createError = require('http-errors');
 const { show } = require('../models/featheringReviewsModel');
+const { amounts } = require('../constants');
+
+const validateFeatheringReview = (req, res, next) => {
+  if (req.body.amount !== undefined) {
+    if (typeof req.body.amount !== 'string') {
+      return next(createError(400, 'Amount must be a string.'));
+    }
+
+    if (!amounts.includes(req.body.amount.toLowerCase())) {
+      return next(
+        createError(
+          400,
+          `Amount must equal one of the following non case-sensitive choices: ${amounts.join(
+            ', ',
+          )}.`,
+        ),
+      );
+    }
+  }
+
+  next();
+};
 
 const setFeatheringReview = (req, res, next) => {
   const userID = req.body.userID ? req.body.userID : res.locals.user.user_id;
@@ -45,6 +67,7 @@ const priorFeatheringReviewExists = (req, res, next) => {
 };
 
 module.exports = {
+  validateFeatheringReview,
   setFeatheringReview,
   setPriorFeatheringReview,
   noPriorFeatheringReview,

@@ -14,6 +14,7 @@ const {
   appendWritingSampleToQS,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateFeatheringReview,
   setFeatheringReview,
   setPriorFeatheringReview,
   noPriorFeatheringReview,
@@ -37,6 +38,7 @@ featheringReviewsRouter.get(
 featheringReviewsRouter.post(
   '/',
   isAuth,
+  validateFeatheringReview,
   setFeatheringReview,
   setPriorFeatheringReview,
   noPriorFeatheringReview,
@@ -46,6 +48,7 @@ featheringReviewsRouter.put(
   '/edit',
   isAuth,
   isAdmin,
+  validateFeatheringReview,
   setFeatheringReview,
   update,
 );
