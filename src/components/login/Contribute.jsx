@@ -49,6 +49,7 @@ class Contribute extends Component {
     e.preventDefault();
 
     this.setState({ clientErrorMessage: '', serverErrorMessage: '' });
+    const { isSignedIn } = this.props;
 
     const {
       writingSampleImage,
@@ -64,6 +65,13 @@ class Contribute extends Component {
       paperStyle,
       comment,
     } = this.state;
+
+    if (!isSignedIn) {
+      this.setState({
+        clientErrorMessage: 'You must login before contributing',
+      });
+      return;
+    }
 
     if (
       writingSampleImage === undefined ||
@@ -215,11 +223,18 @@ class Contribute extends Component {
   }
 
   render() {
+    const { isSignedIn } = this.props;
     const { clientErrorMessage, serverErrorMessage } = this.state;
 
     return (
       <div className="container text-center">
         <div className="row">
+          {!isSignedIn && <div className="col-lg-2" />}
+          {!isSignedIn && (
+            <h3 className="col-lg-8 pb-3 pt-3 border-bottom border-dark m-1">
+              You must <a href="/login">Login</a> before contributing.
+            </h3>
+          )}
           <div className="col-lg-2" />
           <h3 className="col-lg-8 pb-3 pt-3 border-bottom border-dark m-1">
             A contribution may simply be written words. Feel free to add

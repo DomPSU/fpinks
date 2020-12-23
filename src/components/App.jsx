@@ -620,7 +620,7 @@ class App extends Component {
               exact
               path="/contribute"
               key="/contribute"
-              render={() => <Contribute />}
+              render={() => <Contribute isSignedIn={isSignedIn} />}
             />
 
             {/* Gallery */}
