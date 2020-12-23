@@ -30,15 +30,14 @@ const insert = async (req, res, next) => {
     ...req.body,
   };
 
-  // get validated user from idToken
   async function verify() {
     const ticket = await google.verify(user.idToken);
     const insertCredentials = await google.getInsertCredentials(ticket);
 
-    // insert new validated user
     try {
-      await usersModel.insert(insertCredentials);
-      res.status(200).end();
+      const dbRes = await usersModel.insert(insertCredentials);
+
+      res.status(200).send(dbRes);
     } catch (e) {
       next(e);
     }

@@ -24,12 +24,14 @@ class Login extends Component {
     }
   }
 
-  // TODO
   // eslint-disable-next-line class-methods-use-this
   sendIDToken(idToken) {
     API.instance
       .post('/users', {
         idToken,
+      })
+      .then((res) => {
+        sessionStorage.setItem('userID', res.data.user_id);
       })
       .catch((error) => {
         console.log(error);

@@ -21,19 +21,13 @@ const show = async (id) => {
 };
 
 const insert = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-
-  // search database for user
-  const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM Users WHERE sub = ? AND iss = ?',
+  let selectRes = await db.pool.asyncQuery(
+    'SELECT user_id FROM Users WHERE sub = ? AND iss = ?',
     [data.sub, data.iss],
   );
 
-  // insert user if he or she doesnt exist
   if (selectRes.length === 0) {
-    const insertRes = await db.pool.asyncQuery(
+    await db.pool.asyncQuery(
       'INSERT INTO Users (email, username, sub, iss, level, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [
         data.email.toLowerCase(),
@@ -46,24 +40,23 @@ const insert = async (data) => {
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       ],
     );
-    return insertRes;
+
+    selectRes = await db.pool.asyncQuery(
+      'SELECT user_id FROM Users WHERE sub = ? AND iss = ?',
+      [data.sub, data.iss],
+    );
   }
 
-  // return user if it already exists
   if (selectRes.length === 1) {
-    return selectRes;
+    return selectRes[0];
   }
 
-  if (selectRes.length >= 2) {
+  if (selectRes.length > 1) {
     throw Object.assign(new Error('duplicate user in database'), { code: 500 });
   }
 };
 
 const update = async (data) => {
-  // TODO validate all needed keys
-
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
-
   const updateRes = await db.pool.asyncQuery(
     'UPDATE Users SET approved = ?, updated_at = ? WHERE user_id = ?',
     [

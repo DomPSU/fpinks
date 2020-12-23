@@ -585,6 +585,7 @@ class App extends Component {
                     pageStorage="profile writing samples page"
                     path="writing-samples/search/"
                     noResultsMessage="Query matches none of your writing samples."
+                    profile
                   />
                 ) : (
                   <Redirect to="/login" />

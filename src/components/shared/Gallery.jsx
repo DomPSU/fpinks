@@ -95,10 +95,15 @@ class Gallery extends Component {
 
   query() {
     const { query, currentPage } = this.state;
-    const { path } = this.props;
+    const { path, profile } = this.props;
 
     const offset = 12 * (parseInt(currentPage, 10) - 1);
-    const url = `${path}${query}?offset=${offset}`;
+    let url = `${path}${query}?offset=${offset}`;
+
+    if (profile) {
+      const userID = sessionStorage.getItem('userID');
+      url = `${url}&WritingSamples.user_id=${userID}`;
+    }
 
     API.instance
       .get(url)
