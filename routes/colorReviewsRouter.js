@@ -15,7 +15,7 @@ const {
   validateColorReview,
   setColorReview,
   setPriorColorReviews,
-  noMaxPriorColorReviews,
+  underMaxPriorColorReviews,
   priorColorReviewsExists,
 } = require('../middlewares/colorReviewsMiddleware');
 
@@ -29,7 +29,7 @@ colorReviewsRouter.post(
   validateColorReview,
   setColorReview,
   setPriorColorReviews,
-  noMaxPriorColorReviews,
+  underMaxPriorColorReviews,
   insert,
 );
 colorReviewsRouter.put(

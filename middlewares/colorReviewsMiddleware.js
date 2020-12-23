@@ -53,12 +53,12 @@ const setPriorColorReviews = async (req, res, next) => {
   return next();
 };
 
-const noMaxPriorColorReviews = (req, res, next) => {
+const underMaxPriorColorReviews = (req, res, next) => {
   if (res.locals.priorColorReviews.length < 3) {
     return next();
   }
 
-  return next(createError(400, 'At least one prior Color Review exists.'));
+  return next(createError(400, 'Maximum number of Color Review exists.'));
 };
 
 const priorColorReviewsExists = (req, res, next) => {
@@ -77,6 +77,6 @@ module.exports = {
   validateColorReview,
   setColorReview,
   setPriorColorReviews,
-  noMaxPriorColorReviews,
+  underMaxPriorColorReviews,
   priorColorReviewsExists,
 };
