@@ -12,6 +12,7 @@ const {
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateTransparencyReview,
   setTransparencyReview,
   setPriorTransparencyReview,
   noPriorTransparencyReview,
@@ -35,6 +36,7 @@ transparencyReviewsRouter.get(
 transparencyReviewsRouter.post(
   '/',
   isAuth,
+  validateTransparencyReview,
   setTransparencyReview,
   setPriorTransparencyReview,
   noPriorTransparencyReview,
@@ -44,6 +46,7 @@ transparencyReviewsRouter.put(
   '/edit',
   isAuth,
   isAdmin,
+  validateTransparencyReview,
   setTransparencyReview,
   update,
 );
