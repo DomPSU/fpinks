@@ -32,8 +32,8 @@ Create TABLE Papers(
   brand VARCHAR(100) NOT NULL,
   name VARCHAR(100),
   style VARCHAR(10) NOT NULL,
-  lbs VARCHAR(10), -- TODO make NOT NULL and fix seeds
-  grams  VARCHAR(10), -- TODO make NOT NULL and fix seeds
+  lbs VARCHAR(10),
+  grams  VARCHAR(10),
   approved TINYINT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL

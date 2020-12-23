@@ -103,10 +103,12 @@ const insert = async (req, res, next) => {
     next(e);
   }
 
+  const paperName = req.body.paperName ? req.body.paperName : null;
+
   // process paper insert
   const paper = {
     paperBrand: req.body.paperBrand,
-    paperName: req.body.paperName,
+    paperName,
     paperStyle: req.body.paperStyle,
   };
 
@@ -168,10 +170,12 @@ const insert = async (req, res, next) => {
     next(e);
   }
 
+  const comment = req.body.comment ? req.body.comment : null;
+
   // process writingSample insert
   const writingSample = {
     userID: res.locals.user.user_id,
-    comment: req.body.comment,
+    comment,
     penID,
     nibID,
     inkID,

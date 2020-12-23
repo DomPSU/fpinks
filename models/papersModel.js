@@ -21,15 +21,25 @@ const show = async (id) => {
 };
 
 const insert = async (data) => {
-  // TODO validate all needed keys
+  let { paperName } = data;
 
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+  if (paperName) {
+    paperName = paperName.toLowerCase();
+  }
 
-  // search database for paper
-  const selectRes = await db.pool.asyncQuery(
-    'SELECT * FROM Papers WHERE brand = ? AND name = ? AND style = ?', // TODO lbs/grams
-    [data.paperBrand, data.paperName, data.paperStyle],
-  );
+  let selectRes;
+
+  if (paperName) {
+    selectRes = await db.pool.asyncQuery(
+      'SELECT * FROM Papers WHERE brand = ? AND name = ? AND style = ?',
+      [data.paperBrand, data.paperName, data.paperStyle],
+    );
+  } else {
+    selectRes = await db.pool.asyncQuery(
+      'SELECT * FROM Papers WHERE brand = ? AND name is NULL AND style = ?',
+      [data.paperBrand, data.paperStyle],
+    );
+  }
 
   // insert paper if it doesnt exist
   if (selectRes.length === 0) {
@@ -37,16 +47,16 @@ const insert = async (data) => {
       'INSERT INTO Papers (brand, name, style, lbs, grams, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [
         data.paperBrand.toLowerCase(),
-        data.paperName.toLowerCase(),
+        paperName,
         data.paperStyle.toLowerCase(),
-        null, // TODO
-        null, // TODO
+        null,
+        null,
         0,
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
         new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       ],
     );
-    console.log(insertRes);
+
     return insertRes;
   }
 

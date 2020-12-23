@@ -56,16 +56,17 @@ const basicSearch = async (query, offset) => {
 };
 
 const insert = async (data) => {
-  // TODO validate all needed keys
+  let { comment } = data;
 
-  // TODO validate all values not blank unless they can be NULL from schema, set up JSON
+  if (comment) {
+    comment = comment.toLowerCase();
+  }
 
-  // TODO FIX INSERT. user_id defaults to 1 but should be either null, anonymous or logged in user
   const insertRes = await db.pool.asyncQuery(
     'INSERT INTO WritingSamples (user_id, comment, pen_id, nib_id, ink_id, paper_id, original_aws_key, valid_waterproofness, valid_transparency, valid_drying_time, approved, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [
       data.userID,
-      data.comment,
+      comment,
       data.penID,
       data.nibID,
       data.inkID,
