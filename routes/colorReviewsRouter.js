@@ -12,6 +12,7 @@ const {
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateColorReview,
   setColorReview,
   setPriorColorReviews,
   noMaxPriorColorReviews,
@@ -25,12 +26,20 @@ colorReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 colorReviewsRouter.post(
   '/',
   isAuth,
+  validateColorReview,
   setColorReview,
   setPriorColorReviews,
   noMaxPriorColorReviews,
   insert,
 );
-colorReviewsRouter.put('/edit', isAuth, isAdmin, setColorReview, update);
+colorReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  validateColorReview,
+  setColorReview,
+  update,
+);
 colorReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,

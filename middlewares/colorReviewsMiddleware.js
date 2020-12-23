@@ -1,5 +1,29 @@
 const createError = require('http-errors');
 const { show } = require('../models/colorReviewsModel');
+const { colors } = require('../constants');
+
+const validateColorReview = (req, res, next) => {
+  const { color } = req.body;
+
+  if (color !== undefined) {
+    if (typeof color !== 'string') {
+      return next(createError(400, 'Amount must be a string.'));
+    }
+
+    if (!colors.includes(color.toLowerCase())) {
+      return next(
+        createError(
+          400,
+          `Color must equal one of the following non case-sensitive choices: ${colors.join(
+            ', ',
+          )}.`,
+        ),
+      );
+    }
+  }
+
+  next();
+};
 
 const setColorReview = (req, res, next) => {
   const userID = req.body.userID ? req.body.userID : res.locals.user.user_id;
@@ -50,6 +74,7 @@ const priorColorReviewsExists = (req, res, next) => {
 };
 
 module.exports = {
+  validateColorReview,
   setColorReview,
   setPriorColorReviews,
   noMaxPriorColorReviews,
