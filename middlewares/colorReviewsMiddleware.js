@@ -80,7 +80,7 @@ const priorColorReviewsExists = (req, res, next) => {
 const noNoneColorReviewConflict = (req, res, next) => {
   const { colorReview, priorColorReviews } = res.locals;
 
-  if (priorColorReviews.length > 0) {
+  if (priorColorReviews.length === 1) {
     if (priorColorReviews[0].color === 'none') {
       return next(
         createError(
@@ -89,7 +89,9 @@ const noNoneColorReviewConflict = (req, res, next) => {
         ),
       );
     }
+  }
 
+  if (priorColorReviews.length > 0) {
     if (colorReview.color.toLowerCase() === 'none') {
       return next(
         createError(
