@@ -57,7 +57,7 @@ const paperStyles = ['plain', 'lined', 'grid', 'dot'];
 const amounts = ['none', 'light', 'heavy'];
 
 const waterproofnesses = [
-  'non',
+  'none',
   'partially legible',
   'fully legible',
   '100% (no smear)',

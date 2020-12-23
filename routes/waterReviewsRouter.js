@@ -12,6 +12,7 @@ const {
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateWaterReview,
   setWaterReview,
   setPriorWaterReview,
   noPriorWaterReview,
@@ -25,12 +26,20 @@ waterReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 waterReviewsRouter.post(
   '/',
   isAuth,
+  validateWaterReview,
   setWaterReview,
   setPriorWaterReview,
   noPriorWaterReview,
   insert,
 );
-waterReviewsRouter.put('/edit', isAuth, isAdmin, setWaterReview, update);
+waterReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  validateWaterReview,
+  setWaterReview,
+  update,
+);
 waterReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,

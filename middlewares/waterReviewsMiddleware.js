@@ -1,5 +1,27 @@
 const createError = require('http-errors');
 const { show } = require('../models/waterReviewsModel');
+const { waterproofnesses } = require('../constants');
+
+const validateWaterReview = (req, res, next) => {
+  if (req.body.waterproofness !== undefined) {
+    if (typeof req.body.waterproofness !== 'string') {
+      return next(createError(400, 'Waterproofness must be a string.'));
+    }
+
+    if (!waterproofnesses.includes(req.body.waterproofness.toLowerCase())) {
+      return next(
+        createError(
+          400,
+          `Amount must equal one of the following non case-sensitive choices: ${waterproofnesses.join(
+            ', ',
+          )}.`,
+        ),
+      );
+    }
+  }
+
+  next();
+};
 
 const setWaterReview = (req, res, next) => {
   const userID = req.body.userID ? req.body.userID : res.locals.user.user_id;
@@ -45,6 +67,7 @@ const priorWaterReviewExists = (req, res, next) => {
 };
 
 module.exports = {
+  validateWaterReview,
   setWaterReview,
   setPriorWaterReview,
   noPriorWaterReview,
