@@ -12,6 +12,7 @@ const {
   processQueryString,
 } = require('../middlewares/queryStringMiddleware');
 const {
+  validateSheenReview,
   setSheenReview,
   setPriorSheenReview,
   noPriorSheenReview,
@@ -25,12 +26,20 @@ sheenReviewsRouter.get('/', sanitizeQueryString, processQueryString, index);
 sheenReviewsRouter.post(
   '/',
   isAuth,
+  validateSheenReview,
   setSheenReview,
   setPriorSheenReview,
   noPriorSheenReview,
   insert,
 );
-sheenReviewsRouter.put('/edit', isAuth, isAdmin, setSheenReview, update);
+sheenReviewsRouter.put(
+  '/edit',
+  isAuth,
+  isAdmin,
+  validateSheenReview,
+  setSheenReview,
+  update,
+);
 sheenReviewsRouter.delete(
   '/:writingSampleID',
   isAuth,
