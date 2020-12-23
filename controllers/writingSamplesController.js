@@ -188,13 +188,29 @@ const insert = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const { id } = req.params;
+  const { writingSampleID } = req.params;
+
+  const {
+    penID,
+    nibID,
+    inkID,
+    paperID,
+    validWaterproofness,
+    validDryingTime,
+    validTransparency,
+    approved,
+  } = req.body;
+
   const writingSample = {
-    writingSampleID: id,
-    validWaterproofness: req.body.validWaterproofness,
-    validDryingTime: req.body.validDryingTime,
-    validTransparency: req.body.validTransparency,
-    approved: req.body.approved,
+    writingSampleID,
+    penID,
+    nibID,
+    inkID,
+    paperID,
+    validWaterproofness,
+    validDryingTime,
+    validTransparency,
+    approved,
   };
 
   try {

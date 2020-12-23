@@ -17,9 +17,6 @@ const { upload } = AWS;
 
 const writingSamplesRouter = express.Router();
 
-// TODO make sure search is secure. Might need to add middleware.
-// Might need to remove middleware. Might need to refactor search.
-// Might need to sanitize search
 writingSamplesRouter.get(
   '/search/:query',
   sanitizeQueryString,
@@ -40,6 +37,6 @@ writingSamplesRouter.post(
   upload.single('writingSampleImage'),
   insert,
 );
-writingSamplesRouter.put('/edit/:id', isAuth, isAdmin, update);
+writingSamplesRouter.put('/edit/:writingSampleID', isAuth, isAdmin, update);
 
 module.exports = writingSamplesRouter;

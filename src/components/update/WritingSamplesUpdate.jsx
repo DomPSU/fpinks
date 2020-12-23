@@ -8,6 +8,10 @@ class WritingSamplesUpdate extends Component {
 
     this.state = {
       writingSampleID: '',
+      penID: '',
+      nibID: '',
+      inkID: '',
+      paperID: '',
       approved: '',
       validWaterproofness: '',
       validDryingTime: '',
@@ -44,6 +48,10 @@ class WritingSamplesUpdate extends Component {
       .then((res) => {
         this.setState({
           writingSampleID: res.data[0].writing_sample_id,
+          penID: res.data[0].pen_id,
+          nibID: res.data[0].nib_id,
+          inkID: res.data[0].ink_id,
+          paperID: res.data[0].paper_id,
           validWaterproofness: res.data[0].valid_waterproofness,
           validDryingTime: res.data[0].valid_drying_time,
           validTransparency: res.data[0].valid_transparency,
@@ -54,6 +62,12 @@ class WritingSamplesUpdate extends Component {
       .catch((error) => {
         this.setState({
           writingSampleID: '',
+          nibID: '',
+          inkID: '',
+          paperID: '',
+          validWaterproofness: '',
+          validDryingTime: '',
+          validTransparency: '',
           approved: '',
           disableForm: true,
         });
@@ -87,6 +101,10 @@ class WritingSamplesUpdate extends Component {
   handleSubmit(e) {
     const {
       writingSampleID,
+      penID,
+      nibID,
+      inkID,
+      paperID,
       approved,
       validWaterproofness,
       validDryingTime,
@@ -105,6 +123,10 @@ class WritingSamplesUpdate extends Component {
         `/writing-samples/edit/${writingSampleID}`,
         {
           approved,
+          penID,
+          nibID,
+          inkID,
+          paperID,
           validWaterproofness,
           validDryingTime,
           validTransparency,
@@ -135,6 +157,10 @@ class WritingSamplesUpdate extends Component {
   render() {
     const {
       writingSampleID,
+      penID,
+      nibID,
+      inkID,
+      paperID,
       validWaterproofness,
       validDryingTime,
       validTransparency,
@@ -158,6 +184,46 @@ class WritingSamplesUpdate extends Component {
                   onChange={this.handleChange}
                   value={writingSampleID}
                   disabled
+                />
+              </label>
+              <label htmlFor="penID" className="p-3">
+                Pen ID
+                <input
+                  type="text"
+                  id="penID"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={penID}
+                />
+              </label>
+              <label htmlFor="nibID" className="p-3">
+                Nib ID
+                <input
+                  type="text"
+                  id="nibID"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={nibID}
+                />
+              </label>
+              <label htmlFor="inkID" className="p-3">
+                Ink ID
+                <input
+                  type="text"
+                  id="inkID"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={inkID}
+                />
+              </label>
+              <label htmlFor="paperID" className="p-3">
+                Paper ID
+                <input
+                  type="text"
+                  id="paperID"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={paperID}
                 />
               </label>
               <label htmlFor="validWaterproofness" className="p-3">
