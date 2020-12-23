@@ -9,7 +9,7 @@ class Contribute extends Component {
     super(props);
 
     this.state = {
-      writingSampleImage: '',
+      writingSampleImage: undefined,
       inkBrand: '',
       inkName: '',
       penBrand: '',
@@ -21,6 +21,8 @@ class Contribute extends Component {
       paperName: '',
       paperStyle: '',
       comment: '',
+      clientErrorMessage: '',
+      serverErrorMessage: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -44,6 +46,10 @@ class Contribute extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
+
+    this.setState({ clientErrorMessage: '', serverErrorMessage: '' });
+
     const {
       writingSampleImage,
       inkBrand,
@@ -59,9 +65,114 @@ class Contribute extends Component {
       comment,
     } = this.state;
 
-    // TODO add frontend validation
+    if (
+      writingSampleImage === undefined ||
+      inkBrand === '' ||
+      inkName === '' ||
+      penBrand === '' ||
+      penModel === '' ||
+      nibSize === '' ||
+      nibGrind === '' ||
+      nibTune === '' ||
+      paperBrand === '' ||
+      paperStyle === ''
+    ) {
+      this.setState({
+        clientErrorMessage: 'Only paper name and comment may be blank',
+      });
 
-    // HACK
+      return;
+    }
+
+    if (writingSampleImage.name.length > 900) {
+      this.setState({
+        clientErrorMessage:
+          'Writing sample image name must be 900 characters or less.',
+      });
+
+      return;
+    }
+
+    if (inkBrand.length > 100) {
+      this.setState({
+        clientErrorMessage: 'Ink brand must be 100 characters or less.',
+      });
+
+      return;
+    }
+
+    if (inkName.length > 100) {
+      this.setState({
+        clientErrorMessage: 'Ink name must be 100 characters or less.',
+      });
+
+      return;
+    }
+
+    if (penBrand.length > 100) {
+      this.setState({
+        clientErrorMessage: 'Pen brand must be 100 characters or less.',
+      });
+
+      return;
+    }
+
+    if (penModel.length > 255) {
+      this.setState({
+        clientErrorMessage: 'Pen model must be 255 characters or less.',
+      });
+
+      return;
+    }
+
+    if (paperBrand.length > 100) {
+      this.setState({
+        clientErrorMessage: 'Paper brand must be 100 characters or less.',
+      });
+
+      return;
+    }
+
+    if (paperName.length > 100) {
+      this.setState({
+        clientErrorMessage: 'Paper name must be 100 characters or less.',
+      });
+
+      return;
+    }
+
+    if (comment.length > 1024) {
+      this.setState({
+        clientErrorMessage: 'Comment must be 1024 characters or less.',
+      });
+
+      return;
+    }
+
+    if (
+      !(
+        writingSampleImage.type === 'image/png' ||
+        writingSampleImage.type === 'image/jpg' ||
+        writingSampleImage.type === 'image/jpeg'
+      )
+    ) {
+      this.setState({
+        clientErrorMessage:
+          'Writing sample image must be .jpg, .jpeg or .png format.',
+      });
+
+      return;
+    }
+
+    if (writingSampleImage.size > 25000000) {
+      this.setState({
+        clientErrorMessage:
+          'Writing sample image must be less than 25 Megabytes.',
+      });
+
+      return;
+    }
+
     const formData = new FormData();
     formData.append('writingSampleImage', writingSampleImage);
     formData.append('inkBrand', inkBrand);
@@ -82,19 +193,30 @@ class Contribute extends Component {
       },
     };
 
+    this.setState({
+      clientErrorMessage: 'Processing submission... please wait 5s.',
+    });
+
     API.instance
       .post('/writing-samples', formData, config)
       .then((res) => {
         console.log(res);
+
+        this.setState({ clientErrorMessage: '' });
       })
       .catch((error) => {
         console.log(error);
-      });
 
-    e.preventDefault();
+        this.setState({
+          clientErrorMessage: '',
+          serverErrorMessage: 'A server error occured',
+        });
+      });
   }
 
   render() {
+    const { clientErrorMessage, serverErrorMessage } = this.state;
+
     return (
       <div className="container text-center">
         <div className="row">
@@ -110,11 +232,10 @@ class Contribute extends Component {
           <div className="row">
             <div className="col-lg-12 col-lg-offset-12">
               <label htmlFor="writingSampleImage" className="p-3 m-0">
-                Image
                 <input
                   type="file"
                   id="writingSampleImage"
-                  className="form-control p-1"
+                  className="form-control-file p-1"
                   onChange={this.handleFile}
                 />
               </label>
@@ -261,18 +382,36 @@ class Contribute extends Component {
           <button
             type="submit"
             className="btn btn-primary m-1"
+            data-toggle="modal"
+            data-target="#contributeModal"
             onClick={this.handleSubmit}
           >
             Submit
           </button>
         </form>
+        <div
+          className="modal fade"
+          id="contributeModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="contributeModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-body">
+                {clientErrorMessage}
+                {serverErrorMessage}
+                {!clientErrorMessage &&
+                  !serverErrorMessage &&
+                  'Thanks! Your contribution is being processed.'}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 export default Contribute;
-
-// TODO add radio input for g/m^2 or lbs
-// TODO refactor input groups into a react component?
-// TODO nibSize, nibGrind, and nibTune options in json file
