@@ -53,7 +53,9 @@ const setPriorShadingReview = async (req, res, next) => {
 };
 
 const noPriorShadingReview = (req, res, next) => {
-  if (res.locals.priorShadingReview.length === 0) {
+  const { priorShadingReview } = res.locals;
+
+  if (priorShadingReview.length === 0) {
     return next();
   }
 
@@ -61,7 +63,9 @@ const noPriorShadingReview = (req, res, next) => {
 };
 
 const priorShadingReviewExists = (req, res, next) => {
-  if (res.locals.priorShadingReview.length === 1) {
+  const { priorShadingReview } = res.locals;
+
+  if (priorShadingReview.length === 1) {
     return next();
   }
 

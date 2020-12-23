@@ -53,7 +53,9 @@ const setPriorWaterReview = async (req, res, next) => {
 };
 
 const noPriorWaterReview = (req, res, next) => {
-  if (res.locals.priorWaterReview.length === 0) {
+  const { priorWaterReview } = res.locals;
+
+  if (priorWaterReview.length === 0) {
     return next();
   }
 
@@ -61,7 +63,9 @@ const noPriorWaterReview = (req, res, next) => {
 };
 
 const priorWaterReviewExists = (req, res, next) => {
-  if (res.locals.priorWaterReview.length === 1) {
+  const { priorWaterReview } = res.locals;
+
+  if (priorWaterReview.length === 1) {
     return next();
   }
 

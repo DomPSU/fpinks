@@ -54,7 +54,9 @@ const setPriorColorReviews = async (req, res, next) => {
 };
 
 const underMaxPriorColorReviews = (req, res, next) => {
-  if (res.locals.priorColorReviews.length < 3) {
+  const { priorColorReviews } = res.locals;
+
+  if (priorColorReviews.length < 3) {
     return next();
   }
 
@@ -62,10 +64,12 @@ const underMaxPriorColorReviews = (req, res, next) => {
 };
 
 const priorColorReviewsExists = (req, res, next) => {
+  const { priorColorReviews } = res.locals;
+
   if (
-    res.locals.priorColorReviews.length === 1 ||
-    res.locals.priorColorReviews.length === 2 ||
-    res.locals.priorColorReviews.length === 3
+    priorColorReviews.length === 1 ||
+    priorColorReviews.length === 2 ||
+    priorColorReviews.length === 3
   ) {
     return next();
   }

@@ -55,7 +55,9 @@ const setPriorTransparencyReview = async (req, res, next) => {
 };
 
 const noPriorTransparencyReview = (req, res, next) => {
-  if (res.locals.priorTransparencyReview.length === 0) {
+  const { priorTransparencyReview } = res.locals;
+
+  if (priorTransparencyReview.length === 0) {
     return next();
   }
 
@@ -63,7 +65,9 @@ const noPriorTransparencyReview = (req, res, next) => {
 };
 
 const priorTransparencyReviewExists = (req, res, next) => {
-  if (res.locals.priorTransparencyReview.length === 1) {
+  const { priorTransparencyReview } = res.locals;
+
+  if (priorTransparencyReview.length === 1) {
     return next();
   }
 

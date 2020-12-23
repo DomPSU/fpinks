@@ -53,7 +53,9 @@ const setPriorFeatheringReview = async (req, res, next) => {
 };
 
 const noPriorFeatheringReview = (req, res, next) => {
-  if (res.locals.priorFeatheringReview.length === 0) {
+  const { priorFeatheringReview } = res.locals;
+
+  if (priorFeatheringReview.length === 0) {
     return next();
   }
 
@@ -61,7 +63,9 @@ const noPriorFeatheringReview = (req, res, next) => {
 };
 
 const priorFeatheringReviewExists = (req, res, next) => {
-  if (res.locals.priorFeatheringReview.length === 1) {
+  const { priorFeatheringReview } = res.locals;
+
+  if (priorFeatheringReview.length === 1) {
     return next();
   }
 

@@ -53,7 +53,9 @@ const setPriorDryingReview = async (req, res, next) => {
 };
 
 const noPriorDryingReview = (req, res, next) => {
-  if (res.locals.priorDryingReview.length === 0) {
+  const { priorDryingReview } = res.locals;
+
+  if (priorDryingReview.length === 0) {
     return next();
   }
 
@@ -61,7 +63,9 @@ const noPriorDryingReview = (req, res, next) => {
 };
 
 const priorDryingReviewExists = (req, res, next) => {
-  if (res.locals.priorDryingReview.length === 1) {
+  const { priorDryingReview } = res.locals;
+
+  if (priorDryingReview.length === 1) {
     return next();
   }
 

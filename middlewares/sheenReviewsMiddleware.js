@@ -91,7 +91,9 @@ const setPriorSheenReview = async (req, res, next) => {
 };
 
 const noPriorSheenReview = (req, res, next) => {
-  if (res.locals.priorSheenReview.length === 0) {
+  const { priorSheenReview } = res.locals;
+
+  if (priorSheenReview.length === 0) {
     return next();
   }
 
@@ -99,7 +101,9 @@ const noPriorSheenReview = (req, res, next) => {
 };
 
 const priorSheenReviewExists = (req, res, next) => {
-  if (res.locals.priorSheenReview.length === 1) {
+  const { priorSheenReview } = res.locals;
+
+  if (priorSheenReview.length === 1) {
     return next();
   }
 
