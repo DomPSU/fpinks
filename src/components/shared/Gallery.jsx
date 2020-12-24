@@ -29,6 +29,7 @@ class Gallery extends Component {
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleIncrementClick = this.handleIncrementClick.bind(this);
     this.handleDecrementClick = this.handleDecrementClick.bind(this);
+    this.handleFirstPageClick = this.handleFirstPageClick.bind(this);
     this.query = this.debounce(this.query, 300);
   }
 
@@ -95,6 +96,13 @@ class Gallery extends Component {
 
     await this.setState((state) => ({
       currentPage: String(parseInt(state.currentPage, 10) - 1),
+    }));
+    this.query();
+  }
+
+  async handleFirstPageClick() {
+    await this.setState((state) => ({
+      currentPage: '1',
     }));
     this.query();
   }
@@ -195,6 +203,7 @@ class Gallery extends Component {
                 currentPage={currentPage}
                 handleIncrementClick={this.handleIncrementClick}
                 handleDecrementClick={this.handleDecrementClick}
+                handleFirstPageClick={this.handleFirstPageClick}
               />
             </div>
           )}
@@ -219,6 +228,7 @@ class Gallery extends Component {
               currentPage={currentPage}
               handleIncrementClick={this.handleIncrementClick}
               handleDecrementClick={this.handleDecrementClick}
+              handleFirstPageClick={this.handleFirstPageClick}
             />
           )}
 
