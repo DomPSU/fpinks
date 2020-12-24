@@ -1540,7 +1540,7 @@ class WritingSample extends Component {
                       {serverErrorMessage}
                       {!clientErrorMessage &&
                         !serverErrorMessage &&
-                        'Thanks! All of your reviews are being processed.'}
+                        'Thanks! All of your reviews were processed.'}
                     </div>
                   </div>
                 </div>
