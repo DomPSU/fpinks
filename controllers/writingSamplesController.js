@@ -202,6 +202,8 @@ const update = async (req, res, next) => {
     validWaterproofness,
     validDryingTime,
     validTransparency,
+    lowResAWSKey,
+    highResAWSKey,
     approved,
   } = req.body;
 
@@ -214,6 +216,8 @@ const update = async (req, res, next) => {
     validWaterproofness,
     validDryingTime,
     validTransparency,
+    lowResAWSKey,
+    highResAWSKey,
     approved,
   };
 

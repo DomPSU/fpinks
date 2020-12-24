@@ -27,7 +27,6 @@ const show = async (id) => {
     [id],
   );
   await addAPIURLs(res);
-  deleteAllAWSKeys(res);
   return res;
 };
 
@@ -85,7 +84,7 @@ const insert = async (data) => {
 
 const update = async (data) => {
   const updateRes = await db.pool.asyncQuery(
-    'UPDATE WritingSamples SET pen_id=?, nib_id=?, ink_id=?, paper_id=?, approved=?, valid_waterproofness=?, valid_drying_time=?, valid_transparency=?,  updated_at=? WHERE writing_sample_id=?',
+    'UPDATE WritingSamples SET pen_id=?, nib_id=?, ink_id=?, paper_id=?, approved=?, valid_waterproofness=?, valid_drying_time=?, valid_transparency=?, low_res_aws_key=?, high_res_aws_key=?, updated_at=? WHERE writing_sample_id=?',
     [
       data.penID,
       data.nibID,
@@ -95,6 +94,8 @@ const update = async (data) => {
       data.validWaterproofness,
       data.validDryingTime,
       data.validTransparency,
+      data.lowResAWSKey,
+      data.highResAWSKey,
       new Date().toISOString().replace('T', ' ').replace('Z', ' '),
       data.writingSampleID,
     ],

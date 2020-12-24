@@ -16,6 +16,8 @@ class WritingSamplesUpdate extends Component {
       validWaterproofness: '',
       validDryingTime: '',
       validTransparency: '',
+      lowResAWSKey: '',
+      highResAWSKey: '',
       disableForm: true,
       serverResponse: '',
     };
@@ -55,6 +57,8 @@ class WritingSamplesUpdate extends Component {
           validWaterproofness: res.data[0].valid_waterproofness,
           validDryingTime: res.data[0].valid_drying_time,
           validTransparency: res.data[0].valid_transparency,
+          lowResAWSKey: res.data[0].low_res_aws_key,
+          highResAWSKey: res.data[0].high_res_aws_key,
           approved: res.data[0].approved,
           disableForm: false,
         });
@@ -69,6 +73,8 @@ class WritingSamplesUpdate extends Component {
           validDryingTime: '',
           validTransparency: '',
           approved: '',
+          lowResAWSKey: '',
+          highResAWSKey: '',
           disableForm: true,
         });
         console.log(error);
@@ -109,6 +115,8 @@ class WritingSamplesUpdate extends Component {
       validWaterproofness,
       validDryingTime,
       validTransparency,
+      lowResAWSKey,
+      highResAWSKey,
     } = this.state;
 
     // TODO add frontend validation
@@ -122,7 +130,6 @@ class WritingSamplesUpdate extends Component {
       .put(
         `/writing-samples/edit/${writingSampleID}`,
         {
-          approved,
           penID,
           nibID,
           inkID,
@@ -130,6 +137,9 @@ class WritingSamplesUpdate extends Component {
           validWaterproofness,
           validDryingTime,
           validTransparency,
+          lowResAWSKey,
+          highResAWSKey,
+          approved,
         },
         config,
       )
@@ -164,6 +174,8 @@ class WritingSamplesUpdate extends Component {
       validWaterproofness,
       validDryingTime,
       validTransparency,
+      lowResAWSKey,
+      highResAWSKey,
       approved,
       disableForm,
       serverResponse,
@@ -248,14 +260,36 @@ class WritingSamplesUpdate extends Component {
                   disabled={disableForm}
                 />
               </label>
-              <label htmlFor="validTransparency" className="p-3">
-                Valid Transparency Reviews
+              <label htmlFor="validtransparency" className="p-3">
+                valid transparency reviews
                 <input
                   type="text"
-                  id="validTransparency"
+                  id="validtransparency"
                   className="form-control"
                   onChange={this.handleChange}
                   value={validTransparency}
+                  disabled={disableForm}
+                />
+              </label>
+              <label htmlFor="lowResAWSKey" className="p-3">
+                low res aws key
+                <input
+                  type="text"
+                  id="lowResAWSKey"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={lowResAWSKey}
+                  disabled={disableForm}
+                />
+              </label>
+              <label htmlFor="highResAWSKey" className="p-3">
+                high res aws key
+                <input
+                  type="text"
+                  id="highResAWSKey"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={highResAWSKey}
                   disabled={disableForm}
                 />
               </label>
