@@ -41,7 +41,7 @@ const nibSizes = [
 
 const nibGrinds = [
   'unknown',
-  'regular',
+  'standard',
   'stub',
   'italic',
   'calligraphy',
