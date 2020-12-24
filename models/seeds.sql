@@ -401,7 +401,7 @@ VALUES((SELECT pen_id FROM Pens WHERE brand = 'pilot' AND model = 'metropolitan'
 INSERT INTO WritingSamples (pen_id, nib_id, ink_id, paper_id, user_id, low_res_aws_key, high_res_aws_key, original_aws_key, valid_waterproofness, valid_drying_time, valid_transparency, approved, created_at, updated_at)
 VALUES((SELECT pen_id FROM Pens WHERE brand = 'noodler''s ink' AND model = 'konrad'),
        (SELECT nib_id FROM Nibs WHERE size = 'flex' AND grind = 'standard' AND tune = 'factory'),
-       (SELECT ink_id FROM Inks WHERE brand = 'noodler''s ink' AND name = 'air-corp blue-black'),
+       (SELECT ink_id FROM Inks WHERE brand = 'parker quink' AND name = 'blue'),
        (SELECT paper_id FROM Papers WHERE brand = 'amazon' AND name = 'printer' AND style = 'plain' AND lbs = '20' AND grams IS NULL), 
        (SELECT user_id FROM Users WHERE email = 'dominicfpinks@gmail.com'),
        'low_res/parker_quink_blue_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg',
@@ -918,7 +918,6 @@ INSERT INTO Colors (name, created_at, updated_at)
 VALUES ('none', NOW(), NOW());
 
 -- ColorReviews
-
 -- ColorReviews Momiji Pilot Metropolitan M
 INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/iroshizuku_momiji_pilot_metropolitan_m_clairefontaine.jpg'),
@@ -1017,6 +1016,162 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
         (SELECT color_id FROM Colors WHERE name='blue'),
         1, NOW(), NOW());
 
+-- ColorReviews Parker Quink Blue Noodler's Ink Konrad Flex 
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+
+-- ColorReviews Parker Quink Blue Noodler's Ink Konrad M 
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+
+-- ColorReviews Parker Quink Blue Pilot Metropolitan B 
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+
+-- ColorReviews Parker Quink Blue Pilot Metropolitan F 
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+
+-- ColorReviews Parker Quink Blue Pilot Metropolitan M
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+
 -- ColorReviews Diamine Ancient Copper Pelikan Souveran M400 B
 INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg'),
@@ -1047,6 +1202,467 @@ INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, create
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_rhodia.jpg'),
         (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
         (SELECT color_id FROM Colors WHERE name='brown'),
+        1, NOW(), NOW());
+
+-- ColorReviews Noodler's Ink Air-Corp Blue-Black Noodler's Ink Konrad Flex
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+ 
+ 
+-- ColorReviews Noodler's Ink Air-Corp Blue-Black Noodler's Ink Konrad M
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+ 
+-- ColorReviews Noodler's Ink Air-Corp Blue-Black Pilot Metropolitan B
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+
+-- ColorReviews Noodler's Ink Air-Corp Blue-Black Pilot Metropolitan F 
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+
+-- ColorReviews Noodler's Ink Air-Corp Blue-Black Pilot Metropolitan M 
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='blue'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='black'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
+        1, NOW(), NOW());
+INSERT INTO ColorReviews (writing_sample_id, user_id, color_id, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        (SELECT color_id FROM Colors WHERE name='green'),
         1, NOW(), NOW());
 
 -- ShadingReviews
