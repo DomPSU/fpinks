@@ -235,9 +235,11 @@ class Contribute extends Component {
           )}
           <div className="col-lg-2" />
           <h3 className="col-lg-8 pb-3 pt-3 border-bottom border-dark m-1">
-            A contribution may simply be written words. Feel free to add
-            anything else but we suggest the following: waterproofness, drying
-            time, ghosting/bleed-through.
+            A contribution may simply be{' '}
+            <a href="/word_example.jpg">written words</a>. Feel free to add
+            anything else but we suggest the following{' '}
+            <a href="/extra_example.jpg">template</a>. Please do not include a
+            pen within the image.
           </h3>
           <div className="col-lg-2" />
         </div>
