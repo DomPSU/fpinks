@@ -3155,6 +3155,132 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
         (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
         '10s', 1, NOW(), NOW());
 
+-- DryingReviews Parker Quink Blue Noodler's Ink Konrad Flex 
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '10s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '4s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_flex_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+
+-- DryingReviews Parker Quink Blue Noodler's Ink Konrad M 
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '20s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '25s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '4s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_noodlers_ink_konrad_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '30s', 1, NOW(), NOW());
+
+-- DryingReviews Parker Quink Blue Pilot Metropolitan B 
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '2s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '15s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '10s', 1, NOW(), NOW());
+
+-- DryingReviews Parker Quink Blue Pilot Metropolitan F 
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '10s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '4s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '5s', 1, NOW(), NOW());
+
+-- DryingReviews Parker Quink Blue Pilot Metropolitan M
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '10s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '25s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '3s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '15s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/parker_quink_blue_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '20s', 1, NOW(), NOW());
+
 -- DryingReviews Diamine Ancient Copper Pelikan Souveran M400 B
 INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
 VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/diamine_ancient_copper_pelikan_souveran_m400_b_amazon_20lb_printer.jpg'),
@@ -3181,6 +3307,135 @@ VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = '
         (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
         '60s', 1, NOW(), NOW());
 
+-- DryingReviews Noodler's Ink Air-Corp Blue-Black Noodler's Ink Konrad Flex
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '4s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '20s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '10s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_flex_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+
+-- DryingReviews Noodler's Ink Air-Corp Blue-Black Noodler's Ink Konrad M
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '15s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '10s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_noodlers_ink_konrad_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+
+-- DryingReviews Noodler's Ink Air-Corp Blue-Black Pilot Metropolitan B
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '15s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_b_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+
+-- DryingReviews Noodler's Ink Air-Corp Blue-Black Pilot Metropolitan F 
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '20s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '2s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_f_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+
+-- DryingReviews Noodler's Ink Air-Corp Blue-Black Pilot Metropolitan M 
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_20lb_printer.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '1s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_amazon_56_gsm.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '2s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_clairefontaine.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mead_spiral_notebook.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '2s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_mnemosyne.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
+INSERT INTO DryingReviews (writing_sample_id, user_id, drying_time, approved, created_at, updated_at)
+VALUES ((SELECT writing_sample_id FROM WritingSamples WHERE original_aws_key = 'original/noodlers_ink_air-corp_blue-black_pilot_metropolitan_m_rhodia.jpg'),
+        (SELECT user_id From Users WHERE email='dominicfpinks@gmail.com'),
+        '+60s', 1, NOW(), NOW());
 
 -- TransparencyReviews
 -- TransparencyReviews Momiji Pilot Metropolitan M
