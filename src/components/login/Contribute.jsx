@@ -208,8 +208,6 @@ class Contribute extends Component {
     API.instance
       .post('/writing-samples', formData, config)
       .then((res) => {
-        console.log(res);
-
         this.setState({ clientErrorMessage: '' });
       })
       .catch((error) => {
