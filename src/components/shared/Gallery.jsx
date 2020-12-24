@@ -104,6 +104,7 @@ class Gallery extends Component {
     await this.setState((state) => ({
       currentPage: '1',
     }));
+    window.scrollTo(0, 0);
     this.query();
   }
 
