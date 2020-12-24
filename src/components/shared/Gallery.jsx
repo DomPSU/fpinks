@@ -11,10 +11,16 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
 
+    const { pageStorage } = this.props;
+
+    const savedCurrentPage = sessionStorage.getItem(pageStorage);
+
+    const startingPage = !savedCurrentPage ? '1' : savedCurrentPage;
+
     this.state = {
       results: [],
       query: '',
-      currentPage: '1',
+      currentPage: startingPage,
       loading: true,
     };
 
@@ -74,7 +80,7 @@ class Gallery extends Component {
     }
 
     await this.setState((state) => ({
-      currentPage: String(parseInt(state.currentPage, 10) + 1),
+      currentPage: String(parseInt(currentPage, 10) + 1),
     }));
     window.scrollTo(0, 0);
     this.query();
