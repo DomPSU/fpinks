@@ -150,9 +150,6 @@ class Gallery extends Component {
       sessionStorage.setItem(pageStorage, currentPage);
     }
 
-    const firstIndex = (parseInt(currentPage, 10) - 1) * 12;
-    const lastIndex = parseInt(currentPage, 10) * 12;
-
     const list = results.map((writingSample) => (
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
         <Link to={`/writing-samples/${writingSample.writing_sample_id}`}>

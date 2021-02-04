@@ -14,7 +14,6 @@ import About from './general/About';
 import Admin from './login/Admin';
 import Login from './login/Login';
 import Contribute from './login/Contribute';
-import ProfileReviews from './login/Reviews';
 import PrivacyPolicy from './login/PrivacyPolicy';
 import TermsOfService from './login/TermsOfService';
 
